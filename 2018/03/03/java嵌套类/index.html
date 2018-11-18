@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="jizx">
+
+
+
+<meta name="description" content="讲解java中嵌套类的概念，也就是在类中定义另一个类的概念（未完待续。。。）">
+<meta name="keywords" content="类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java嵌套类">
+<meta property="og:url" content="http://jizx.top/2018/03/03/java嵌套类/index.html">
+<meta property="og:site_name" content="Jizx">
+<meta property="og:description" content="讲解java中嵌套类的概念，也就是在类中定义另一个类的概念（未完待续。。。）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-18T09:02:40.870Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java嵌套类">
+<meta name="twitter:description" content="讲解java中嵌套类的概念，也就是在类中定义另一个类的概念（未完待续。。。）">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Jizx" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="https://avatars1.githubusercontent.com/u/18480104?s=40&v=4">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>java嵌套类 | Jizx</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">jizx</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false">
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class="no-result">No results found <i class="fa fa-spinner fa-pulse"></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">分类&amp;标签</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1822980003@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/JizxGit" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/从句/">从句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传参/">传参</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/健康/">健康</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/同理心/">同理心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/吵架/">吵架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复合句/">复合句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心理/">心理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/所见所闻/">所见所闻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/批评/">批评</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方法调用/">方法调用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时态/">时态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类/">类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">博客主题原作者MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">在读研究生二年级</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">jizx</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">jizx</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">分类&amp;标签</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1822980003@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/JizxGit" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-java嵌套类" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/03/03/java嵌套类/" class="article-date">
+      <time datetime="2018-03-03T12:39:30.000Z" itemprop="datePublished">2018-03-03</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      java嵌套类
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/java/">java</a><a class="article-category-link" href="/categories/java/基础/">基础</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/类/">类</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p><excerpt in="" index="" |="" 首页摘要=""><br>讲解java中嵌套类的概念，也就是在类中定义另一个类的概念（未完待续。。。）</excerpt></p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<h2 id="嵌套类"><a href="#嵌套类" class="headerlink" title="嵌套类"></a>嵌套类</h2><p>java语言允许你在一个类中定义另一个类，这样的类称为嵌套类，形式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">NestedClass</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>术语: 嵌套类分为2类：静态、非静态。静态的嵌套类称为静态嵌套类，非静态的嵌套类称为内部类，如下所示：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticNestedClass</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>嵌套类是包围它的外部类（enclosing class）的一个成员，非静态嵌套类（内部类）可以访问到其他成员，即使它们被定义为私有的（private）。静态嵌套类不能访问其他成员。作为外部类的成员，嵌套类可以被声明为 private, public, protected, 或者 package private 四种访问权限</p>
+<p><strong>为什么要使用嵌套类呢?</strong></p>
+<ul>
+<li>这是一种有效组织那种只在某一处使用到的类的方法：比如一个类只对另外一个类有用，那么把它们两放在一起，嵌套在一起是合乎逻辑的，将这样的辅助类（helper classes）嵌套在一起使得java包更加简洁合理.</li>
+<li>增强了封装性: 考虑两个顶层类（top-level classes）, A 和 B, 其中B需要访问A的成员，否则这些成员将被声明为私有。如果将B藏在A中, A的成员即使被定义为私有的，B也可以访问到， 另外，B本身也与外界隔离开来</li>
+<li>更加可读，并且有利于维护代码: Nesting small classes within top-level classes places the code closer to where it is used.</li>
+</ul>
+<h3 id="静态嵌套类（Static-Nested-Classes）"><a href="#静态嵌套类（Static-Nested-Classes）" class="headerlink" title="静态嵌套类（Static Nested Classes）"></a>静态嵌套类（Static Nested Classes）</h3><p>与类方法、类变量成员一样，一个静态嵌套类与外部类是相关联的，而且与静态方法类似，静态嵌套类不能直接获取到外部类的实例变量或者其中的函数：它只能通过类引用来使用它们。</p>
+<p>注意：静态嵌套类与其外部类（或者其他类）的实例成员之间的交互，就像其他顶层类之间一样。实际上，一个静态嵌套类在表现上像是一个顶级类，其实是嵌套在另一个顶级类中的，以方便打包。<br>使用到静态嵌套类时必须通过外部类，形如：<code>OuterClass.StaticNestedClass</code><br>比如要创建一个静态嵌套类的实例，语法如下：<br><code>OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass();</code><br>​     </p>
+<h3 id="内部类（Inner-Classes）"><a href="#内部类（Inner-Classes）" class="headerlink" title="内部类（Inner Classes）"></a>内部类（Inner Classes）</h3><p>与实例方法、实例变量成员一样，一个内部类与外部类的一个实例是相关联的，而且能够直接访问到外部类实例中的方法与变量，而且因为内部类是与实例相关联的，因此内部类中是无法定义静态成员的。</p>
+<p>内部类的实例只能与外部类的实例同时存在，无法独立实例化，并且能够直接访问到外部类的方法与变量<br>想要实例化一个内部类，你必须先实例化一个外部类，然后才能通过外部类创建一个内部类的实例，语法如下：</p>
+<p><code>OuterClass.InnerClass innerObject = outerObject.new InnerClass();</code><br>内部类中有两种特殊的类：局部类、匿名类</p>
+<h4 id="局部类（Local-Classes）"><a href="#局部类（Local-Classes）" class="headerlink" title="局部类（Local Classes）"></a>局部类（Local Classes）</h4><p>Local classes are classes that are defined in a <em>block</em>, which is a group of zero or more statements between balanced braces. You typically find local classes defined in the body of a method.</p>
+<p>This section covers the following topics:</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/localclasses.html#declaring-local-classes" target="_blank" rel="noopener">Declaring Local Classes</a></li>
+<li>Accessing Members of an Enclosing Class<ul>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/localclasses.html#shadowing-and-local-classes" target="_blank" rel="noopener">Shadowing and Local Classes</a></li>
+</ul>
+</li>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/localclasses.html#local-classes-are-similar-to-inner-classes" target="_blank" rel="noopener">Local Classes Are Similar To Inner Classes</a></li>
+</ul>
+<h5 id="Declaring-Local-Classes"><a href="#Declaring-Local-Classes" class="headerlink" title="Declaring Local Classes"></a><a href="">Declaring Local Classes</a></h5><p>You can define a local class inside any block (see <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/expressions.html" target="_blank" rel="noopener">Expressions, Statements, and Blocks</a> for more information). For example, you can define a local class in a method body, a <code>for</code> loop, or an <code>if</code> clause.</p>
+<p>The following example, <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/examples/LocalClassExample.java" target="_blank" rel="noopener"><code>LocalClassExample</code></a>, validates two phone numbers. It defines the local class <code>PhoneNumber</code> in the method <code>validatePhoneNumber</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">public class LocalClassExample &#123;</span><br><span class="line">  </span><br><span class="line">    static String regularExpression = &quot;[^0-9]&quot;;</span><br><span class="line">  </span><br><span class="line">    public static void validatePhoneNumber(</span><br><span class="line">        String phoneNumber1, String phoneNumber2) &#123;</span><br><span class="line">      </span><br><span class="line">        final int numberLength = 10;</span><br><span class="line">        </span><br><span class="line">        // Valid in JDK 8 and later:</span><br><span class="line">       </span><br><span class="line">        // int numberLength = 10;</span><br><span class="line">       </span><br><span class="line">        class PhoneNumber &#123;</span><br><span class="line">            </span><br><span class="line">            String formattedPhoneNumber = null;</span><br><span class="line"></span><br><span class="line">            PhoneNumber(String phoneNumber)&#123;</span><br><span class="line">                // numberLength = 7;</span><br><span class="line">                String currentNumber = phoneNumber.replaceAll(</span><br><span class="line">                  regularExpression, &quot;&quot;);</span><br><span class="line">                if (currentNumber.length() == numberLength)</span><br><span class="line">                    formattedPhoneNumber = currentNumber;</span><br><span class="line">                else</span><br><span class="line">                    formattedPhoneNumber = null;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            public String getNumber() &#123;</span><br><span class="line">                return formattedPhoneNumber;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            // Valid in JDK 8 and later:</span><br><span class="line"></span><br><span class="line">//            public void printOriginalNumbers() &#123;</span><br><span class="line">//                System.out.println(&quot;Original numbers are &quot; + phoneNumber1 +</span><br><span class="line">//                    &quot; and &quot; + phoneNumber2);</span><br><span class="line">//            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        PhoneNumber myNumber1 = new PhoneNumber(phoneNumber1);</span><br><span class="line">        PhoneNumber myNumber2 = new PhoneNumber(phoneNumber2);</span><br><span class="line">        </span><br><span class="line">        // Valid in JDK 8 and later:</span><br><span class="line"></span><br><span class="line">//        myNumber1.printOriginalNumbers();</span><br><span class="line"></span><br><span class="line">        if (myNumber1.getNumber() == null) </span><br><span class="line">            System.out.println(&quot;First number is invalid&quot;);</span><br><span class="line">        else</span><br><span class="line">            System.out.println(&quot;First number is &quot; + myNumber1.getNumber());</span><br><span class="line">        if (myNumber2.getNumber() == null)</span><br><span class="line">            System.out.println(&quot;Second number is invalid&quot;);</span><br><span class="line">        else</span><br><span class="line">            System.out.println(&quot;Second number is &quot; + myNumber2.getNumber());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String... args) &#123;</span><br><span class="line">        validatePhoneNumber(&quot;123-456-7890&quot;, &quot;456-7890&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The example validates a phone number by first removing all characters from the phone number except the digits 0 through 9. After, it checks whether the phone number contains exactly ten digits (the length of a phone number in North America). This example prints the following:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">First number is 1234567890</span><br><span class="line">Second number is invalid</span><br></pre></td></tr></table></figure>
+<h5 id="Accessing-Members-of-an-Enclosing-Class"><a href="#Accessing-Members-of-an-Enclosing-Class" class="headerlink" title="Accessing Members of an Enclosing Class"></a><a href="">Accessing Members of an Enclosing Class</a></h5><p>A local class has access to the members of its enclosing class. In the previous example, the <code>PhoneNumber</code> constructor accesses the member <code>LocalClassExample.regularExpression</code>.</p>
+<p>In addition, a local class has access to local variables. However, a local class can only access local variables that are declared final. When a local class accesses a local variable or parameter of the enclosing block, it <em>captures</em> that variable or parameter. For example, the <code>PhoneNumber</code> constructor can access the local variable <code>numberLength</code> because it is declared final; <code>numberLength</code> is a <em>captured variable</em>.</p>
+<p>However, starting in Java SE 8, a local class can access local variables and parameters of the enclosing block that are final or <em>effectively final</em>. A variable or parameter whose value is never changed after it is initialized is effectively final. For example, suppose that the variable <code>numberLength</code> is not declared final, and you add the highlighted assignment statement in the <code>PhoneNumber</code> constructor to change the length of a valid phone number to 7 digits:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PhoneNumber(String phoneNumber) &#123;</span><br><span class="line">    numberLength = 7;</span><br><span class="line">    String currentNumber = phoneNumber.replaceAll(</span><br><span class="line">        regularExpression, &quot;&quot;);</span><br><span class="line">    if (currentNumber.length() == numberLength)</span><br><span class="line">        formattedPhoneNumber = currentNumber;</span><br><span class="line">    else</span><br><span class="line">        formattedPhoneNumber = null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Because of this assignment statement, the variable <code>numberLength</code> is not effectively final anymore. As a result, the Java compiler generates an error message similar to “local variables referenced from an inner class must be final or effectively final” where the inner class <code>PhoneNumber</code> tries to access the <code>numberLength</code> variable:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if (currentNumber.length() == numberLength)</span><br></pre></td></tr></table></figure>
+<p>Starting in Java SE 8, if you declare the local class in a method, it can access the method’s parameters. For example, you can define the following method in the <code>PhoneNumber</code> local class:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public void printOriginalNumbers() &#123;</span><br><span class="line">    System.out.println(&quot;Original numbers are &quot; + phoneNumber1 +</span><br><span class="line">        &quot; and &quot; + phoneNumber2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The method <code>printOriginalNumbers</code> accesses the parameters <code>phoneNumber1</code> and <code>phoneNumber2</code> of the method <code>validatePhoneNumber</code>.</p>
+<h6 id="Shadowing-and-Local-Classes"><a href="#Shadowing-and-Local-Classes" class="headerlink" title="Shadowing and Local Classes"></a><a href="">Shadowing and Local Classes</a></h6><p>Declarations of a type (such as a variable) in a local class shadow declarations in the enclosing scope that have the same name. See <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html#shadowing" target="_blank" rel="noopener">Shadowing</a> for more information.</p>
+<h5 id="Local-Classes-Are-Similar-To-Inner-Classes"><a href="#Local-Classes-Are-Similar-To-Inner-Classes" class="headerlink" title="Local Classes Are Similar To Inner Classes"></a><a href="">Local Classes Are Similar To Inner Classes</a></h5><p>Local classes are similar to inner classes because they cannot define or declare any static members. Local classes in static methods, such as the class <code>PhoneNumber</code>, which is defined in the static method <code>validatePhoneNumber</code>, can only refer to static members of the enclosing class. For example, if you do not define the member variable <code>regularExpression</code> as static, then the Java compiler generates an error similar to “non-static variable <code>regularExpression</code> cannot be referenced from a static context.”</p>
+<p>Local classes are non-static because they have access to instance members of the enclosing block. Consequently, they cannot contain most kinds of static declarations.</p>
+<p>You cannot declare an interface inside a block; interfaces are inherently static. For example, the following code excerpt does not compile because the interface <code>HelloThere</code> is defined inside the body of the method <code>greetInEnglish</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public void greetInEnglish() &#123;</span><br><span class="line">    interface HelloThere &#123;</span><br><span class="line">       public void greet();</span><br><span class="line">    &#125;</span><br><span class="line">    class EnglishHelloThere implements HelloThere &#123;</span><br><span class="line">        public void greet() &#123;</span><br><span class="line">            System.out.println(&quot;Hello &quot; + name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    HelloThere myGreeting = new EnglishHelloThere();</span><br><span class="line">    myGreeting.greet();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>You cannot declare static initializers or member interfaces in a local class. The following code excerpt does not compile because the method <code>EnglishGoodbye.sayGoodbye</code> is declared <code>static</code>. The compiler generates an error similar to “modifier ‘static’ is only allowed in constant variable declaration” when it encounters this method definition:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public void sayGoodbyeInEnglish() &#123;</span><br><span class="line">    class EnglishGoodbye &#123;</span><br><span class="line">        public static void sayGoodbye() &#123;</span><br><span class="line">            System.out.println(&quot;Bye bye&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    EnglishGoodbye.sayGoodbye();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>A local class can have static members provided that they are constant variables. (A <em>constant variable</em> is a variable of primitive type or type <code>String</code> that is declared final and initialized with a compile-time constant expression. A compile-time constant expression is typically a string or an arithmetic expression that can be evaluated at compile time. See <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/classvars.html" target="_blank" rel="noopener">Understanding Class Members</a> for more information.) The following code excerpt compiles because the static member <code>EnglishGoodbye.farewell</code> is a constant variable:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public void sayGoodbyeInEnglish() &#123;</span><br><span class="line">    class EnglishGoodbye &#123;</span><br><span class="line">        public static final String farewell = &quot;Bye bye&quot;;</span><br><span class="line">        public void sayGoodbye() &#123;</span><br><span class="line">            System.out.println(farewell);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    EnglishGoodbye myEnglishGoodbye = new EnglishGoodbye();</span><br><span class="line">    myEnglishGoodbye.sayGoodbye();</span><br><span class="line">&#125;待补充。。。</span><br></pre></td></tr></table></figure>
+<h4 id="匿名类（Anonymous-Classes）"><a href="#匿名类（Anonymous-Classes）" class="headerlink" title="匿名类（Anonymous Classes）"></a>匿名类（Anonymous Classes）</h4><p>Anonymous classes enable you to make your code more concise. They enable you to declare and instantiate a class at the same time. They are like local classes except that they do not have a name. Use them if you need to use a local class only once.</p>
+<p>This section covers the following topics:</p>
+<ul>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html#declaring-anonymous-classes" target="_blank" rel="noopener">Declaring Anonymous Classes</a></li>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html#syntax-of-anonymous-classes" target="_blank" rel="noopener">Syntax of Anonymous Classes</a></li>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html#accessing" target="_blank" rel="noopener">Accessing Local Variables of the Enclosing Scope, and Declaring and Accessing Members of the Anonymous Class</a></li>
+<li><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html#examples-of-anonymous-classes" target="_blank" rel="noopener">Examples of Anonymous Classes</a></li>
+</ul>
+<h5 id="Declaring-Anonymous-Classes"><a href="#Declaring-Anonymous-Classes" class="headerlink" title="Declaring Anonymous Classes"></a><a href="">Declaring Anonymous Classes</a></h5><p>While local classes are class declarations, anonymous classes are expressions, which means that you define the class in another expression. The following example, <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/examples/HelloWorldAnonymousClasses.java" target="_blank" rel="noopener"><code>HelloWorldAnonymousClasses</code></a>, uses anonymous classes in the initialization statements of the local variables <code>frenchGreeting</code> and <code>spanishGreeting</code>, but uses a local class for the initialization of the variable <code>englishGreeting`</code>:`</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">public class HelloWorldAnonymousClasses &#123;</span><br><span class="line">  </span><br><span class="line">    interface HelloWorld &#123;</span><br><span class="line">        public void greet();</span><br><span class="line">        public void greetSomeone(String someone);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    public void sayHello() &#123;</span><br><span class="line">        </span><br><span class="line">        class EnglishGreeting implements HelloWorld &#123;</span><br><span class="line">            String name = &quot;world&quot;;</span><br><span class="line">            public void greet() &#123;</span><br><span class="line">                greetSomeone(&quot;world&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            public void greetSomeone(String someone) &#123;</span><br><span class="line">                name = someone;</span><br><span class="line">                System.out.println(&quot;Hello &quot; + name);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      </span><br><span class="line">        HelloWorld englishGreeting = new EnglishGreeting();</span><br><span class="line">        </span><br><span class="line">        HelloWorld frenchGreeting = new HelloWorld() &#123;</span><br><span class="line">            String name = &quot;tout le monde&quot;;</span><br><span class="line">            public void greet() &#123;</span><br><span class="line">                greetSomeone(&quot;tout le monde&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            public void greetSomeone(String someone) &#123;</span><br><span class="line">                name = someone;</span><br><span class="line">                System.out.println(&quot;Salut &quot; + name);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        </span><br><span class="line">        HelloWorld spanishGreeting = new HelloWorld() &#123;</span><br><span class="line">            String name = &quot;mundo&quot;;</span><br><span class="line">            public void greet() &#123;</span><br><span class="line">                greetSomeone(&quot;mundo&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            public void greetSomeone(String someone) &#123;</span><br><span class="line">                name = someone;</span><br><span class="line">                System.out.println(&quot;Hola, &quot; + name);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        englishGreeting.greet();</span><br><span class="line">        frenchGreeting.greetSomeone(&quot;Fred&quot;);</span><br><span class="line">        spanishGreeting.greet();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String... args) &#123;</span><br><span class="line">        HelloWorldAnonymousClasses myApp =</span><br><span class="line">            new HelloWorldAnonymousClasses();</span><br><span class="line">        myApp.sayHello();</span><br><span class="line">    &#125;            </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Syntax-of-Anonymous-Classes"><a href="#Syntax-of-Anonymous-Classes" class="headerlink" title="Syntax of Anonymous Classes"></a><a href="">Syntax of Anonymous Classes</a></h5><p>As mentioned previously, an anonymous class is an expression. The syntax of an anonymous class expression is like the invocation of a constructor, except that there is a class definition contained in a block of code.</p>
+<p>Consider the instantiation of the <code>frenchGreeting</code> object:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">HelloWorld frenchGreeting = new HelloWorld() &#123;</span><br><span class="line">    String name = &quot;tout le monde&quot;;</span><br><span class="line">    public void greet() &#123;</span><br><span class="line">        greetSomeone(&quot;tout le monde&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public void greetSomeone(String someone) &#123;</span><br><span class="line">        name = someone;</span><br><span class="line">        System.out.println(&quot;Salut &quot; + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>The anonymous class expression consists of the following:</p>
+<ul>
+<li>The <code>new</code> operator</li>
+<li>The name of an interface to implement or a class to extend. In this example, the anonymous class is implementing the interface <code>HelloWorld</code>.</li>
+<li>Parentheses that contain the arguments to a constructor, just like a normal class instance creation expression. <strong>Note</strong>: When you implement an interface, there is no constructor, so you use an empty pair of parentheses, as in this example.</li>
+<li>A body, which is a class declaration body. More specifically, in the body, method declarations are allowed but statements are not.</li>
+</ul>
+<p>Because an anonymous class definition is an expression, it must be part of a statement. In this example, the anonymous class expression is part of the statement that instantiates the <code>frenchGreeting</code> object. (This explains why there is a semicolon after the closing brace.)</p>
+<h5 id="Accessing-Local-Variables-of-the-Enclosing-Scope-and-Declaring-and-Accessing-Members-of-the-Anonymous-Class"><a href="#Accessing-Local-Variables-of-the-Enclosing-Scope-and-Declaring-and-Accessing-Members-of-the-Anonymous-Class" class="headerlink" title="Accessing Local Variables of the Enclosing Scope, and Declaring and Accessing Members of the Anonymous Class"></a><a href="">Accessing Local Variables of the Enclosing Scope, and Declaring and Accessing Members of the Anonymous Class</a></h5><p>Like local classes, anonymous classes can <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/localclasses.html#accessing-members-of-an-enclosing-class" target="_blank" rel="noopener">capture variables</a>; they have the same access to local variables of the enclosing scope:</p>
+<ul>
+<li>An anonymous class has access to the members of its enclosing class.</li>
+<li>An anonymous class cannot access local variables in its enclosing scope that are not declared as <code>final</code> or effectively final.</li>
+<li>Like a nested class, a declaration of a type (such as a variable) in an anonymous class shadows any other declarations in the enclosing scope that have the same name. See <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html#shadowing" target="_blank" rel="noopener">Shadowing</a> for more information.</li>
+</ul>
+<p>Anonymous classes also have the same restrictions as local classes with respect to their members:</p>
+<ul>
+<li>You cannot declare static initializers or member interfaces in an anonymous class.</li>
+<li>An anonymous class can have static members provided that they are constant variables.</li>
+</ul>
+<p>Note that you can declare the following in anonymous classes:</p>
+<ul>
+<li>Fields</li>
+<li>Extra methods (even if they do not implement any methods of the supertype)</li>
+<li>Instance initializers</li>
+<li>Local classes</li>
+</ul>
+<p>However, you cannot declare constructors in an anonymous class.</p>
+<h5 id="Examples-of-Anonymous-Classes"><a href="#Examples-of-Anonymous-Classes" class="headerlink" title="Examples of Anonymous Classes"></a><a href="">Examples of Anonymous Classes</a></h5><p>Anonymous classes are often used in graphical user interface (GUI) applications.</p>
+<p>Consider the JavaFX example <a href="https://docs.oracle.com/javase/8/javafx/get-started-tutorial/hello_world.htm" target="_blank" rel="noopener"><code>HelloWorld.java</code></a> (from the section <a href="https://docs.oracle.com/javase/8/javafx/get-started-tutorial/hello_world.htm" target="_blank" rel="noopener">Hello World, JavaFX Style</a> from <a href="https://docs.oracle.com/javase/8/javafx/get-started-tutorial/javafx_get_started.htm" target="_blank" rel="noopener">Getting Started with JavaFX</a>). This sample creates a frame that contains a <strong>Say ‘Hello World’</strong> button. The anonymous class expression is highlighted:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import javafx.event.ActionEvent;</span><br><span class="line">import javafx.event.EventHandler;</span><br><span class="line">import javafx.scene.Scene;</span><br><span class="line">import javafx.scene.control.Button;</span><br><span class="line">import javafx.scene.layout.StackPane;</span><br><span class="line">import javafx.stage.Stage;</span><br><span class="line"> </span><br><span class="line">public class HelloWorld extends Application &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        launch(args);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Override</span><br><span class="line">    public void start(Stage primaryStage) &#123;</span><br><span class="line">        primaryStage.setTitle(&quot;Hello World!&quot;);</span><br><span class="line">        Button btn = new Button();</span><br><span class="line">        btn.setText(&quot;Say &apos;Hello World&apos;&quot;);</span><br><span class="line">        btn.setOnAction(new EventHandler&lt;ActionEvent&gt;() &#123;</span><br><span class="line"> </span><br><span class="line">            @Override</span><br><span class="line">            public void handle(ActionEvent event) &#123;</span><br><span class="line">                System.out.println(&quot;Hello World!&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        StackPane root = new StackPane();</span><br><span class="line">        root.getChildren().add(btn);</span><br><span class="line">        primaryStage.setScene(new Scene(root, 300, 250));</span><br><span class="line">        primaryStage.show();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>In this example, the method invocation <code>btn.setOnAction</code> specifies what happens when you select the <strong>Say ‘Hello World’</strong> button. This method requires an object of type <code>EventHandler&lt;ActionEvent&gt;</code>. The <code>EventHandler&lt;ActionEvent&gt;</code> interface contains only one method, handle. Instead of implementing this method with a new class, the example uses an anonymous class expression. Notice that this expression is the argument passed to the <code>btn.setOnAction</code> method.</p>
+<p>Because the <code>EventHandler&lt;ActionEvent&gt;</code> interface contains only one method, you can use a lambda expression instead of an anonymous class expression. See the section <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html" target="_blank" rel="noopener">Lambda Expressions</a> for more information.</p>
+<p>Anonymous classes are ideal for implementing an interface that contains two or more methods. The following JavaFX example is from the section <a href="https://docs.oracle.com/javase/8/javafx/user-interface-tutorial/custom.htm" target="_blank" rel="noopener">Customization of UI Controls</a>. The highlighted code creates a text field that only accepts numeric values. It redefines the default implementation of the <code>TextField</code> class with an anonymous class by overriding the <code>replaceText</code> and <code>replaceSelection</code> methods inherited from the <code>TextInputControl</code> class.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">import javafx.application.Application;</span><br><span class="line">import javafx.event.ActionEvent;</span><br><span class="line">import javafx.event.EventHandler;</span><br><span class="line">import javafx.geometry.Insets;</span><br><span class="line">import javafx.scene.Group;</span><br><span class="line">import javafx.scene.Scene;</span><br><span class="line">import javafx.scene.control.*;</span><br><span class="line">import javafx.scene.layout.GridPane;</span><br><span class="line">import javafx.scene.layout.HBox;</span><br><span class="line">import javafx.stage.Stage;</span><br><span class="line"></span><br><span class="line">public class CustomTextFieldSample extends Application &#123;</span><br><span class="line">    </span><br><span class="line">    final static Label label = new Label();</span><br><span class="line"> </span><br><span class="line">    @Override</span><br><span class="line">    public void start(Stage stage) &#123;</span><br><span class="line">        Group root = new Group();</span><br><span class="line">        Scene scene = new Scene(root, 300, 150);</span><br><span class="line">        stage.setScene(scene);</span><br><span class="line">        stage.setTitle(&quot;Text Field Sample&quot;);</span><br><span class="line"> </span><br><span class="line">        GridPane grid = new GridPane();</span><br><span class="line">        grid.setPadding(new Insets(10, 10, 10, 10));</span><br><span class="line">        grid.setVgap(5);</span><br><span class="line">        grid.setHgap(5);</span><br><span class="line"> </span><br><span class="line">        scene.setRoot(grid);</span><br><span class="line">        final Label dollar = new Label(&quot;$&quot;);</span><br><span class="line">        GridPane.setConstraints(dollar, 0, 0);</span><br><span class="line">        grid.getChildren().add(dollar);</span><br><span class="line">        </span><br><span class="line">        final TextField sum = new TextField() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void replaceText(int start, int end, String text) &#123;</span><br><span class="line">                if (!text.matches(&quot;[a-z, A-Z]&quot;)) &#123;</span><br><span class="line">                    super.replaceText(start, end, text);                     </span><br><span class="line">                &#125;</span><br><span class="line">                label.setText(&quot;Enter a numeric value&quot;);</span><br><span class="line">            &#125;</span><br><span class="line"> </span><br><span class="line">            @Override</span><br><span class="line">            public void replaceSelection(String text) &#123;</span><br><span class="line">                if (!text.matches(&quot;[a-z, A-Z]&quot;)) &#123;</span><br><span class="line">                    super.replaceSelection(text);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"> </span><br><span class="line">        sum.setPromptText(&quot;Enter the total&quot;);</span><br><span class="line">        sum.setPrefColumnCount(10);</span><br><span class="line">        GridPane.setConstraints(sum, 1, 0);</span><br><span class="line">        grid.getChildren().add(sum);</span><br><span class="line">        </span><br><span class="line">        Button submit = new Button(&quot;Submit&quot;);</span><br><span class="line">        GridPane.setConstraints(submit, 2, 0);</span><br><span class="line">        grid.getChildren().add(submit);</span><br><span class="line">        </span><br><span class="line">        submit.setOnAction(new EventHandler&lt;ActionEvent&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void handle(ActionEvent e) &#123;</span><br><span class="line">                label.setText(null);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        GridPane.setConstraints(label, 0, 1);</span><br><span class="line">        GridPane.setColumnSpan(label, 3);</span><br><span class="line">        grid.getChildren().add(label);</span><br><span class="line">        </span><br><span class="line">        scene.setRoot(grid);</span><br><span class="line">        stage.show();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        launch(args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="遮盖（Shadowing）、变量作用域问题"><a href="#遮盖（Shadowing）、变量作用域问题" class="headerlink" title="遮盖（Shadowing）、变量作用域问题"></a>遮盖（Shadowing）、变量作用域问题</h3><p>如果在特定范围内（比如在内部类或者方法中）有一个声明（成员变量声明或者方法参数名字）与该范围外的另一个声明拥有相同的名字，那么该范围内的声明就会遮盖掉范围外的声明。你就不能仅简单地通过名字来引用被遮盖的那个声明，请看下面的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShadowTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">FirstLevel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> x = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">methodInFirstLevel</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"x = "</span> + x);</span><br><span class="line">            System.out.println(<span class="string">"this.x = "</span> + <span class="keyword">this</span>.x);</span><br><span class="line">            System.out.println(<span class="string">"ShadowTest.this.x = "</span> + ShadowTest.<span class="keyword">this</span>.x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String... args)</span> </span>&#123;</span><br><span class="line">        ShadowTest st = <span class="keyword">new</span> ShadowTest();</span><br><span class="line">        ShadowTest.FirstLevel fl = st.new FirstLevel();</span><br><span class="line">        fl.methodInFirstLevel(<span class="number">23</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">23</span></span><br><span class="line"><span class="keyword">this</span>.x = <span class="number">1</span></span><br><span class="line">ShadowTest.<span class="keyword">this</span>.x = <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<p>该例子中定义了3个名为x的变量：类ShadowTest的成员变量、内部类FirstLevel的成员变量、methodInFirstLevel方法的形参。methodInFirstLevel方法的形参遮盖住了内部类FirstLevel的成员变量，因此，当你在方法中使用x时，x表示的是方法的参数x。想要获得内部类FirstLevel的成员变量x，要通过关键字<strong>this</strong> 来代表外部的作用域（enclosing scope），也就是FirstLevel类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"this.x = "</span> + <span class="keyword">this</span>.x);</span><br></pre></td></tr></table></figure>
+<p>要获取到更大作用域的成员变量时，需要通过其所属的类的类名来访问，比如以下的语句，在methodInFirstLevel方法中获取最外层的ShadowTest 类的成员变量x</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"ShadowTest.this.x = "</span> + ShadowTest.<span class="keyword">this</span>.x);</span><br></pre></td></tr></table></figure>
+<p>参考资料：<a href="https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html</a></p>
+</the>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/03/03/java嵌套类/">java嵌套类</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
+        <p><span>发布时间:</span>2018-03-03, 20:39:30</p>
+        <p><span>最后更新:</span>2018-11-18, 17:02:40</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/03/03/java嵌套类/" title="java嵌套类">http://jizx.top/2018/03/03/java嵌套类/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://jizx.top/2018/03/03/java嵌套类/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/03/23/如何提高「钝感力」，从此不再「想太多」/">
+                    如何提高「钝感力」，从此不再「想太多」
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/02/11/英语语法——中级：第3章-完成时态/">
+                    英语语法——中级：第3章.完成时态
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#嵌套类"><span class="toc-text">嵌套类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#静态嵌套类（Static-Nested-Classes）"><span class="toc-text">静态嵌套类（Static Nested Classes）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部类（Inner-Classes）"><span class="toc-text">内部类（Inner Classes）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#局部类（Local-Classes）"><span class="toc-text">局部类（Local Classes）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Declaring-Local-Classes"><span class="toc-text">Declaring Local Classes</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Accessing-Members-of-an-Enclosing-Class"><span class="toc-text">Accessing Members of an Enclosing Class</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Shadowing-and-Local-Classes"><span class="toc-text">Shadowing and Local Classes</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Local-Classes-Are-Similar-To-Inner-Classes"><span class="toc-text">Local Classes Are Similar To Inner Classes</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#匿名类（Anonymous-Classes）"><span class="toc-text">匿名类（Anonymous Classes）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Declaring-Anonymous-Classes"><span class="toc-text">Declaring Anonymous Classes</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Syntax-of-Anonymous-Classes"><span class="toc-text">Syntax of Anonymous Classes</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Accessing-Local-Variables-of-the-Enclosing-Scope-and-Declaring-and-Accessing-Members-of-the-Anonymous-Class"><span class="toc-text">Accessing Local Variables of the Enclosing Scope, and Declaring and Accessing Members of the Anonymous Class</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Examples-of-Anonymous-Classes"><span class="toc-text">Examples of Anonymous Classes</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遮盖（Shadowing）、变量作用域问题"><span class="toc-text">遮盖（Shadowing）、变量作用域问题</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-4 i,
+        .toc-level-4 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"java嵌套类　| Jizx　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/03/23/如何提高「钝感力」，从此不再「想太多」/" title="上一篇: 如何提高「钝感力」，从此不再「想太多」">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/02/11/英语语法——中级：第3章-完成时态/" title="下一篇: 英语语法——中级：第3章.完成时态">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/04/java方法传参问题/">java方法传参问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/如何有效批评而不是吵架/">如何有效批评而不是吵架</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/运动后不能马上洗澡/">运动后不能马上洗澡</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/喜欢人的理由为什么说不出来/">喜欢人的理由为什么说不出来</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/全球公认的最健康的一天作息图解/">全球公认的最健康的一天作息图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/如何提高「钝感力」，从此不再「想太多」/">如何提高「钝感力」，从此不再「想太多」</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/03/java嵌套类/">java嵌套类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第3章-完成时态/">英语语法——中级：第3章.完成时态</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第2章-名词、定语、状语从句/">英语语法——中级：第2章.名词、定语、状语从句</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第1章-简单句与复合句/">英语语法——中级：第1章.简单句与复合句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/08/vim常用按键总结/">vim常用按键总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2018 jizx
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
