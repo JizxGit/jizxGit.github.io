@@ -7,7 +7,7 @@
       <link href="/2018/12/15/window%E6%B7%BB%E5%8A%A0%E5%8F%B3%E9%94%AE%E7%94%A8atom%E6%89%93%E5%BC%80/"/>
       <url>/2018/12/15/window%E6%B7%BB%E5%8A%A0%E5%8F%B3%E9%94%AE%E7%94%A8atom%E6%89%93%E5%BC%80/</url>
       
-        <content type="html"><![CDATA[<excerpt in="" index="" |="" 首页摘要=""> <p>window添加右键功能，如用atom打开，用vs code打开，可以方便用指定的编辑器打开文件，或者打开文件夹</p><a id="more"></a><the rest="" of="" contents="" |="" 余下全文=""><p>使用<code>regedit</code> 打开注册表，找到如下位置，按照图示添加项，即可</p><p><img src="/2018/12/15/window添加右键用atom打开/F:/Data\Blog\source\_posts\2018-12-15-window添加右键用atom打开\图像 001.png" alt="图像 001"></p><p><img src="/2018/12/15/window添加右键用atom打开/F:/Data\Blog\source\_posts\2018-12-15-window添加右键用atom打开\图像 002.png" alt="图像 002"></p></the></excerpt>]]></content>
+        <content type="html"><![CDATA[<excerpt in="" index="" |="" 首页摘要=""> <p>window添加右键功能，如用atom打开，用vs code打开，可以方便用指定的编辑器打开文件，或者打开文件夹</p><a id="more"></a><the rest="" of="" contents="" |="" 余下全文=""><p>使用<code>regedit</code> 打开注册表，找到如下位置，按照图示添加项，即可</p><p><img src="/2018/12/15/window添加右键用atom打开/./图像 001.png" alt="图像 001"></p><p><img src="/2018/12/15/window添加右键用atom打开/./图像 002.png" alt="图像 002"></p></the></excerpt>]]></content>
       
       
       <categories>
