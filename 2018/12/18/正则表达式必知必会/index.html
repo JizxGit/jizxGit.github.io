@@ -23,15 +23,15 @@
 <meta property="og:site_name" content="Jizx的博客">
 <meta property="og:description" content="正则表达式必知必会的笔记">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://jizx.top/2018/12/18/正则表达式必知必会/正则表达式符号表.png">
-<meta property="og:image" content="http://jizx.top/2018/12/18/正则表达式必知必会/子表达式嵌套问题.png">
+<meta property="og:image" content="http://jizx.top/2018/12/18/正则表达式必知必会/正则表达式符号表.jpg">
+<meta property="og:image" content="http://jizx.top/2018/12/18/正则表达式必知必会/子表达式嵌套问题.jpg">
 <meta property="og:image" content="http://jizx.top/2018/12/18/正则表达式必知必会/前瞻流程.png">
 <meta property="og:image" content="http://jizx.top/2018/12/18/正则表达式必知必会/后瞻流程.png">
-<meta property="og:updated_time" content="2018-12-18T07:47:49.563Z">
+<meta property="og:updated_time" content="2018-12-18T07:56:17.479Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式必知必会">
 <meta name="twitter:description" content="正则表达式必知必会的笔记">
-<meta name="twitter:image" content="http://jizx.top/2018/12/18/正则表达式必知必会/正则表达式符号表.png">
+<meta name="twitter:image" content="http://jizx.top/2018/12/18/正则表达式必知必会/正则表达式符号表.jpg">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -315,7 +315,7 @@
 <the rest="" of="" contents="" |="" 余下全文="">
 
 <h2 id="元字符表"><a href="#元字符表" class="headerlink" title="元字符表"></a>元字符表</h2><p>下面介绍的是在正则表达式中有特殊意义的字符，称为元字符</p>
-<p><img src="/2018/12/18/正则表达式必知必会/./正则表达式符号表.png" alt="正则表达式符号表"></p>
+<p><img src="/2018/12/18/正则表达式必知必会/./正则表达式符号表.jpg" alt="正则表达式符号表"></p>
 <h3 id="转义符号"><a href="#转义符号" class="headerlink" title="转义符号"></a>转义符号</h3><p>如果要查找这些字符本身，需要用<code>\</code>进行转义，比如想匹配点号<code>.</code> 就需要这样写<code>\.</code>  有个特殊的例子：如果想匹配<code>\</code>就需要这样<code>\\</code></p>
 <h2 id="匹配单个字符"><a href="#匹配单个字符" class="headerlink" title="匹配单个字符"></a>匹配单个字符</h2><h3 id="匹配字符中的一个"><a href="#匹配字符中的一个" class="headerlink" title="匹配字符中的一个"></a>匹配字符中的一个</h3><ul>
 <li><code>.</code>：  匹配任意一个字符（除了换行符）</li>
@@ -511,7 +511,7 @@
 <ul>
 <li>group(0)代表整个正则表达式</li>
 <li>group(1)代表第1个子表达式，也就是最外层的括号</li>
-<li>group(2)代表第2个子表达式<br><img src="/2018/12/18/正则表达式必知必会/./子表达式嵌套问题.png" alt="子表达式嵌套问题"></li>
+<li>group(2)代表第2个子表达式<br><img src="/2018/12/18/正则表达式必知必会/./子表达式嵌套问题.jpg" alt="子表达式嵌套问题"></li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s=&quot;jizx333hhhh&quot;</span><br><span class="line">&gt;&gt;&gt; m=re.search(r&quot;((\w+?)(\d(\d(\d)))(\w&#123;4&#125;))&quot;,s)</span><br><span class="line">&gt;&gt;&gt; m.group(0)</span><br><span class="line">&apos;jizx333hhhh&apos;</span><br><span class="line">&gt;&gt;&gt; m.group(1)   # 上图中的根节点</span><br><span class="line">&apos;jizx333hhhh&apos;</span><br><span class="line">&gt;&gt;&gt; m.group(2)</span><br><span class="line">&apos;jizx&apos;</span><br><span class="line">&gt;&gt;&gt; m.group(3)</span><br><span class="line">&apos;333&apos;</span><br><span class="line">&gt;&gt;&gt; m.group(4)</span><br><span class="line">&apos;33&apos;</span><br><span class="line">&gt;&gt;&gt; m.group(5)</span><br><span class="line">&apos;3&apos;</span><br><span class="line">&gt;&gt;&gt; m.group(6)</span><br><span class="line">&apos;hhhh&apos;</span><br><span class="line">&gt;&gt;&gt; m.group(7)</span><br><span class="line">IndexError: no such group</span><br></pre></td></tr></table></figure>
 <h3 id="不保存分组"><a href="#不保存分组" class="headerlink" title="不保存分组?:"></a>不保存分组<code>?:</code></h3><p><code>(:X)</code>在正则中表示所匹配的子组X不作为结果输出，称为非捕获分组，不想被捕获的时候使用，可以提高程序执行速度</p>
@@ -684,7 +684,7 @@
         <p><span>本文标题:</span><a href="/2018/12/18/正则表达式必知必会/">正则表达式必知必会</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
         <p><span>发布时间:</span>2018-12-18, 14:48:00</p>
-        <p><span>最后更新:</span>2018-12-18, 15:47:49</p>
+        <p><span>最后更新:</span>2018-12-18, 15:56:17</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2018/12/18/正则表达式必知必会/" title="正则表达式必知必会">http://jizx.top/2018/12/18/正则表达式必知必会/</a>
             <span class="copy-path" data-clipboard-text="原文: http://jizx.top/2018/12/18/正则表达式必知必会/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
