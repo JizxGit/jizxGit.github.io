@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="jizx">
+
+
+
+<meta name="description" content="处理数据常用的命令，包括 sort、awk、cut 等常用命令（持续 ing）">
+<meta name="keywords" content="linux,命令,awk,更新ing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux常用命令">
+<meta property="og:url" content="https://jizx.top/2019/08/04/linux常用命令/index.html">
+<meta property="og:site_name" content="玖玖的博客">
+<meta property="og:description" content="处理数据常用的命令，包括 sort、awk、cut 等常用命令（持续 ing）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-04T13:24:44.972Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux常用命令">
+<meta name="twitter:description" content="处理数据常用的命令，包括 sort、awk、cut 等常用命令（持续 ing）">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="玖玖的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="https://avatars1.githubusercontent.com/u/18480104?s=40&v=4">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>linux常用命令 | 玖玖的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">jizx</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false">
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class="no-result">No results found <i class="fa fa-spinner fa-pulse"></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">分类&amp;标签</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1822980003@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/JizxGit" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notepad/">notepad++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photoshop/">photoshop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/从句/">从句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传参/">传参</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/健康/">健康</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/同理心/">同理心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/吵架/">吵架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复合句/">复合句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心理/">心理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/截图/">截图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/所见所闻/">所见所闻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打印/">打印</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/批评/">批评</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方法调用/">方法调用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时态/">时态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/曲线/">曲线</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/更新ing/">更新ing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类/">类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统优化/">系统优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统环境/">系统环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编码问题/">编码问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编辑器/">编辑器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/通配符/">通配符</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">博客主题原作者MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">在读研究生二年级</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">jizx</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">jizx</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">分类&amp;标签</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1822980003@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/JizxGit" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-linux常用命令" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/08/04/linux常用命令/" class="article-date">
+      <time datetime="2019-08-04T11:21:32.000Z" itemprop="datePublished">2019-08-04</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      linux常用命令
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/linux/">linux</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/awk/">awk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/命令/">命令</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/更新ing/">更新ing</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <excerpt in="" index="" |="" 首页摘要=""> 
+
+<p>处理数据常用的命令，包括 sort、awk、cut 等常用命令（持续 ing）</p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+<h4 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h4><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-t</td>
+<td>指定分隔符</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>在输出行中去除重复行</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>默认是字符串比较，指定-n使用数值比较</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>默认从小到大，指定后改为从大到小排序</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>排序结果输出到指定文件，对于<strong>保存到原文件很有用</strong>，不然是可以用重定向的</td>
+</tr>
+<tr>
+<td>-k</td>
+<td>指定排序的列，具体用法非常多，参考下面的讲解</td>
+</tr>
+</tbody>
+</table>
+<h5 id="k"><a href="#k" class="headerlink" title="-k"></a>-k</h5><p>选项的语法格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FStart.CStart Modifie, FEnd.CEnd Modifier</span><br><span class="line">-------Start---------, -------End--------</span><br><span class="line"> FStart.CStart 选项   ,   FEnd.CEnd 选项</span><br></pre></td></tr></table></figure>
+<p>这个语法格式可以被其中的逗号<code>,</code>分为两大部分，<strong>Start</strong>部分和<strong>End</strong>部分。Start部分也由三部分组成，其中的Modifier部分就是我们之前说过的类似n和r的选项部分。</p>
+<p>我们重点说说<code>Start</code>部分的<code>FStart</code>和<code>C.Start</code>。<code>C.Start</code>也是可以省略的，省略的话就表示从本域的开头部分开始。<code>FStart.CStart</code>，其中<code>FStart</code>就是表示使用的域，而<code>CStart</code>则表示在<code>FStart</code>域中<strong>从第几个字符开始算“排序首字符”</strong>。同理，在End部分中，你可以设定<code>FEnd.CEnd</code>，如果你省略<code>.CEnd</code>，则表示结尾到“域尾”，即本域的最后一个字符。或者，如果你将CEnd设定为0(零)，也是表示结尾到“域尾”。</p>
+<p>在modifier部分还可以用到哪些选项？    modifier不论写在开始还是结束，都对这个域有效（我观察的）</p>
+<p>可以用到b、d、f、i、n 或 r。</p>
+<ul>
+<li>其中n和r你肯定已经很熟悉了。</li>
+<li>b表示忽略本域的签到空白符号。</li>
+<li>d表示对本域按照字典顺序排序（即，只考虑空白和字母）。</li>
+<li>f表示对本域忽略大小写进行排序。</li>
+<li>i表示忽略“不可打印字符”，只针对可打印字符进行排序。（有些ASCII就是不可打印字符，比如\a是报警，\b是退格，\n是换行，\r是回车等等）</li>
+</ul>
+<p><strong>如果指定的域都一样，那就会从第一个域、第二个域依次升序比较</strong></p>
+<p><strong>跨域的设定是个假象</strong>，FStart 与FEnd必须相同</p>
+<h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><ol>
+<li><p>从公司英文名称的第二个字母开始进行排序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sort -t &apos; &apos; -k 1.2 facebook.txt</span><br><span class="line">baidu 100 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">google 110 5000</span><br><span class="line">guge 50 3000</span><br></pre></td></tr></table></figure>
+<p> 使用了<code>-k 1.2</code>，表示对第一个域的第二个字符开始到本域的最后一个字符为止的字符串进行排序。</p>
+</li>
+<li><p>按照员工工资降序排序，如果员工人数相同的，则按照公司人数升序排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sort -n -t &apos; &apos; -k 3r -k 2 facebook.txt</span><br><span class="line">baidu 100 5000</span><br><span class="line">google 110 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">guge 50 3000</span><br></pre></td></tr></table></figure>
+<p>在-k 3后面偷偷加上了一个小写字母r。<strong>r和-r选项的作用是一样的，就是表示逆序，不过只对当前域有效</strong>，表示第三个域（员工平均工资）是按照降序排序。此处你还可以加上n，就表示对这个域进行排序时，要按照数值大小进行排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sort -t &apos; &apos; -k 3nr -k 2n facebook.txt</span><br><span class="line">baidu 100 5000</span><br><span class="line">google 110 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">guge 50 3000</span><br></pre></td></tr></table></figure>
+<p>我们去掉了最前面的-n选项，而是将它加入到了每一个-k选项中了。</p>
+</li>
+<li><p>只针对公司英文名称的第二个字母进行排序，如果相同的按照员工工资进行降序排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sort -t &apos; &apos; -k 1.2,1.2 -k 3nr facebook.txt</span><br><span class="line">baidu 100 5000</span><br><span class="line">google 110 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">guge 50 3000</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>我们使用了-k 1.2,1.2的表示方式，表示我们“只”对第二个字母进行排序。（如果你问“我使用-k 1.2怎么不行？”，当然不行，因为你省略了End部分，这就意味着你将对从第二个字母起到本域最后一个字符为止的字符串进行排序）。</p>
+</blockquote>
+</li>
+<li><p>最诡异的排序（跨域是不行的）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sort -n -k 2.2,3.1 facebook.txt</span><br><span class="line">guge 50 3000</span><br><span class="line">baidu 100 5000</span><br><span class="line">sohu 100 4500</span><br><span class="line">google 110 5000</span><br></pre></td></tr></table></figure>
+<p>以第二个域的第二个字符开始到第三个域的第一个字符结束的部分进行排序。</p>
+<p>第一行，会提取0 3，第二行提取00 5，第三行提取00 4，第四行提取10 5。</p>
+<p>又因为sort认为0小于00小于000小于0000….</p>
+<p>因此0 3肯定是在第一个。10 5肯定是在最后一个。但为什么00 5却在00 4前面呢？（你可以自己做实验思考一下。）</p>
+<p>答案揭晓：原来“跨域的设定是个假象”，sort只会比较第二个域的第二个字符到第二个域的最后一个字符的部分，而不会把第三个域的开头字符纳入比较范围。当发现00和00相同时，sort就会自动比较第一个域去了。当然baidu在sohu前面了。</p>
+</li>
+</ol>
+<p><a href="http://blog.chinaunix.net/uid-10540984-id-313479.html" target="_blank" rel="noopener">http://blog.chinaunix.net/uid-10540984-id-313479.html</a></p>
+<h4 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h4><h5 id="基本组成"><a href="#基本组成" class="headerlink" title="基本组成"></a>基本组成</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk [option] &apos;pattern &#123; action &#125;&apos; file</span><br></pre></td></tr></table></figure>
+<p>引号之间的部分是awk编程语言写就的程序</p>
+<p>每个模式依次测试每个输入行。对于匹配到行的模式，其对应的动作（也许包含多步）得到执行，然后读取下一行并继续匹配，直到所有的输入读取完毕。</p>
+<p>由于模式和动作两者任一都是可选的，所以需要使用大括号包围动作以区分于其他模式。</p>
+<p>option</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-F fs   fs指定输入分隔符，fs可以是字符串或正则表达式，如-F:</span><br><span class="line">-v var=value   赋值一个用户定义变量，将外部变量传递给awk</span><br><span class="line">-f scripfile  从脚本文件中读取awk命令</span><br></pre></td></tr></table></figure>
+<h5 id="模式种类"><a href="#模式种类" class="headerlink" title="模式种类"></a>模式种类</h5><ol>
+<li>BEGIN { 语句 }</li>
+</ol>
+<p>在读取任何输入前执行一次 语句</p>
+<ol start="2">
+<li>END { 语句 }</li>
+</ol>
+<p>读取所有输入之后执行一次 语句</p>
+<ol start="3">
+<li>表达式 { 语句 }</li>
+</ol>
+<p>对于 表达式 为真（即，非零或非空）的行，执行 语句</p>
+<ol start="4">
+<li>/正则表达式/ { 语句 }</li>
+</ol>
+<p>如果输入行包含字符串与 正则表达式 相匹配，则执行 语句</p>
+<ol start="5">
+<li>组合模式 { 语句 }</li>
+</ol>
+<p>一个 组合模式 通过与（&amp;&amp;），或（||），非（|），以及括弧来组合多个表达式；对于组合模式为真的每个输入行，执行 语句</p>
+<ol start="6">
+<li>模式1，模式2 { 语句 }</li>
+</ol>
+<p>范围模式(range pattern)匹配从与 模式1 相匹配的行到与 模式2 相匹配的行（包含该行）之间的所有行，对于这些输入行，执行语句 。</p>
+<blockquote>
+<p>BEGIN和END不与其他模式组合。范围模式不可以是任何其他模式的一部分。BEGIN和END是仅有的必须搭配动作的模式。</p>
+</blockquote>
+<h5 id="输入方式"><a href="#输入方式" class="headerlink" title="输入方式"></a>输入方式</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;pattern &#123; action &#125;&apos; files</span><br><span class="line">awk &apos;pattern &#123; action &#125;&apos; file1 file2</span><br><span class="line">awk &apos;pattern &#123; action &#125;&apos;  # 进入交互模式，直到ctrl+d结束输入</span><br></pre></td></tr></table></figure>
+<h5 id="将指令保存在文件中"><a href="#将指令保存在文件中" class="headerlink" title="将指令保存在文件中"></a>将指令保存在文件中</h5><p>当 引号内的 程序过长时，可以单独保存在文件中，假设存在文件 progfile ，输入命令行：:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -f progfile	file</span><br></pre></td></tr></table></figure>
+<h5 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h5><h6 id="打印输出"><a href="#打印输出" class="headerlink" title="打印输出"></a>打印输出</h6><p><strong>打印一行</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; print &#125;</span><br><span class="line"># 或者，由于 $0 表示整行,</span><br><span class="line">&#123; print $0 &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>打印特定列</strong></p>
+<p>使用一个 print 语句可以在同一行中输出不止一个字段. 下面的程序输出了每 行输入中的第一和第三个字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; print $1, $3 &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>NF</strong> 列总数</p>
+<p>该变量表示一共有多少列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; print NF, $1, $NF &#125; # 打印第一列 和最后一列</span><br></pre></td></tr></table></figure>
+<p><strong>计算和打印</strong></p>
+<p>你也可以对字段的值进行计算后再打印出来. 下面的程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; print $1, $2 * $3 &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>NR 打印行号</strong></p>
+<p>存储当前已经读取了多少行的计数。给每一行加上行号:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; print NR, $0 &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>在输出中添加内容</strong></p>
+<p>双引号内的文字将会在字段和计算的值中插入输出.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; print &quot;total pay for&quot;, $1, &quot;is&quot;, $2 * $3 &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>排序输出</strong></p>
+<p>最简单的方式是使用awk将每位员工的总薪酬置于其记录之前，然后利用<strong>sort</strong>命令来处理awk的输出。Unix上，命令行如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;&#123; printf(&quot;%6.2f    %s\n&quot;, $2 * $3, $0) &#125;&apos; emp.data | sort</span><br></pre></td></tr></table></figure>
+<p><strong>打印表头，表尾</strong></p>
+<p> BEGIN 用于匹配第一个输入文件的第一行之前的位置， END 则用于匹配处理过的最后一个文件的最后一行之后的位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;BEGIN &#123;print &quot;Name Rate Hour&quot;;print &quot;=========&quot;&#125; &#123;print $0&#125;&apos; file</span><br></pre></td></tr></table></figure>
+<p><strong>字符串拼接</strong></p>
+<p>print语句块中双引号是被当作拼接符使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 将names变量与当前行的的$1以及空格进行拼接，赋值给names</span><br><span class="line"> &#123; names = names $1 &quot; &quot;&#125;</span><br><span class="line">END &#123; print names &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>只打印最后一行</strong></p>
+<p><strong>打印最后一个输入行</strong></p>
+<p>虽然在 END 动作中 NR 还保留着它的值，但 $0 没有。程序是打印最后一个输入行的一种方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">    &#123; last = $0 &#125;</span><br><span class="line">END &#123; print last &#125;</span><br></pre></td></tr></table></figure>
+<h6 id="高级输出"><a href="#高级输出" class="headerlink" title="高级输出"></a>高级输出</h6><p>printf 语句的形式如下：:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printf(format, value1, value2, ..., valuen)</span><br></pre></td></tr></table></figure>
+<p>其中 format 是字符串，包含要逐字打印的文本，穿插着 format 之后的每个值该如何打印的规格(specification)。一个规格是一个 % 符，后面跟着一些字符，用来控制一个 value 的格式。第一个规格说明如何打印 value1 ，第二个说明如何打印 value2 ，… 。因此，有多少 value 要打印，在 format 中就要有多少个 % 规格。（与C语言很像）</p>
+<p>这里有个程序使用 printf 打印每位员工的总薪酬：:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; printf(&quot;total pay for %s is $%.2f\n&quot;, $1, $2 * $3) &#125;</span><br></pre></td></tr></table></figure>
+<h6 id="选择、过滤"><a href="#选择、过滤" class="headerlink" title="选择、过滤"></a>选择、过滤</h6><p><strong>数值判断</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$2 * $3 &gt; 50 &#123; printf(&quot;$%.2f for %s\n&quot;, $2 * $3, $1) &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>文本内容选择，支持正则</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$1 == &quot;Susie&quot; &#123; print &#125;</span><br><span class="line">$1~/正则内容/ &#123; print $1&#125; #对某一列进行正则</span><br><span class="line">/正则内容/ &#123; print $1&#125;	# 对整行进行匹配</span><br></pre></td></tr></table></figure>
+<p><strong>多条件组合</strong></p>
+<p>逻辑操作符与 &amp;&amp; ， 或 || ， 以及非 ! 对模式进行组合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$2 &gt;= 4 || $3 &gt;= 20 &#123;print&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="计算，定义变量"><a href="#计算，定义变量" class="headerlink" title="计算，定义变量"></a>计算，定义变量</h6><p>一个动作就是一个以新行或者分号分隔的语句序列。</p>
+<p><strong>定义变量</strong></p>
+<p>这个程序使用一个变量 emp 来统计工作超过15个小时的员工的数目：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$3 &gt; 15 &#123; emp = emp + 1 &#125;</span><br><span class="line">END     &#123; print emp, &quot;employees worked more than 15 hours&quot; &#125;</span><br></pre></td></tr></table></figure>
+<p>对于第三个字段超过15的每行， emp 的前一个值加1。以 emp.data 为输入，该程序产生：:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 employees worked more than 15 hours</span><br></pre></td></tr></table></figure>
+<p>用作数字的awk<strong>变量的默认初始值为0</strong>，所以我们不需要初始化 emp 。</p>
+<p>awk变量可以保存数字也<strong>可以保存字符串</strong>。这个程序会找出时薪最高的员工：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 如果$2大于最大值，则更新为当前行的信息</span><br><span class="line">$2 &gt; maxrate &#123; maxrate = $2; maxemp = $1 &#125;</span><br><span class="line">END &#123; print &quot;highest hourly rate:&quot;, maxrate, &quot;for&quot;, maxemp &#125;</span><br></pre></td></tr></table></figure>
+<h6 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h6><p>length：字符长度</p>
+<p>请参考该网址，可以看到更多的函数说明：<a href="https://man.linuxde.net/awk" target="_blank" rel="noopener">https://man.linuxde.net/awk</a></p>
+<h6 id="控制语句（用到再看）"><a href="#控制语句（用到再看）" class="headerlink" title="控制语句（用到再看）"></a>控制语句（用到再看）</h6><p>仅可以在动作中使用</p>
+<p><strong>if else if  else语句</strong></p>
+<p>如下程序将计算时薪超过6美元的员工的总薪酬与平均薪酬。它使用一个 if 来防范计算平均薪酬时的零除问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$2 &gt; 6 &#123; n = n + 1; pay = pay + $2 * $3 &#125;</span><br><span class="line">END    &#123; if (n &gt; 0)</span><br><span class="line">            print n, &quot;employees, total pay is&quot;, pay,</span><br><span class="line">                     &quot;average pay is&quot;, pay/n</span><br><span class="line">         else</span><br><span class="line">             print &quot;no employees are paid more than $6/hour&quot;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>emp.data 的输出是：:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">no employees are paid more than $6/hour</span><br></pre></td></tr></table></figure>
+<p>if-else 语句中，if 后的条件会被计算。如果为真，执行第一个 print 语句。否则，执行第二个 print 语句。注意我们可以使用一个逗号将一个长语句截断为多行来书写。</p>
+<p><strong>while语句</strong></p>
+<p>一个 while 语句有一个条件和一个执行体。条件为真时执行体中的语句会被重复执行。这个程序使用公式 value=amount(1+rate)yearsvalue=amount(1+rate)years</p>
+<p>来演示以特定的利率投资一定量的钱，其数值是如何随着年数增长的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># interest1 - 计算复利</span><br><span class="line">#   输入: 钱数    利率    年数</span><br><span class="line">#   输出: 复利值</span><br><span class="line"></span><br><span class="line">&#123;   i = 1</span><br><span class="line">    while (i &lt;= $3) &#123;</span><br><span class="line">        printf(&quot;\t%.2f\n&quot;, $1 * (1 + $2) ^ i)</span><br><span class="line">        i = i + 1</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>条件是 while 后括弧包围的表达式；循环体是条件后大括号包围的两个表达式。 printf 规格字符串中的 \t 代表制表符； ^ 是指数操作符。从 # 开始到行尾的文本是注释，会被awk忽略，但能帮助程序的读者理解程序做的事情。</p>
+<p>你可以为这程序输入三个一组的数字，看看不一样的钱数、利率、以及年数会产生什么。例如，如下事务演示了1000美元，利率为6%与12%，5年的复利分别是如何增长的：:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ awk -f interest1</span><br><span class="line">1000 .06 5</span><br><span class="line">        1060.00</span><br><span class="line">        1123.60</span><br><span class="line">        1191.02</span><br><span class="line">        1262.48</span><br><span class="line">        1338.23</span><br><span class="line">1000 .12 5</span><br><span class="line">        1120.00</span><br><span class="line">        1254.40</span><br><span class="line">        1404.93</span><br><span class="line">        1573.52</span><br><span class="line">        1762.34</span><br></pre></td></tr></table></figure>
+<p><strong>for语句</strong></p>
+<p>另一个语句， for ，将大多数循环都包含的初始化、测试、以及自增压缩成一行。如下是之前利息计算的 for 版本：:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># interest1 - 计算复利</span><br><span class="line">#   输入: 钱数    利率    年数</span><br><span class="line">#   输出: 每年末的复利</span><br><span class="line"></span><br><span class="line">&#123; for (i = 1; i &lt;= $3; i = i + 1)</span><br><span class="line">    printf(&quot;\t%.2f\n&quot;, $1 * (1 + $2) ^ i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>初始化 i = 1 只执行一次。接下来，测试条件 i &lt;= $3 ；如果为真，则执行循环体的 printf 语句。循环体执行结束后执行自增 i = i + 1 ，接着由另一次条件测试开始下一个循环迭代。代码更加紧凑，并且由于循环体仅是一条语句，所以不需要大括号来包围它。</p>
+<h6 id="数组变量（用到再看）"><a href="#数组变量（用到再看）" class="headerlink" title="数组变量（用到再看）"></a>数组变量（用到再看）</h6><p>将按行逆序打印输入。第一个动作将输入行存为数组 line 的连续元素；即第一行放在 line[1] ，第二行放在 line[2] , 依次继续。 END 动作使用一个 while 语句从后往前打印数组中的输入行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 反转 - 按行逆序打印输入</span><br><span class="line"></span><br><span class="line">    &#123; line[NR] = $0 &#125;  # 记下每个输入行</span><br><span class="line">END &#123; i = NR           # 逆序打印</span><br><span class="line">      while (i &gt; 0) &#123;</span><br><span class="line">        print line[i]</span><br><span class="line">        i = i - 1</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>以 emp.data 为输入，输出为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Susie    4.25   18</span><br><span class="line">Mary     5.50   22</span><br><span class="line">Mark     5.00   20</span><br><span class="line">Kathy    4.00   10</span><br><span class="line">Dan      3.75   0</span><br><span class="line">Beth     4.00   0</span><br></pre></td></tr></table></figure>
+<p>参考：<a href="https://awk.readthedocs.io/en/latest/chapter-one.html" target="_blank" rel="noopener">https://awk.readthedocs.io/en/latest/chapter-one.html</a></p>
+</the></excerpt>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/08/04/linux常用命令/">linux常用命令</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
+        <p><span>发布时间:</span>2019-08-04, 19:21:32</p>
+        <p><span>最后更新:</span>2019-08-04, 21:24:44</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/04/linux常用命令/" title="linux常用命令">https://jizx.top/2019/08/04/linux常用命令/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://jizx.top/2019/08/04/linux常用命令/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/01/04/mac卸载官网的python/">
+                    mac卸载官网的python
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#sort"><span class="toc-text">sort</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#k"><span class="toc-text">-k</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#例子"><span class="toc-text">例子</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#awk"><span class="toc-text">awk</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#基本组成"><span class="toc-text">基本组成</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#模式种类"><span class="toc-text">模式种类</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#输入方式"><span class="toc-text">输入方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#将指令保存在文件中"><span class="toc-text">将指令保存在文件中</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#功能"><span class="toc-text">功能</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#打印输出"><span class="toc-text">打印输出</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#高级输出"><span class="toc-text">高级输出</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#选择、过滤"><span class="toc-text">选择、过滤</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#计算，定义变量"><span class="toc-text">计算，定义变量</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#内置函数"><span class="toc-text">内置函数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#控制语句（用到再看）"><span class="toc-text">控制语句（用到再看）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#数组变量（用到再看）"><span class="toc-text">数组变量（用到再看）</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-4 i,
+        .toc-level-4 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/01/04/mac卸载官网的python/" title="下一篇: mac卸载官网的python">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/linux常用命令/">linux常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/04/mac卸载官网的python/">mac卸载官网的python</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/photoshop曲线原理与应用/">photoshop曲线原理与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/正则表达式必知必会/">正则表达式必知必会</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/shell通配符/">shell通配符</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/window添加右键用atom打开/">window添加右键用atom打开</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/notepad常用插件/">notepad常用插件与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/chrome截取整个网页/">chrome截取整个网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Git教程/">Git教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/python编码问题/">python编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/04/java方法传参问题/">java方法传参问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/如何有效批评而不是吵架/">如何有效批评而不是吵架</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/运动后不能马上洗澡/">运动后不能马上洗澡</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/喜欢人的理由为什么说不出来/">喜欢人的理由为什么说不出来</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/全球公认的最健康的一天作息图解/">全球公认的最健康的一天作息图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/如何提高「钝感力」，从此不再「想太多」/">如何提高「钝感力」，从此不再「想太多」</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/03/java嵌套类/">java嵌套类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第3章-完成时态/">英语语法——中级：第3章.完成时态</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第2章-名词、定语、状语从句/">英语语法——中级：第2章.名词、定语、状语从句</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第1章-简单句与复合句/">英语语法——中级：第1章.简单句与复合句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/08/vim常用按键总结/">vim常用按键总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2019 jizx
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 6;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
