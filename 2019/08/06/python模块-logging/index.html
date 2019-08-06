@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="jizx">
+
+
+
+<meta name="description" content="python logging 模块的使用以及详细讲解">
+<meta name="keywords" content="python,logging">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python模块-logging">
+<meta property="og:url" content="https://jizx.top/2019/08/06/python模块-logging/index.html">
+<meta property="og:site_name" content="玖玖的博客">
+<meta property="og:description" content="python logging 模块的使用以及详细讲解">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-06T09:38:12.686Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python模块-logging">
+<meta name="twitter:description" content="python logging 模块的使用以及详细讲解">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="玖玖的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="https://avatars1.githubusercontent.com/u/18480104?s=40&v=4">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>python模块-logging | 玖玖的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">jizx</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false">
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class="no-result">No results found <i class="fa fa-spinner fa-pulse"></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">分类&amp;标签</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1822980003@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/JizxGit" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter/">jupyter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logging/">logging</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notepad/">notepad++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photoshop/">photoshop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/从句/">从句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传参/">传参</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/健康/">健康</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/右键/">右键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/同理心/">同理心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/吵架/">吵架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复合句/">复合句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心理/">心理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/截图/">截图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/所见所闻/">所见所闻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打印/">打印</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/批评/">批评</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方法调用/">方法调用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时态/">时态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/曲线/">曲线</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/更新ing/">更新ing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类/">类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统优化/">系统优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统环境/">系统环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编码问题/">编码问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编辑器/">编辑器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/通配符/">通配符</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">博客主题原作者MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">在读研究生二年级</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">jizx</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">jizx</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">分类&amp;标签</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1822980003@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/JizxGit" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-python模块-logging" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/08/06/python模块-logging/" class="article-date">
+      <time datetime="2019-08-06T06:32:08.000Z" itemprop="datePublished">2019-08-06</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python模块-logging
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/python/">python</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/logging/">logging</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <excerpt in="" index="" |="" 首页摘要=""> 
+
+<p>python logging 模块的使用以及详细讲解</p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+
+
+<h3 id="日志级别"><a href="#日志级别" class="headerlink" title="日志级别"></a>日志级别</h3><p>logging模块定义了以下几个日志等级，它允许开发人员自定义其他日志级别，但是这是不被推荐的，尤其是在开发供别人使用的库时，因为这会导致日志级别的混乱。</p>
+<table>
+<thead>
+<tr>
+<th>日志等级（level）</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEBUG</td>
+<td>最详细的日志信息，典型应用场景是 问题诊断</td>
+</tr>
+<tr>
+<td>INFO</td>
+<td>信息详细程度仅次于DEBUG，通常只记录关键节点信息，用于确认一切都是按照我们预期的那样进行工作</td>
+</tr>
+<tr>
+<td>WARNING</td>
+<td>当某些不期望的事情发生时记录的信息（如，磁盘可用空间较低），但是此时应用程序还是正常运行的</td>
+</tr>
+<tr>
+<td>ERROR</td>
+<td>由于一个更严重的问题导致某些功能不能正常运行时记录的信息</td>
+</tr>
+<tr>
+<td>CRITICAL</td>
+<td>当发生严重错误，导致应用程序不能继续运行时记录的信息</td>
+</tr>
+</tbody>
+</table>
+<p>默认情况下Python的logging模块将日志打印到了标准输出中，且只显示了大于等于WARNING级别的日志，这说明<strong>默认的日志级别设置为WARNING</strong>（日志级别等级CRITICAL &gt; ERROR &gt; WARNING &gt; INFO &gt; DEBUG）而日志的信息量是依次增多的；</p>
+<p>开发应用程序或部署开发环境时，可以使用DEBUG或INFO级别的日志获取尽可能详细的日志信息来进行开发或部署调试；</p>
+<h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><p>logging模块提供了两种记录日志的方式：</p>
+<ul>
+<li>第一种方式是使用logging提供的模块级别的函数</li>
+<li>第二种方式是使用Logging日志系统的四大组件</li>
+</ul>
+<p>首先来看一下第一种，通过logging提供的模块级别的函数进行日志记录。</p>
+<p>logging模块定义的模块级别的常用函数</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>logging.debug(msg, *args, **kwargs)</td>
+<td>创建一条严重级别为DEBUG的日志记录</td>
+</tr>
+<tr>
+<td>logging.info(msg, *args, **kwargs)</td>
+<td>创建一条严重级别为INFO的日志记录</td>
+</tr>
+<tr>
+<td>logging.warning(msg, *args, **kwargs)</td>
+<td>创建一条严重级别为WARNING的日志记录</td>
+</tr>
+<tr>
+<td>logging.error(msg, *args, **kwargs)</td>
+<td>创建一条严重级别为ERROR的日志记录</td>
+</tr>
+<tr>
+<td>logging.critical(msg, *args, **kwargs)</td>
+<td>创建一条严重级别为CRITICAL的日志记录</td>
+</tr>
+<tr>
+<td>logging.log(level, *args, **kwargs)</td>
+<td>创建一条严重级别为level的日志记录</td>
+</tr>
+<tr>
+<td>logging.basicConfig(**kwargs)</td>
+<td>对root logger进行一次性配置</td>
+</tr>
+</tbody>
+</table>
+<p>其中<code>logging.basicConfig(**kwargs)</code>函数用于指定“要记录的日志级别”、“日志格式”、“日志输出位置”、“日志文件的打开模式”等信息，其他几个都是用于记录各个级别日志的函数。</p>
+<p>具体例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(level=logging.DEBUG,<span class="comment"># 控制台打印的日志级别</span></span><br><span class="line">                    filename=<span class="string">'new.log'</span>,</span><br><span class="line">                    filemode=<span class="string">'w'</span>,<span class="comment"># 写模式：a和w，w就是写模式，a是追加模式，默认是追加模式</span></span><br><span class="line">                    format= <span class="string">'%(asctime)s - %(pathname)s[line:%(lineno)d] - %(name)s - %(levelname)s: %(message)s'</span>, <span class="comment"># 日志格式</span></span><br><span class="line">                    datefmt=<span class="string">'%Y-%m-%d  %H:%M:%S %a '</span>    <span class="comment"># 日期格式</span></span><br><span class="line">                    )</span><br><span class="line"></span><br><span class="line">logging.debug(<span class="string">"info"</span>)</span><br><span class="line">logging.info(<span class="string">"info"</span>)</span><br><span class="line">logging.warning(<span class="string">"warning"</span>)</span><br><span class="line">logging.error(<span class="string">"error"</span>)</span><br><span class="line">logging.critical(<span class="string">"critical"</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="关于-basicConfig-说明"><a href="#关于-basicConfig-说明" class="headerlink" title="关于 basicConfig 说明"></a>关于 basicConfig 说明</h4><p>主要的配置是通过<code>basicConfig</code>来定制的：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">level</td>
+<td style="text-align:left">指定日志器的日志级别，默认是 WARNING 级别，因此 DEBUG、INFO 都不会输出</td>
+</tr>
+<tr>
+<td style="text-align:left">filename</td>
+<td style="text-align:left">指定日志输出目标文件的文件名（可以写文件名也可以写文件的完整的绝对路径，写文件名日志放执行文件目录下，写完整路径按照完整路径生成日志文件），指定该设置项后日志信息就<strong>不会被输出到控制台了</strong>，如果需要同时显示，请看后面的组件用法。</td>
+</tr>
+<tr>
+<td style="text-align:left">filemode</td>
+<td style="text-align:left">指定日志文件的打开模式，默认为<code>a</code>,追加的方式，该选项要在filename指定时才有效</td>
+</tr>
+<tr>
+<td style="text-align:left">stream</td>
+<td style="text-align:left">指定日志输出目标stream，如sys.stdout、sys.stderr以及网络stream。需要说明的是，stream和filename不能同时提供，否则会引发 <code>ValueError</code>异常</td>
+</tr>
+<tr>
+<td style="text-align:left">handlers</td>
+<td style="text-align:left">Python 3.3中新添加的配置项。该选项如果被指定，它应该是一个创建了多个Handler的可迭代对象，这些handler将会被添加到root logger。需要说明的是：filename、stream和handlers这三个配置项只能有一个存在，不能同时出现2个或3个，否则会引发ValueError异常。</td>
+</tr>
+<tr>
+<td style="text-align:left">format</td>
+<td style="text-align:left">指定日志格式字符串，即指定日志输出时所包含的字段信息以及它们的顺序。logging模块定义的格式字段请看<strong>Formater</strong>一节</td>
+</tr>
+<tr>
+<td style="text-align:left">datefmt</td>
+<td style="text-align:left">指定日期/时间格式。需要注意的是，该选项要在format中<strong>包含时间字段%(asctime)s时才有效</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">style</td>
+<td style="text-align:left">Python 3.2中新添加的配置项。指定format格式字符串的风格，可取值为’%’、’{‘和’$’，默认为’%’</td>
+</tr>
+</tbody>
+</table>
+<p>注意点：</p>
+<ul>
+<li><code>logging.basicConfig()</code>函数是一个一次性的简单配置工具使，也就是说<strong>只有在第一次调用该函数时会起作用</strong>，后续再次调用该函数时完全不会产生任何操作的，多次调用的设置并不是累加操作。</li>
+<li>日志器（Logger）是有层级关系的，上面调用的logging模块级别的函数所使用的日志器是<code>RootLogger</code>类的实例，其名称为’root’，它是处于日志器层级关系最顶层的日志器，且<strong>该实例是以单例模式存在的</strong>。</li>
+<li>如果要记录的日志中包含变量数据，可使用一个格式字符串作为这个事件的描述消息（<code>logging.debug</code>、<code>logging.info</code>等函数的第一个参数），然后将变量数据作为第二个参数<code>*args</code>的值进行传递，如下:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logging.warning(&apos;%s is %d years old.&apos;, &apos;Tom&apos;, 10)</span><br><span class="line"># WARNING:root:Tom is 10 years old.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其实，logging所提供的模块级别的日志记录函数也是对logging日志系统相关类的封装而已。这里其实创建了一个 名为<code>root</code>的日志器组件，是一个默认的、单例的 logger 组件。接下来我们看一下第二种。</p>
+<h3 id="Logging-组件"><a href="#Logging-组件" class="headerlink" title="Logging 组件"></a>Logging 组件</h3><p>logging模块就是通过下面这些组件来完成日志处理的，上面所使用的logging模块级别的函数也是通过这些组件对应的类来实现的。</p>
+<p>在介绍logging模块的日志处理流程之前，我们先来介绍下logging模块的四大组件：</p>
+<table>
+<thead>
+<tr>
+<th>组件名称</th>
+<th>对应类名</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>日志器</td>
+<td>Logger</td>
+<td>提供了应用程序可一直使用的接口</td>
+</tr>
+<tr>
+<td>处理器</td>
+<td>Handler</td>
+<td>将logger创建的日志记录发送到合适的目的输出</td>
+</tr>
+<tr>
+<td>过滤器</td>
+<td>Filter</td>
+<td>提供了更细粒度的控制工具来决定输出哪条日志记录，丢弃哪条日志记录</td>
+</tr>
+<tr>
+<td>格式器</td>
+<td>Formatter</td>
+<td>决定日志记录的最终输出格式</td>
+</tr>
+</tbody>
+</table>
+<p>它们之间的合作关系如下：</p>
+<ul>
+<li>日志器（logger）需要通过处理器（handler）将日志信息输出到目标位置，如：文件、sys.stdout、网络等；</li>
+<li>不同的处理器（handler）可以将日志输出到不同的位置；</li>
+<li>日志器（logger）可以设置多个处理器（handler）将同一条日志记录输出到不同的位置；</li>
+<li>每个处理器（handler）都可以设置自己的过滤器（filter）实现日志过滤，从而只保留感兴趣的日志；</li>
+<li>每个处理器（handler）都可以设置自己的格式器（formatter）实现同一条日志以不同的格式输出到不同的地方。</li>
+</ul>
+<p>简单点说就是：<strong>日志器（logger）是入口，真正干活儿的是处理器（handler），处理器（handler）还可以通过过滤器（filter）和格式器（formatter）对要输出的日志内容做过滤和格式化等处理操作。</strong></p>
+<h3 id="日志流处理简要流程"><a href="#日志流处理简要流程" class="headerlink" title="日志流处理简要流程"></a>日志流处理简要流程</h3><ol>
+<li><p>创建一个logger</p>
+</li>
+<li><p>设置下logger的日志的等级</p>
+</li>
+<li><p>创建合适的Handler(FileHandler要有路径)</p>
+</li>
+<li><p>设置下每个Handler的日志等级。</p>
+</li>
+<li><p>创建下日志的格式Formater</p>
+</li>
+<li><p>向Handler中添加上面创建的Formater</p>
+</li>
+<li><p>将上面创建的Handler注册到logger中</p>
+</li>
+<li><p>打印输出logger.debug\logger.info\logger.warning\logger.error\logger.critical</p>
+</li>
+</ol>
+<blockquote>
+<p>为什么会有两个<code>setLevel()</code>方法？logger 的级别决定了消息是否要传递给处理器。每个handler的级别决定了消息是否要分发到指定目标</p>
+</blockquote>
+<p>从“简单使用”一节中我们了解到了<code>logging.debug()</code>、<code>logging.info()</code>等函数分别用以记录不同级别的日志信息 ，<code>logging.basicConfig()</code>用默认日志格式（Formatter）为日志系统建立一个默认的流处理器（StreamHandler），设置基础配置（如日志级别等）并加到 root logger 中。</p>
+<p>接下来就按照上面的流程来介绍高级的用法，来满足各种需求。</p>
+<h3 id="logger"><a href="#logger" class="headerlink" title="logger"></a>logger</h3><h4 id="日志器的获取"><a href="#日志器的获取" class="headerlink" title="日志器的获取"></a>日志器的获取</h4><p>如何获取一个Logger对象呢？</p>
+<ol>
+<li>通过Logger类的实例化方法创建一个Logger类的实例，</li>
+<li>但是我们通常都是用第二种方式：<code>logging.getLogger(&#39;name&#39;)</code>方法。</li>
+</ol>
+<p><code>logging.getLogger(&#39;name&#39;)</code>方法有一个可选参数name，该参数表示将要返回的日志器的名称标识， 默认为<code>root</code>。若以相同的name参数值多次调用<code>getLogger()</code>方法，将会返回指向<strong>同一个logger对象的引用</strong>。</p>
+<h4 id="日志器的继承"><a href="#日志器的继承" class="headerlink" title="日志器的继承"></a>日志器的继承</h4><ul>
+<li>logger的名称是以<code>.</code>分割的层级结构，每个<code>.</code>后面的logger都是<code>.</code>前面的logger的children，例如，有一个名称为 foo 的logger，其它名称分别为 <code>foo.bar</code>, <code>foo.bar.baz</code> 和 <code>foo.bam</code>都是 foo 的后代。</li>
+<li>logger有一个”有效等级（effective level）”的概念。如果一个logger上没有被明确设置一个level，那么该logger就使用它parent的level。如果它的parent也没有明确设置level，则继续向上查找parent的parent的有效level，依次类推，直到找到个一个明确设置了level的祖先为止。需要说明的是，root logger总是会有一个明确的level设置（默认为 WARNING）。当决定是否去处理一个已发生的事件时，<strong>logger的有效等级将会被用来决定是否将该事件传递给该logger的handlers进行处理</strong>。</li>
+<li>child loggers在完成对日志消息的处理后，默认会将日志消息传递给与它们的祖先loggers相关的handlers。因此，我们不必为一个应用程序中所使用的所有loggers定义和配置handlers，只需要为一个顶层的logger配置handlers，然后按照需要创建child loggers就可足够了。我们也可以通过将一个logger的propagate属性设置为False来关闭这种传递机制。</li>
+</ul>
+<h3 id="handler"><a href="#handler" class="headerlink" title="handler"></a>handler</h3><p>Handler对象的作用是（基于日志消息的level）将消息分发到handler指定的位置（文件、网络、邮件等）。Logger对象可以通过addHandler()方法为自己添加0个或者更多个handler对象。比如，一个应用程序可能想要实现以下几个日志需求：</p>
+<ul>
+<li>1）把所有日志都发送到一个日志文件中；</li>
+<li>2）把所有严重级别大于等于error的日志发送到stdout（标准输出）；</li>
+<li>3）把所有严重级别为critical的日志发送到一个email邮件地址。这种场景就需要3个不同的handlers，每个handler复杂发送一个特定严重级别的日志到一个特定的位置。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fh = logging.FileHandler(&quot;jizx_log.txt&quot;,encoding=&quot;utf-8&quot;) # 创建一个文件 handler 用于注册到 logger 中</span><br><span class="line">Handler.setLevel(lel):指定被处理的信息级别，低于lel级别的信息将被忽略</span><br><span class="line">Handler.setFormatter()：给这个handler选择一个格式</span><br><span class="line">Handler.addFilter(filt)、Handler.removeFilter(filt)：新增或删除一个filter对象</span><br></pre></td></tr></table></figure>
+<p>应用程序代码不应该直接实例化和使用Handler实例。因为Handler是一个基类，它只定义了素有handlers都应该有的接口，同时提供了一些子类可以直接使用或覆盖的默认行为。下面是一些常用的Handler：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Handler</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">logging.StreamHandler([strm])</td>
+<td style="text-align:left">将日志消息发送到输出到Stream，如std.out, std.err或任何file-like对象。默认是sys.stderr</td>
+</tr>
+<tr>
+<td style="text-align:left">logging.FileHandler(filename[,mode])</td>
+<td style="text-align:left">将日志消息发送到磁盘文件，默认<code>mode</code>是<code>a</code>,文件大小会无限增长。还可是<code>w</code></td>
+</tr>
+<tr>
+<td style="text-align:left">logging.handlers.RotatingFileHandler( filename[, mode[, maxBytes[, backupCount]]])</td>
+<td style="text-align:left">将日志消息发送到磁盘文件，并支持日志文件按大小切割。当文件达到一定大小之后，它会自动将当前日志文件改名，然后创建 一个新的同名日志文件继续输出。maxBytes用于指定日志文件的最大文件大小。如果maxBytes为0，意味着日志文件可以无限大，这时上面描述的重命名过程就不会发生。<br>backupCount用于指定保留的备份文件的个数。比如，如果指定为2，当上面描述的重命名过程发生时，原有的chat.log.2并不会被更名，而是被删除。</td>
+</tr>
+<tr>
+<td style="text-align:left">logging.hanlders.TimedRotatingFileHandler( filename [,when [,interval [,backupCount]]])</td>
+<td style="text-align:left">将日志消息发送到磁盘文件，并支持日志文件按时间切割。interval是时间间隔。when参数是一个字符串。表示时间间隔的单位，不区分大小写。它有以下取值：S 秒、M 分、H 小时、D 天、W 每星期（interval==0时代表星期一）、midnight 每天凌晨</td>
+</tr>
+<tr>
+<td style="text-align:left">logging.handlers.HTTPHandler</td>
+<td style="text-align:left">将日志消息以GET或POST的方式发送给一个HTTP服务器</td>
+</tr>
+<tr>
+<td style="text-align:left">logging.handlers.SMTPHandler</td>
+<td style="text-align:left">将日志消息发送给一个指定的email地址</td>
+</tr>
+<tr>
+<td style="text-align:left">logging.NullHandler</td>
+<td style="text-align:left">该Handler实例会忽略error messages，通常被想使用logging的library开发者使用来避免’No handlers could be found for logger XXX’信息的出现。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="formater"><a href="#formater" class="headerlink" title="formater"></a>formater</h3><p>Formater对象用于配置日志信息的最终顺序、结构和内容。与logging.Handler基类不同的是，应用代码可以直接实例化Formatter类。另外，如果你的应用程序需要一些特殊的处理行为，也可以实现一个Formatter的子类来完成。</p>
+<p>Formatter类的构造方法定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logging.Formatter.__init__(fmt=None, datefmt=None, style=&apos;%&apos;)</span><br></pre></td></tr></table></figure>
+<p>该构造方法接收3个可选参数：</p>
+<ul>
+<li>fmt：指定消息格式化字符串，如果不指定该参数则默认使用message的原始值</li>
+<li>datefmt：指定日期格式字符串，如果不指定该参数则默认使用”%Y-%m-%d %H:%M:%S”</li>
+<li>style：Python 3.2新增的参数，可取值为 ‘%’, ‘{‘和 ‘$’，如果不指定该参数则默认使用’%’</li>
+</ul>
+<p><strong>一般直接用<code>logging.Formatter(fmt, datefmt)</code></strong></p>
+<h4 id="format格式字符串说明"><a href="#format格式字符串说明" class="headerlink" title="format格式字符串说明"></a>format格式字符串说明</h4><table>
+<thead>
+<tr>
+<th>字段/属性名称</th>
+<th>使用格式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>asctime</td>
+<td>%(asctime)s</td>
+<td>将日志的时间构造成可读的形式，默认情况下是‘2016-02-08 12:00:00,123’精确到毫秒</td>
+</tr>
+<tr>
+<td>name</td>
+<td>%(name)s</td>
+<td>所使用的日志器名称，默认是’root’，因为默认使用的是 rootLogger</td>
+</tr>
+<tr>
+<td>filename</td>
+<td>%(filename)s</td>
+<td>调用日志输出函数的模块的文件名； pathname的文件名部分，包含文件后缀</td>
+</tr>
+<tr>
+<td>funcName</td>
+<td>%(funcName)s</td>
+<td>由哪个function发出的log， 调用日志输出函数的函数名</td>
+</tr>
+<tr>
+<td>levelname</td>
+<td>%(levelname)s</td>
+<td>日志的最终等级（被filter修改后的）</td>
+</tr>
+<tr>
+<td>message</td>
+<td>%(message)s</td>
+<td>日志信息， 日志记录的文本内容</td>
+</tr>
+<tr>
+<td>lineno</td>
+<td>%(lineno)d</td>
+<td>当前日志的行号， 调用日志输出函数的语句所在的代码行</td>
+</tr>
+<tr>
+<td>levelno</td>
+<td>%(levelno)s</td>
+<td>该日志记录的数字形式的日志级别（10, 20, 30, 40, 50）</td>
+</tr>
+<tr>
+<td>pathname</td>
+<td>%(pathname)s</td>
+<td>完整路径 ，调用日志输出函数的模块的完整路径名，可能没有</td>
+</tr>
+<tr>
+<td>process</td>
+<td>%(process)s</td>
+<td>当前进程， 进程ID。可能没有</td>
+</tr>
+<tr>
+<td>processName</td>
+<td>%(processName)s</td>
+<td>进程名称，Python 3.1新增</td>
+</tr>
+<tr>
+<td>thread</td>
+<td>%(thread)s</td>
+<td>当前线程， 线程ID。可能没有</td>
+</tr>
+<tr>
+<td>threadName</td>
+<td>%(thread)s</td>
+<td>线程名称</td>
+</tr>
+<tr>
+<td>module</td>
+<td>%(module)s</td>
+<td>调用日志输出函数的模块名， filename的名称部分，不包含后缀即不包含文件后缀的文件名</td>
+</tr>
+<tr>
+<td>created</td>
+<td>%(created)f</td>
+<td>当前时间，用UNIX标准的表示时间的浮点数表示； 日志事件发生的时间–时间戳，就是当时调用time.time()函数返回的值</td>
+</tr>
+<tr>
+<td>relativeCreated</td>
+<td>%(relativeCreated)d</td>
+<td>输出日志信息时的，自Logger创建以 来的毫秒数； 日志事件发生的时间相对于logging模块加载时间的相对毫秒数</td>
+</tr>
+<tr>
+<td>msecs</td>
+<td>%(msecs)d</td>
+<td>日志事件发生事件的毫秒部分。logging.basicConfig()中用了参数datefmt，将会去掉asctime中产生的毫秒部分，可以用这个加上</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Filter类（暂时了解）"><a href="#Filter类（暂时了解）" class="headerlink" title="Filter类（暂时了解）"></a>Filter类（暂时了解）</h3><p>Filter可以被Handler和Logger用来做比level更细粒度的、更复杂的过滤功能。Filter是一个过滤器基类，它只允许某个logger层级下的日志事件通过过滤。该类定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class logging.Filter(name=&apos;&apos;)</span><br><span class="line">    filter(record)</span><br></pre></td></tr></table></figure>
+<p>比如，一个filter实例化时传递的name参数值为’A.B’，那么该filter实例将只允许名称为类似如下规则的loggers产生的日志记录通过过滤：’A.B’，’A.B,C’，’A.B.C.D’，’A.B.D’，而名称为’A.BB’, ‘B.A.B’的loggers产生的日志则会被过滤掉。如果name的值为空字符串，则允许所有的日志事件通过过滤。</p>
+<p>filter方法用于具体控制传递的record记录是否能通过过滤，如果该方法返回值为0表示不能通过过滤，返回值为非0表示可以通过过滤。</p>
+<h3 id="综合案例"><a href="#综合案例" class="headerlink" title="综合案例"></a>综合案例</h3><p><strong>需求：</strong></p>
+<p>输出log到控制台，并将日志写入log文件，保存2种类型的log：</p>
+<ul>
+<li><p>all.log 保存debug, info, warning, critical 信息</p>
+</li>
+<li><p>error.log则只保存error信息，同时按照时间自动分割日志文件</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">from</span> logging <span class="keyword">import</span> handlers</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Logger</span><span class="params">(object)</span>:</span></span><br><span class="line">    level_relations = &#123;</span><br><span class="line">        <span class="string">'debug'</span>: logging.DEBUG,</span><br><span class="line">        <span class="string">'info'</span>: logging.INFO,</span><br><span class="line">        <span class="string">'warning'</span>: logging.WARNING,</span><br><span class="line">        <span class="string">'error'</span>: logging.ERROR,</span><br><span class="line">        <span class="string">'crit'</span>: logging.CRITICAL</span><br><span class="line">    &#125;  <span class="comment"># 日志级别关系映射</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, filename, level=<span class="string">'info'</span>, when=<span class="string">'D'</span>, backCount=<span class="number">3</span>, fmt=<span class="string">'%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s'</span>)</span>:</span></span><br><span class="line">        self.logger = logging.getLogger(filename)</span><br><span class="line">        self.logger.setLevel(self.level_relations.get(level))  <span class="comment"># 设置日志级别</span></span><br><span class="line">        format_str = logging.Formatter(fmt)  <span class="comment"># 设置日志格式</span></span><br><span class="line"></span><br><span class="line">        out_screen = logging.StreamHandler()  <span class="comment"># 往屏幕上输出</span></span><br><span class="line">        out_screen.setFormatter(format_str)  <span class="comment"># 设置屏幕上显示的格式</span></span><br><span class="line"></span><br><span class="line">        out_file = handlers.TimedRotatingFileHandler(filename=filename, when=when, backupCount=backCount, encoding=<span class="string">'utf-8'</span>)  <span class="comment"># 往文件里写入，指定间隔时间自动生成文件的处理器</span></span><br><span class="line">        out_file.setFormatter(format_str)  <span class="comment"># 设置文件里写入的格式</span></span><br><span class="line">        <span class="comment"># interval是时间间隔，backupCount是备份文件的个数，如果超过这个个数，就会自动删除，when是间隔的时间单位，单位有以下几种：</span></span><br><span class="line">        <span class="comment"># S 秒、M 分、H 小时、、D 天、、W 每星期（interval==0时代表星期一）、midnight 每天凌晨</span></span><br><span class="line"></span><br><span class="line">        self.logger.addHandler(out_screen)  <span class="comment"># 把对象加到logger里</span></span><br><span class="line">        self.logger.addHandler(out_file)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">debug</span><span class="params">(self, msg)</span>:</span></span><br><span class="line">        self.logger.debug(msg)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">info</span><span class="params">(self, msg)</span>:</span></span><br><span class="line">        self.logger.info(msg)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">warning</span><span class="params">(self, msg)</span>:</span></span><br><span class="line">        self.logger.warning(msg)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(self, msg)</span>:</span></span><br><span class="line">        self.logger.error(msg)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">critical</span><span class="params">(self, msg)</span>:</span></span><br><span class="line">        self.logger.critical(msg)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    log = Logger(<span class="string">'all.log'</span>,level=<span class="string">'debug'</span>)</span><br><span class="line">    log.logger.debug(<span class="string">'debug'</span>)</span><br><span class="line">    log.logger.info(<span class="string">'info'</span>)</span><br><span class="line">    log.logger.warning(<span class="string">u'警告'</span>)</span><br><span class="line">    log.logger.error(<span class="string">u'报错'</span>)</span><br><span class="line">    log.logger.critical(<span class="string">u'严重'</span>)</span><br><span class="line">    error_log= Logger(<span class="string">'error.log'</span>, level=<span class="string">'error'</span>)</span><br><span class="line">    error_log.logger.error(<span class="string">'error'</span>)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 这种方法虽然调用简单，但是日志中“lineno”字段的信息就只会对应的到上面的 logger 类中的函数，而不是真正打印信息的行数(后期研究一下如何解决)</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    all_log = Logger(<span class="string">'all.log'</span>, level=<span class="string">'debug'</span>)</span><br><span class="line">    all_log.debug(<span class="string">'debug'</span>)</span><br><span class="line">    all_log.info(<span class="string">'info'</span>)</span><br><span class="line">    all_log.warning(<span class="string">u'警告'</span>)</span><br><span class="line">    all_log.error(<span class="string">u'报错'</span>)</span><br><span class="line">    all_log.critical(<span class="string">u'严重'</span>)</span><br><span class="line">    error_log=Logger(<span class="string">'error.log'</span>, level=<span class="string">'error'</span>)</span><br><span class="line">    error_log.error(<span class="string">'error'</span>)</span><br><span class="line">    error_log.critical(<span class="string">u'严重'</span>)</span><br></pre></td></tr></table></figure>
+<p>参考:<a href="https://www.cnblogs.com/Nicholas0707/p/9021672.html" target="_blank" rel="noopener">https://www.cnblogs.com/Nicholas0707/p/9021672.html</a></p>
+<p><a href="https://www.cnblogs.com/nancyzhu/p/8551506.html" target="_blank" rel="noopener">https://www.cnblogs.com/nancyzhu/p/8551506.html</a> 综合案例</p>
+</the></excerpt>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/08/06/python模块-logging/">python模块-logging</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
+        <p><span>发布时间:</span>2019-08-06, 14:32:08</p>
+        <p><span>最后更新:</span>2019-08-06, 17:38:12</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/06/python模块-logging/" title="python模块-logging">https://jizx.top/2019/08/06/python模块-logging/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://jizx.top/2019/08/06/python模块-logging/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/08/06/python模块-小工具大全/">
+                    python模块-小工具大全
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/08/04/jupyter使用与设置/">
+                    jupyter使用与设置
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#日志级别"><span class="toc-text">日志级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简单使用"><span class="toc-text">简单使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关于-basicConfig-说明"><span class="toc-text">关于 basicConfig 说明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Logging-组件"><span class="toc-text">Logging 组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#日志流处理简要流程"><span class="toc-text">日志流处理简要流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#logger"><span class="toc-text">logger</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#日志器的获取"><span class="toc-text">日志器的获取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#日志器的继承"><span class="toc-text">日志器的继承</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#handler"><span class="toc-text">handler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#formater"><span class="toc-text">formater</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#format格式字符串说明"><span class="toc-text">format格式字符串说明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Filter类（暂时了解）"><span class="toc-text">Filter类（暂时了解）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#综合案例"><span class="toc-text">综合案例</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-4 i,
+        .toc-level-4 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/08/06/python模块-小工具大全/" title="上一篇: python模块-小工具大全">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/08/04/jupyter使用与设置/" title="下一篇: jupyter使用与设置">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python模块-小工具大全/">python模块-小工具大全</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python模块-logging/">python模块-logging</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/jupyter使用与设置/">jupyter使用与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/linux常用命令/">linux常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/04/mac卸载官网的python/">mac卸载官网的python</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/photoshop曲线原理与应用/">photoshop曲线原理与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/正则表达式必知必会/">正则表达式必知必会</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/shell通配符/">shell通配符</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/window添加右键用atom打开/">window添加右键用atom打开</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/notepad常用插件/">notepad常用插件与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/chrome截取整个网页/">chrome截取整个网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Git教程/">Git教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/python编码问题/">python编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/04/java方法传参问题/">java方法传参问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/如何有效批评而不是吵架/">如何有效批评而不是吵架</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/运动后不能马上洗澡/">运动后不能马上洗澡</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/喜欢人的理由为什么说不出来/">喜欢人的理由为什么说不出来</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/全球公认的最健康的一天作息图解/">全球公认的最健康的一天作息图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/如何提高「钝感力」，从此不再「想太多」/">如何提高「钝感力」，从此不再「想太多」</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/03/java嵌套类/">java嵌套类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第3章-完成时态/">英语语法——中级：第3章.完成时态</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第2章-名词、定语、状语从句/">英语语法——中级：第2章.名词、定语、状语从句</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第1章-简单句与复合句/">英语语法——中级：第1章.简单句与复合句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/08/vim常用按键总结/">vim常用按键总结</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2019 jizx
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 6;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
