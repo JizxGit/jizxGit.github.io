@@ -1,4 +1,4 @@
-https://jizx.top/2019/09/04/bash定制命令提示符/
+https://jizx.top/2019/09/04/bash命令提示符个性化/
 https://jizx.top/2019/09/02/awk/
 https://jizx.top/2019/08/13/linux-shell编程/
 https://jizx.top/2019/08/06/python模块-小工具大全/
