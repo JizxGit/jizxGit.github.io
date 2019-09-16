@@ -21,9 +21,12 @@
 <meta property="og:url" content="https://jizx.top/2019/08/13/linux-shell编程/index.html">
 <meta property="og:site_name" content="玖玖的博客">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-02T08:36:25.806Z">
+<meta property="og:image" content="https://jizx.top/2019/08/13/linux-shell编程/shell配置文件加载顺序1.png">
+<meta property="og:image" content="https://jizx.top/2019/08/13/linux-shell编程/shell配置文件加载顺序2.png">
+<meta property="og:updated_time" content="2019-09-05T02:38:14.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux shell编程">
+<meta name="twitter:image" content="https://jizx.top/2019/08/13/linux-shell编程/shell配置文件加载顺序1.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -305,7 +308,7 @@
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
 
-<h3 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h3><h4 id="父子进程"><a href="#父子进程" class="headerlink" title="父子进程"></a>父子进程</h4><p>在CLI提示符后输入/bin/bash命令或其他等效的bash命令时，会创建一个新的shell程序。 这个shell程序被称为子shell（child shell）。</p>
+<h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><h3 id="Shell-进程"><a href="#Shell-进程" class="headerlink" title="Shell 进程"></a>Shell 进程</h3><h4 id="父子进程"><a href="#父子进程" class="headerlink" title="父子进程"></a>父子进程</h4><p>在CLI提示符后输入/bin/bash命令或其他等效的bash命令时，会创建一个新的shell程序。 这个shell程序被称为子shell（child shell）。</p>
 <p>在生成子shell进程时，只有部分父进程的环境被复制到子shell环境中。这会对包括变量在内的一些东西造成影响。</p>
 <h4 id="进程列表"><a href="#进程列表" class="headerlink" title="进程列表"></a>进程列表</h4><p>可以在一行内指定依次运行的一系列指令，通过<strong>命令列表</strong>来实现：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span> ; ls ; <span class="built_in">cd</span> /etc ; <span class="built_in">pwd</span> ; <span class="built_in">cd</span> ; <span class="built_in">pwd</span> ; ls</span><br></pre></td></tr></table></figure>
@@ -328,55 +331,51 @@
 <blockquote>
 <p>  通过使用扩展语法，协程的名字被设置成My_Job。这里要注意的是，扩展语法写起来有点 麻烦。必须确保在第一个花括号<code>{</code>和命令名之间有一个空格。还必须保证命令以分号<code>;</code>结 尾。另外，分号和闭花括号<code>}</code>之间也得有一个空格。</p>
 </blockquote>
-<h4 id="理解-shell-的内建命令"><a href="#理解-shell-的内建命令" class="headerlink" title="理解 shell 的内建命令"></a>理解 shell 的内建命令</h4><h5 id="外部命令"><a href="#外部命令" class="headerlink" title="外部命令"></a>外部命令</h5><p>外部命令，是存在于bash shell之外的程序。外部命令程序通常位于/bin、/usr/bin、/sbin或/usr/sbin中。</p>
+<h3 id="shell-内建命令"><a href="#shell-内建命令" class="headerlink" title="shell 内建命令"></a>shell 内建命令</h3><h4 id="外部命令"><a href="#外部命令" class="headerlink" title="外部命令"></a>外部命令</h4><p>外部命令，是存在于bash shell之外的程序。外部命令程序通常位于<code>/bin</code>、<code>/usr/bin</code>、<code>/sbin</code>或<code>/usr/sbin</code>中。</p>
 <p>当外部命令执行时，会创建出一个子进程。这种操作被称为<strong>衍生</strong>（forking）。</p>
-<p>当进程必须执行衍生操作时，它需<strong>要花费时间和精力来设置新子进程的环境</strong>。所以说，外部 命令多少还是有代价的。</p>
-<h5 id="内部命令"><a href="#内部命令" class="headerlink" title="内部命令"></a>内部命令</h5><p>内建命令和外部命令的区别在于前者<strong>不需要使用子进程来执行</strong>。它们已经和shell编译成了一 体，作为shell工具的组成部分存在。比如cd和exit</p>
-<p>利用<code>type</code>命令来了解某个命令是否是内建的。</p>
+<p>当进程必须执行衍生操作时，它需<strong>要花费时间和精力来设置新子进程的环境</strong>。所以说，外部命令多少还是有代价的。</p>
+<h4 id="内建命令"><a href="#内建命令" class="headerlink" title="内建命令"></a>内建命令</h4><p>内建命令和外部命令的区别在于前者<strong>不需要使用子进程来执行</strong>。它们已经和shell编译成了一体，作为shell工具的组成部分存在。比如<code>cd</code>和<code>exit</code></p>
+<p>利用<code>type</code>命令来了解某个命令是否是内建的</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ type cd</span><br><span class="line">cd is a shell builtin</span><br></pre></td></tr></table></figure>
-<p>有些命令有多种实现。例如echo和pwd既有内建命令也有外部命令，要查看命令的不同实现，使用type命令的-a选项。</p>
+<p>有些命令有多种实现。例如<code>echo</code>和<code>pwd</code>既有内建命令也有外部命令，要查看命令的不同实现，使用type命令的-a选项。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ type -a echo </span><br><span class="line">echo is a shell builtin </span><br><span class="line">echo is /bin/echo</span><br></pre></td></tr></table></figure>
-<p>要使用外部命令 <code>pwd</code> ，可以输入<code>/bin/pwd</code> 。</p>
-<h5 id="内部命令-history"><a href="#内部命令-history" class="headerlink" title="内部命令 history"></a>内部命令 history</h5><p>设置保存在bash历史记录中的命令数。要想实现这一点，你需要修改名为 <code>HISTSIZE</code> 的环境变量</p>
+<p>要使用外部命令 <code>pwd</code> ，可以输入<code>/bin/pwd</code> </p>
+<h5 id="内建命令之-history"><a href="#内建命令之-history" class="headerlink" title="内建命令之 history"></a>内建命令之 history</h5><p>设置保存在bash历史记录中的命令数。要想实现这一点，你需要修改名为 <code>HISTSIZE</code> 的环境变量</p>
 <p>输入<code>!!</code>可以重新执行上一条命令，<code>!编号</code>即可执行历史列表中的对应编号的命令</p>
 <p>bash命令的历史记录是先存放在内存中，当shell退出时才被写入到历史文件<code>~/.bash_history</code>中。</p>
 <p><code>~/.bash_history</code>文件只有在打开首个终端会话时才会被读取。</p>
 <p>可以在退出shell会话之前强制将命令历史记录写入<code>.bash_history</code>文件。要实现强制写入，需要使用<code>history -a</code></p>
 <p>要想强制重新读 取.bash_history文件，更新终端会话的历史记录，可以使用 <code>history -n</code> 命令。</p>
-<h5 id="内部命令-alias"><a href="#内部命令-alias" class="headerlink" title="内部命令 alias"></a>内部命令 alias</h5><p>要查看当前可用 的别名，使用<code>alias</code>或者<code>alias -p</code>。</p>
+<h5 id="内建命令之-alias"><a href="#内建命令之-alias" class="headerlink" title="内建命令之 alias"></a>内建命令之 alias</h5><p>要查看当前可用 的别名，使用<code>alias</code>或者<code>alias -p</code>。</p>
 <p>使用alias命令创建属于自己的别名。</p>
 <p><code>alias li=&#39;ls -li&#39;</code></p>
-<h4 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h4><p>全局环境变量对于shell会话和所有生成的子shell都是可见的。局部变量则只对创建它们的 shell可见。</p>
-<p>查看环境变量的命令有<code>set</code>、<code>env</code>、<code>printenv</code></p>
-<blockquote>
-<p>  它们的区别：</p>
-<p>  set 命令会显示出全局变量、局部变量以 及用户定义变量。它还会按照字母顺序对结果进行排序。</p>
-<p>  env 和 printenv 命令不会对变量排序，也不会输出局部变量和用户定义变量。</p>
-<p>  TODO env 与 printenv</p>
-</blockquote>
-<p>要显示个别环境变量的值，可以使用<code>printenv</code> 或者 <code>echo</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ printenv HOME </span><br><span class="line">/home/Christine</span><br><span class="line"></span><br><span class="line">$ echo $HOME </span><br><span class="line">/home/Christine</span><br></pre></td></tr></table></figure>
-<h5 id="设置变量"><a href="#设置变量" class="headerlink" title="设置变量"></a>设置变量</h5><p>变量名区分大小写。所有的环境变量名均使用大写字母，自己创建的局 部变量或是shell脚本，请使用小写字母。</p>
-<p>赋值时不能有空格的原因：</p>
-<p>记住，变量名、等号和值之间没有空格，这一点非常重要。如果在赋值表达式中加上了空格， bash shell就会把值当成一个单独的命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ my_variable = &quot;Hello World&quot; </span><br><span class="line">-bash: my_variable: command not found</span><br></pre></td></tr></table></figure>
-<h5 id="设置全局环境变量"><a href="#设置全局环境变量" class="headerlink" title="设置全局环境变量"></a>设置全局环境变量</h5><p>创建全局环境变量的方法是先创建一个局部环境变量，然后通过<code>export</code>命令把它导出到全局环境中。变量名前面不需要加$。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ my_variable=&quot;I am Global now&quot; </span><br><span class="line">$ my_variable2=&quot;I am Global now&quot; </span><br><span class="line">$ export my_variable my_variable2  # 可以同时导出多个变量</span><br></pre></td></tr></table></figure>
-<p>修改子shell中全局环境变量并<strong>不会影响到父shell中该变量的值</strong>。这种改变仅在子shell中有效，并不会被反映到父shell中。甚至无法使用export命令改变父shell中全局环境变量的值。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ my_variable=<span class="string">"I am Global now"</span> </span><br><span class="line">$ <span class="built_in">export</span> my_variable </span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$my_variable</span> I am Global now </span><br><span class="line">$ </span><br><span class="line"><span class="variable">$bash</span> </span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$my_variable</span> </span><br><span class="line">I am Global now </span><br><span class="line">$ </span><br><span class="line">$ my_variable=<span class="string">"Null"</span> </span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">export</span> my_variable  <span class="comment"># 导出变量也没用</span></span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$my_variable</span></span><br><span class="line">Null </span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">exit</span> </span><br><span class="line"><span class="built_in">exit</span> </span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$my_variable</span> </span><br><span class="line">I am Global now </span><br><span class="line">$</span><br></pre></td></tr></table></figure>
-<h5 id="删除变量"><a href="#删除变量" class="headerlink" title="删除变量"></a>删除变量</h5><p>记住不要使用$。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unset my_variable</span><br></pre></td></tr></table></figure>
-<p>在处理<strong>全局环境变量</strong>时，如果你是在子进程中删除了一个全局环境变量， 这只对子进程有效。该全局环境变量在<strong>父进程中依然可用</strong>。</p>
-<h5 id="什么时候变量前加"><a href="#什么时候变量前加" class="headerlink" title="什么时候变量前加`"></a>什么时候变量前加`</h5><p>记住一点就行了：如果要用到变量，使用<code>$</code>；如果要操作变量，不使用<code>$</code>。这条规则的一个例外就是使用 printenv 显示某个变量的值。</p>
-<h5 id="shell-配置文件"><a href="#shell-配置文件" class="headerlink" title="shell 配置文件"></a>shell 配置文件</h5><p>启动bash shell有3种方式：</p>
+<h3 id="shell-配置文件"><a href="#shell-配置文件" class="headerlink" title="shell 配置文件"></a>shell 配置文件</h3><p><a href="http://ddrv.cn/a/173848/" target="_blank" rel="noopener">http://ddrv.cn/a/173848/</a></p>
+<p><code>Shell</code> 启动方式（TODO 到底是几种）</p>
 <ul>
-<li><p>登录时作为默认登录shell</p>
-</li>
-<li><p>作为非登录shell的交互式shell </p>
-</li>
-<li><p>作为运行脚本的非交互shell</p>
-</li>
+<li>交互式登录</li>
+<li>交互式非登录</li>
+<li>非交互式登录</li>
+<li>非交互式非登录</li>
 </ul>
+<p>启动bash shell有3种方式：</p>
+<ul>
+<li>登录时作为默认登录shell</li>
+<li>作为非登录shell的交互式shell </li>
+<li>作为运行脚本的非交互shell</li>
+</ul>
+<blockquote>
+<p>  <code>交互式</code>：一个个地输入命令并及时查看它们的输出结果，整个过程都在跟 Shell 不停地互动。<br>  <code>非交互式</code>：运行一个 <code>Shell 脚本</code> 文件，让所有命令批量化、一次性地执行。<br>  <code>登录式</code>：需要输入用户名和密码才能使用。<br>  <code>非登录式</code>：直接可以使用。</p>
+</blockquote>
+<h4 id="判断-shell-类型"><a href="#判断-shell-类型" class="headerlink" title="判断 shell 类型"></a>判断 shell 类型</h4><p><strong>如何判断是否为交互式 Shell? 有两种方式</strong></p>
+<ol>
+<li>查看特殊变量 <code>-</code> ，如果值包含 <code>i</code>，则是交互式，否则是非交互式</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ echo $-</span><br></pre></td></tr></table></figure>
+<ol>
+<li>查看变量 <code>PS1</code> 是否为空，如果不为空，则是交互式，否则为非交互式</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ echo $PS1</span><br></pre></td></tr></table></figure>
+<p><strong>如何判断是否为登录式 Shell ?</strong><br>执行命令 <code>shopt login_shell</code>，如果 <code>login_shell</code> 的值为 <code>on</code>表示登录式，为 <code>off</code>表示非登录式。</p>
 <h6 id="登录-shell"><a href="#登录-shell" class="headerlink" title="登录 shell"></a>登录 shell</h6><p>当你登录Linux系统时，bash shell会作为登录shell启动。（对于没有图形化界面来说）</p>
 <p>登录shell会从5个不同的启动文件里 读取命令：</p>
 <ul>
@@ -420,20 +419,46 @@
 <li>有些 shell脚本是通过启动一个子shell来执行的。子shell可以继承父shell导出过的变量。</li>
 <li>对于那些不启动子shell的脚本， 变量已经存在于当前shell中了。 所以就算没有设置 BASH_ENV，也可以使用当前shell的局部变量和全局变量。</li>
 </ul>
-<h5 id="环境变量持久化"><a href="#环境变量持久化" class="headerlink" title="环境变量持久化"></a>环境变量持久化</h5><p>对全局环境变量来说如果将新的或修 改过的变量设置放在/etc/profile文件中，在你升级了所用的发行版， 这个文件也会跟着更新，那你所有定制过的变量设置可就都没有了。</p>
+<h4 id="配置文件加载顺序"><a href="#配置文件加载顺序" class="headerlink" title="配置文件加载顺序"></a>配置文件加载顺序</h4><p><a href="https://blog.csdn.net/bjnihao/article/details/51775854" target="_blank" rel="noopener">https://blog.csdn.net/bjnihao/article/details/51775854</a></p>
+<p>正常启动</p>
+<p><img src="/2019/08/13/linux-shell编程/./shell配置文件加载顺序1.png" alt=""></p>
+<p>su 切换用户</p>
+<p><img src="/2019/08/13/linux-shell编程/./shell配置文件加载顺序2.png" alt=""></p>
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><p>全局环境变量对于shell会话和所有生成的子shell都是可见的。局部变量则只对创建它们的 shell可见。</p>
+<p>查看环境变量的命令有<code>set</code>、<code>env</code>、<code>printenv</code></p>
+<blockquote>
+<p>  它们的区别：</p>
+<p>  set 命令会显示出全局变量、局部变量以 及用户定义变量。它还会按照字母顺序对结果进行排序。</p>
+<p>  env 和 printenv 命令不会对变量排序，也不会输出局部变量和用户定义变量。</p>
+<p>  TODO env 与 printenv</p>
+</blockquote>
+<p>要显示个别环境变量的值，可以使用<code>printenv</code> 或者 <code>echo</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ printenv HOME </span><br><span class="line">/home/Christine</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$HOME</span> </span><br><span class="line">/home/Christine</span><br></pre></td></tr></table></figure>
+<h4 id="设置局部变量"><a href="#设置局部变量" class="headerlink" title="设置局部变量"></a>设置局部变量</h4><p>变量名区分大小写。所有的环境变量名均使用大写字母，自己创建的局部变量或是shell脚本，请使用小写字母。</p>
+<p>记住，变量名、等号和值之间<strong>没有空格</strong>：如果在赋值表达式中加上了空格， bash shell就会把值当成一个单独的命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ my_variable = <span class="string">"Hello World"</span> </span><br><span class="line">-bash: my_variable: <span class="built_in">command</span> not found</span><br></pre></td></tr></table></figure>
+<h4 id="设置全局变量"><a href="#设置全局变量" class="headerlink" title="设置全局变量"></a>设置全局变量</h4><p>创建全局环境变量的方法是先创建一个局部环境变量，然后通过<code>export</code>命令把它导出到全局环境中。变量名前面不需要加$。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ my_variable=<span class="string">"I am Global now"</span> </span><br><span class="line">$ my_variable2=<span class="string">"I am Global now"</span> </span><br><span class="line">$ <span class="built_in">export</span> my_variable my_variable2  <span class="comment"># 可以同时导出多个变量</span></span><br></pre></td></tr></table></figure>
+<p>修改<em>子shell</em>中全局环境变量并<strong>不会影响到父shell中该变量的值</strong>。这种改变仅在子shell中有效，并不会被反映到父shell中。甚至无法使用export命令改变父shell中全局环境变量的值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ my_variable=<span class="string">"I am Global now"</span> </span><br><span class="line">$ <span class="built_in">export</span> my_variable </span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$my_variable</span> I am Global now </span><br><span class="line">$ </span><br><span class="line"><span class="variable">$bash</span> </span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$my_variable</span> </span><br><span class="line">I am Global now </span><br><span class="line">$ </span><br><span class="line">$ my_variable=<span class="string">"Null"</span> </span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">export</span> my_variable  <span class="comment"># 导出变量也没用</span></span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$my_variable</span></span><br><span class="line">Null </span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">exit</span> </span><br><span class="line"><span class="built_in">exit</span> </span><br><span class="line">$ </span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$my_variable</span> </span><br><span class="line">I am Global now </span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<h4 id="删除变量"><a href="#删除变量" class="headerlink" title="删除变量"></a>删除变量</h4><p>记住不要使用<code>$</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unset my_variable</span><br></pre></td></tr></table></figure>
+<p>在处理<strong>全局环境变量</strong>时，如果你是在子进程中删除了一个全局环境变量， 这只对子进程有效。该全局环境变量在<strong>父进程中依然可用</strong>。</p>
+<h4 id="变量前的-符号"><a href="#变量前的-符号" class="headerlink" title="变量前的`#### 符号"></a>变量前的`#### 符号</h4><p>记住一点就行了：如果要用到变量，使用<code>$</code>；如果要操作变量，不使用<code>$</code>。这条规则的一个例外就是使用 <code>printenv</code> 显示某个变量的值。</p>
+<h4 id="环境变量持久化"><a href="#环境变量持久化" class="headerlink" title="环境变量持久化"></a>环境变量持久化</h4><p>对全局环境变量来说<strong>不要将变量、设置放在<code>/etc/profile</code></strong>文件中，因为在你升级了所用的发行版后， 这个文件也会跟着更新，那所有定制过的变量设置可就都没有了。</p>
 <p><strong>最好</strong>是在<code>/etc/profile.d</code>目录中创建一个以<code>.sh</code>结尾的文件。把所有新的或修改过的全局环境变 量设置放在这个文件中。</p>
 <p>在大多数发行版中，存储个人用户永久性bash shell变量的地方是<code>~/.bashrc</code>文件。这一点适用于所有类型的shell进程。 但如果设置了 BASH_ENV 变量， 那么记住， 除非它指向的是<code>~/.bashrc</code>，否则你应该将非交互式shell的用户变量放在别的地方。</p>
-<h4 id="创建脚本"><a href="#创建脚本" class="headerlink" title="创建脚本"></a>创建脚本</h4><p>在创建shell脚本文件时，必须在文件的第一行指定要使用的shell。其格式为：</p>
+<h2 id="shell-编程"><a href="#shell-编程" class="headerlink" title="shell 编程"></a>shell 编程</h2><h4 id="创建脚本"><a href="#创建脚本" class="headerlink" title="创建脚本"></a>创建脚本</h4><p>在创建shell脚本文件时，必须在文件的第一行指定要使用的shell。其格式为：</p>
 <p><code>!/bin/bash</code></p>
 <p>在通常的shell脚本中，井号（#）用作注释行。然而， shell脚本文件的第一行是个例外。</p>
-<h4 id="日期date"><a href="#日期date" class="headerlink" title="日期date"></a>日期date</h4><p>TODO </p>
-<p><code>date +%y%m%d</code></p>
 <h4 id="打印"><a href="#打印" class="headerlink" title="打印"></a>打印</h4><p>默认情况下，不需要使用引号将要显示的文本字符串划定出来</p>
 <p>可用单引号或双引号来划定文本字符串。如果在字符串中用到了它们，你需要在 文本中使用其中一种引号，而用另外一种来将字符串划定起来。</p>
 <p>不换行<code>echo -n &quot;The time and date are: &quot;</code></p>
 <blockquote>
-<p>  单引号：</p>
-<p>  双引号：</p>
+<p>  反斜杠（\）：使反斜杠后面的一个变量变为单纯的字符串。</p>
+<p>  单引号（’’）：全局转义，转义其中所有的变量为单纯的字符串。</p>
+<p>  双引号（””）：保留其中的变量属性，不进行转义处理。</p>
+<p>  反引号（<code></code>）：把其中的命令执行后返回结果，等价于$(命令)</p>
 </blockquote>
 <h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><h5 id="环境变量-1"><a href="#环境变量-1" class="headerlink" title="环境变量"></a>环境变量</h5><p>在 shell 中<code>set</code>命令来显示一份完整的当前环境变量列表</p>
 <p>在脚本中，你可以在环境变量名称之前加上美元符<code>$</code>来使用这些环境变量，或者<code>${variable}</code> 形式引用的变量。变量名两侧额外的花括号通常用来帮助识别美元符后的变量名</p>
@@ -683,7 +708,14 @@
 <p>从文件中循环读取</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash </span></span><br><span class="line"><span class="comment"># process new user accounts</span></span><br><span class="line"></span><br><span class="line">input=<span class="string">"users.csv"</span> </span><br><span class="line"><span class="keyword">while</span> IFS=<span class="string">','</span> <span class="built_in">read</span> -r userid name </span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"adding <span class="variable">$userid</span>"</span></span><br><span class="line">    useradd -c <span class="string">"<span class="variable">$name</span>"</span> -m <span class="variable">$userid</span> </span><br><span class="line"><span class="keyword">done</span> &lt; <span class="string">"<span class="variable">$input</span>"</span></span><br></pre></td></tr></table></figure>
 <p>                                                                  </p>
-<h3 id="暂时"><a href="#暂时" class="headerlink" title="暂时"></a>暂时</h3><h4 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h4><p>位置参数变量是标准的数字：\$0是程序名，\$1是第 一个参数，​\$2是第二个参数，依次类推，直到第九个参数\$9。</p>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><h4 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h4><p>位置参数变量是标准的数字：\$0是程序名，\$1是第 一个参数，\$2是第二个参数，依次类推，直到第九个参数\$9。</p>
+<h4 id="常用的转义字符"><a href="#常用的转义字符" class="headerlink" title="常用的转义字符"></a>常用的转义字符</h4><p>4个最常用的转义字符如下所示。</p>
+<blockquote>
+<p>  反斜杠（\）：使反斜杠后面的一个变量变为单纯的字符串。</p>
+<p>  单引号（’’）：全局转义，转义其中所有的变量为单纯的字符串。</p>
+<p>  双引号（””）：保留其中的变量属性，不进行转义处理。</p>
+<p>  反引号（<code></code>）：把其中的命令执行后返回结果，等价于$(命令)</p>
+</blockquote>
 </the></excerpt>
       
     </div>
@@ -695,7 +727,7 @@
         <p><span>本文标题:</span><a href="/2019/08/13/linux-shell编程/">linux shell编程</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
         <p><span>发布时间:</span>2019-08-13, 11:00:08</p>
-        <p><span>最后更新:</span>2019-09-02, 16:36:25</p>
+        <p><span>最后更新:</span>2019-09-05, 10:38:14</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/08/13/linux-shell编程/" title="linux shell编程">https://jizx.top/2019/08/13/linux-shell编程/</a>
             <span class="copy-path" data-clipboard-text="原文: https://jizx.top/2019/08/13/linux-shell编程/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -731,7 +763,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本知识"><span class="toc-text">基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#父子进程"><span class="toc-text">父子进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程列表"><span class="toc-text">进程列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#高效子进程"><span class="toc-text">高效子进程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#后台模式"><span class="toc-text">后台模式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#协程"><span class="toc-text">协程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#理解-shell-的内建命令"><span class="toc-text">理解 shell 的内建命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#外部命令"><span class="toc-text">外部命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内部命令"><span class="toc-text">内部命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内部命令-history"><span class="toc-text">内部命令 history</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内部命令-alias"><span class="toc-text">内部命令 alias</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#环境变量"><span class="toc-text">环境变量</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#设置变量"><span class="toc-text">设置变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#设置全局环境变量"><span class="toc-text">设置全局环境变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#删除变量"><span class="toc-text">删除变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#什么时候变量前加"><span class="toc-text">什么时候变量前加`</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#shell-配置文件"><span class="toc-text">shell 配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#登录-shell"><span class="toc-text">登录 shell</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#交互式-shell-进程"><span class="toc-text">交互式 shell 进程</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#非交互式-shell"><span class="toc-text">非交互式 shell</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#环境变量持久化"><span class="toc-text">环境变量持久化</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建脚本"><span class="toc-text">创建脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#日期date"><span class="toc-text">日期date</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#打印"><span class="toc-text">打印</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#环境变量-1"><span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#用户变量"><span class="toc-text">用户变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#变量拼接"><span class="toc-text">变量拼接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#命令输出赋给变量、命令替换"><span class="toc-text">命令输出赋给变量、命令替换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#数组变量"><span class="toc-text">数组变量</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重定向"><span class="toc-text">重定向</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数学运算"><span class="toc-text">数学运算</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#expr-不推荐"><span class="toc-text">expr (不推荐)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方括号-只支持整数"><span class="toc-text">方括号(只支持整数)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#bc计算器-浮点数计算"><span class="toc-text">bc计算器(浮点数计算)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#退出脚本"><span class="toc-text">退出脚本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流程控制"><span class="toc-text">流程控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#if-else"><span class="toc-text">if else</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#test-命令"><span class="toc-text">test 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#推荐写法"><span class="toc-text">推荐写法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#条件测试"><span class="toc-text">条件测试</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#整数比较"><span class="toc-text">整数比较</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#字符串比较-有坑"><span class="toc-text">字符串比较(有坑)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#文件比较"><span class="toc-text">文件比较</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#布尔逻辑"><span class="toc-text">布尔逻辑</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#双括号与双中括号"><span class="toc-text">双括号与双中括号</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#数字高级比较-（双括号）"><span class="toc-text">数字高级比较 （双括号）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#字符串高级比较（双中括号）"><span class="toc-text">字符串高级比较（双中括号）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#swtich-case"><span class="toc-text">swtich case</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for（Python-风格）"><span class="toc-text">for（Python 风格）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#字段分隔符"><span class="toc-text">字段分隔符</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#遍历目录"><span class="toc-text">遍历目录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c语言风格的-for"><span class="toc-text">c语言风格的 for</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#while-与-until"><span class="toc-text">while 与 until</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#break-与-continue"><span class="toc-text">break 与 continue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#循环的重定向"><span class="toc-text">循环的重定向</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#暂时"><span class="toc-text">暂时</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命令行参数"><span class="toc-text">命令行参数</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本知识"><span class="toc-text">基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Shell-进程"><span class="toc-text">Shell 进程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#父子进程"><span class="toc-text">父子进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程列表"><span class="toc-text">进程列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#高效子进程"><span class="toc-text">高效子进程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#后台模式"><span class="toc-text">后台模式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#协程"><span class="toc-text">协程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shell-内建命令"><span class="toc-text">shell 内建命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#外部命令"><span class="toc-text">外部命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内建命令"><span class="toc-text">内建命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#内建命令之-history"><span class="toc-text">内建命令之 history</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内建命令之-alias"><span class="toc-text">内建命令之 alias</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shell-配置文件"><span class="toc-text">shell 配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#判断-shell-类型"><span class="toc-text">判断 shell 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#登录-shell"><span class="toc-text">登录 shell</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#交互式-shell-进程"><span class="toc-text">交互式 shell 进程</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#非交互式-shell"><span class="toc-text">非交互式 shell</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置文件加载顺序"><span class="toc-text">配置文件加载顺序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境变量"><span class="toc-text">环境变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设置局部变量"><span class="toc-text">设置局部变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置全局变量"><span class="toc-text">设置全局变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除变量"><span class="toc-text">删除变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#变量前的-符号"><span class="toc-text">变量前的`#### 符号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#环境变量持久化"><span class="toc-text">环境变量持久化</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#shell-编程"><span class="toc-text">shell 编程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建脚本"><span class="toc-text">创建脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#打印"><span class="toc-text">打印</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#环境变量-1"><span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#用户变量"><span class="toc-text">用户变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#变量拼接"><span class="toc-text">变量拼接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#命令输出赋给变量、命令替换"><span class="toc-text">命令输出赋给变量、命令替换</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#数组变量"><span class="toc-text">数组变量</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重定向"><span class="toc-text">重定向</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数学运算"><span class="toc-text">数学运算</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#expr-不推荐"><span class="toc-text">expr (不推荐)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方括号-只支持整数"><span class="toc-text">方括号(只支持整数)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#bc计算器-浮点数计算"><span class="toc-text">bc计算器(浮点数计算)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#退出脚本"><span class="toc-text">退出脚本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流程控制"><span class="toc-text">流程控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#if-else"><span class="toc-text">if else</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#test-命令"><span class="toc-text">test 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#推荐写法"><span class="toc-text">推荐写法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#条件测试"><span class="toc-text">条件测试</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#整数比较"><span class="toc-text">整数比较</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#字符串比较-有坑"><span class="toc-text">字符串比较(有坑)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#文件比较"><span class="toc-text">文件比较</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#布尔逻辑"><span class="toc-text">布尔逻辑</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#双括号与双中括号"><span class="toc-text">双括号与双中括号</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#数字高级比较-（双括号）"><span class="toc-text">数字高级比较 （双括号）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#字符串高级比较（双中括号）"><span class="toc-text">字符串高级比较（双中括号）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#swtich-case"><span class="toc-text">swtich case</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for（Python-风格）"><span class="toc-text">for（Python 风格）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#字段分隔符"><span class="toc-text">字段分隔符</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#遍历目录"><span class="toc-text">遍历目录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c语言风格的-for"><span class="toc-text">c语言风格的 for</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#while-与-until"><span class="toc-text">while 与 until</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#break-与-continue"><span class="toc-text">break 与 continue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#循环的重定向"><span class="toc-text">循环的重定向</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tips"><span class="toc-text">Tips</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命令行参数"><span class="toc-text">命令行参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用的转义字符"><span class="toc-text">常用的转义字符</span></a></li></ol></li>
         
     </div>
     <style>

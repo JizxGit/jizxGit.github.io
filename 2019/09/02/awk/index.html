@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="玖玖的博客">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jizx.top/2019/09/02/awk/awk_workflow.jpg">
-<meta property="og:updated_time" content="2019-09-04T15:58:04.124Z">
+<meta property="og:updated_time" content="2019-09-04T16:03:22.798Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="awk">
 <meta name="twitter:image" content="https://jizx.top/2019/09/02/awk/awk_workflow.jpg">
@@ -372,12 +372,10 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;BEGIN &#123;print &quot;Name Rate Hour&quot;;print &quot;=========&quot;&#125; &#123;print $0&#125;&apos; file</span><br></pre></td></tr></table></figure>
 <p><strong>字符串拼接</strong></p>
 <ul>
-<li><p>在命令中使用<strong>空格</strong>进行变量拼接</p>
-</li>
-<li><p>在<code>print</code>语句块中使用<strong>双引号</strong>拼接</p>
+<li>在命令中使用<strong>空格</strong>进行变量拼接</li>
+<li>在<code>print</code>语句块中使用<strong>双引号</strong>拼接<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 将names变量与当前行的的$1以及空格进行拼接，赋值给names</span><br><span class="line"> &#123; names = names $1 &quot; &quot;&#125;</span><br><span class="line">END &#123; print names &#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 将names变量与当前行的的$1以及空格进行拼接，赋值给names</span><br><span class="line"> &#123; names = names $1 &quot; &quot;&#125;</span><br><span class="line">END &#123; print names &#125;</span><br></pre></td></tr></table></figure>
 <p><strong>只打印最后一行</strong></p>
 <p><strong>打印最后一个输入行</strong></p>
 <p>虽然在 END 动作中 NR 还保留着它的值，但 $0 没有。程序是打印最后一个输入行的一种方式</p>
@@ -552,13 +550,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$2 &gt;= 4 || $3 &gt;= 20 &#123;print&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="多条命令"><a href="#多条命令" class="headerlink" title="多条命令"></a>多条命令</h3><p>要在命令行上的程序脚本中使用多条命令，</p>
 <ul>
-<li><p>只要在命令之间放个<strong>分号</strong>即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ echo &quot;My name is Rich&quot; | gawk &apos;&#123;$4=&quot;Christine&quot;; print $0&#125;&apos; My name is Christine</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>也可以用次提示符一次一行地输入程序脚本命令。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ gawk <span class="string">'&#123; \</span></span><br><span class="line"><span class="string">&gt; $4="Christine"</span></span><br><span class="line"><span class="string">&gt; print $0&#125;'</span> </span><br><span class="line">My name is Rich </span><br><span class="line"></span><br><span class="line">$ My name is Christine</span><br></pre></td></tr></table></figure>
-</li>
+<li>只要在命令之间放个<strong>分号</strong>即可。</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"My name is Rich"</span> | gawk <span class="string">'&#123;$4="Christine"; print $0&#125;'</span> My name is Christine</span><br></pre></td></tr></table></figure>
+<ul>
+<li>也可以用次提示符一次一行地输入程序脚本命令。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'&#123; \</span></span><br><span class="line"><span class="string">&gt; $4="Christine"</span></span><br><span class="line"><span class="string">&gt; print $0&#125;'</span> </span><br><span class="line">My name is Rich </span><br><span class="line"></span><br><span class="line">$ My name is Christine</span><br></pre></td></tr></table></figure>
 <h3 id="将命令保存在文件中"><a href="#将命令保存在文件中" class="headerlink" title="将命令保存在文件中"></a>将命令保存在文件中</h3><p>当引号内的程序过长时，可以单独保存在文件中，假设存在文件 progfile ，输入命令行：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -f progfile	file</span><br></pre></td></tr></table></figure>
 <p>文件中不用引号包起来，但是中括号还是需要的，多条指令在同一行中用分号分分隔，或者以多行形式书写</p>
@@ -841,17 +839,14 @@
 <h4 id="getline"><a href="#getline" class="headerlink" title="getline"></a>getline</h4><p>getline：得到行，但是注意，<strong>得到的并不是当前行，而是当前行的下一行</strong>。原因如下：</p>
 <p>从整体上来说，应这么理解它的用法：</p>
 <ul>
-<li><p><code>getline var</code> 读取一行内容给 <code>var</code>，没有变量时等价于 <code>getline $0</code></p>
-</li>
-<li><p>当其左右无重定向符 | 或 &lt; 时，getline作用于当前文件，读入当前文件的一行给其后跟的变量  <code>var</code> 或<code>$0</code>（无变量时）；由于<code>awk</code>在处理<code>getline</code>之前已经读入了一行，所以<code>getline</code>得的是下一行（第二行开始）。</p>
-</li>
+<li><code>getline var</code> 读取一行内容给 <code>var</code>，没有变量时等价于 <code>getline $0</code></li>
+<li>当其左右无重定向符 | 或 &lt; 时，getline作用于当前文件，读入当前文件的一行给其后跟的变量  <code>var</code> 或<code>$0</code>（无变量时）；由于<code>awk</code>在处理<code>getline</code>之前已经读入了一行，所以<code>getline</code>得的是下一行（第二行开始）。</li>
 <li><p>当其左右有重定向符 | 或 &lt; 时，<code>getline</code>则作用于定向输入文件（用重定向符从另外一个文件中读取内容、管道符号获得UNIX命令的输出）赋值给<code>$0</code> 或<code>getline</code>后面的变量。由于该文件是刚打开，并没有被<code>awk</code>读入一行，那么<code>getline</code>返回的是该文件的第一行，而不是隔行，并赋值。</p>
 <blockquote>
 <p>  <code>getline</code> 会记住重定向的文件读取到哪一行了，并不会重复执行<code>getline var &lt; file</code>  重复读取文件，而是一次读取一行</p>
 </blockquote>
 </li>
-<li><p><code>getline</code>执行后会更新<code>NF</code>，<code>NR</code>，<code>FNR</code>等这些内部变量。</p>
-</li>
+<li><code>getline</code>执行后会更新<code>NF</code>，<code>NR</code>，<code>FNR</code>等这些内部变量。</li>
 </ul>
 <p>例子：</p>
 <p>比较 <code>getline</code>后有无变量的区别</p>
@@ -872,7 +867,7 @@
         <p><span>本文标题:</span><a href="/2019/09/02/awk/">awk</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
         <p><span>发布时间:</span>2019-09-02, 12:05:24</p>
-        <p><span>最后更新:</span>2019-09-04, 23:58:04</p>
+        <p><span>最后更新:</span>2019-09-05, 00:03:22</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/09/02/awk/" title="awk">https://jizx.top/2019/09/02/awk/</a>
             <span class="copy-path" data-clipboard-text="原文: https://jizx.top/2019/09/02/awk/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
