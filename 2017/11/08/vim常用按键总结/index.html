@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="玖玖的博客">
 <meta property="og:description" content="通过对linux中自带的vimtutor命令学习，然后对常用的vim命令进行总结，方便以后忘记了常看">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-16T16:22:37.102Z">
+<meta property="og:updated_time" content="2019-09-25T02:30:44.189Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vim常用按键总结">
 <meta name="twitter:description" content="通过对linux中自带的vimtutor命令学习，然后对常用的vim命令进行总结，方便以后忘记了常看">
@@ -333,6 +333,107 @@
 <h2 id="普通模式"><a href="#普通模式" class="headerlink" title="普通模式"></a>普通模式</h2><p>命令的基本模式 <code>operation [number] range</code></p>
 <h3 id="定位移动"><a href="#定位移动" class="headerlink" title="定位移动"></a>定位移动</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">        k上</span><br><span class="line">    h左       l右</span><br><span class="line">         j下</span><br><span class="line">    </span><br><span class="line">4h 左4个字符     4k 上4行     4j 下4行     4l 右4个字符</span><br><span class="line">    </span><br><span class="line">2gg                             "定位到第2行代码，等同于2G</span><br><span class="line">2G                              "定位到第2行代码</span><br><span class="line">gg                              "定位到整个代码的第1行</span><br><span class="line">G                               "定位到整个代码的最后一行</span><br><span class="line"></span><br><span class="line">0或^                            "行首</span><br><span class="line"><span class="meta">$</span>                               "行尾</span><br><span class="line"></span><br><span class="line">e                               "向后跳到该单词结束处</span><br><span class="line">w                               "向后跳一个单词的长度，即调到下一个单词的开始处</span><br><span class="line">b                               "向前跳一个单词的长度，即调到上一个单词的开始处</span><br><span class="line">2e,2w,2b表示移动2个单位</span><br><span class="line"></span><br><span class="line">H                               "当前屏幕可见的第一行</span><br><span class="line">M                               "当前屏幕可见的中间</span><br><span class="line">L                               "当前屏幕可见的最后一行</span><br><span class="line"></span><br><span class="line">Ctrl+o                          "快速跳回上一个位置</span><br></pre></td></tr></table></figure>
 <h3 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">i                               "光标处插入</span><br><span class="line">a                               "光标后一个字符处插入</span><br><span class="line">A                               "光标所在行末尾插入</span><br><span class="line">o                               "光标下方新建一行</span><br><span class="line">O                               "光标上方新建一行</span><br><span class="line"></span><br><span class="line">p                               "粘贴</span><br><span class="line">y                               "复制选择的文本</span><br><span class="line">yw或ye                          "复制一个单词</span><br><span class="line">yy                              "复制 光标所在的这一行</span><br><span class="line">4yy                             "复制 光标所在行开始向下的4行</span><br><span class="line"></span><br><span class="line">dd                              "剪切 光标所在的这一行</span><br><span class="line">2dd                             "剪切 光标所在行 向下 2行</span><br><span class="line">d0                              "从当前的光标开始剪切，一直到行首</span><br><span class="line">D                               "从当前的光标开始剪切，一直到行末</span><br><span class="line"></span><br><span class="line">daw                             "删除光标所在的单词</span><br><span class="line">dw                              "删除光标后的一个单词</span><br><span class="line">d2w                             "删除光标后2个单词</span><br><span class="line">x                               "删除当前的光标所在的字符，每次只会删除一个</span><br><span class="line">X                               "删除当前光标前面的那个，每次只会删除一个</span><br><span class="line"></span><br><span class="line">r                               "替换光标后的一个字符</span><br><span class="line">R                               "连续替换光标后的字符</span><br><span class="line"></span><br><span class="line">ce或cw                          "修改该单词到单词结尾</span><br><span class="line">C或c$                           "修改光标后该行的全部内容</span><br><span class="line"></span><br><span class="line">J                               "连接两行</span><br><span class="line"></span><br><span class="line">.                               "重复执行上一次的命令</span><br><span class="line"></span><br><span class="line">u                               "撤销最后的操作</span><br><span class="line">U                               "撤销对整行的修改</span><br><span class="line">ctrl+r                          "反撤销</span><br><span class="line"></span><br><span class="line">ctrl+a 或 ctrl+x                "对光标下的数字进行加减，10ctrl+a可以每次加10，再配合点号.可以重复累加 *</span><br></pre></td></tr></table></figure>
+<h3 id="操作符-动作命令-操作"><a href="#操作符-动作命令-操作" class="headerlink" title="操作符 + 动作命令 = 操作"></a>操作符 + 动作命令 = 操作</h3><p><code>d{motion}</code> ，d是操作符， motion是动作</p>
+<p>操作符与动作命令的结合形成了一种语法。 这种语法的第一条规则很简单， 即一个操作由一个操作符， 后面跟一个动作命令组成。 学习新的动作命令及操作符， 就像是在学习Vim的词汇一样。 如果掌握了这一简单的语法规则， 在词汇量增长时， 就能表达更多的想法。 </p>
+<p>Vim的语法只有一条额外规则， 即当一个操作符命令被连续调用两次时， 它会作用于当前行。 所以 dd 删除当前行， 而 &gt;&gt; 缩进当前行。 gU 命令是一种特殊情况， 我们既可以用 gUgU ， 也可以用简化版的gUU 来使它作用于当前行。 </p>
+<p> Vim操作符</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c</td>
+<td>修改</td>
+</tr>
+<tr>
+<td>d</td>
+<td>删除</td>
+</tr>
+<tr>
+<td>y</td>
+<td>复制到寄存器</td>
+</tr>
+<tr>
+<td>g~</td>
+<td>反转大小写</td>
+</tr>
+<tr>
+<td>gu</td>
+<td>转换为小写</td>
+</tr>
+<tr>
+<td>gU</td>
+<td>转换为大写</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>增加缩进</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>减小缩进</td>
+</tr>
+<tr>
+<td>=</td>
+<td>自动缩进</td>
+</tr>
+<tr>
+<td>!</td>
+<td>使用外部程序过滤{motion}所跨越的行</td>
+</tr>
+</tbody>
+</table>
+<p>一键代替两键</p>
+<table>
+<thead>
+<tr>
+<th>快捷按键</th>
+<th>等效按键</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S</td>
+<td>^C</td>
+<td>清空当前行</td>
+</tr>
+<tr>
+<td>C</td>
+<td>c$</td>
+<td>删除当前行光标后的内容</td>
+</tr>
+<tr>
+<td>s</td>
+<td>cl</td>
+<td>TODO</td>
+</tr>
+<tr>
+<td>I</td>
+<td>^i</td>
+<td>在行首插入</td>
+</tr>
+<tr>
+<td>A</td>
+<td>$a</td>
+<td>在行尾插入</td>
+</tr>
+<tr>
+<td>o</td>
+<td>A\&lt;Enter></td>
+<td>在下方新建一行空白行</td>
+</tr>
+<tr>
+<td>O</td>
+<td>ko&lt;&gt;</td>
+<td>在上方新建一行空白行</td>
+</tr>
+</tbody>
+</table>
 <h4 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h4><p><code>yyp</code> 会使用寄存器，<code>:t.</code> 则不会</p>
 <p>在复制距离较远的行时，<code>:t</code> 命令通常更加高效</p>
 <h4 id="删除一个单词"><a href="#删除一个单词" class="headerlink" title="删除一个单词"></a>删除一个单词</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The end is nigh</span><br></pre></td></tr></table></figure>
@@ -576,7 +677,7 @@
         <p><span>本文标题:</span><a href="/2017/11/08/vim常用按键总结/">vim常用按键总结</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
         <p><span>发布时间:</span>2017-11-08, 17:09:53</p>
-        <p><span>最后更新:</span>2019-09-17, 00:22:37</p>
+        <p><span>最后更新:</span>2019-09-25, 10:30:44</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/11/08/vim常用按键总结/" title="vim常用按键总结">https://jizx.top/2017/11/08/vim常用按键总结/</a>
             <span class="copy-path" data-clipboard-text="原文: https://jizx.top/2017/11/08/vim常用按键总结/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -606,7 +707,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#模式切换"><span class="toc-text">模式切换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#普通模式"><span class="toc-text">普通模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定位移动"><span class="toc-text">定位移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编辑"><span class="toc-text">编辑</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#复制"><span class="toc-text">复制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除一个单词"><span class="toc-text">删除一个单词</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#行尾添加字符串"><span class="toc-text">行尾添加字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对数字进行加减"><span class="toc-text">对数字进行加减</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重复与回退"><span class="toc-text">重复与回退</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#翻页"><span class="toc-text">翻页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找与替换"><span class="toc-text">查找与替换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入模式"><span class="toc-text">插入模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编辑-1"><span class="toc-text">编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插入非常用字符"><span class="toc-text">插入非常用字符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可视模式"><span class="toc-text">可视模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令行模式"><span class="toc-text">命令行模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用设置"><span class="toc-text">常用设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#打字机模式"><span class="toc-text">打字机模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#全局配置"><span class="toc-text">全局配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查看配置状态"><span class="toc-text">查看配置状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开与关闭某项设置"><span class="toc-text">打开与关闭某项设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#末行命令自动补全"><span class="toc-text">末行命令自动补全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐配置文件内容"><span class="toc-text">推荐配置文件内容</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#外观、代码风格"><span class="toc-text">外观、代码风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编辑相关"><span class="toc-text">编辑相关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#搜索相关"><span class="toc-text">搜索相关</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于粘贴缩进问题"><span class="toc-text">关于粘贴缩进问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#快捷键设置"><span class="toc-text">快捷键设置</span></a></li></ol></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#模式切换"><span class="toc-text">模式切换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#普通模式"><span class="toc-text">普通模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定位移动"><span class="toc-text">定位移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编辑"><span class="toc-text">编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作符-动作命令-操作"><span class="toc-text">操作符 + 动作命令 = 操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#复制"><span class="toc-text">复制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除一个单词"><span class="toc-text">删除一个单词</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#行尾添加字符串"><span class="toc-text">行尾添加字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对数字进行加减"><span class="toc-text">对数字进行加减</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重复与回退"><span class="toc-text">重复与回退</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#翻页"><span class="toc-text">翻页</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查找与替换"><span class="toc-text">查找与替换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入模式"><span class="toc-text">插入模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#编辑-1"><span class="toc-text">编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#插入非常用字符"><span class="toc-text">插入非常用字符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可视模式"><span class="toc-text">可视模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令行模式"><span class="toc-text">命令行模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用设置"><span class="toc-text">常用设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#打字机模式"><span class="toc-text">打字机模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#全局配置"><span class="toc-text">全局配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查看配置状态"><span class="toc-text">查看配置状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打开与关闭某项设置"><span class="toc-text">打开与关闭某项设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#末行命令自动补全"><span class="toc-text">末行命令自动补全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#推荐配置文件内容"><span class="toc-text">推荐配置文件内容</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#外观、代码风格"><span class="toc-text">外观、代码风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编辑相关"><span class="toc-text">编辑相关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#搜索相关"><span class="toc-text">搜索相关</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于粘贴缩进问题"><span class="toc-text">关于粘贴缩进问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#快捷键设置"><span class="toc-text">快捷键设置</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
