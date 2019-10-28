@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="jizx">
+
+
+
+<meta name="description" content="hive 的读书笔记，ing">
+<meta name="keywords" content="hive,ing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hive">
+<meta property="og:url" content="https://jizx.top/2019/10/12/hive/index.html">
+<meta property="og:site_name" content="玖玖的博客">
+<meta property="og:description" content="hive 的读书笔记，ing">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://jizx.top/2019/10/12/hive/image1.png">
+<meta property="og:image" content="https://jizx.top/2019/10/12/hive/2019-10-12-hive/image2.png">
+<meta property="og:updated_time" content="2019-10-28T15:45:55.783Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hive">
+<meta name="twitter:description" content="hive 的读书笔记，ing">
+<meta name="twitter:image" content="https://jizx.top/2019/10/12/hive/image1.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="玖玖的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="https://avatars1.githubusercontent.com/u/18480104?s=40&v=4">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>hive | 玖玖的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">jizx</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false">
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class="no-result">No results found <i class="fa fa-spinner fa-pulse"></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">分类&amp;标签</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1822980003@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/JizxGit" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/anaconda/">anaconda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hive/">hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i-ng/">i ng</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ing/">ing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter/">jupyter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logging/">logging</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notepad/">notepad++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photoshop/">photoshop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/window/">window</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/从句/">从句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传参/">传参</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/健康/">健康</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/右键/">右键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/同理心/">同理心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/吵架/">吵架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复合句/">复合句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心理/">心理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/截图/">截图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/所见所闻/">所见所闻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打印/">打印</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/批评/">批评</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方法调用/">方法调用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时态/">时态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/曲线/">曲线</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境/">环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类/">类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统优化/">系统优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统环境/">系统环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编码问题/">编码问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编辑器/">编辑器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">博客主题原作者MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">在读研究生二年级</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">jizx</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">jizx</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">分类&amp;标签</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1822980003@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/JizxGit" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-hive" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/10/12/hive/" class="article-date">
+      <time datetime="2019-10-11T16:40:39.000Z" itemprop="datePublished">2019-10-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hive
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/hive/">hive</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hive/">hive</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ing/">ing</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <excerpt in="" index="" |="" 首页摘要=""> 
+
+<p>hive 的读书笔记，ing</p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+
+
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><ul>
+<li style="list-style: none"><input type="checkbox" checked> 第 3 章</li>
+<li style="list-style: none"><input type="checkbox" checked> 第 4 章<ul>
+<li style="list-style: none"><input type="checkbox"> 4.4.2 自定义表的存储格式</li>
+<li style="list-style: none"><input type="checkbox"> 4.6.7 </li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox" checked> 第 5 章</li>
+<li style="list-style: none"><input type="checkbox" checked> 第 6 章<ul>
+<li style="list-style: none"><input type="checkbox" checked> 6.9.2 分桶表的输入裁剪</li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox" checked> 第 7 章 视图</li>
+<li style="list-style: none"><input type="checkbox"> 第 8 章 粗略看了</li>
+<li style="list-style: none"><input type="checkbox" checked> 第 9 章<ul>
+<li style="list-style: none"><input type="checkbox"> 9.5</li>
+</ul>
+</li>
+</ul>
+<p>头部寻址</p>
+<p>Hadoop 每次指定的文件输入和输出路径都是<strong>文件夹</strong></p>
+<h3 id="hive-变量空间"><a href="#hive-变量空间" class="headerlink" title="hive 变量空间"></a>hive 变量空间</h3><table>
+<thead>
+<tr>
+<th>命名空间</th>
+<th>使用权限</th>
+<th>详细描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hivevar</td>
+<td>rw</td>
+<td>用户自定义变量（v0.8.0+）</td>
+</tr>
+<tr>
+<td>hiveconf</td>
+<td>rw</td>
+<td>hive相关配置属性</td>
+</tr>
+<tr>
+<td>system</td>
+<td>rw</td>
+<td>java定义的配置属性</td>
+</tr>
+<tr>
+<td>env</td>
+<td>r</td>
+<td>Shell环境属性</td>
+</tr>
+</tbody>
+</table>
+<p>通常我们可以使用hive -e查看有关hivevar与hiveconf的描述：</p>
+<p><strong>2、hivevar与hiveconf的作用域</strong></p>
+<p>之前项目中涉及两个hive作业同时执行并需要传入相同key的参数，因此顾虑不清楚是否是线程安全。</p>
+<p>结论先行：<code>hivevar</code>与<code>hiveconf</code>作用域都<strong>是会话级别</strong>的，言外之意就是如果两个并发同时跑的作业同时传入一个相同key但是value不相同的值的参数，<strong>不会发生线程安全问题</strong>。</p>
+<p><strong>3、对于hivevar与hiveconf的使用</strong></p>
+<p><code>hiveconf</code> 变量取值必须要使用<code>hiveconf</code>作为前缀参数，具体格式如下:<code>${hiveconf:key}</code></p>
+<p>但是对于<code>hivevar</code>取值可以不使用前缀<code>hivevar</code>，具体格式如下：</p>
+<ul>
+<li><p>使用前缀:   <code>${hivevar:key}</code></p>
+</li>
+<li><p>不使用前缀:<code>${key}</code></p>
+</li>
+</ul>
+<h3 id="CLI"><a href="#CLI" class="headerlink" title="CLI"></a>CLI</h3><p>注意：cli中 tab 会进行自动补全，而且输入流后面的字符会被认为是对提示的回复，因此会导致执行失败</p>
+<p><code>!</code>， 不用退出 hive CLI 即可使用shell 命令，在命令前加上感叹号即可：<code>! pwd ;</code></p>
+<p>注意：不支持交互式命令、管道命令、文件名模糊匹配功能，如<code>! ls *.hql</code>，查找的是<code>*.hql</code>文件而不是以<code>.hql</code>结尾的所有文件。</p>
+<p>hive 中使用 hadoop 命令，只需要去掉<code>hadoop</code>这个关键字即可。而且更加高效，因此 hive 会在同一进程中执行这些命令，而不需要重新启动一个 JVM 实例。</p>
+<p>以<code>--</code>开头的字符串是注释。</p>
+<h2 id="数据类型与定义"><a href="#数据类型与定义" class="headerlink" title="数据类型与定义"></a>数据类型与定义</h2><h3 id="hive-数据类型"><a href="#hive-数据类型" class="headerlink" title="hive 数据类型"></a>hive 数据类型</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">分类</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">描述</th>
+<th style="text-align:left">字面量示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">原始类型</td>
+<td style="text-align:left">BOOLEAN</td>
+<td style="text-align:left">true/false</td>
+<td style="text-align:left">TRUE</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">TINYINT</td>
+<td style="text-align:left">1字节的有符号整数 -128~127</td>
+<td style="text-align:left">1Y</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">SMALLINT</td>
+<td style="text-align:left">2个字节的有符号整数，-32768~32767</td>
+<td style="text-align:left">1S</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">INT</td>
+<td style="text-align:left">4个字节的带符号整数</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">BIGINT</td>
+<td style="text-align:left">8字节带符号整数</td>
+<td style="text-align:left">1L</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">FLOAT</td>
+<td style="text-align:left">4字节单精度浮点数1.0</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">DOUBLE</td>
+<td style="text-align:left">8字节双精度浮点数</td>
+<td style="text-align:left">1.0</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">DEICIMAL</td>
+<td style="text-align:left">任意精度的带符号小数</td>
+<td style="text-align:left">1.0</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">STRING</td>
+<td style="text-align:left">字符串，变长</td>
+<td style="text-align:left">“a”，’b’</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">VARCHAR</td>
+<td style="text-align:left">变长字符串</td>
+<td style="text-align:left">“a”，’b’</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">CHAR</td>
+<td style="text-align:left">固定长度字符串</td>
+<td style="text-align:left">“a”，’b’</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">BINARY</td>
+<td style="text-align:left">字节数组（v0.8.0+）</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">TIMESTAMP</td>
+<td style="text-align:left">时间戳，纳秒精度（v0.8.0+）</td>
+<td style="text-align:left">122327493795</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">DATE</td>
+<td style="text-align:left">日期</td>
+<td style="text-align:left">‘2016-03-29’</td>
+</tr>
+<tr>
+<td style="text-align:left">复杂类型</td>
+<td style="text-align:left">ARRAY</td>
+<td style="text-align:left">有序的的同类型的集合</td>
+<td style="text-align:left">array(1,2)</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">MAP</td>
+<td style="text-align:left">key-value,key必须为原始类型，value可以任意类型</td>
+<td style="text-align:left">map(‘a’,1,’b’,2)</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">STRUCT</td>
+<td style="text-align:left">字段集合,类型可以不同</td>
+<td style="text-align:left">struct(‘1’,1,1.0), named_stract(‘col1’,’1’,’col2’,1,’clo3’,1.0)</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">UNION</td>
+<td style="text-align:left">在有限取值范围内的一个值</td>
+<td style="text-align:left">create_union(1,’a’,63)</td>
+</tr>
+</tbody>
+</table>
+<p>不存在最大长度限制的“字符串”，hive 支持无限长度的字符串</p>
+<p>进行比较时，hive 会隐式地将类型转为较大的，因此是同类型间的比较</p>
+<p>集合类型的问题可能会增大数据冗余的风险，也可能导致数据不一致，当数据发生改变时，冗余的拷贝数据可能无法进行相应的同步。优点是提升更高的吞吐量的数据。</p>
+<h3 id="文本文件的保存形式"><a href="#文本文件的保存形式" class="headerlink" title="文本文件的保存形式"></a>文本文件的保存形式</h3><h3 id="分隔符在HIVE中的用途"><a href="#分隔符在HIVE中的用途" class="headerlink" title="分隔符在HIVE中的用途"></a>分隔符在HIVE中的用途</h3><table>
+<thead>
+<tr>
+<th>分隔符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\n</td>
+<td>对于文本文件来说，每行都是一条记录，因此换行符可以分隔记录</td>
+</tr>
+<tr>
+<td>^A(Ctrl+A)</td>
+<td>用于分隔字段(列)。在CREATE TABLE语句中可以使用八进制编码\001表示</td>
+</tr>
+<tr>
+<td>^B(Ctrl+B)</td>
+<td>用于分隔ARRAY或者STRUCT中的元素，或用于MAP中键-值对之间的分隔。在CREATE TABLE语句中可以使用八进制编码\002表示</td>
+</tr>
+<tr>
+<td>^C(Ctrl+C)</td>
+<td>用于MAP中键和值之间的分隔。在CREATE TABLE语句中可以使用八进制编码\003表示</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>  Hive 中没有定义专门的数据格式，数据格式可以由用户指定，用户定义数据格式需要指定三个属性：列分隔符（通常为空格、”\t”、”\x001″）、行分隔符（”\n”）以及读取文件数据的方法。由于在加载数据的过程中，不需要从用户数据格式到 Hive 定义的数据格式的转换，因此，Hive 在加载的过程中不会对数据本身进行任何修改，而只是将数据内容复制或者移动到相应的 HDFS 目录中。</p>
+</blockquote>
+<p>在创建 table 的时候，table 加载文件的时候就会按照下面格式匹配</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">row format delimited </span><br><span class="line">fields terminated by &apos;\001&apos; </span><br><span class="line">collection items terminated by &apos;\002&apos; </span><br><span class="line">map keys terminated by &apos;\003&apos;</span><br><span class="line">lines terminated by &apos;\n&apos; </span><br><span class="line">stored as textfile;</span><br></pre></td></tr></table></figure>
+<p><code>row format delimited</code>必须写在其他子句（不包括<code>lines terminated by</code>与<code>stored as textfile</code>）之前。</p>
+<p>其实，<code>line terminated by</code>目前只支持<code>\n</code>，<code>stored as textfile</code>也很少用到。</p>
+<h3 id="数据校验"><a href="#数据校验" class="headerlink" title="数据校验"></a>数据校验</h3><p>传统数据库是<strong>写时模式</strong>，即 数据在写入数据库的时候对模式（数据格式）进行检查</p>
+<p>hive 不会在 数据加载时进行验证，而是在查询时进行，也就是<strong>读时模式</strong></p>
+<p>如果模式和文件内容不匹配，hive 容忍性非常好。</p>
+<ul>
+<li>如果每行记录中字段个数少于对应的模式中定义的字段个数的话，缺失的字段以 null 填充</li>
+<li>如果字段是数值型，但 hive 读取时发现存在非数值类型的字符串值的话，那些字段将会返回 null 值</li>
+</ul>
+<h2 id="HiveQL"><a href="#HiveQL" class="headerlink" title="HiveQL"></a>HiveQL</h2><p>hive 不支持行级插入、更新、删除操作，也不支持事务。</p>
+<p>hive   数据库的概念本质上只是表的一个目录或者命名空间。这样可以避免表名冲突。</p>
+<p>如果没有显指定数据库，默认使用 default 数据库</p>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br><span class="line">show databases like &apos;h.*&apos;;   # 支持正则</span><br><span class="line">create database name LOCATION ‘/my/dir/’;   # 指定数据库目录</span><br></pre></td></tr></table></figure>
+<p>数据库可以的内容很少，只有<code>DBPROPERTIES</code>可以设置键值对属性，来描述这个数据库的属性信息，其他都是不可改的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert database name SET DBPROPERTIES (&apos;edited-by&apos;=&apos;jizx&apos;);</span><br></pre></td></tr></table></figure>
+<h3 id="数据定义"><a href="#数据定义" class="headerlink" title="数据定义"></a>数据定义</h3><h3 id="分区表"><a href="#分区表" class="headerlink" title="分区表"></a>分区表</h3><p>通过载入数据的方式创建分区。将<code>$HOME/california-employees</code>   目录下的文件拷贝到分区目录下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">load data local inpath &apos;$&#123;env:HOME&#125;/california-employees&apos;</span><br><span class="line">into table emplyees</span><br><span class="line">partition (country = &apos;US&apos;, state = &apos;CA&apos;)</span><br></pre></td></tr></table></figure>
+<p>也可以t通过 insert 的方法，也可以通过 <code>alert table...add partition</code>的方法</p>
+<h4 id="查看分区"><a href="#查看分区" class="headerlink" title="查看分区"></a>查看分区</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show partitions table_name;</span><br><span class="line">describe extended table_name;   # 更详细的表信息</span><br><span class="line">describe extended table_name PARTITION  (year=2019,month=1,day=2);   # 更详细的分区信息，可以看到 location 信息</span><br></pre></td></tr></table></figure>
+<h3 id="外部分区表（最常见）"><a href="#外部分区表（最常见）" class="headerlink" title="外部分区表（最常见）"></a>外部分区表（最常见）</h3><p>使用的目录组织习惯完全由我们自己定义。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alert table name ADD PARTITION(year=2019,month=9,day=2)</span><br><span class="line">LOCATITION &apos;hdfs://master_server/data/log_messages/2012/01/02&apos;;</span><br></pre></td></tr></table></figure>
+<p>这种灵活性的优点是：我们可以用像 amazon s3 这样的廉价存储设备存储<strong>旧的数据</strong>，在 HDFS 中存储较新的数据。</p>
+<p><img src="/2019/10/12/hive/./image1.png" alt="image-20191012145614833"></p>
+<h3 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop table if exists table_name;</span><br></pre></td></tr></table></figure>
+<p>对于管理表，表的元数据和表内的数据都会被删除。</p>
+<p>回收站功能</p>
+<p>/user/$USER/.Trash目录下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.trash.interval=</span><br></pre></td></tr></table></figure>
+<p>检查点的时间间隔，单位是分钟。</p>
+<p>如果不小心删除了管理表的话，先重建表，然后重建所需要的分区，再从<code>.Trash</code>目录中将误删的文件移动到正确的文件目录下。</p>
+<h3 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h3><p>会修改元数据，但不会修改数据本身</p>
+<h4 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert table log_messages RENAME TO logmsgs;</span><br></pre></td></tr></table></figure>
+<h4 id="分区操作"><a href="#分区操作" class="headerlink" title="分区操作"></a>分区操作</h4><p>添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert table log_messages ADD IF NOT EXISTS</span><br><span class="line">PARTITION (year=2019,month=1,day=1) LOCATITION &apos;/logs/2019/09/01&apos;</span><br><span class="line">PARTITION (year=2019,month=1,day=2) LOCATITION &apos;/logs/2019/09/02&apos;</span><br><span class="line">PARTITION (year=2019,month=1,day=3) LOCATITION &apos;/logs/2019/09/03&apos;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>  0.8.0以上的 hive 可以在一个查询内同时增加多个分区</p>
+</blockquote>
+<p>修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alert table log_messages PARTITION (year=2019,month=1,day=3)</span><br><span class="line">SET LOCATION &apos;s3n://ourbucket/logs/2011/01/02&apos;</span><br></pre></td></tr></table></figure>
+<p>删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert table log_messages DROP IF EXISTs PARTITION (year=2019,month=1,day=3);</span><br></pre></td></tr></table></figure>
+<h4 id="列操作"><a href="#列操作" class="headerlink" title="列操作"></a>列操作</h4><p><strong>修改列</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert table log</span><br><span class="line">CHANGE COLUMN hms new_hms INT</span><br><span class="line">COMMENT &apos;注释&apos;</span><br><span class="line">AFTER other_column;</span><br></pre></td></tr></table></figure>
+<p>想放在第一列的话，使用<code>FIRTST</code>代替<code>AFTER other_column</code>即可</p>
+<p><strong>添加</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert table log ADD COLUMN (</span><br><span class="line">	app_name STRING COMMENT &apos;注释&apos;,</span><br><span class="line">	session STRING COMMENT &apos;注释&apos;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><strong>删除或替换列</strong></p>
+<p>其实就是将原本的全部的列信息删除掉，然后重新定义列信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert table log REPLACE COLUMN (</span><br><span class="line">	app_name STRING COMMENT &apos;注释&apos;,</span><br><span class="line">	session STRING COMMENT &apos;注释&apos;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><strong>修改表属性</strong></p>
+<p>可以修改或添加，但是无法删除</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alert table log SET TBLPROPERTIES(</span><br><span class="line">	&apos;note&apos; = &apos;笔记内容&apos;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>limit在CLI 中非常经常用到，为了避免执行整个查询语句，有一个配置属性可开启，对原数据进行抽样。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hive.limit.optimize.enable=true</span><br><span class="line">hive.limit.row.max.size=1000000    # how much size we need to gurantee each row to have at least</span><br><span class="line">hive.limit.optimize.limit.file=10  # 最多采样的文件数</span><br></pre></td></tr></table></figure>
+<p>缺点：有可能输入中有用的数据永远不会被处理到。</p>
+<h3 id="创建分区表"><a href="#创建分区表" class="headerlink" title="创建分区表"></a>创建分区表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 建表</span><br><span class="line">&gt; create table supply(id int, part string, quantity int) </span><br><span class="line">&gt; partitioned by (int day);</span><br><span class="line"></span><br><span class="line"># 添加分区</span><br><span class="line">&gt; alert table supply add partiton (day=20190909);</span><br><span class="line"></span><br><span class="line"># 通过 where 选择分区</span><br><span class="line">&gt; select part,quantity from supply</span><br><span class="line">&gt; where day&gt;=20190909 and quantity &lt; 4;</span><br></pre></td></tr></table></figure>
+<p>多分区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ...</span><br><span class="line">&gt; partition by (day int, state string, city string);</span><br></pre></td></tr></table></figure>
+<p>理想的分区方案不应该导致产生太多的分区和文件夹目录。</p>
+<p>一个分区对应着包含多个文件的文件夹。因此如果存在数百个分区，每天就会创建好几万个文件。默认情况下，MapReduce 会将每个 job转为多个 task，每个 task 都是一个新的 JVM 实例，每个文件都会对应一个 task，因此 JVM 的开启和销毁可能会比实际处理数据的时间还要久。</p>
+<p>好的分区方案应该保证分区数量的增长是<strong>均匀的</strong>。</p>
+<h3 id="分桶表TODO"><a href="#分桶表TODO" class="headerlink" title="分桶表TODO"></a>分桶表TODO</h3><h3 id="为表增加列"><a href="#为表增加列" class="headerlink" title="为表增加列"></a>为表增加列</h3><p>SerDe 非常宽松，通过指定的分隔符从左向右将行分解成列</p>
+<ul>
+<li>如果字段数比预期少，那么缺失的字段将返回 null</li>
+<li>如果字段数比预期多，那么多出的字段将会被忽略</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert table student add columns (score string);</span><br></pre></td></tr></table></figure>
+<p>通过这种方法，无法在已有字段的开始或者中间增加字段</p>
+<h3 id="使用列存储表-TODO"><a href="#使用列存储表-TODO" class="headerlink" title="使用列存储表 TODO"></a>使用列存储表 TODO</h3><p>以下两种情况适合列存储表</p>
+<h4 id="重复数据，如-age，省市"><a href="#重复数据，如-age，省市" class="headerlink" title="重复数据，如 age，省市"></a>重复数据，如 age，省市</h4><h4 id="多列"><a href="#多列" class="headerlink" title="多列"></a>多列</h4><h2 id="导入导出数据"><a href="#导入导出数据" class="headerlink" title="导入导出数据"></a>导入导出数据</h2><h3 id="动态分区插入"><a href="#动态分区插入" class="headerlink" title="动态分区插入"></a>动态分区插入</h3><p>可以基于查询参数推断出需要创建的分区名称。SELECT 语句中的最后 2 列会对应到 PARTITION 中的分区名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INSERT OVERWRITE TSBLE employees</span><br><span class="line">PARTITION(country, state)</span><br><span class="line">SELECT ..., se.cnty,se.st</span><br><span class="line">FROM staged_employees se;</span><br></pre></td></tr></table></figure>
+<p>动静结合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INSERT OVERWRITE TSBLE employees</span><br><span class="line">PARTITION(country = &apos;US&apos;, state)   # 静态分区键必须出现在动态分区键之前</span><br><span class="line">SELECT ..., se.cnty,se.st</span><br><span class="line">FROM staged_employees se</span><br><span class="line">WHERE se.cnty = &apos;US&apos;;</span><br></pre></td></tr></table></figure>
+<h3 id="单个查询语句中创建表并加装数据"><a href="#单个查询语句中创建表并加装数据" class="headerlink" title="单个查询语句中创建表并加装数据"></a>单个查询语句中创建表并加装数据</h3><p>这个功能不能用于外部表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE ca_employees</span><br><span class="line">AS SELECT name, salary, address</span><br><span class="line">FROM employees</span><br><span class="line">WHERE se.state = &apos;CA&apos;;</span><br></pre></td></tr></table></figure>
+<h3 id="导出数据"><a href="#导出数据" class="headerlink" title="导出数据"></a>导出数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INSERT OVERWRITE LOCAL DIRECTORY &apos;/tmp/employees&apos;</span><br><span class="line">select name</span><br><span class="line">from employee</span><br><span class="line">where se.state = &apos;CA&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p><code>select sub[0] from table_name;</code> 查询<strong>数组</strong>类型的字段的第一个元素</p>
+<p><code>select ded[“state taxes”] from table_name;</code> 查询<strong>map</strong>类型的字段</p>
+<p><code>select address.city from table_name;</code> 查询<strong>struct</strong>类型的字段</p>
+<p>使用正则表达式来指定列，所有以 price 开头的列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select `price.*` from stocks;</span><br></pre></td></tr></table></figure>
+<p>不允许使用多个 DISTINCT 函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(DISTINCT ymd),count (DISTINCT volume) from stocks;</span><br></pre></td></tr></table></figure>
+<p>存在的 bug <code>count(DISTINCT col)</code>同时 col 是分区列时，会出现 bug</p>
+<p>表生成函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT name, sub </span><br><span class="line">FROM udtf_test</span><br><span class="line">LATERAL VIEW explode(subordinates) subView AS sub;</span><br></pre></td></tr></table></figure>
+<p>在这里LATERAL VIEW 是将 explode结果转换成一个视图subView,在视图中的单列列名定义为sub，然后在查询的时候引用这个列名就能够查到。</p>
+<p>与时间相关的函数 ，输入可以是整数或者字符串类型。对于 0.8.0，可以接受 TIMESTAMP 类型的参数。</p>
+<p>列别名 <code>SELECT  col as new_col FROM table_name</code></p>
+<p>对列的进一步处理，进行条件判断</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Select  </span><br><span class="line">    CASE </span><br><span class="line">     WHEN salary &gt; 7 AND salary &lt;10 THEN &apos;high&apos;</span><br><span class="line">     ELSE &apos;very high&apos;</span><br><span class="line">    END AS bracket </span><br><span class="line">FROM employees</span><br></pre></td></tr></table></figure>
+<p>最好将下面的设置添加到 hiverc 中，避免不必要的 <code>MapReduce</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set  hive.exec.mode.local.auto=true</span><br></pre></td></tr></table></figure>
+<h3 id="where"><a href="#where" class="headerlink" title="where"></a>where</h3><p>where 语句使用<strong>谓词表达式</strong>，谓词表达式结果为 true 时，相应的行将被保留和输出。</p>
+<p>where 语句中并不能使用 select 语句中的别名，解决办法是使用嵌套 select 语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT e.* FROM</span><br><span class="line">  ( select salary*(1- ded[&quot;Taxes&quot;]) as new_salary</span><br><span class="line">    FROM employees) e</span><br><span class="line">WHERE round(e.new_salary) &gt; 7000</span><br></pre></td></tr></table></figure>
+<h4 id="关于浮点数比较的陷阱"><a href="#关于浮点数比较的陷阱" class="headerlink" title="关于浮点数比较的陷阱"></a>关于浮点数比较的陷阱</h4><p>hive无法精确的表示 0.2，如果转为 float，实际数值是：0.2000001。如果转为 double，实际数值是：0.200000000001。</p>
+<p>sql 语句中的浮点数，默认是 Double 类型的，比如下面的0.2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from name wheren high&gt; 0.2</span><br></pre></td></tr></table></figure>
+<p>如果表的字段定义时是 Float 类型，就会出现比较上的问题。输出中会有=0.2 的。</p>
+<p>Float字段会隐式转为 Double 类型，变成：0.20000001000000，因此会比 0.2 的double 类型0.200000000001大。 </p>
+<p>因此会出现 <code>&gt;0.2</code>的效果与<code>&gt;=0.2</code>相同。</p>
+<p>解决办法：</p>
+<ol>
+<li>将字段类型保存为 double，缺点是查询时内存消耗增多</li>
+<li>sql 中的数字显示指定类型<code>WHERE high &gt; cast(0.2 AS FLOAT)</code></li>
+<li>与钱相关的都避免使用浮点数</li>
+</ol>
+<h3 id="GROUP-BY-语句"><a href="#GROUP-BY-语句" class="headerlink" title="GROUP BY 语句"></a>GROUP BY 语句</h3><p>having 语句用于聚合后再进行的条件过滤，避免了子查询</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select avg(salary) From stocks</span><br><span class="line">where ...</span><br><span class="line">GROUP BY year(ymd)</span><br><span class="line">HAVING avg(salary) &gt; 50.0   # 对上面的聚合后的内容进行过滤</span><br></pre></td></tr></table></figure>
+<h3 id="join-语句"><a href="#join-语句" class="headerlink" title="join 语句"></a>join 语句</h3><ul>
+<li><p>join on 只支持等值连接，也就是<code>a.col=b.col</code> ，不支持<code>a.col&lt; b.col</code></p>
+</li>
+<li><p>不支持在 on 子句中的谓词使用 OR</p>
+</li>
+<li><p>hive 假定从左到右边表依次变大，也可以在 SELECT 中添加<code>/*+STREAMTABLE(s)*/</code></p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT /*+STREAMTABLE(s)*/   s.ymd,s.symbol</span><br><span class="line">FROM stocks s JOIN dividends d ON ...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ON语句中的分区过滤条件在 OUTER JOIN 中是无效的，在 INNER JOIN 中是有效的 TODO（不太明白）</p>
+</li>
+<li><p>full outer join 将会返回所有表中符合 WHERE 语句条件的所有记录。如果任一张表的指定字段没有符合条件的值的话，那么就是用 NULL 值代替。</p>
+</li>
+</ul>
+<h4 id="LEFT-SEMI-JOIN"><a href="#LEFT-SEMI-JOIN" class="headerlink" title="LEFT SEMI-JOIN"></a>LEFT SEMI-JOIN</h4><p>左半开连接会返回左边表的记录，前提是其记录对于满足 ON 语句中的判定条件。</p>
+<p><img src="/2019/10/12/hive/2019-10-12-hive/image2.png" alt="image-20191015111109600"></p>
+<h4 id="map-join"><a href="#map-join" class="headerlink" title="map  join"></a>map  join</h4><p>0.7之前的需要在 SELECT 中添加标记来进行触发，如下面的内连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT /*+MAPJOIN(d)*/ s.ymd, s.symbol, d.dividend </span><br><span class="line">FROM stocks s JOIN dividends d ON s.ymd=d.ymd</span><br><span class="line">WHERE s.symbol = &apos;AAPL&apos;</span><br></pre></td></tr></table></figure>
+<p>0.7之后的版本，废弃这种标记，不过添加后同样是有效的。如果没有该标记，需要用户设置属性<code>hive.auto.convert.JOIN=true</code>，也可以配置小表的大小<code>hive.mapjoin.smalltable.filesize=25000000</code> 单位是字节</p>
+<h3 id="ORDER-BY-和-SORT-BY"><a href="#ORDER-BY-和-SORT-BY" class="headerlink" title="ORDER BY 和 SORT BY"></a>ORDER BY 和 SORT BY</h3><p>sort by 是局部的，order by 是全局的，比较费时。</p>
+<h3 id="DISTRIBUTE-BY与-CLUSTER-BY"><a href="#DISTRIBUTE-BY与-CLUSTER-BY" class="headerlink" title="DISTRIBUTE BY与 CLUSTER BY"></a>DISTRIBUTE BY与 CLUSTER BY</h3><p>Distribute by 用来保证相同指定列的记录会分发到同一个 reducer 中。</p>
+<p>如果DISTRIBUTE 与 SORT 语句中都涉及到相同的列，而且采用的是升序排序方式，那么这时 CLUSTER BY 等价于前面的两个语句。</p>
+<p>CLUSTER BY 剥夺了 SORT BY 的并行性，但是这样可以实现输出的数据是全局排序的。</p>
+<h3 id="抽样查询"><a href="#抽样查询" class="headerlink" title="抽样查询"></a>抽样查询</h3><p>方式1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from numbers TABLESAMPLE(BUCKET 1 OUT OF 2 ON col1) s;</span><br></pre></td></tr></table></figure>
+<p>2表示将数据分散成几桶，1 表示选择第几桶</p>
+<p>方式 2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from numbersflat TABLESAMPLE(0.1 PERCENT) s;</span><br></pre></td></tr></table></figure>
+<p>基于行数的，按照输入路径下的数据块百分比进行抽样。</p>
+<ul>
+<li>不一定适合所有文件格式</li>
+<li>抽样最小单元是一个 HDFS 数据块，如果标的数据大小 &lt; 普通的块大小 128MB 的话，将返回所有行</li>
+</ul>
+<h3 id="UNION-ALL"><a href="#UNION-ALL" class="headerlink" title="UNION ALL"></a>UNION ALL</h3><p>hive中比较低的版本没有 union，只有 union all</p>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><ul>
+<li>将复杂的多层子嵌套进行封装，类似于使用函数一样。</li>
+<li>安全机制，不直接给用户访问敏感数据的原始表，而是提供给用户通过 where 限制了的视图。（目前 hive 并不支持，用户必须具有原始表的权限，视图才能工作）</li>
+<li>可以理解为：hive 会先解析视图，然后使用解析结果来解析整个查询语句，不过查询优化器<strong>可能会将视图和查询语句合并成一个单一的实际查询语句。</strong>如果视图中包含 ORDER BY 或者 LIMIT，则会先解析视图。</li>
+<li>通过 show tables 来查询视图，没有 show views 这样的语句</li>
+</ul>
+<p>describe 和describe extended 可以显示视图的元数据信息</p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="数据的导入与导出"><a href="#数据的导入与导出" class="headerlink" title="数据的导入与导出"></a>数据的导入与导出</h3><p>1）加载到普通表</p>
+<p>加载本地文本文件内容（要与hive表字段分隔符顺序都要一致）</p>
+<pre><code>load data local inpath &apos;/home/hadoop/orders.csv&apos; overwrite into table orders;
+</code></pre><p>如果数据源在HDFS上，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load data inpath &apos;hdfs://master:9000/user/orders&apos; overwrite into table orders;  数据源在HDFS上</span><br></pre></td></tr></table></figure>
+<p>2) 加载到分区表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load data local inpath &apos;/home/hadoop/test.txt&apos; overwrite into table test partition (dt=&apos;2017-09-09&apos;);</span><br></pre></td></tr></table></figure>
+<p>partition 是指定这批数据放入分区2017-09-09中；</p>
+<p>3）加载分桶表<br>先创建普通临时表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">create table orders_tmp</span><br><span class="line">(</span><br><span class="line">user_id int,</span><br><span class="line">user_name string,</span><br><span class="line">create_time string</span><br><span class="line">)</span><br><span class="line">row format delimited fields terminated by &apos;,&apos; stored as textfile;</span><br></pre></td></tr></table></figure>
+<p>数据载入临时表</p>
+<pre><code>load data local inpath &apos;/home/hadoop/lead.txt&apos; overwrite into table orders_tmp; 
+</code></pre><p>导入分桶表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set hive.enforce.bucketing = true;</span><br><span class="line">insert overwrite table orders select * from orders_tmp;</span><br></pre></td></tr></table></figure>
+<p>4) 导出数据</p>
+<p>将hive表中的数据导出到本地文件中；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert overwrite local directory &apos;/home/hadoop/orders.bak2017-12-28&apos; select * from orders;</span><br></pre></td></tr></table></figure>
+<p>【去掉local关键字，也可以导出到HDFS上】</p>
+<h3 id="JOIN-ON中的-and-与-where-子句"><a href="#JOIN-ON中的-and-与-where-子句" class="headerlink" title="JOIN ON中的 and 与 where 子句"></a>JOIN ON中的 and 与 where 子句</h3><p>HiveQL与标准SQL的区别：</p>
+<p>陷阱1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM first_table t1</span><br><span class="line">JOIN second_table t2</span><br><span class="line">ON t1.id = t2.id</span><br><span class="line">	where t1.date = &quot;2016-06-01&quot;</span><br></pre></td></tr></table></figure>
+<p>在hive里面，没有SQL优化器，则这样些的后果是，直接将t1表与t2表全量连接，产生大量的MapReduce操作再进行过滤</p>
+<p>正确写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM</span><br><span class="line">( SELECT * FROM first_table WHERE date = &quot;2016-06-01&quot;) t1</span><br><span class="line">JOIN second_table t2</span><br><span class="line">ON t1.id = t2.id;</span><br></pre></td></tr></table></figure>
+<p>其实上面的语句还不是最好的,因为hive通常处理的都是大数据表,上亿至少小case。<strong>hive sql里不推荐用嵌套子查询语句</strong>，就是为了减小查询负担。</p>
+<p>更优的写法是join…on 后面，用and代替where。为什么？用and的话，查询是先过滤条件，得到一个较小的表，然后再跟其他表联合。这样，无形中，就能节省下不小的运算量，自然就更快了！</p>
+<p>更优的写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM first_table t1</span><br><span class="line">JOIN second_table t2</span><br><span class="line">ON t1.id = t2.id</span><br><span class="line">and t1.date = &quot;2016-06-01&quot;;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.jianshu.com/p/ad64b953dc67" target="_blank" rel="noopener">https://www.jianshu.com/p/ad64b953dc67</a></p>
+</the></excerpt>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/10/12/hive/">hive</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
+        <p><span>发布时间:</span>2019-10-12, 00:40:39</p>
+        <p><span>最后更新:</span>2019-10-28, 23:45:55</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/10/12/hive/" title="hive">https://jizx.top/2019/10/12/hive/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://jizx.top/2019/10/12/hive/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/10/25/开发环境搭建/">
+                    开发环境搭建
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/10/11/linux知识点/">
+                    linux知识点
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TODO"><span class="toc-text">TODO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hive-变量空间"><span class="toc-text">hive 变量空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CLI"><span class="toc-text">CLI</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型与定义"><span class="toc-text">数据类型与定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#hive-数据类型"><span class="toc-text">hive 数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文本文件的保存形式"><span class="toc-text">文本文件的保存形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分隔符在HIVE中的用途"><span class="toc-text">分隔符在HIVE中的用途</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据校验"><span class="toc-text">数据校验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HiveQL"><span class="toc-text">HiveQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据库"><span class="toc-text">数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据定义"><span class="toc-text">数据定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分区表"><span class="toc-text">分区表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#查看分区"><span class="toc-text">查看分区</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#外部分区表（最常见）"><span class="toc-text">外部分区表（最常见）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除表"><span class="toc-text">删除表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改表"><span class="toc-text">修改表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#重命名"><span class="toc-text">重命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分区操作"><span class="toc-text">分区操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#列操作"><span class="toc-text">列操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优化"><span class="toc-text">优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建分区表"><span class="toc-text">创建分区表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分桶表TODO"><span class="toc-text">分桶表TODO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为表增加列"><span class="toc-text">为表增加列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用列存储表-TODO"><span class="toc-text">使用列存储表 TODO</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#重复数据，如-age，省市"><span class="toc-text">重复数据，如 age，省市</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多列"><span class="toc-text">多列</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导入导出数据"><span class="toc-text">导入导出数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#动态分区插入"><span class="toc-text">动态分区插入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单个查询语句中创建表并加装数据"><span class="toc-text">单个查询语句中创建表并加装数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导出数据"><span class="toc-text">导出数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查询"><span class="toc-text">查询</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#select"><span class="toc-text">select</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#where"><span class="toc-text">where</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#关于浮点数比较的陷阱"><span class="toc-text">关于浮点数比较的陷阱</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GROUP-BY-语句"><span class="toc-text">GROUP BY 语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join-语句"><span class="toc-text">join 语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#LEFT-SEMI-JOIN"><span class="toc-text">LEFT SEMI-JOIN</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#map-join"><span class="toc-text">map  join</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ORDER-BY-和-SORT-BY"><span class="toc-text">ORDER BY 和 SORT BY</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DISTRIBUTE-BY与-CLUSTER-BY"><span class="toc-text">DISTRIBUTE BY与 CLUSTER BY</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抽样查询"><span class="toc-text">抽样查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UNION-ALL"><span class="toc-text">UNION ALL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#视图"><span class="toc-text">视图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#索引"><span class="toc-text">索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据的导入与导出"><span class="toc-text">数据的导入与导出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JOIN-ON中的-and-与-where-子句"><span class="toc-text">JOIN ON中的 and 与 where 子句</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-4 i,
+        .toc-level-4 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/10/25/开发环境搭建/" title="上一篇: 开发环境搭建">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/10/11/linux知识点/" title="下一篇: linux知识点">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/推荐网站/">推荐网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/python技巧/">python技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/开发环境搭建/">开发环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/hive/">hive</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/11/linux知识点/">linux知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/10/vim技巧/">vim技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/bash命令提示符个性化/">bash命令提示符个性化</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/02/awk/">awk</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/13/linux-shell编程/">linux shell编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python模块-小工具大全/">python模块-小工具大全</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python模块-logging/">python模块-logging</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/anaconda与jupyter使用与设置/">anaconda与jupyter的使用和设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/linux常用命令/">linux常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/01/04/mac卸载官网的python/">mac卸载官网的python</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/photoshop曲线原理与应用/">photoshop曲线原理与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/正则表达式必知必会/">正则表达式必知必会</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/window添加右键用atom打开/">window添加右键用atom打开</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/notepad常用插件/">notepad常用插件与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/chrome截取整个网页/">chrome截取整个网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Git教程/">Git教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/python编码问题/">python编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/04/java方法传参问题/">java方法传参问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/如何有效批评而不是吵架/">如何有效批评而不是吵架</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/运动后不能马上洗澡/">运动后不能马上洗澡</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/喜欢人的理由为什么说不出来/">喜欢人的理由为什么说不出来</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/全球公认的最健康的一天作息图解/">全球公认的最健康的一天作息图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/如何提高「钝感力」，从此不再「想太多」/">如何提高「钝感力」，从此不再「想太多」</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/03/java嵌套类/">java嵌套类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第3章-完成时态/">英语语法——中级：第3章.完成时态</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第2章-名词、定语、状语从句/">英语语法——中级：第2章.名词、定语、状语从句</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第1章-简单句与复合句/">英语语法——中级：第1章.简单句与复合句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/08/vim/">vim</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2019 jizx
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 6;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

@@ -1,3 +1,9 @@
+https://jizx.top/2019/10/28/推荐网站/
+https://jizx.top/2019/10/25/python技巧/
+https://jizx.top/2019/10/25/开发环境搭建/
+https://jizx.top/2019/10/12/hive/
+https://jizx.top/2019/10/11/linux知识点/
+https://jizx.top/2019/10/10/vim技巧/
 https://jizx.top/2019/09/04/bash命令提示符个性化/
 https://jizx.top/2019/09/02/awk/
 https://jizx.top/2019/08/13/linux-shell编程/
@@ -8,7 +14,6 @@ https://jizx.top/2019/08/04/linux常用命令/
 https://jizx.top/2019/01/04/mac卸载官网的python/
 https://jizx.top/2018/12/18/photoshop曲线原理与应用/
 https://jizx.top/2018/12/18/正则表达式必知必会/
-https://jizx.top/2018/12/18/shell通配符/
 https://jizx.top/2018/12/15/window添加右键用atom打开/
 https://jizx.top/2018/12/12/notepad常用插件/
 https://jizx.top/2018/12/04/chrome截取整个网页/
@@ -25,4 +30,4 @@ https://jizx.top/2018/03/03/java嵌套类/
 https://jizx.top/2018/02/11/英语语法——中级：第3章-完成时态/
 https://jizx.top/2018/02/11/英语语法——中级：第2章-名词、定语、状语从句/
 https://jizx.top/2018/02/11/英语语法——中级：第1章-简单句与复合句/
-https://jizx.top/2017/11/08/vim常用按键总结/
+https://jizx.top/2017/11/08/vim/
