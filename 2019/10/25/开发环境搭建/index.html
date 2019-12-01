@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="玖玖的博客">
 <meta property="og:description" content="Mac、linux、window这 3 大系统的开发环境搭建推荐、遇到的相关问题的解决方案记录">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-28T15:53:21.136Z">
+<meta property="og:updated_time" content="2019-12-01T15:11:30.617Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开发环境搭建">
 <meta name="twitter:description" content="Mac、linux、window这 3 大系统的开发环境搭建推荐、遇到的相关问题的解决方案记录">
@@ -311,15 +311,30 @@
 
 
 
-
-
-<h4 id="cmder中文乱码"><a href="#cmder中文乱码" class="headerlink" title="cmder中文乱码"></a>cmder中文乱码</h4><p>打开设置; Startup-Environment; 添加 set LANG=zh_CN.UTF-8</p>
+<h2 id="通用环境"><a href="#通用环境" class="headerlink" title="通用环境"></a>通用环境</h2><h3 id="Python-环境"><a href="#Python-环境" class="headerlink" title="Python 环境"></a>Python 环境</h3><h4 id="macOS"><a href="#macOS" class="headerlink" title="macOS"></a>macOS</h4><ol>
+<li><p>下载最新python版本对应的<a href="https://www.anaconda.com/download/#macos" target="_blank" rel="noopener">anaconda</a>，这样这个环境中默认的python就是最新的</p>
+</li>
+<li><p>根据提示完成安装，这时命令行中<code>conda --version</code> 无法执行，</p>
+<p><strong>for anaconda 3 :</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=~/anaconda3/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>然后通过<code>conda --version</code> 确认</p>
+</li>
+<li><p><code>export PATH=~/anaconda3/bin:$PATH</code>  <strong>有效时间为这次终端结束</strong>，因此应该通过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo nano ~/.bashrc   # bash</span><br><span class="line">或者</span><br><span class="line">sudo nano ~/.zshrc    # zsh</span><br></pre></td></tr></table></figure>
+<p>修改配置文件，将命令复制保存在文件中，最后通过<code>source .bashrc</code>加载新的配置信息，使得配置立即生效。</p>
+</li>
+<li><p>在pycharm设置中搜索 interpreter，添加解释器，选择conda 环境，如果想让新项目默认使用该解释器，勾选【 <strong>make available to all projects</strong>】</p>
+</li>
+</ol>
+<h4 id="window"><a href="#window" class="headerlink" title="window"></a>window</h4><p>右键我的电脑—属性—高级系统设置—-高级选项里面有一个环境变量，点击环境变量——系统变量里面 找path——双击path，添加路径，路径间用<code>;</code>隔开。</p>
+<p>需要添加的路径有三个（以我的为例子）：F:\Anaconda3;F:\Anaconda3\Scripts;F:\Anaconda3\Library\bin</p>
+<h2 id="window-1"><a href="#window-1" class="headerlink" title="window"></a>window</h2><h4 id="cmder中文乱码"><a href="#cmder中文乱码" class="headerlink" title="cmder中文乱码"></a>cmder中文乱码</h4><p>打开设置; Startup-Environment; 添加 set LANG=zh_CN.UTF-8</p>
 <h4 id="30个高效alias"><a href="#30个高效alias" class="headerlink" title="30个高效alias"></a>30个高效alias</h4><p>临时取消alias</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/clear ## 命令完整路径</span><br><span class="line">\c    ## call alias 前添加\</span><br><span class="line">command ls  ## 或使用command</span><br></pre></td></tr></table></figure>
 <p>删除别名</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unalias aliasname</span><br><span class="line">unalias foo</span><br></pre></td></tr></table></figure>
 <p><a href="https://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html" target="_blank" rel="noopener">https://www.cyberciti.biz/tips/bash-aliases-mac-centos-linux-unix.html</a></p>
-</the></excerpt>
+<h2 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h2></the></excerpt>
       
     </div>
     
@@ -330,7 +345,7 @@
         <p><span>本文标题:</span><a href="/2019/10/25/开发环境搭建/">开发环境搭建</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
         <p><span>发布时间:</span>2019-10-25, 14:27:11</p>
-        <p><span>最后更新:</span>2019-10-28, 23:53:21</p>
+        <p><span>最后更新:</span>2019-12-01, 23:11:30</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/10/25/开发环境搭建/" title="开发环境搭建">https://jizx.top/2019/10/25/开发环境搭建/</a>
             <span class="copy-path" data-clipboard-text="原文: https://jizx.top/2019/10/25/开发环境搭建/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -366,7 +381,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#cmder中文乱码"><span class="toc-text">cmder中文乱码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#30个高效alias"><span class="toc-text">30个高效alias</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#通用环境"><span class="toc-text">通用环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Python-环境"><span class="toc-text">Python 环境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#macOS"><span class="toc-text">macOS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#window"><span class="toc-text">window</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#window-1"><span class="toc-text">window</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cmder中文乱码"><span class="toc-text">cmder中文乱码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#30个高效alias"><span class="toc-text">30个高效alias</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#mac"><span class="toc-text">mac</span></a></li>
         
     </div>
     <style>
