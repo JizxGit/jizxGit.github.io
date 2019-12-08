@@ -1,3 +1,4 @@
+https://jizx.top/2019/12/07/python-多线程/
 https://jizx.top/2019/12/01/python-cookbook/
 https://jizx.top/2019/10/28/推荐网站/
 https://jizx.top/2019/10/25/python技巧/
@@ -8,11 +9,10 @@ https://jizx.top/2019/10/10/vim技巧/
 https://jizx.top/2019/09/04/bash命令提示符个性化/
 https://jizx.top/2019/09/02/awk/
 https://jizx.top/2019/08/13/linux-shell编程/
-https://jizx.top/2019/08/06/python模块-小工具大全/
+https://jizx.top/2019/08/06/python小模块/
 https://jizx.top/2019/08/06/python模块-logging/
 https://jizx.top/2019/08/04/anaconda与jupyter使用与设置/
 https://jizx.top/2019/08/04/linux常用命令/
-https://jizx.top/2019/01/04/mac卸载官网的python/
 https://jizx.top/2018/12/18/photoshop曲线原理与应用/
 https://jizx.top/2018/12/18/正则表达式必知必会/
 https://jizx.top/2018/12/15/window添加右键用atom打开/
@@ -23,7 +23,6 @@ https://jizx.top/2018/11/19/python编码问题/
 https://jizx.top/2018/07/04/java方法传参问题/
 https://jizx.top/2018/06/17/如何有效批评而不是吵架/
 https://jizx.top/2018/06/17/剑指offer/
-https://jizx.top/2018/03/23/运动后不能马上洗澡/
 https://jizx.top/2018/03/23/喜欢人的理由为什么说不出来/
 https://jizx.top/2018/03/23/全球公认的最健康的一天作息图解/
 https://jizx.top/2018/03/23/如何提高「钝感力」，从此不再「想太多」/
