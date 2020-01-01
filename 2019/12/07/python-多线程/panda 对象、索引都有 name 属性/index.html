@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="jizx">
+
+
+
+<meta name="description" content="panda 对象、索引都有 name 属性  series，可以认为它是一个长度固定且有序的字典  索引index，可以指定字符串数组为索引，根据此数组顺序进行排序，索引对象是不可变的，无法修改索引对象。 1index[1]=&amp;apos;d&amp;apos;  # TypeError  值 value    dataframe，表示矩阵的数据表，行列索引都用，列索引一般由你指定，行索引可以自动生成，可以">
+<meta name="keywords" content="java,python,linux,javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="玖玖的博客">
+<meta property="og:url" content="https://jizx.top/2019/12/07/python-多线程/panda 对象、索引都有 name 属性/index.html">
+<meta property="og:site_name" content="玖玖的博客">
+<meta property="og:description" content="panda 对象、索引都有 name 属性  series，可以认为它是一个长度固定且有序的字典  索引index，可以指定字符串数组为索引，根据此数组顺序进行排序，索引对象是不可变的，无法修改索引对象。 1index[1]=&amp;apos;d&amp;apos;  # TypeError  值 value    dataframe，表示矩阵的数据表，行列索引都用，列索引一般由你指定，行索引可以自动生成，可以">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://jizx.top/2019/12/07/python-多线程/panda%20对象、索引都有%20name%20属性/image-20191215160830739.png">
+<meta property="og:updated_time" content="2019-12-15T18:20:31.431Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="玖玖的博客">
+<meta name="twitter:description" content="panda 对象、索引都有 name 属性  series，可以认为它是一个长度固定且有序的字典  索引index，可以指定字符串数组为索引，根据此数组顺序进行排序，索引对象是不可变的，无法修改索引对象。 1index[1]=&amp;apos;d&amp;apos;  # TypeError  值 value    dataframe，表示矩阵的数据表，行列索引都用，列索引一般由你指定，行索引可以自动生成，可以">
+<meta name="twitter:image" content="https://jizx.top/2019/12/07/python-多线程/panda%20对象、索引都有%20name%20属性/image-20191215160830739.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="玖玖的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="https://avatars1.githubusercontent.com/u/18480104?s=40&v=4">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>玖玖的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">jizx</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false">
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class="no-result">No results found <i class="fa fa-spinner fa-pulse"></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">分类&amp;标签</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1822980003@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/JizxGit" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/anaconda/">anaconda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hive/">hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ing/">ing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter/">jupyter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logging/">logging</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notepad/">notepad++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photoshop/">photoshop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/window/">window</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/从句/">从句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传参/">传参</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/健康/">健康</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/右键/">右键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/同理心/">同理心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/吵架/">吵架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复合句/">复合句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多进程/">多进程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心理/">心理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/截图/">截图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/所见所闻/">所见所闻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打印/">打印</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/批评/">批评</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方法调用/">方法调用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时态/">时态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/曲线/">曲线</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境/">环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类/">类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统优化/">系统优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编码问题/">编码问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编辑器/">编辑器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">博客主题原作者MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">在读研究生二年级</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">jizx</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">jizx</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">分类&amp;标签</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1822980003@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/JizxGit" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+</nav>
+      <div class="body-wrap"><article id="post-python-多线程/panda 对象、索引都有 name 属性" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/12/07/python-多线程/panda 对象、索引都有 name 属性/" class="article-date">
+      <time datetime="2019-12-06T16:00:00.000Z" itemprop="datePublished">2019-12-07</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>panda 对象、索引都有 name 属性</p>
+<ol>
+<li><p>series，可以认为它是一个长度固定且有序的字典</p>
+<ol>
+<li><p>索引index，可以指定字符串数组为索引，根据此数组顺序进行排序，索引对象是不可变的，无法修改索引对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index[1]=&apos;d&apos;  # TypeError</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>值 value</p>
+</li>
+</ol>
+</li>
+<li><p>dataframe，表示矩阵的数据表，行列索引都用，列索引一般由你指定，行索引可以自动生成，可以嵌套 dataframe</p>
+</li>
+<li><p>当你将列表或者数组赋值给列时，长度必须与 DataFrame 匹配</p>
+</li>
+</ol>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p><code>Frame[&quot;colunm&quot;]</code>可以获取列，<code>frame.colunm</code> 也可以，但是必须是有效的 Python 值，不存在键时会报错</p>
+<p><code>Frame[&quot;colunm&quot;]=arrange(6)</code>可以创建新的列，但是<code>Frame.colunm=arrange(6)</code>不可以</p>
+<p>索引像数组一样，但是方法像集合</p>
+<p><img src="/2019/12/07/python-多线程/panda 对象、索引都有 name 属性/image-20191215160830739.png" alt="image-20191215160830738"></p>
+<h4 id="reindex"><a href="#reindex" class="headerlink" title="reindex"></a>reindex</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df2=df.reindex(index=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>],columns=[<span class="string">'f'</span>,<span class="string">'d'</span>,<span class="string">'w'</span>])</span><br></pre></td></tr></table></figure>
+<p>method=’ffile’，向前填充，’bfill’向后填充</p>
+<p>fill_value=0 这是填充值</p>
+<h4 id="drop"><a href="#drop" class="headerlink" title="drop"></a>drop</h4><p>删除 指定行、列，并返回新的对象，如果要修改原对象，可以设置 inplace=True</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data.drop([<span class="string">"row1"</span>])</span><br><span class="line">data.drop([<span class="string">"col1"</span>],axis=<span class="number">1</span>)</span><br><span class="line">data.drop([<span class="string">"col1"</span>],axis=<span class="number">1</span>,inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p>数值切片时与 Python 一致不含之后一列，但是字符串切片时，是包含最后的。</p>
+<h4 id="loc-与-iloc"><a href="#loc-与-iloc" class="headerlink" title="loc 与 iloc"></a>loc 与 iloc</h4><p>loc 轴标签，iloc 整数标签</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data.loc[[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">0</span>,<span class="number">1</span>]]</span><br><span class="line">loc[:<span class="number">1</span>] <span class="comment"># 包含 1</span></span><br><span class="line">iloc[:<span class="number">1</span>] <span class="comment"># 不包含1 ，有点坑</span></span><br></pre></td></tr></table></figure>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p><code>sort_index(axis=)</code>，对索引进行排序</p>
+<p><code>sort_values(by=[&#39;a&#39;,&#39;b&#39;])</code>，对值进行排序</p>
+<h3 id="缺失值"><a href="#缺失值" class="headerlink" title="缺失值"></a>缺失值</h3><p>na ： not available</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dropna 过滤掉 na (how=&apos;all&apos;, axis=1，thresh=2)全部是 na 时才是删除，并指定为列，thresh 表示只删除第2列或者行</span><br><span class="line">fillna 替换 na</span><br><span class="line">isnull 判断是否为 na</span><br><span class="line">notnull</span><br></pre></td></tr></table></figure>
+<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><h3 id="series"><a href="#series" class="headerlink" title="series"></a>series</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series([1, 3, 5, np.nan, 6, 8])</span><br></pre></td></tr></table></figure>
+<h3 id="dataFrame"><a href="#dataFrame" class="headerlink" title="dataFrame"></a>dataFrame</h3><p>传递数组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">dates = pd.date_range(<span class="string">'20130101'</span>, periods=<span class="number">6</span>) <span class="comment"># 创建时间列表，作为下面的索引</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">DatetimeIndex(['2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04','2013-01-05', '2013-01-06'], dtype='datetime64[ns]', freq='D')</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line">df = pd.DataFrame(np.random.randn(<span class="number">6</span>, <span class="number">4</span>), index=dates, columns=list(<span class="string">'ABCD'</span>)) <span class="comment"># index是行索引，columns 是列索引</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">                   A         B         C         D</span></span><br><span class="line"><span class="string">2013-01-01  0.469112 -0.282863 -1.509059 -1.135632</span></span><br><span class="line"><span class="string">2013-01-02  1.212112 -0.173215  0.119209 -1.044236</span></span><br><span class="line"><span class="string">2013-01-03 -0.861849 -2.104569 -0.494929  1.071804</span></span><br><span class="line"><span class="string">2013-01-04  0.721555 -0.706771 -1.039575  0.271860</span></span><br><span class="line"><span class="string">2013-01-05 -0.424972  0.567020  0.276232 -1.087401</span></span><br><span class="line"><span class="string">2013-01-06 -0.673690  0.113648 -1.478427  0.524988</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
+<p>传递字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">df2 = pd.DataFrame(&#123;<span class="string">'A'</span>: <span class="number">1.</span>,</span><br><span class="line">               <span class="string">'B'</span>: pd.Timestamp(<span class="string">'20130102'</span>),</span><br><span class="line">               <span class="string">'C'</span>: pd.Series(<span class="number">1</span>, index=list(range(<span class="number">4</span>)), dtype=<span class="string">'float32'</span>),</span><br><span class="line">               <span class="string">'D'</span>: np.array([<span class="number">3</span>] * <span class="number">4</span>, dtype=<span class="string">'int32'</span>),</span><br><span class="line">               <span class="string">'E'</span>: pd.Categorical([<span class="string">"test"</span>, <span class="string">"train"</span>, <span class="string">"test"</span>, <span class="string">"train"</span>]),</span><br><span class="line">               <span class="string">'F'</span>: <span class="string">'foo'</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">     A          B    C  D      E    F</span></span><br><span class="line"><span class="string">0  1.0 2013-01-02  1.0  3   test  foo</span></span><br><span class="line"><span class="string">1  1.0 2013-01-02  1.0  3  train  foo</span></span><br><span class="line"><span class="string">2  1.0 2013-01-02  1.0  3   test  foo</span></span><br><span class="line"><span class="string">3  1.0 2013-01-02  1.0  3  train  foo</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
+<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><h4 id="查看部分内容"><a href="#查看部分内容" class="headerlink" title="查看部分内容"></a>查看部分内容</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.head()</span><br><span class="line">df.tail(3)</span><br></pre></td></tr></table></figure>
+<h4 id="查看索引"><a href="#查看索引" class="headerlink" title="查看索引"></a>查看索引</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.index     <span class="comment"># 行索引</span></span><br><span class="line">df.columns   <span class="comment"># 列索引</span></span><br></pre></td></tr></table></figure>
+<h4 id="转为-numpy"><a href="#转为-numpy" class="headerlink" title="转为 numpy"></a>转为 numpy</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">df.to_numpy()</span><br><span class="line">Out[17]: </span><br><span class="line">array([[ 0.4691, -0.2829, -1.5091, -1.1356],</span><br><span class="line">       [ 1.2121, -0.1732,  0.1192, -1.0442],</span><br><span class="line">       [-0.8618, -2.1046, -0.4949,  1.0718],</span><br><span class="line">       [ 0.7216, -0.7068, -1.0396,  0.2719],</span><br><span class="line">       [-0.425 ,  0.567 ,  0.2762, -1.0874],</span><br><span class="line">       [-0.6737,  0.1136, -1.4784,  0.525 ]])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>  使用<a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_numpy.html#pandas.DataFrame.to_numpy" target="_blank" rel="noopener"><code>DataFrame.to_numpy()</code>](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_numpy.html#pandas.DataFrame.to_numpy) 有时代价会非常大，特别是当每列数据类型不同的时候，这是pandas 与 NumPy本质的不同造成的: <strong>整个NumPy数组只有一种数据类型 ,而 pandas 的每一列都可以是不同的数据类型</strong>. 当你使用<code>DataFrame.to_numpy()</code></a>, pandas 要选择一种能覆盖 DataFrame 中所有数据的 NumPy dtype ，最终往往是<code>object</code>, 这就需要将每个值都转为 Python object类型。</p>
+</blockquote>
+<h4 id="查看数值类型的列的统计信息"><a href="#查看数值类型的列的统计信息" class="headerlink" title="查看数值类型的列的统计信息"></a>查看数值类型的列的统计信息</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">df.describe()</span><br><span class="line">”“”</span><br><span class="line">count  <span class="number">6.000000</span>  <span class="number">6.000000</span>  <span class="number">6.000000</span>  <span class="number">6.000000</span></span><br><span class="line">mean   <span class="number">0.073711</span> <span class="number">-0.431125</span> <span class="number">-0.687758</span> <span class="number">-0.233103</span></span><br><span class="line">std    <span class="number">0.843157</span>  <span class="number">0.922818</span>  <span class="number">0.779887</span>  <span class="number">0.973118</span></span><br><span class="line">min   <span class="number">-0.861849</span> <span class="number">-2.104569</span> <span class="number">-1.509059</span> <span class="number">-1.135632</span></span><br><span class="line"><span class="number">25</span>%   <span class="number">-0.611510</span> <span class="number">-0.600794</span> <span class="number">-1.368714</span> <span class="number">-1.076610</span></span><br><span class="line"><span class="number">50</span>%    <span class="number">0.022070</span> <span class="number">-0.228039</span> <span class="number">-0.767252</span> <span class="number">-0.386188</span></span><br><span class="line"><span class="number">75</span>%    <span class="number">0.658444</span>  <span class="number">0.041933</span> <span class="number">-0.034326</span>  <span class="number">0.461706</span></span><br><span class="line">max    <span class="number">1.212112</span>  <span class="number">0.567020</span>  <span class="number">0.276232</span>  <span class="number">1.071804</span></span><br><span class="line">“”“</span><br></pre></td></tr></table></figure>
+<h4 id="转置"><a href="#转置" class="headerlink" title="转置"></a>转置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.T</span><br></pre></td></tr></table></figure>
+<h4 id="排序-1"><a href="#排序-1" class="headerlink" title="排序"></a>排序</h4><h5 id="索引排序"><a href="#索引排序" class="headerlink" title="索引排序"></a>索引排序</h5><p>默认是对行索引排序，axis=1 时对列索引排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">df.sort_index(axis=<span class="number">1</span>, ascending=<span class="keyword">False</span>) <span class="comment"># 列索引逆序</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">                   D         C         B         A</span></span><br><span class="line"><span class="string">2013-01-01 -1.135632 -1.509059 -0.282863  0.469112</span></span><br><span class="line"><span class="string">2013-01-02 -1.044236  0.119209 -0.173215  1.212112</span></span><br><span class="line"><span class="string">2013-01-03  1.071804 -0.494929 -2.104569 -0.861849</span></span><br><span class="line"><span class="string">2013-01-04  0.271860 -1.039575 -0.706771  0.721555</span></span><br><span class="line"><span class="string">2013-01-05 -1.087401  0.276232  0.567020 -0.424972</span></span><br><span class="line"><span class="string">2013-01-06  0.524988 -1.478427  0.113648 -0.673690</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
+<h5 id="内容排序"><a href="#内容排序" class="headerlink" title="内容排序"></a>内容排序</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">df.sort_values(by=<span class="string">'B'</span>)</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">                   A         B         C         D</span></span><br><span class="line"><span class="string">2013-01-03 -0.861849 -2.104569 -0.494929  1.071804</span></span><br><span class="line"><span class="string">2013-01-04  0.721555 -0.706771 -1.039575  0.271860</span></span><br><span class="line"><span class="string">2013-01-01  0.469112 -0.282863 -1.509059 -1.135632</span></span><br><span class="line"><span class="string">2013-01-02  1.212112 -0.173215  0.119209 -1.044236</span></span><br><span class="line"><span class="string">2013-01-06 -0.673690  0.113648 -1.478427  0.524988</span></span><br><span class="line"><span class="string">2013-01-05 -0.424972  0.567020  0.276232 -1.087401</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
+<h2 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h2><p>列选择</p>
+<p><code>df[&#39;A&#39;]</code>等价于 <code>df.A</code></p>
+<p>行切片</p>
+<p>​    <code>df[0:3]</code></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2019/12/07/python-多线程/panda 对象、索引都有 name 属性/"></a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
+        <p><span>发布时间:</span>2019-12-07, 00:00:00</p>
+        <p><span>最后更新:</span>2019-12-16, 02:20:31</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2019/12/07/python-多线程/panda 对象、索引都有 name 属性/" title="">https://jizx.top/2019/12/07/python-多线程/panda 对象、索引都有 name 属性/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://jizx.top/2019/12/07/python-多线程/panda 对象、索引都有 name 属性/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2019/12/07/python-多线程/">
+                    python 多线程与多进程
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2019/12/01/python-cookbook/">
+                    python cookbook
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#索引"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#reindex"><span class="toc-text">reindex</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#drop"><span class="toc-text">drop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#loc-与-iloc"><span class="toc-text">loc 与 iloc</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺失值"><span class="toc-text">缺失值</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#series"><span class="toc-text">series</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dataFrame"><span class="toc-text">dataFrame</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看"><span class="toc-text">查看</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#查看部分内容"><span class="toc-text">查看部分内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看索引"><span class="toc-text">查看索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#转为-numpy"><span class="toc-text">转为 numpy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看数值类型的列的统计信息"><span class="toc-text">查看数值类型的列的统计信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#转置"><span class="toc-text">转置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#排序-1"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#索引排序"><span class="toc-text">索引排序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内容排序"><span class="toc-text">内容排序</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选择"><span class="toc-text">选择</span></a>
+        
+    </li></div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-4 i,
+        .toc-level-4 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2019/12/07/python-多线程/" title="上一篇: python 多线程与多进程">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2019/12/01/python-cookbook/" title="下一篇: python cookbook">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/12/16/正则表达式-lp/">正则表达式-lp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/python-多线程/">python 多线程与多进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/python-多线程/panda 对象、索引都有 name 属性/">python-多线程/panda 对象、索引都有 name 属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/python-cookbook/">python cookbook</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/推荐网站/">推荐网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/python技巧/">python技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/开发环境搭建/">开发环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/hive/">hive</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/11/linux知识点/">linux知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/10/vim技巧/">vim技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/bash命令提示符个性化/">bash命令提示符个性化</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/02/awk/">awk</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/13/linux-shell编程/">linux-shell编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python小模块/">python小模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python模块-logging/">python模块-logging</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/anaconda与jupyter使用与设置/">anaconda与jupyter的使用和设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/linux常用命令/">linux常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/photoshop曲线原理与应用/">photoshop曲线原理与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/正则表达式必知必会/">正则表达式必知必会</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/window添加右键用atom打开/">window添加右键用atom打开</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/notepad常用插件/">notepad常用插件与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/chrome截取整个网页/">chrome截取整个网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Git教程/">Git教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/python编码问题/">python编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/04/java方法传参问题/">java方法传参问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/如何有效批评而不是吵架/">如何有效批评而不是吵架</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/喜欢人的理由为什么说不出来/">喜欢人的理由为什么说不出来</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/全球公认的最健康的一天作息图解/">全球公认的最健康的一天作息图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/如何提高「钝感力」，从此不再「想太多」/">如何提高「钝感力」，从此不再「想太多」</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/03/java嵌套类/">java嵌套类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第3章-完成时态/">英语语法——中级：第3章.完成时态</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第2章-名词、定语、状语从句/">英语语法——中级：第2章.名词、定语、状语从句</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第1章-简单句与复合句/">英语语法——中级：第1章.简单句与复合句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/08/vim/">vim</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2020 jizx
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 6;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

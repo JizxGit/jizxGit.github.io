@@ -264,6 +264,87 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-正则表达式-lp" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/12/16/正则表达式-lp/" class="article-date">
+      <time datetime="2019-12-16T14:49:52.124Z" itemprop="datePublished">2019-12-16</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="正则表达式-re"><a href="#正则表达式-re" class="headerlink" title="正则表达式-re"></a>正则表达式-re</h1><p>​    </p>
+<p>*1.模式和被搜索的字符串即可以是unicode字符串（str），也可以是8位字节串（bytes）。两种不能混用。re.compile（u’’）</p>
+<ol start="2">
+<li><p>r表示原生字符(保留正则表达式的原生字符\d,\w)，防止转义，取消字符串中\的特殊含义。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mm = &quot;c:\\ab\\bc&quot;        # r的作用主要用来防止转义字符\，使其失去特殊含义。保留正则表达式的\d,\w，.,*,+等特殊含义</span><br><span class="line">r =re.match(&quot;c:\\\\ab&quot;,mm)</span><br><span class="line">r1 = re.match(r&quot;c:\\a\w*&quot;,mm)</span><br><span class="line">print(mm)</span><br><span class="line">print(r.group())</span><br><span class="line">print(r1.group())</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>3.特殊含义：+匹配一次或多次；*匹配0次或多次；？匹配0此货一次；{}控制次数，贪婪匹配</p>
+<p>非贪懒匹配：+？，*？，{}？，？作用匹配尽量少的次数{3,5}？匹配3次就结束</p>
+<ol start="4">
+<li>(?&lt;=…)  匹配字符串的当前位置，它的前面匹配 <code>…</code> 的内容到当前位置 </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> import re</span><br><span class="line">&gt;&gt;&gt; m = re.search(&apos;(?&lt;=abc)def&apos;, &apos;abcdef&apos;)</span><br><span class="line">&gt;&gt;&gt; m.group(0)</span><br><span class="line">&apos;def&apos;</span><br></pre></td></tr></table></figure>
+<p> (abc|bcd|cde)，表示这一段是abc、bcd、cde三者之一均可，顺序也必须一致<br>(abc)?，表示这一组要么一起出现，要么不出现，出现则按此组内的顺序出现<br>(?:abc)表示找到这样abc这样一组，但不记录，不保存到$变量中，否则可以通过$x取第几个括号所匹配到的项，比如：(aaa)(bbb)(ccc)(?:ddd)(eee)，可以用$1获取(aaa)匹配到的内容，而$3则获取到了(ccc)匹配到的内容，而$4则获取的是由(eee)匹配到的内容，因为前一对括号没有保存变量 </p>
+<p>5.正则表达式re.compile()<br>compile()的定义：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">compile(pattern, flags=<span class="number">0</span>)</span><br><span class="line">Compile a regular expression pattern, returning a pattern object</span><br></pre></td></tr></table></figure>
+<p> 从compile()函数的定义中，可以看出返回的是一个匹配对象，它单独使用就没有任何意义，需要和findall(), search(), match(）搭配使用。  </p>
+<p>6。compile 与 match（）一起使用，从位置0开始匹配，匹配不到会返回NONE，返回NONE时就没有span，group属性了，与group一起使用。</p>
+<p>group（0）返回的是’ ‘匹配到的内容，group（1）返回的是第一个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">content = &apos;Hello,I am jerry,from chongqing,a montain city,nice to meet you.....&apos;</span><br><span class="line">regex = re.compile(&apos;\w*o\w*&apos;)</span><br><span class="line">x = regex.match(content).group()</span><br><span class="line">y = regex.match(content).span()</span><br><span class="line"></span><br><span class="line">print(x)</span><br><span class="line">print(y)</span><br><span class="line">return:</span><br><span class="line">Hello</span><br><span class="line">(0, 5)</span><br></pre></td></tr></table></figure>
+<p>group使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">s = &apos;&#123;&quot;mobilephone&quot;:&quot;$&#123;phone&#125;&quot;,&quot;pwd&quot;:&quot;$&#123;pwd&#125;&quot;&#125;&apos;</span><br><span class="line">regex = re.compile(&apos;\$\&#123;(.*?)\&#125;(&quot;)&apos;)</span><br><span class="line">res = re.search(&apos;\$\&#123;(.*?)\&#125;(&quot;)&apos;,s)</span><br><span class="line">key = res.group()</span><br><span class="line">value = res.group(1)</span><br><span class="line">value1 = res.group(2)</span><br><span class="line">print(key)</span><br><span class="line">print(value)</span><br><span class="line">print(value1)</span><br><span class="line">#</span><br><span class="line">$&#123;phone&#125;&quot;</span><br><span class="line">phone</span><br><span class="line">&quot;</span><br></pre></td></tr></table></figure>
+<p>7.compile与search搭配使用</p>
+<p>compile()与search()搭配使用, 返回的类型与match()差不多， 但是不同的是search(), 可以不从位置0开始匹配。但是匹配一个单词之后，匹配和match()一样，匹配就会结束。</p>
+<ol start="8">
+<li><p>python正则模块re中findall和finditer两者相似，但却有很大区别。两者都可以获取所有的匹配结果，这和search方法有着很大的区别，同时不同的是一个返回list，一个返回一个MatchObject类型的iterator </p>
+<p>可以被next()函数调用并不断返回下一个值得对象称为迭代器 (Iterator) </p>
+<p><code>可以直接作用于`</code>for<code></code>循环的对象统称为可迭代对象（Iterable）` </p>
+<p>(x for x in range(5))是一个迭代器 </p>
+<p><strong><em>finditer</em></strong></p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">正则没有分组</span><br><span class="line">content = &quot;email:12345678@163.com email:2345678@163.com email:345678@163.com&quot;</span><br><span class="line">result_regex = re.compile(&apos;\d+@\w+.com&apos;)</span><br><span class="line">result_finditer = result_regex.finditer(content)  # result_finditer是一个matchobject的迭代器</span><br><span class="line">for i in result_finditer:</span><br><span class="line">	print i.group(0)</span><br><span class="line">	print i.span(0)</span><br><span class="line">	print i.start()  #　返回所有匹配到的对象的开始索引值</span><br><span class="line"></span><br><span class="line">12345678@163.com</span><br><span class="line">(6, 22)</span><br><span class="line">6</span><br><span class="line">2345678@163.com</span><br><span class="line">(29, 44)</span><br><span class="line">29</span><br><span class="line">345678@163.com</span><br><span class="line">(51, 65)</span><br><span class="line">51</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">正则分组</span><br><span class="line">result_finditer = re.finditer(r&quot;(\d+)@(\w+).com&quot;, content)</span><br><span class="line">#正则有两个分组，我们需要分别获取分区，分组从0开始，group方法不传递索引默认为0，代表了整个正则的匹配结果</span><br><span class="line">for i in result_finditer :</span><br><span class="line">    phone_no = i.group(1)</span><br><span class="line">    email_type = i.group(2)</span><br><span class="line"></span><br><span class="line">result_findall = re.findall(r&quot;(\d+)@(\w+).com&quot;, content)</span><br><span class="line">#此时返回的虽然为[]，但不是简单的[],而是一个tuple类型的list  </span><br><span class="line">#如：[(&apos;12345678&apos;, &apos;163&apos;), (&apos;2345678&apos;, &apos;163&apos;), (&apos;345678&apos;, &apos;163&apos;)]</span><br><span class="line">for i in result_findall :</span><br><span class="line">    phone_no = i[0]</span><br><span class="line">    email_type = i[1]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">start，end的使用方法，针对匹配对象（object），返回整型</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mm = &apos;AABBCCCCAA&apos;</span><br><span class="line">ss = re.compile(&apos;A+&apos;)</span><br><span class="line">ms = ss.findｉｔｅｒ(mm)</span><br><span class="line">for ii in ms:</span><br><span class="line">    print ii.start()</span><br><span class="line">    </span><br><span class="line">C:\Users\chenliping04\.conda\envs\py2\pythonw.exe E:/本地测试项目/title_company_1/test2.py</span><br><span class="line">0</span><br><span class="line">8</span><br></pre></td></tr></table></figure>
+<p><strong><em>findall</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1.当正则没有分组是返回的就是正则的匹配</span><br><span class="line">re.findall(r&quot;\d+@\w+.com&quot;, content)</span><br><span class="line">[&apos;2345678@163.com&apos;, &apos;2345678@163.com&apos;, &apos;345678@163.com&apos;]</span><br><span class="line">2..有一个分组返回的是分组的匹配而不是整个正则的匹配</span><br><span class="line">re.findall(r&quot;(\d+)@\w+.com&quot;, content)</span><br><span class="line">[&apos;2345678&apos;, &apos;2345678&apos;, &apos;345678&apos;]</span><br><span class="line">3.多个分组时将分组装到tuple中 返回</span><br><span class="line">re.findall(r&quot;(\d+)@(\w+).com&quot;, content)</span><br><span class="line">[(&apos;2345678&apos;, &apos;163&apos;), (&apos;2345678&apos;, &apos;163&apos;), (&apos;345678&apos;, &apos;163&apos;)]</span><br><span class="line">因此假如我们需要拿到整个正则和每个分组的匹配，使用findall我们需要将整个正则作为一个分组</span><br><span class="line">re.findall(r&quot;((\d+)@(\w+).com)&quot;, content)</span><br><span class="line">[(&apos;2345678@163.com&apos;, &apos;2345678&apos;, &apos;163&apos;), (&apos;2345678@163.com&apos;, &apos;2345678&apos;, &apos;163&apos;), (&apos;345678@163.com&apos;, &apos;345678&apos;, &apos;163&apos;)]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-python-多线程" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
@@ -315,6 +396,102 @@
         <p class="article-more-link">
           <a href="/2019/12/07/python-多线程/#more">阅读全文 >></a>
         </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-python-多线程/panda 对象、索引都有 name 属性" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/12/07/python-多线程/panda 对象、索引都有 name 属性/" class="article-date">
+      <time datetime="2019-12-06T16:00:00.000Z" itemprop="datePublished">2019-12-07</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>panda 对象、索引都有 name 属性</p>
+<ol>
+<li><p>series，可以认为它是一个长度固定且有序的字典</p>
+<ol>
+<li><p>索引index，可以指定字符串数组为索引，根据此数组顺序进行排序，索引对象是不可变的，无法修改索引对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index[1]=&apos;d&apos;  # TypeError</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>值 value</p>
+</li>
+</ol>
+</li>
+<li><p>dataframe，表示矩阵的数据表，行列索引都用，列索引一般由你指定，行索引可以自动生成，可以嵌套 dataframe</p>
+</li>
+<li><p>当你将列表或者数组赋值给列时，长度必须与 DataFrame 匹配</p>
+</li>
+</ol>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p><code>Frame[&quot;colunm&quot;]</code>可以获取列，<code>frame.colunm</code> 也可以，但是必须是有效的 Python 值，不存在键时会报错</p>
+<p><code>Frame[&quot;colunm&quot;]=arrange(6)</code>可以创建新的列，但是<code>Frame.colunm=arrange(6)</code>不可以</p>
+<p>索引像数组一样，但是方法像集合</p>
+<p><img src="/2019/12/07/python-多线程/panda 对象、索引都有 name 属性/image-20191215160830739.png" alt="image-20191215160830738"></p>
+<h4 id="reindex"><a href="#reindex" class="headerlink" title="reindex"></a>reindex</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df2=df.reindex(index=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>],columns=[<span class="string">'f'</span>,<span class="string">'d'</span>,<span class="string">'w'</span>])</span><br></pre></td></tr></table></figure>
+<p>method=’ffile’，向前填充，’bfill’向后填充</p>
+<p>fill_value=0 这是填充值</p>
+<h4 id="drop"><a href="#drop" class="headerlink" title="drop"></a>drop</h4><p>删除 指定行、列，并返回新的对象，如果要修改原对象，可以设置 inplace=True</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data.drop([<span class="string">"row1"</span>])</span><br><span class="line">data.drop([<span class="string">"col1"</span>],axis=<span class="number">1</span>)</span><br><span class="line">data.drop([<span class="string">"col1"</span>],axis=<span class="number">1</span>,inplace=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p>数值切片时与 Python 一致不含之后一列，但是字符串切片时，是包含最后的。</p>
+<h4 id="loc-与-iloc"><a href="#loc-与-iloc" class="headerlink" title="loc 与 iloc"></a>loc 与 iloc</h4><p>loc 轴标签，iloc 整数标签</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data.loc[[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">0</span>,<span class="number">1</span>]]</span><br><span class="line">loc[:<span class="number">1</span>] <span class="comment"># 包含 1</span></span><br><span class="line">iloc[:<span class="number">1</span>] <span class="comment"># 不包含1 ，有点坑</span></span><br></pre></td></tr></table></figure>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p><code>sort_index(axis=)</code>，对索引进行排序</p>
+<p><code>sort_values(by=[&#39;a&#39;,&#39;b&#39;])</code>，对值进行排序</p>
+<h3 id="缺失值"><a href="#缺失值" class="headerlink" title="缺失值"></a>缺失值</h3><p>na ： not available</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dropna 过滤掉 na (how=&apos;all&apos;, axis=1，thresh=2)全部是 na 时才是删除，并指定为列，thresh 表示只删除第2列或者行</span><br><span class="line">fillna 替换 na</span><br><span class="line">isnull 判断是否为 na</span><br><span class="line">notnull</span><br></pre></td></tr></table></figure>
+<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><h3 id="series"><a href="#series" class="headerlink" title="series"></a>series</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series([1, 3, 5, np.nan, 6, 8])</span><br></pre></td></tr></table></figure>
+<h3 id="dataFrame"><a href="#dataFrame" class="headerlink" title="dataFrame"></a>dataFrame</h3><p>传递数组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">dates = pd.date_range(<span class="string">'20130101'</span>, periods=<span class="number">6</span>) <span class="comment"># 创建时间列表，作为下面的索引</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">DatetimeIndex(['2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04','2013-01-05', '2013-01-06'], dtype='datetime64[ns]', freq='D')</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line">df = pd.DataFrame(np.random.randn(<span class="number">6</span>, <span class="number">4</span>), index=dates, columns=list(<span class="string">'ABCD'</span>)) <span class="comment"># index是行索引，columns 是列索引</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">                   A         B         C         D</span></span><br><span class="line"><span class="string">2013-01-01  0.469112 -0.282863 -1.509059 -1.135632</span></span><br><span class="line"><span class="string">2013-01-02  1.212112 -0.173215  0.119209 -1.044236</span></span><br><span class="line"><span class="string">2013-01-03 -0.861849 -2.104569 -0.494929  1.071804</span></span><br><span class="line"><span class="string">2013-01-04  0.721555 -0.706771 -1.039575  0.271860</span></span><br><span class="line"><span class="string">2013-01-05 -0.424972  0.567020  0.276232 -1.087401</span></span><br><span class="line"><span class="string">2013-01-06 -0.673690  0.113648 -1.478427  0.524988</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
+<p>传递字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">df2 = pd.DataFrame(&#123;<span class="string">'A'</span>: <span class="number">1.</span>,</span><br><span class="line">               <span class="string">'B'</span>: pd.Timestamp(<span class="string">'20130102'</span>),</span><br><span class="line">               <span class="string">'C'</span>: pd.Series(<span class="number">1</span>, index=list(range(<span class="number">4</span>)), dtype=<span class="string">'float32'</span>),</span><br><span class="line">               <span class="string">'D'</span>: np.array([<span class="number">3</span>] * <span class="number">4</span>, dtype=<span class="string">'int32'</span>),</span><br><span class="line">               <span class="string">'E'</span>: pd.Categorical([<span class="string">"test"</span>, <span class="string">"train"</span>, <span class="string">"test"</span>, <span class="string">"train"</span>]),</span><br><span class="line">               <span class="string">'F'</span>: <span class="string">'foo'</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">     A          B    C  D      E    F</span></span><br><span class="line"><span class="string">0  1.0 2013-01-02  1.0  3   test  foo</span></span><br><span class="line"><span class="string">1  1.0 2013-01-02  1.0  3  train  foo</span></span><br><span class="line"><span class="string">2  1.0 2013-01-02  1.0  3   test  foo</span></span><br><span class="line"><span class="string">3  1.0 2013-01-02  1.0  3  train  foo</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
+<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><h4 id="查看部分内容"><a href="#查看部分内容" class="headerlink" title="查看部分内容"></a>查看部分内容</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.head()</span><br><span class="line">df.tail(3)</span><br></pre></td></tr></table></figure>
+<h4 id="查看索引"><a href="#查看索引" class="headerlink" title="查看索引"></a>查看索引</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.index     <span class="comment"># 行索引</span></span><br><span class="line">df.columns   <span class="comment"># 列索引</span></span><br></pre></td></tr></table></figure>
+<h4 id="转为-numpy"><a href="#转为-numpy" class="headerlink" title="转为 numpy"></a>转为 numpy</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">df.to_numpy()</span><br><span class="line">Out[17]: </span><br><span class="line">array([[ 0.4691, -0.2829, -1.5091, -1.1356],</span><br><span class="line">       [ 1.2121, -0.1732,  0.1192, -1.0442],</span><br><span class="line">       [-0.8618, -2.1046, -0.4949,  1.0718],</span><br><span class="line">       [ 0.7216, -0.7068, -1.0396,  0.2719],</span><br><span class="line">       [-0.425 ,  0.567 ,  0.2762, -1.0874],</span><br><span class="line">       [-0.6737,  0.1136, -1.4784,  0.525 ]])</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>  使用<a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_numpy.html#pandas.DataFrame.to_numpy" target="_blank" rel="noopener"><code>DataFrame.to_numpy()</code>](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_numpy.html#pandas.DataFrame.to_numpy) 有时代价会非常大，特别是当每列数据类型不同的时候，这是pandas 与 NumPy本质的不同造成的: <strong>整个NumPy数组只有一种数据类型 ,而 pandas 的每一列都可以是不同的数据类型</strong>. 当你使用<code>DataFrame.to_numpy()</code></a>, pandas 要选择一种能覆盖 DataFrame 中所有数据的 NumPy dtype ，最终往往是<code>object</code>, 这就需要将每个值都转为 Python object类型。</p>
+</blockquote>
+<h4 id="查看数值类型的列的统计信息"><a href="#查看数值类型的列的统计信息" class="headerlink" title="查看数值类型的列的统计信息"></a>查看数值类型的列的统计信息</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">df.describe()</span><br><span class="line">”“”</span><br><span class="line">count  <span class="number">6.000000</span>  <span class="number">6.000000</span>  <span class="number">6.000000</span>  <span class="number">6.000000</span></span><br><span class="line">mean   <span class="number">0.073711</span> <span class="number">-0.431125</span> <span class="number">-0.687758</span> <span class="number">-0.233103</span></span><br><span class="line">std    <span class="number">0.843157</span>  <span class="number">0.922818</span>  <span class="number">0.779887</span>  <span class="number">0.973118</span></span><br><span class="line">min   <span class="number">-0.861849</span> <span class="number">-2.104569</span> <span class="number">-1.509059</span> <span class="number">-1.135632</span></span><br><span class="line"><span class="number">25</span>%   <span class="number">-0.611510</span> <span class="number">-0.600794</span> <span class="number">-1.368714</span> <span class="number">-1.076610</span></span><br><span class="line"><span class="number">50</span>%    <span class="number">0.022070</span> <span class="number">-0.228039</span> <span class="number">-0.767252</span> <span class="number">-0.386188</span></span><br><span class="line"><span class="number">75</span>%    <span class="number">0.658444</span>  <span class="number">0.041933</span> <span class="number">-0.034326</span>  <span class="number">0.461706</span></span><br><span class="line">max    <span class="number">1.212112</span>  <span class="number">0.567020</span>  <span class="number">0.276232</span>  <span class="number">1.071804</span></span><br><span class="line">“”“</span><br></pre></td></tr></table></figure>
+<h4 id="转置"><a href="#转置" class="headerlink" title="转置"></a>转置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.T</span><br></pre></td></tr></table></figure>
+<h4 id="排序-1"><a href="#排序-1" class="headerlink" title="排序"></a>排序</h4><h5 id="索引排序"><a href="#索引排序" class="headerlink" title="索引排序"></a>索引排序</h5><p>默认是对行索引排序，axis=1 时对列索引排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">df.sort_index(axis=<span class="number">1</span>, ascending=<span class="keyword">False</span>) <span class="comment"># 列索引逆序</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">                   D         C         B         A</span></span><br><span class="line"><span class="string">2013-01-01 -1.135632 -1.509059 -0.282863  0.469112</span></span><br><span class="line"><span class="string">2013-01-02 -1.044236  0.119209 -0.173215  1.212112</span></span><br><span class="line"><span class="string">2013-01-03  1.071804 -0.494929 -2.104569 -0.861849</span></span><br><span class="line"><span class="string">2013-01-04  0.271860 -1.039575 -0.706771  0.721555</span></span><br><span class="line"><span class="string">2013-01-05 -1.087401  0.276232  0.567020 -0.424972</span></span><br><span class="line"><span class="string">2013-01-06  0.524988 -1.478427  0.113648 -0.673690</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
+<h5 id="内容排序"><a href="#内容排序" class="headerlink" title="内容排序"></a>内容排序</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">df.sort_values(by=<span class="string">'B'</span>)</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">                   A         B         C         D</span></span><br><span class="line"><span class="string">2013-01-03 -0.861849 -2.104569 -0.494929  1.071804</span></span><br><span class="line"><span class="string">2013-01-04  0.721555 -0.706771 -1.039575  0.271860</span></span><br><span class="line"><span class="string">2013-01-01  0.469112 -0.282863 -1.509059 -1.135632</span></span><br><span class="line"><span class="string">2013-01-02  1.212112 -0.173215  0.119209 -1.044236</span></span><br><span class="line"><span class="string">2013-01-06 -0.673690  0.113648 -1.478427  0.524988</span></span><br><span class="line"><span class="string">2013-01-05 -0.424972  0.567020  0.276232 -1.087401</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
+<h2 id="选择"><a href="#选择" class="headerlink" title="选择"></a>选择</h2><p>列选择</p>
+<p><code>df[&#39;A&#39;]</code>等价于 <code>df.A</code></p>
+<p>行切片</p>
+<p>​    <code>df[0:3]</code></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
       
       <div class="clearfix"></div>
     </div>
@@ -956,7 +1133,7 @@
   
     <div class="article-meta">
       <a href="/2019/08/13/linux-shell编程/" class="article-date">
-      <time datetime="2019-08-13T03:00:08.000Z" itemprop="datePublished">2019-08-13</time>
+      <time datetime="2019-08-12T16:00:00.000Z" itemprop="datePublished">2019-08-13</time>
 </a>
 
 
@@ -967,21 +1144,16 @@
       <input type="hidden" class="isFancy">
     
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/13/linux-shell编程/">linux shell编程</a>
-    </h1>
-  
-
-      </header>
-      
-    
     <div class="article-entry" itemprop="articleBody">
       
           
-              <excerpt in="" index="" |="" 首页摘要=""></excerpt>
+              <h4 id="title-linux-shell编程"><a href="#title-linux-shell编程" class="headerlink" title="title: linux shell编程"></a>title: linux shell编程</h4><p>tags:</p>
+<ul>
+<li>shell</li>
+<li>linux<br>categories:</li>
+<li>linux<br>date: 2019-08-13 11:00:08</li>
+</ul>
+<excerpt in="" index="" |="" 首页摘要=""></excerpt>
           
       
     </div>
@@ -989,16 +1161,8 @@
     <div class="article-info article-info-index">
       
       
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-    </div>
-
 
       
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
-    </div>
-
       
         <p class="article-more-link">
           <a href="/2019/08/13/linux-shell编程/#more">阅读全文 >></a>
@@ -1508,150 +1672,6 @@
 
 
   
-    <article id="post-notepad常用插件" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/12/12/notepad常用插件/" class="article-date">
-      <time datetime="2018-12-12T01:40:43.000Z" itemprop="datePublished">2018-12-12</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/12/notepad常用插件/">notepad常用插件与设置</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <excerpt in="" index="" |="" 首页摘要=""> 
-
-<ol>
-<li>notepad如何安装插件</li>
-<li>常用的插件推荐</li>
-<li>设置与配置信息备份</li>
-</ol></excerpt>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/编辑器/">编辑器</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notepad/">notepad++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编辑器/">编辑器</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2018/12/12/notepad常用插件/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-chrome截取整个网页" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/12/04/chrome截取整个网页/" class="article-date">
-      <time datetime="2018-12-04T08:39:59.000Z" itemprop="datePublished">2018-12-04</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/04/chrome截取整个网页/">chrome截取整个网页</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <excerpt in="" index="" |="" 首页摘要=""> 
-
-<p>浏览器原生功能实现滚动截屏，截取整个页面</p></excerpt>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/Chrome/">Chrome</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/截图/">截图</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/2018/12/04/chrome截取整个网页/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1663,7 +1683,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2017-2019 jizx
+                2017-2020 jizx
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>

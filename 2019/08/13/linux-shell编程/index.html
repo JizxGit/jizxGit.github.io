@@ -15,17 +15,20 @@
 
 
 
-<meta name="keywords" content="shell,linux">
+<meta name="description" content="title: linux shell编程tags:  shell linuxcategories: linuxdate: 2019-08-13 11:00:08">
+<meta name="keywords" content="java,python,linux,javascript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux shell编程">
+<meta property="og:title" content="玖玖的博客">
 <meta property="og:url" content="https://jizx.top/2019/08/13/linux-shell编程/index.html">
 <meta property="og:site_name" content="玖玖的博客">
+<meta property="og:description" content="title: linux shell编程tags:  shell linuxcategories: linuxdate: 2019-08-13 11:00:08">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jizx.top/2019/08/13/linux-shell编程/shell配置文件加载顺序1.png">
 <meta property="og:image" content="https://jizx.top/2019/08/13/linux-shell编程/shell配置文件加载顺序2.png">
-<meta property="og:updated_time" content="2019-10-30T02:53:12.212Z">
+<meta property="og:updated_time" content="2020-01-01T18:16:55.179Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux shell编程">
+<meta name="twitter:title" content="玖玖的博客">
+<meta name="twitter:description" content="title: linux shell编程tags:  shell linuxcategories: linuxdate: 2019-08-13 11:00:08">
 <meta name="twitter:image" content="https://jizx.top/2019/08/13/linux-shell编程/shell配置文件加载顺序1.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -58,7 +61,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>linux shell编程 | 玖玖的博客</title>
+<title>玖玖的博客</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -263,7 +266,7 @@
   
     <div class="article-meta">
       <a href="/2019/08/13/linux-shell编程/" class="article-date">
-      <time datetime="2019-08-13T03:00:08.000Z" itemprop="datePublished">2019-08-13</time>
+      <time datetime="2019-08-12T16:00:00.000Z" itemprop="datePublished">2019-08-13</time>
 </a>
 
 
@@ -274,36 +277,16 @@
       <input type="hidden" class="isFancy">
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      linux shell编程
-    </h1>
-  
-
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-    </div>
-
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shell/">shell</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
     <div class="article-entry" itemprop="articleBody">
       
           
-        <excerpt in="" index="" |="" 首页摘要=""> 
+        <h4 id="title-linux-shell编程"><a href="#title-linux-shell编程" class="headerlink" title="title: linux shell编程"></a>title: linux shell编程</h4><p>tags:</p>
+<ul>
+<li>shell</li>
+<li>linux<br>categories:</li>
+<li>linux<br>date: 2019-08-13 11:00:08</li>
+</ul>
+<excerpt in="" index="" |="" 首页摘要=""> 
 
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
@@ -494,13 +477,6 @@
 </blockquote>
 <p>TODO 没明白</p>
 <p>在命令行提示符下使用路径 ./ 运行命令的话，也会创建出子shell；要是运行命令的时候 不加入路径，就不会创建子shell。如果你使用的是内建的shell命令，并不会涉及子shell。 在命令行提示符下运行脚本时一定要留心！</p>
-<h4 id="数组变量"><a href="#数组变量" class="headerlink" title="数组变量"></a>数组变量</h4><p>给某个环境变量设置多个值，可以把值放在括号里，值与值之间用空格分隔。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ mytest=(one two three four five)</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$mytest</span>      <span class="comment"># 打印数组只会显示第一个值</span></span><br><span class="line">one   </span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;mytest[*]&#125;</span> <span class="comment"># 显示整个数组变量，用星号作为通配符放在索引值的位置。</span></span><br><span class="line">one two three four five</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;mytest[2]&#125;</span> <span class="comment"># 根据索引取值</span></span><br><span class="line">three</span><br></pre></td></tr></table></figure>
-<p>unset命令删除数组中的某个值，但是要小心，这可能会有点复杂。看下面的例子。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">unset</span> mytest[2]  </span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> &#123;mytest[*]&#125;  <span class="comment"># 遍历时会跳过被删除的索引位置</span></span><br><span class="line">one two four five </span><br><span class="line"> </span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;mytest[2]&#125;</span> <span class="comment"># 但是该索引位置还占用着</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> &#123;mytest[3]&#125; </span><br><span class="line">four</span><br></pre></td></tr></table></figure>
-<p>这个例子用unset命令删除在索引值为2的位置上的值。显示整个数组时，看起来像是索引 里面已经没这个索引了。但当专门显示索引值为2的位置上的值时，就能看到这个位置是空的。 最后，可以在unset命令后跟上数组名来删除整个数组。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ unset mytest   </span><br><span class="line">$ echo &#123;mytest[*]&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="变量展开TODO"><a href="#变量展开TODO" class="headerlink" title="变量展开TODO"></a>变量展开TODO</h4><p>TODO</p>
 <h4 id="变量截取"><a href="#变量截取" class="headerlink" title="变量截取"></a>变量截取</h4><p>假设我们定义了一个变量为：</p>
 <figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">代码如下:</span><br><span class="line">file=<span class="regexp">/dir1/</span>dir2/dir3/my.file.txt</span><br></pre></td></tr></table></figure>
 <p>可以用<code>${ }</code>分别替换得到不同的值：</p>
@@ -510,6 +486,53 @@
 <p>也可以对变量值里的字符串作替换：</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">代码如下<span class="symbol">:</span></span><br><span class="line">$&#123;file/dir/path&#125;：将第一个dir 替换为path：/path1/dir2/dir3/my.file.txt</span><br><span class="line">$&#123;file/<span class="regexp">/dir/path</span>&#125;：将全部dir 替换为 path：/path1/path2/path3/my.file.txt</span><br><span class="line"></span><br><span class="line">利用 $&#123; &#125; 还可针对不同的变数状态赋值(沒设定、空值、非空值)：</span><br><span class="line"></span><br><span class="line">$&#123;file-my.file.txt&#125; ：假如 $file 沒有设定，則使用 my.file.txt 作传回值。(空值及非空值時不作处理) </span><br><span class="line">$&#123;<span class="symbol">file:</span>-my.file.txt&#125; ：假如 $file 沒有設定或為空值，則使用 my.file.txt 作傳回值。 (非空值時不作处理)</span><br><span class="line">$&#123;file+my.file.txt&#125; ：假如 $file 設為空值或非空值，均使用 my.file.txt 作傳回值。(沒設定時不作处理)</span><br><span class="line">$&#123;<span class="symbol">file:</span>+my.file.txt&#125; ：若 $file 為非空值，則使用 my.file.txt 作傳回值。 (沒設定及空值時不作处理)</span><br><span class="line">$&#123;file=my.file.txt&#125; ：若 $file 沒設定，則使用 my.file.txt 作傳回值，同時將 $file 賦值為 my.file.txt 。 (空值及非空值時不作处理)</span><br><span class="line">$&#123;<span class="symbol">file:</span>=my.file.txt&#125; ：若 $file 沒設定或為空值，則使用 my.file.txt 作傳回值，同時將 $file 賦值為my.file.txt 。 (非空值時不作处理)</span><br><span class="line">$&#123;file?my.file.txt&#125; ：若 $file 沒設定，則將 my.file.txt 輸出至 STDERR。 (空值及非空值時不作处理)</span><br><span class="line"></span><br><span class="line">$&#123;<span class="symbol">file:</span>?my.file.txt&#125; ：若 $file 没设定或为空值，则将 my.file.txt 输出至 STDERR。 (非空值時不作处理)</span><br><span class="line">$&#123;<span class="comment">#var&#125; 可计算出变量值的长度：</span></span><br><span class="line"></span><br><span class="line">$&#123;<span class="comment">#file&#125; 可得到 27 ，因为/dir1/dir2/dir3/my.file.txt 是27个字节</span></span><br></pre></td></tr></table></figure>
 <p><a href="https://www.jb51.net/article/64804.htm" target="_blank" rel="noopener">参考来源</a></p>
+<h3 id="数组变量"><a href="#数组变量" class="headerlink" title="数组变量"></a>数组变量</h3><ul>
+<li>Bash Shell 只支持一维数组（不支持多维数组）。</li>
+<li>初始化时不需要定义数组大小（与 PHP 类似）。</li>
+<li>数组元素的下标由0开始。</li>
+</ul>
+<h4 id="数组定义"><a href="#数组定义" class="headerlink" title="数组定义"></a>数组定义</h4><p>Shell 数组用括号来表示，元素用”空格”符号分割开，语法格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array_name=(value1 value2 … valuen)</span><br></pre></td></tr></table></figure>
+<p>例如：my_array=(A B “C” D)</p>
+<p>我们也可以使用下标来定义数组：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">array_name[0]=value0</span><br><span class="line">array_name[1]=value1</span><br><span class="line">array_name[2]=value2</span><br></pre></td></tr></table></figure>
+<h4 id="读取数组"><a href="#读取数组" class="headerlink" title="读取数组"></a>读取数组</h4><p>这样是行不通的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$mytest</span>      <span class="comment"># 打印数组只会显示第一个值</span></span></span><br><span class="line">one</span><br></pre></td></tr></table></figure>
+<p>一般格式是：<code>${array_name[index]}</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">my_array=(A B "C" D)</span><br><span class="line">echo "第一个元素为: $&#123;my_array[0]&#125;"</span><br><span class="line">echo "第二个元素为: $&#123;my_array[1]&#125;"</span><br><span class="line">echo "第三个元素为: $&#123;my_array[2]&#125;"</span><br><span class="line">echo "第四个元素为: $&#123;my_array[3]&#125;"</span><br></pre></td></tr></table></figure>
+<p><strong>获取数组中的所有元素</strong></p>
+<p>使用<code>@</code> 或 <code>*</code> 可以获取数组中的所有元素，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">my_array=(A B "C" D)</span><br><span class="line">echo "数组的元素为: $&#123;my_array[*]&#125;"</span><br><span class="line">echo "数组的元素为: $&#123;my_array[@]&#125;"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 数组的元素为: A B C D 数组的元素为: A B C D</span></span><br></pre></td></tr></table></figure>
+<p><strong>获取数组的长度</strong></p>
+<p>获取数组长度的方法与获取字符串长度的方法相同，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">my_array=(A B "C" D)</span><br><span class="line">echo "数组元素个数为: $&#123;#my_array[*]&#125;"</span><br><span class="line">echo "数组元素个数为: $&#123;#my_array[@]&#125;"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 数组元素个数为: 4 数组元素个数为: 4</span></span><br></pre></td></tr></table></figure>
+<h4 id="删除某个值"><a href="#删除某个值" class="headerlink" title="删除某个值"></a>删除某个值</h4><p>unset命令删除数组中的某个值，但是要小心，这可能会有点复杂。看下面的例子。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">unset</span> mytest[2]  </span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> &#123;mytest[*]&#125;  <span class="comment"># 遍历时会跳过被删除的索引位置</span></span><br><span class="line">one two four five </span><br><span class="line"> </span><br><span class="line">$ <span class="built_in">echo</span> <span class="variable">$&#123;mytest[2]&#125;</span> <span class="comment"># 但是该索引位置还占用着</span></span><br><span class="line"></span><br><span class="line">$ <span class="built_in">echo</span> &#123;mytest[3]&#125; </span><br><span class="line">four</span><br></pre></td></tr></table></figure>
+<p>这个例子用unset命令删除在索引值为2的位置上的值。显示整个数组时，看起来像是索引 里面已经没这个索引了。但当专门显示索引值为2的位置上的值时，就能看到这个位置是空的。 最后，可以在unset命令后跟上数组名来删除整个数组。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">unset</span> mytest   </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> &#123;mytest[*]&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="数组遍历"><a href="#数组遍历" class="headerlink" title="数组遍历"></a>数组遍历</h4><p>首先创建一个数组 array=( A B C D 1 2 3 4)</p>
+<h5 id="标准的for循环"><a href="#标准的for循环" class="headerlink" title="标准的for循环"></a><strong>标准的for循环</strong></h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(( i=0;i&lt;$&#123;#array[@]&#125;;i++)) #$&#123;#array[@]&#125;获取数组长度用于循环</span><br><span class="line">do    </span><br><span class="line">	echo $&#123;array[i]&#125;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h5 id="for-…-in"><a href="#for-…-in" class="headerlink" title="for … in"></a><strong>for … in</strong></h5><p>不带数组下标</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for element in $&#123;array[@]&#125;    #也可以写成for element in $&#123;array[*]&#125;</span><br><span class="line">do</span><br><span class="line">    echo $element</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p>带数组下标</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in $&#123;!array[@]&#125;  </span><br><span class="line">do   </span><br><span class="line">   echo $i $&#123;array[$i]&#125;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h5 id="while循环法"><a href="#while循环法" class="headerlink" title="while循环法"></a><strong>while循环法</strong></h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">i=0  </span><br><span class="line">while [ $i -lt $&#123;#array[@]&#125; ]    #当变量（下标）小于数组长度时进入循环体</span><br><span class="line">do  </span><br><span class="line">    echo $&#123;array[$i]&#125;   #按下标打印数组元素</span><br><span class="line">    let i++  </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="shell-展开"><a href="#shell-展开" class="headerlink" title="shell 展开"></a>shell 展开</h3><p>Bash 有七种扩展格式。本文只介绍其中五种：<code>~</code> 扩展、算术扩展、路径名称扩展、大括号扩展和命令替换。</p>
+<h4 id="花括号"><a href="#花括号" class="headerlink" title="{}花括号"></a><code>{}</code>花括号</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"Hello "</span>&#123;David,Jen,Rikki,Jason&#125;.</span></span><br><span class="line">Hello David. Hello Jen. Hello Rikki. Hello Jason.</span><br></pre></td></tr></table></figure>
+<h4 id="扩展"><a href="#扩展" class="headerlink" title="~扩展"></a><code>~</code>扩展</h4><p>Bash shell 把这个快捷方式展开成用户的完整的家目录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> ~</span></span><br><span class="line">/home/student</span><br></pre></td></tr></table></figure>
+<h4 id="路径名称扩展"><a href="#路径名称扩展" class="headerlink" title="路径名称扩展"></a>路径名称扩展</h4><p>路径名称扩展是展开文件通配模式为匹配该模式的完整路径名称的另一种说法，匹配字符使用 <code>?</code> 和 <code>*</code></p>
+<ul>
+<li><p><code>?</code> — 匹配字符串中特定位置的一个任意字符</p>
+</li>
+<li><p><code>*</code> — 匹配字符串中特定位置的 0 个或多个任意字符</p>
+</li>
+</ul>
+<h4 id="命令替换"><a href="#命令替换" class="headerlink" title="命令替换"></a>命令替换</h4><p>命令替换是让一个命令的标准输出数据流被当做参数传给另一个命令的扩展形式。</p>
+<p>命令替换有两种格式：<code>command</code> 和 <code>$(command)</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"Todays date is <span class="variable">$(date)</span>"</span></span></span><br><span class="line">Todays date is Sun Apr  7 14:42:59 EDT 2019</span><br></pre></td></tr></table></figure>
+<h4 id="算术扩展"><a href="#算术扩展" class="headerlink" title="算术扩展"></a>算术扩展</h4><p>数字扩展的语法是 <code>$((arithmetic-expression))</code> ，分别用两个括号来打开和关闭表达式。算术扩展在 shell 程序或脚本中<strong>类似命令替换</strong>；表达式结算后的结果替换了表达式，用于 shell 后续的计算。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> Var1=5 ; Var2=7 ; Var3=$((Var1*Var2)) ; <span class="built_in">echo</span> <span class="string">"Var 3 = <span class="variable">$Var3</span>"</span></span></span><br><span class="line">Var 3 = 35</span><br></pre></td></tr></table></figure>
 <h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><p>覆盖原本文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 正常信息写入</span><br><span class="line">2&gt; 错误信息写入</span><br><span class="line">&amp;&gt; 不论是正确还是错误信息，都写入文件中</span><br></pre></td></tr></table></figure>
 <p>追加文本文件，多一个<code>&gt;</code></p>
@@ -673,7 +696,16 @@
 </ul>
 <p>你还可以使用网站<a href="https://www.shellcheck.net/" target="_blank" rel="noopener">ShellCheck</a>来帮助你检查你的脚本。</p>
 <p>转至：<a href="https://coolshell.cn/articles/19219.html" target="_blank" rel="noopener">https://coolshell.cn/articles/19219.html</a></p>
-<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><h4 id="if-else"><a href="#if-else" class="headerlink" title="if else"></a>if else</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if command </span><br><span class="line">then</span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><h4 id="逻辑符号"><a href="#逻辑符号" class="headerlink" title="逻辑符号"></a>逻辑符号</h4><p><code>command1 &amp;&amp; command2</code> ：如果 command1 执行成功，那么接着执行 command2。如果 command1 失败，就跳过 command2。</p>
+<p><code>command1 || command2</code>：如果 command1 失败，执行 command2。隐藏的逻辑是，如果 command1 成功，跳过 command2。</p>
+<p><code>&amp;&amp;</code> 和 <code>||</code> 两种运算符结合起来才能发挥它们的最大功效</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">前置 commands ; command1 &amp;&amp; command2 || command3 ; 跟随 commands</span><br></pre></td></tr></table></figure>
+<p>语法解释：假如 command1 退出时返回码为零，就执行 command2，否则执行 command3。<strong>类似于 if-else的逻辑</strong>。</p>
+<p>用具体代码试试，在 root 的 home 目录下测试：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@studentvm1 ~]$ Dir=/root/testdir ; mkdir $Dir &amp;&amp; cd $Dir || echo "$Dir was not created."mkdir: cannot create directory '/root/testdir': Permission denied/root/testdir was not created.</span><br></pre></td></tr></table></figure>
+<p>现在在你的家目录执行，你将会有权限创建这个目录了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[student@studentvm1 ~]$ Dir=~/testdir ; mkdir $Dir &amp;&amp; cd $Dir || echo "$Dir was not created."</span><br></pre></td></tr></table></figure>
+<h4 id="if-else"><a href="#if-else" class="headerlink" title="if else"></a>if else</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if command </span><br><span class="line">then</span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 <p>或者</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 推荐</span><br><span class="line">if command; then </span><br><span class="line">    commands</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -683,7 +715,7 @@
 <p><strong>if else</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if command</span><br><span class="line">then</span><br><span class="line">    commands </span><br><span class="line">else</span><br><span class="line">    commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 <p><strong>if elif</strong> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if command1 then</span><br><span class="line">    commands </span><br><span class="line">elif command2</span><br><span class="line">then</span><br><span class="line">    more commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if command1 </span><br><span class="line">then</span><br><span class="line">    commands </span><br><span class="line">elif command2</span><br><span class="line">then</span><br><span class="line">    more commands </span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>  注意：记住， 在 elif 语句中， 紧跟其后的 else 语句属于 elif 代码块。 它们并不属于之前的 if-then 代码块。</p>
 </blockquote>
@@ -705,10 +737,13 @@
 <li>字符串比较</li>
 <li>文件比较</li>
 </ol>
-<h6 id="整数比较"><a href="#整数比较" class="headerlink" title="整数比较"></a><em>整数比较</em></h6><p>我们不能在 test命令中使用浮点值</p>
+<h6 id="整数比较"><a href="#整数比较" class="headerlink" title="整数比较"></a>整数比较</h6><p>我们不能在 test命令中使用浮点值</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n1 -eq n2    # 检查n1是否与n2相等 </span><br><span class="line">n1 -ge n2    # 检查n1是否大于或等于n2 </span><br><span class="line">n1 -gt n2    # 检查n1是否大于n2 </span><br><span class="line">n1 -le n2    # 检查n1是否小于或等于n2 </span><br><span class="line">n1 -lt n2    # 检查n1是否小于n2 </span><br><span class="line">n1 -ne n2    # 检查n1是否不等于n2</span><br></pre></td></tr></table></figure>
 <p>test命令只能在比较中使用简单的 算术操作。双括号命令提供了更多的数学符号。请看后面内容。</p>
-<h6 id="字符串比较-有坑"><a href="#字符串比较-有坑" class="headerlink" title="字符串比较(有坑)"></a><em>字符串比较(有坑)</em></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">str1 = str2   # 检查str1是否和str2相同 </span><br><span class="line">str1 != str2  # 检查str1是否和str2不同 </span><br><span class="line">str1 \&lt; str2   # 检查str1是否比str2小，注意一定要转义</span><br><span class="line">str1 \&gt; str2   # 检查str1是否比str2大，注意一定要转义</span><br><span class="line">-n str1       # 检查str1的长度是否非0</span><br><span class="line">-z str1       # 检查str1的长度是否为0，未在shell脚本中定义过，所以它的字符串长度仍然 为0，</span><br></pre></td></tr></table></figure>
+<h6 id="字符串比较-有坑"><a href="#字符串比较-有坑" class="headerlink" title="字符串比较(有坑)"></a>字符串比较(有坑)</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">str1 = str2   # 检查str1是否和str2相同 </span><br><span class="line">str1 != str2  # 检查str1是否和str2不同 </span><br><span class="line">str1 \&lt; str2   # 检查str1是否比str2小，注意一定要转义</span><br><span class="line">str1 \&gt; str2   # 检查str1是否比str2大，注意一定要转义</span><br><span class="line">-n str1       # 检查str1的长度是否非0</span><br><span class="line">-z str1       # 检查str1的长度是否为0，未在shell脚本中定义过，所以它的字符串长度仍然 为0</span><br></pre></td></tr></table></figure>
+<p><strong>字符串长度比较</strong></p>
+<p>计算字符串的长度没有简单的方法。有很多种方法可以计算，但是我认为使用 <code>expr</code>（求值表达式）命令是相对最简单的一种。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyVar="How long is this?" ; expr length "$MyVar"    # 注意 mac 中并没有 length 这个命令</span><br></pre></td></tr></table></figure>
 <p>这里会出现经常困扰shell程序员的问题：</p>
 <ul>
 <li><p>大于号和小于号必须转义，否则shell会把它们当作<strong>重定向符号</strong>，把字符串值当作文件名；</p>
@@ -721,7 +756,142 @@
 <li><p>未在shell脚本中定义过，<code>-z</code>认为它的字符串长度为0</p>
 </li>
 </ul>
-<h6 id="文件比较"><a href="#文件比较" class="headerlink" title="文件比较"></a><em>文件比较</em></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">-e file               # 是否存在，可用于文件和目录</span><br><span class="line">-d file               # 是否存在并是一个目录</span><br><span class="line">-f file               # 是否存在并是一个文件</span><br><span class="line">-s file               # 是否存在并非空</span><br><span class="line">-r file               # 是否存在并可读</span><br><span class="line">-w file               # 是否存在并可写</span><br><span class="line">-x file               # 是否存在并可执行</span><br><span class="line">-O file               # 是否存在并属当前用户所有</span><br><span class="line">-G file               # 是否存在并且默认组与当前用户相同</span><br><span class="line"></span><br><span class="line"># 在你尝试使用-nt或 -ot比较文件之前，必须先确认文件是存在的。</span><br><span class="line">file1 -nt file2       # 检查file1是否比file2新</span><br><span class="line">file1 -ot file2       # 检查file1是否比file2旧</span><br></pre></td></tr></table></figure>
+<h6 id="文件比较"><a href="#文件比较" class="headerlink" title="文件比较"></a>文件比较</h6><table>
+<thead>
+<tr>
+<th style="text-align:left">操作符</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>-a filename</code></td>
+<td style="text-align:left">如果文件存在，返回真值；文件可以为空也可以有内容，但是只要它存在，就返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-b filename</code></td>
+<td style="text-align:left">如果文件存在且是一个块设备，如 <code>/dev/sda</code> 或 <code>/dev/sda1</code>，则返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-c filename</code></td>
+<td style="text-align:left">如果文件存在且是一个字符设备，如 <code>/dev/TTY1</code>，则返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-d filename</code></td>
+<td style="text-align:left">如果文件存在且是一个目录，返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-e filename</code></td>
+<td style="text-align:left">如果文件存在，返回真值；与上面的 <code>-a</code> 相同，可用于文件和目录</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-f filename</code></td>
+<td style="text-align:left">如果文件存在且是一个一般文件，不是目录、设备文件或链接等的其他的文件，则返回 真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-g filename</code></td>
+<td style="text-align:left">如果文件存在且 <code>SETGID</code> 标记被设置在其上，返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-h filename</code></td>
+<td style="text-align:left">如果文件存在且是一个符号链接，则返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-k filename</code></td>
+<td style="text-align:left">如果文件存在且粘滞位已设置，则返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-p filename</code></td>
+<td style="text-align:left">如果文件存在且是一个命名的管道（FIFO），返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-r filename</code></td>
+<td style="text-align:left">如果文件存在且有可读权限（它的可读位被设置），返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-s filename</code></td>
+<td style="text-align:left">如果文件存在且大小大于 0，返回真值（存在并非空）；如果一个文件存在但大小为 0，则返回假值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-t fd</code></td>
+<td style="text-align:left">如果文件描述符 <code>fd</code> 被打开且被关联到一个终端设备上，返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-u filename</code></td>
+<td style="text-align:left">如果文件存在且它的 <code>SETUID</code> 位被设置，返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-w filename</code></td>
+<td style="text-align:left">如果文件存在且有可写权限，返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-x filename</code></td>
+<td style="text-align:left">如果文件存在且有可执行权限，返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-G filename</code></td>
+<td style="text-align:left">如果文件存在且文件的组 ID 与当前用户相同，返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-L filename</code></td>
+<td style="text-align:left">如果文件存在且是一个符号链接，返回真值（同 <code>-h</code>）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-N filename</code></td>
+<td style="text-align:left">如果文件存在且从文件上一次被读取后文件被修改过，返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-O filename</code></td>
+<td style="text-align:left">如果文件存在且你是文件的拥有者，返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-S filename</code></td>
+<td style="text-align:left">如果文件存在且文件是套接字，返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">在你尝试使用<code>ef</code>、<code>-nt</code>或 <code>-ot</code>比较文件之前，必须先确认文件是存在的。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>file1 -ef file2</code></td>
+<td style="text-align:left">如果文件 <code>file1</code> 和文件 <code>file2</code> 指向同一设备的同一 INODE 号，返回真值（即硬链接）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>file1 -nt file2</code></td>
+<td style="text-align:left">如果文件 <code>file1</code> 比 <code>file2</code> 新（根据修改日期），或 <code>file1</code> 存在而 <code>file2</code> 不存在，返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>file1 -ot file2</code></td>
+<td style="text-align:left">如果文件 <code>file1</code> 比 <code>file2</code> 旧（根据修改日期），或 <code>file1</code> 不存在而 <code>file2</code> 存在</td>
+</tr>
+</tbody>
+</table>
+<p>判断文件存在并不为空的脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">File="TestFile1"</span><br><span class="line">echo "This is $File" &gt; $File</span><br><span class="line">if [ -s $File ]</span><br><span class="line">   then</span><br><span class="line">   echo "$File exists and contains data."</span><br><span class="line">elif [ -e $File ]</span><br><span class="line">   then</span><br><span class="line">   echo "$File exists and is empty."</span><br><span class="line">else</span><br><span class="line">   echo "$File does not exist."</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h6 id="其他杂项"><a href="#其他杂项" class="headerlink" title="其他杂项"></a>其他杂项</h6><p>这些杂项操作符展示一个 shell 选项是否被设置，或一个 shell 变量是否有值，但是它不显示变量的值，只显示它是否有值。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">操作符</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>-o optname</code></td>
+<td style="text-align:left">如果一个 shell 选项 <code>optname</code> 是启用的（查看内建在 Bash 手册页中的 set <code>-o</code> 选项描述下面的选项列表），则返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-v varname</code></td>
+<td style="text-align:left">如果 shell 变量 <code>varname</code> 被设置了值（被赋予了值），则返回真值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>-R varname</code></td>
+<td style="text-align:left">如果一个 shell 变量 <code>varname</code> 被设置了值且是一个名字引用，则返回真值</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://linux.cn/article-11687-1.html" target="_blank" rel="noopener">https://linux.cn/article-11687-1.html</a></p>
 <h5 id="布尔逻辑"><a href="#布尔逻辑" class="headerlink" title="布尔逻辑"></a>布尔逻辑</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if-then语句允许你使用布尔逻辑来组合测试。有两种布尔运算符可用：  </span><br><span class="line">[ condition1 ] &amp;&amp; [ condition2 ] </span><br><span class="line">[ condition1 ] || [ condition2 ]</span><br></pre></td></tr></table></figure>
 <p>例子</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash </span></span><br><span class="line"><span class="comment"># testing compound comparisons </span></span><br><span class="line"><span class="comment"># if [ -d $HOME ] &amp;&amp; [ -w $HOME/testing ] </span></span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"The file exists and you can write to it"</span> </span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"I cannot write to the file"</span> </span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
@@ -828,8 +998,8 @@
 <p>重定向到文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> /home/rich/* </span><br><span class="line"><span class="keyword">do</span> </span><br><span class="line">    <span class="keyword">if</span> [ -d <span class="string">"<span class="variable">$file</span>"</span> ] </span><br><span class="line">    <span class="keyword">then</span> </span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$file</span> is a directory"</span> </span><br><span class="line">    <span class="keyword">elif</span> </span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"<span class="variable">$file</span> is a file"</span> </span><br><span class="line">    <span class="keyword">fi</span> </span><br><span class="line"><span class="keyword">done</span> &gt; output.txt  <span class="comment"># 重定向到文件</span></span><br></pre></td></tr></table></figure>
 <p>从文件中循环读取</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash </span></span><br><span class="line"><span class="comment"># process new user accounts</span></span><br><span class="line"></span><br><span class="line">input=<span class="string">"users.csv"</span> </span><br><span class="line"><span class="keyword">while</span> IFS=<span class="string">','</span> <span class="built_in">read</span> -r userid name </span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"adding <span class="variable">$userid</span>"</span></span><br><span class="line">    useradd -c <span class="string">"<span class="variable">$name</span>"</span> -m <span class="variable">$userid</span> </span><br><span class="line"><span class="keyword">done</span> &lt; <span class="string">"<span class="variable">$input</span>"</span></span><br></pre></td></tr></table></figure>
-<p>                                                                  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash </span></span><br><span class="line"><span class="comment"># process new user accounts</span></span><br><span class="line"></span><br><span class="line">input=<span class="string">"users.csv"</span> </span><br><span class="line"><span class="keyword">while</span> IFS=<span class="string">','</span> <span class="built_in">read</span> -r userid name </span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"adding <span class="variable">$userid</span>"</span></span><br><span class="line">    useradd -c <span class="string">"<span class="variable">$name</span>"</span> -m <span class="variable">$userid</span> </span><br><span class="line"><span class="keyword">done</span> &lt; <span class="string">"<span class="variable">$input</span>"</span></span><br></pre></td></tr></table></figure>
+<p>​                                                   </p>
 <h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><h4 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h4><p>位置参数变量是标准的数字：<code>$0</code>是程序名，<code>$1</code>是第 一个参数，<code>$2</code>是第二个参数，依次类推，直到第九个参数<code>$9</code>。</p>
 <h4 id="常用的转义字符"><a href="#常用的转义字符" class="headerlink" title="常用的转义字符"></a>常用的转义字符</h4><p>4个最常用的转义字符如下所示。</p>
 <blockquote>
@@ -862,12 +1032,12 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/08/13/linux-shell编程/">linux shell编程</a></p>
+        <p><span>本文标题:</span><a href="/2019/08/13/linux-shell编程/"></a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
-        <p><span>发布时间:</span>2019-08-13, 11:00:08</p>
-        <p><span>最后更新:</span>2019-10-30, 10:53:12</p>
+        <p><span>发布时间:</span>2019-08-13, 00:00:00</p>
+        <p><span>最后更新:</span>2020-01-02, 02:16:55</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/08/13/linux-shell编程/" title="linux shell编程">https://jizx.top/2019/08/13/linux-shell编程/</a>
+            <span>原始链接:</span><a class="post-url" href="/2019/08/13/linux-shell编程/" title="">https://jizx.top/2019/08/13/linux-shell编程/</a>
             <span class="copy-path" data-clipboard-text="原文: https://jizx.top/2019/08/13/linux-shell编程/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -901,9 +1071,9 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本知识"><span class="toc-text">基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Shell-进程"><span class="toc-text">Shell 进程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#父子进程"><span class="toc-text">父子进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程列表"><span class="toc-text">进程列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#高效子进程"><span class="toc-text">高效子进程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#后台模式"><span class="toc-text">后台模式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#协程"><span class="toc-text">协程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shell-内建命令"><span class="toc-text">shell 内建命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#外部命令"><span class="toc-text">外部命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内建命令"><span class="toc-text">内建命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#内建命令之-history"><span class="toc-text">内建命令之 history</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内建命令之-alias"><span class="toc-text">内建命令之 alias</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shell-配置文件-TODO"><span class="toc-text">shell 配置文件(TODO)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#判断-shell-类型"><span class="toc-text">判断 shell 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#登录-shell"><span class="toc-text">登录 shell</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#交互式-shell-进程"><span class="toc-text">交互式 shell 进程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#非交互式-shell"><span class="toc-text">非交互式 shell</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置文件加载顺序"><span class="toc-text">配置文件加载顺序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境变量"><span class="toc-text">环境变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设置局部变量"><span class="toc-text">设置局部变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置全局变量"><span class="toc-text">设置全局变量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shell-编程"><span class="toc-text">shell 编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建脚本"><span class="toc-text">创建脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打印"><span class="toc-text">打印</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#环境变量-1"><span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用户变量"><span class="toc-text">用户变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#只读变量"><span class="toc-text">只读变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#字符串的3种形式"><span class="toc-text">字符串的3种形式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#变量-字符串-拼接"><span class="toc-text">变量(字符串)拼接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#字符串的长度"><span class="toc-text">字符串的长度</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除变量"><span class="toc-text">删除变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#变量前的-符号"><span class="toc-text">变量前的 $ 符号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#环境变量持久化"><span class="toc-text">环境变量持久化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令输出赋给变量、命令替换"><span class="toc-text">命令输出赋给变量、命令替换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组变量"><span class="toc-text">数组变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#变量展开TODO"><span class="toc-text">变量展开TODO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#变量截取"><span class="toc-text">变量截取</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重定向"><span class="toc-text">重定向</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重定向绑定-gt-amp"><span class="toc-text">重定向绑定&gt;&amp;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数学运算"><span class="toc-text">数学运算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#expr-不推荐"><span class="toc-text">expr (不推荐)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方括号-只支持整数"><span class="toc-text">方括号(只支持整数)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bc计算器-浮点数计算"><span class="toc-text">bc计算器(浮点数计算)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#圆括号"><span class="toc-text">圆括号</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#退出脚本"><span class="toc-text">退出脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#脚本的健壮性"><span class="toc-text">脚本的健壮性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流程控制"><span class="toc-text">流程控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#if-else"><span class="toc-text">if else</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#test-命令"><span class="toc-text">test 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#推荐写法"><span class="toc-text">推荐写法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#条件测试"><span class="toc-text">条件测试</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#整数比较"><span class="toc-text">整数比较</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#字符串比较-有坑"><span class="toc-text">字符串比较(有坑)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#文件比较"><span class="toc-text">文件比较</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#布尔逻辑"><span class="toc-text">布尔逻辑</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#双括号与双中括号-进阶"><span class="toc-text">双括号与双中括号(进阶)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#数字高级比较-（双括号）"><span class="toc-text">数字高级比较 （双括号）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#字符串高级比较（双中括号）"><span class="toc-text">字符串高级比较（双中括号）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#逻辑运算"><span class="toc-text">逻辑运算</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#支持正则表达式"><span class="toc-text">[[ ]] 支持正则表达式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#swtich-case"><span class="toc-text">swtich case</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for（Python-风格）"><span class="toc-text">for（Python 风格）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#字段分隔符"><span class="toc-text">字段分隔符</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#遍历目录"><span class="toc-text">遍历目录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c语言风格的-for"><span class="toc-text">c语言风格的 for</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#while-与-until"><span class="toc-text">while 与 until</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#break-与-continue"><span class="toc-text">break 与 continue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#循环的重定向"><span class="toc-text">循环的重定向</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tips"><span class="toc-text">Tips</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命令行参数"><span class="toc-text">命令行参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用的转义字符"><span class="toc-text">常用的转义字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取文件的绝对路径"><span class="toc-text">获取文件的绝对路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#检查命令是否存在"><span class="toc-text">检查命令是否存在</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最佳实践"><span class="toc-text">最佳实践</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#title-linux-shell编程"><span class="toc-text">title: linux shell编程</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#基本知识"><span class="toc-text">基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Shell-进程"><span class="toc-text">Shell 进程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#父子进程"><span class="toc-text">父子进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#进程列表"><span class="toc-text">进程列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#高效子进程"><span class="toc-text">高效子进程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#后台模式"><span class="toc-text">后台模式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#协程"><span class="toc-text">协程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shell-内建命令"><span class="toc-text">shell 内建命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#外部命令"><span class="toc-text">外部命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内建命令"><span class="toc-text">内建命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#内建命令之-history"><span class="toc-text">内建命令之 history</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#内建命令之-alias"><span class="toc-text">内建命令之 alias</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shell-配置文件-TODO"><span class="toc-text">shell 配置文件(TODO)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#判断-shell-类型"><span class="toc-text">判断 shell 类型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#登录-shell"><span class="toc-text">登录 shell</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#交互式-shell-进程"><span class="toc-text">交互式 shell 进程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#非交互式-shell"><span class="toc-text">非交互式 shell</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置文件加载顺序"><span class="toc-text">配置文件加载顺序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#环境变量"><span class="toc-text">环境变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设置局部变量"><span class="toc-text">设置局部变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置全局变量"><span class="toc-text">设置全局变量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shell-编程"><span class="toc-text">shell 编程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建脚本"><span class="toc-text">创建脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打印"><span class="toc-text">打印</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#环境变量-1"><span class="toc-text">环境变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用户变量"><span class="toc-text">用户变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#只读变量"><span class="toc-text">只读变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#字符串的3种形式"><span class="toc-text">字符串的3种形式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#变量-字符串-拼接"><span class="toc-text">变量(字符串)拼接</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#字符串的长度"><span class="toc-text">字符串的长度</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除变量"><span class="toc-text">删除变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#变量前的-符号"><span class="toc-text">变量前的 $ 符号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#环境变量持久化"><span class="toc-text">环境变量持久化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令输出赋给变量、命令替换"><span class="toc-text">命令输出赋给变量、命令替换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#变量截取"><span class="toc-text">变量截取</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组变量"><span class="toc-text">数组变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数组定义"><span class="toc-text">数组定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#读取数组"><span class="toc-text">读取数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除某个值"><span class="toc-text">删除某个值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数组遍历"><span class="toc-text">数组遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#标准的for循环"><span class="toc-text">标准的for循环</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#for-…-in"><span class="toc-text">for … in</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#while循环法"><span class="toc-text">while循环法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shell-展开"><span class="toc-text">shell 展开</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#花括号"><span class="toc-text">{}花括号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#扩展"><span class="toc-text">~扩展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#路径名称扩展"><span class="toc-text">路径名称扩展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#命令替换"><span class="toc-text">命令替换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#算术扩展"><span class="toc-text">算术扩展</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重定向"><span class="toc-text">重定向</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#输出"><span class="toc-text">输出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#输入"><span class="toc-text">输入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重定向绑定-gt-amp"><span class="toc-text">重定向绑定&gt;&amp;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数学运算"><span class="toc-text">数学运算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#expr-不推荐"><span class="toc-text">expr (不推荐)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方括号-只支持整数"><span class="toc-text">方括号(只支持整数)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bc计算器-浮点数计算"><span class="toc-text">bc计算器(浮点数计算)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#圆括号"><span class="toc-text">圆括号</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#退出脚本"><span class="toc-text">退出脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#脚本的健壮性"><span class="toc-text">脚本的健壮性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流程控制"><span class="toc-text">流程控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#逻辑符号"><span class="toc-text">逻辑符号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#if-else"><span class="toc-text">if else</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#test-命令"><span class="toc-text">test 命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#推荐写法"><span class="toc-text">推荐写法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#条件测试"><span class="toc-text">条件测试</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#整数比较"><span class="toc-text">整数比较</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#字符串比较-有坑"><span class="toc-text">字符串比较(有坑)</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#文件比较"><span class="toc-text">文件比较</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#其他杂项"><span class="toc-text">其他杂项</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#布尔逻辑"><span class="toc-text">布尔逻辑</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#双括号与双中括号-进阶"><span class="toc-text">双括号与双中括号(进阶)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#数字高级比较-（双括号）"><span class="toc-text">数字高级比较 （双括号）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#字符串高级比较（双中括号）"><span class="toc-text">字符串高级比较（双中括号）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#逻辑运算"><span class="toc-text">逻辑运算</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#支持正则表达式"><span class="toc-text">[[ ]] 支持正则表达式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#swtich-case"><span class="toc-text">swtich case</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for（Python-风格）"><span class="toc-text">for（Python 风格）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#字段分隔符"><span class="toc-text">字段分隔符</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#遍历目录"><span class="toc-text">遍历目录</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c语言风格的-for"><span class="toc-text">c语言风格的 for</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#while-与-until"><span class="toc-text">while 与 until</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#break-与-continue"><span class="toc-text">break 与 continue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#循环的重定向"><span class="toc-text">循环的重定向</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tips"><span class="toc-text">Tips</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命令行参数"><span class="toc-text">命令行参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用的转义字符"><span class="toc-text">常用的转义字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#获取文件的绝对路径"><span class="toc-text">获取文件的绝对路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#检查命令是否存在"><span class="toc-text">检查命令是否存在</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最佳实践"><span class="toc-text">最佳实践</span></a>
         
-    </div>
+    </li></div>
     <style>
         .left-col .switch-btn,
         .left-col .switch-area {
@@ -946,7 +1116,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/python-多线程/">python 多线程与多进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/python-cookbook/">python cookbook</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/推荐网站/">推荐网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/python技巧/">python技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/开发环境搭建/">开发环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/hive/">hive</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/11/linux知识点/">linux知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/10/vim技巧/">vim技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/bash命令提示符个性化/">bash命令提示符个性化</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/02/awk/">awk</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/13/linux-shell编程/">linux shell编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python小模块/">python小模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python模块-logging/">python模块-logging</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/anaconda与jupyter使用与设置/">anaconda与jupyter的使用和设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/linux常用命令/">linux常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/photoshop曲线原理与应用/">photoshop曲线原理与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/正则表达式必知必会/">正则表达式必知必会</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/window添加右键用atom打开/">window添加右键用atom打开</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/notepad常用插件/">notepad常用插件与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/chrome截取整个网页/">chrome截取整个网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Git教程/">Git教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/python编码问题/">python编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/04/java方法传参问题/">java方法传参问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/如何有效批评而不是吵架/">如何有效批评而不是吵架</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/喜欢人的理由为什么说不出来/">喜欢人的理由为什么说不出来</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/全球公认的最健康的一天作息图解/">全球公认的最健康的一天作息图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/如何提高「钝感力」，从此不再「想太多」/">如何提高「钝感力」，从此不再「想太多」</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/03/java嵌套类/">java嵌套类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第3章-完成时态/">英语语法——中级：第3章.完成时态</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第2章-名词、定语、状语从句/">英语语法——中级：第2章.名词、定语、状语从句</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第1章-简单句与复合句/">英语语法——中级：第1章.简单句与复合句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/08/vim/">vim</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/12/16/正则表达式-lp/">正则表达式-lp</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/python-多线程/">python 多线程与多进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/python-多线程/panda 对象、索引都有 name 属性/">python-多线程/panda 对象、索引都有 name 属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/python-cookbook/">python cookbook</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/推荐网站/">推荐网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/python技巧/">python技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/开发环境搭建/">开发环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/hive/">hive</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/11/linux知识点/">linux知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/10/vim技巧/">vim技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/bash命令提示符个性化/">bash命令提示符个性化</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/02/awk/">awk</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/13/linux-shell编程/">linux-shell编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python小模块/">python小模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python模块-logging/">python模块-logging</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/anaconda与jupyter使用与设置/">anaconda与jupyter的使用和设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/linux常用命令/">linux常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/photoshop曲线原理与应用/">photoshop曲线原理与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/正则表达式必知必会/">正则表达式必知必会</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/window添加右键用atom打开/">window添加右键用atom打开</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/notepad常用插件/">notepad常用插件与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/chrome截取整个网页/">chrome截取整个网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Git教程/">Git教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/python编码问题/">python编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/04/java方法传参问题/">java方法传参问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/如何有效批评而不是吵架/">如何有效批评而不是吵架</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/喜欢人的理由为什么说不出来/">喜欢人的理由为什么说不出来</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/全球公认的最健康的一天作息图解/">全球公认的最健康的一天作息图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/如何提高「钝感力」，从此不再「想太多」/">如何提高「钝感力」，从此不再「想太多」</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/03/java嵌套类/">java嵌套类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第3章-完成时态/">英语语法——中级：第3章.完成时态</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第2章-名词、定语、状语从句/">英语语法——中级：第2章.名词、定语、状语从句</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第1章-简单句与复合句/">英语语法——中级：第1章.简单句与复合句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/08/vim/">vim</a></li></ul>
 
 
 
@@ -960,7 +1130,7 @@
         <div id="footer-info">
             <div class="footer-left">
                 <i class="fa fa-copyright"></i> 
-                2017-2019 jizx
+                2017-2020 jizx
             </div>
             <div class="footer-right">
                 <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
