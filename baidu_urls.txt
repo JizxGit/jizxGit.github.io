@@ -1,8 +1,12 @@
+https://jizx.top/2020/02/04/attention图解/
+https://jizx.top/2020/02/04/keras/
+https://jizx.top/2020/02/04/数据分析库/
+https://jizx.top/2020/02/04/sklearn/
 https://jizx.top/2019/12/07/python-多线程/
 https://jizx.top/2019/12/01/python-cookbook/
 https://jizx.top/2019/10/28/推荐网站/
 https://jizx.top/2019/10/25/python技巧/
-https://jizx.top/2019/10/25/开发环境搭建/
+https://jizx.top/2019/10/25/开发环境搭建与效率技巧/
 https://jizx.top/2019/10/12/hive/
 https://jizx.top/2019/10/11/linux知识点/
 https://jizx.top/2019/10/10/vim技巧/
