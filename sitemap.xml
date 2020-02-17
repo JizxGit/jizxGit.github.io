@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jizx.top/2020/02/04/keras/</loc>
+    
+    <lastmod>2020-02-17T03:26:31.488Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jizx.top/2019/12/07/python-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
     
     <lastmod>2020-02-17T03:24:38.928Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>https://jizx.top/2020/02/04/attention%E5%9B%BE%E8%A7%A3/</loc>
     
     <lastmod>2020-02-04T12:16:30.710Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jizx.top/2020/02/04/keras/</loc>
-    
-    <lastmod>2020-02-04T12:14:23.888Z</lastmod>
     
   </url>
   

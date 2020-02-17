@@ -21,6 +21,20 @@
         <content type="html"><![CDATA[<excerpt in="" index="" |="" 首页摘要=""> <a id="more"></a><the rest="" of="" contents="" |="" 余下全文=""><h5 id="下载mnist数据集，网络失败的问题"><a href="#下载mnist数据集，网络失败的问题" class="headerlink" title="下载mnist数据集，网络失败的问题"></a>下载mnist数据集，网络失败的问题</h5><p>Keras file is located into a new path in Google Cloud Storage (Before it was in AWS S3)：</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz</span><br></pre></td></tr></table></figure><p>When using:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.keras.datasets.mnist.load_data()</span><br></pre></td></tr></table></figure><p>You can pass a <code>path</code> parameter.</p><p><code>load_data()</code> will call <code>get_file()</code> which takes as parameter <code>fname</code>, if path is a full path and file exists, it will not be downloaded.</p><p>Example:</p><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gsutil cp gs://tensorflow/tf-keras-datasets/mnist.npz /tmp/data/mnist.npz</span></span><br><span class="line"><span class="comment"># python3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>path = <span class="string">'/tmp/data/mnist.npz'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(train_images, train_labels), (test_images, test_labels) = tf.keras.datasets.mnist.load_data(path)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>len(train_images)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">60000</span></span><br></pre></td></tr></table></figure></the></excerpt>]]></content>
       
       
+      <categories>
+          
+          <category> 深度学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 深度学习 </tag>
+            
+            <tag> tensorflow </tag>
+            
+        </tags>
       
     </entry>
     
@@ -389,9 +403,9 @@
             
             <tag> python </tag>
             
-            <tag> logging </tag>
-            
             <tag> 工具 </tag>
+            
+            <tag> logging </tag>
             
         </tags>
       
