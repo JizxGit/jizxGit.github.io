@@ -21,11 +21,11 @@
 <meta property="og:url" content="https://jizx.top/2019/12/07/python-多线程/index.html">
 <meta property="og:site_name" content="玖玖的博客">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://jizx.top/2019/12/07/python-多线程/2019-12-07-python-多线程/1.线程相关模块.tiff">
-<meta property="og:updated_time" content="2020-02-04T09:58:31.106Z">
+<meta property="og:image" content="https://jizx.top/2019/12/07/python-多线程/线程相关模块.png">
+<meta property="og:updated_time" content="2020-02-17T03:24:38.928Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python 多线程与多进程">
-<meta name="twitter:image" content="https://jizx.top/2019/12/07/python-多线程/2019-12-07-python-多线程/1.线程相关模块.tiff">
+<meta name="twitter:image" content="https://jizx.top/2019/12/07/python-多线程/线程相关模块.png">
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
@@ -310,7 +310,7 @@
 
 
 <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>与线程相关的标准库模块</p>
-<p><img src="/2019/12/07/python-多线程/2019-12-07-python-多线程/1.线程相关模块.tiff" alt="Pasted Graphic"></p>
+<p><img src="/2019/12/07/python-多线程/./线程相关模块.png" alt="Pasted Graphic"></p>
 <h3 id="线程实现"><a href="#线程实现" class="headerlink" title="线程实现"></a>线程实现</h3><p>方式一，定义线程函数，实例化<code>Thread</code>类（简单）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Code to execute in an independent thread</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">countdown</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">'T-minus'</span>, n)</span><br><span class="line">        n -= <span class="number">1</span></span><br><span class="line">        time.sleep(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create and launch a thread</span></span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line">t = Thread(target=countdown, args=(<span class="number">10</span>,))</span><br><span class="line"><span class="comment"># t = Thread(target=countdown, args=(10,), daemon=True) #守护进程</span></span><br><span class="line">t.start()</span><br></pre></td></tr></table></figure>
 <p>方式二，定义线程类，可实现复杂需求（推荐）</p>
@@ -399,7 +399,7 @@
         <p><span>本文标题:</span><a href="/2019/12/07/python-多线程/">python 多线程与多进程</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
         <p><span>发布时间:</span>2019-12-07, 23:39:40</p>
-        <p><span>最后更新:</span>2020-02-04, 17:58:31</p>
+        <p><span>最后更新:</span>2020-02-17, 11:24:38</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/12/07/python-多线程/" title="python 多线程与多进程">https://jizx.top/2019/12/07/python-多线程/</a>
             <span class="copy-path" data-clipboard-text="原文: https://jizx.top/2019/12/07/python-多线程/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
