@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
 
     <!--[if lt IE 9]>
         <style>body {display: none; background: none !important} </style>
@@ -109,11 +109,11 @@
 
         
             <form id="search-form">
-            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="false">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
             <i class="fa fa-times" onclick="resetSearch()"></i>
             </form>
             <div id="local-search-result"></div>
-            <p class="no-result">No results found <i class="fa fa-spinner fa-pulse"></i></p>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
         
 
 
@@ -256,9 +256,9 @@
             </nav>
         </header>                
     </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我">
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-数据分析库" class="article article-type-post" itemscope="" itemprop="blogPost">
+      <div class="body-wrap"><article id="post-数据分析库" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2020/02/04/数据分析库/" class="article-date">
@@ -270,7 +270,7 @@
   
   <div class="article-inner">
     
-      <input type="hidden" class="isFancy">
+      <input type="hidden" class="isFancy" />
     
     
       <header class="article-header">
@@ -435,7 +435,7 @@
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target="_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
         </p>
     </div>
 
@@ -464,7 +464,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#numpy"><span class="toc-text">numpy</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#argpartition"><span class="toc-text">argpartition</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TODO"><span class="toc-text">TODO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本类型"><span class="toc-text">基本类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#索引"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#reindex"><span class="toc-text">reindex</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#drop"><span class="toc-text">drop</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#loc-与-iloc"><span class="toc-text">loc 与 iloc</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺失值"><span class="toc-text">缺失值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#series"><span class="toc-text">series</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dataFrame"><span class="toc-text">dataFrame</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#传递数组"><span class="toc-text">传递数组</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#传递字典"><span class="toc-text">传递字典</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看"><span class="toc-text">查看</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#查看部分内容"><span class="toc-text">查看部分内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看索引"><span class="toc-text">查看索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#转为-numpy"><span class="toc-text">转为 numpy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看数值类型的列的统计信息"><span class="toc-text">查看数值类型的列的统计信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#转置"><span class="toc-text">转置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序-1"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#索引排序"><span class="toc-text">索引排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内容排序"><span class="toc-text">内容排序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择"><span class="toc-text">选择</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#某行、某列"><span class="toc-text">某行、某列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一大片"><span class="toc-text">一大片</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#loc：通过-label"><span class="toc-text">loc：通过 label</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#iloc：通过下标"><span class="toc-text">iloc：通过下标</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#boolean"><span class="toc-text">boolean</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#赋值"><span class="toc-text">赋值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#新增一列"><span class="toc-text">新增一列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过-label-定位来赋值"><span class="toc-text">通过 label 定位来赋值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过下标-position-定位来赋值"><span class="toc-text">通过下标 position 定位来赋值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过条件筛选赋值"><span class="toc-text">通过条件筛选赋值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺失值处理"><span class="toc-text">缺失值处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#判断-nan"><span class="toc-text">判断 nan</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除含有-NaN-的行"><span class="toc-text">删除含有 NaN 的行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#填充NaN"><span class="toc-text">填充NaN</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作"><span class="toc-text">操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#统计"><span class="toc-text">统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#map"><span class="toc-text">map</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#aplay"><span class="toc-text">aplay</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#applymap"><span class="toc-text">applymap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串方法"><span class="toc-text">字符串方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#合并数据"><span class="toc-text">合并数据</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#append"><span class="toc-text">append</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#concat"><span class="toc-text">concat</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#join"><span class="toc-text">join</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组"><span class="toc-text">分组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间处理"><span class="toc-text">时间处理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#时间-序列生成"><span class="toc-text">时间 序列生成</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Reshaping-TODO"><span class="toc-text">Reshaping  TODO</span></a></li></ol></li></ol></li>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#numpy"><span class="toc-text">numpy</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#argpartition"><span class="toc-text">argpartition</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pandas"><span class="toc-text">pandas</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TODO"><span class="toc-text">TODO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本类型"><span class="toc-text">基本类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#索引"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#reindex"><span class="toc-text">reindex</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#drop"><span class="toc-text">drop</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#loc-与-iloc"><span class="toc-text">loc 与 iloc</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#排序"><span class="toc-text">排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#缺失值"><span class="toc-text">缺失值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对象"><span class="toc-text">创建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#series"><span class="toc-text">series</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#dataFrame"><span class="toc-text">dataFrame</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#传递数组"><span class="toc-text">传递数组</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#传递字典"><span class="toc-text">传递字典</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看"><span class="toc-text">查看</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#查看部分内容"><span class="toc-text">查看部分内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看索引"><span class="toc-text">查看索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#转为-numpy"><span class="toc-text">转为 numpy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看数值类型的列的统计信息"><span class="toc-text">查看数值类型的列的统计信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#转置"><span class="toc-text">转置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排序-1"><span class="toc-text">排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#索引排序"><span class="toc-text">索引排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#内容排序"><span class="toc-text">内容排序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择"><span class="toc-text">选择</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#某行、某列"><span class="toc-text">某行、某列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#一大片"><span class="toc-text">一大片</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#loc：通过-label"><span class="toc-text">loc：通过 label</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#iloc：通过下标"><span class="toc-text">iloc：通过下标</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#boolean"><span class="toc-text">boolean</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#赋值"><span class="toc-text">赋值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#新增一列"><span class="toc-text">新增一列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过-label-定位来赋值"><span class="toc-text">通过 label 定位来赋值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过下标-position-定位来赋值"><span class="toc-text">通过下标 position 定位来赋值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通过条件筛选赋值"><span class="toc-text">通过条件筛选赋值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缺失值处理"><span class="toc-text">缺失值处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#判断-nan"><span class="toc-text">判断 nan</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#删除含有-NaN-的行"><span class="toc-text">删除含有 NaN 的行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#填充NaN"><span class="toc-text">填充NaN</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作"><span class="toc-text">操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#统计"><span class="toc-text">统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#map"><span class="toc-text">map</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#aplay"><span class="toc-text">aplay</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#applymap"><span class="toc-text">applymap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字符串方法"><span class="toc-text">字符串方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#合并数据"><span class="toc-text">合并数据</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#append"><span class="toc-text">append</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#concat"><span class="toc-text">concat</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#join"><span class="toc-text">join</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分组"><span class="toc-text">分组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间处理"><span class="toc-text">时间处理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#时间-序列生成"><span class="toc-text">时间 序列生成</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Reshaping-TODO"><span class="toc-text">Reshaping  TODO</span></a></li></ol></li></ol></li></ol>
         
     </div>
     <style>
@@ -472,13 +472,13 @@
         .left-col .switch-area {
             display: none;
         }
-        .toc-level-4 i,
-        .toc-level-4 ol {
+        .toc-level-5 i,
+        .toc-level-5 ol {
             display: none !important;
         }
     </style>
 
-    <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
     <script>
         yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
@@ -532,7 +532,7 @@
         
             <div class="visit">
                 
-                    <span id="busuanzi_container_site_pv" style="display:none">
+                    <span id="busuanzi_container_site_pv" style='display:none'>
                         <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
                         </span>
                     </span>
@@ -541,8 +541,8 @@
                     <span>| </span>
                 
                 
-                    <span id="busuanzi_container_page_pv" style="display:none">
-                        <span id="page-visit" title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
                         </span>
                     </span>
                 

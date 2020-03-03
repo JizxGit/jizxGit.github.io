@@ -1408,7 +1408,8 @@ color
   max-width: 100%;
 }
 .article-entry strong {
-  font-weight: bold;
+  font-weight: bolder;
+  font-size: larger;
 }
 .article-entry li strong {
   color: #708090;
