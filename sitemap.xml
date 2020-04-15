@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jizx.vip/2019/08/06/python%E5%B0%8F%E6%A8%A1%E5%9D%97/</loc>
+    
+    <lastmod>2020-04-15T16:24:29.577Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jizx.vip/2019/08/06/python%E6%A8%A1%E5%9D%97-logging/</loc>
+    
+    <lastmod>2020-04-15T16:24:29.577Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jizx.vip/2020/03/30/pytorch/</loc>
+    
+    <lastmod>2020-03-30T12:28:51.230Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jizx.vip/2019/08/13/linux-shell%E7%BC%96%E7%A8%8B/</loc>
+    
+    <lastmod>2020-03-26T00:52:56.899Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jizx.vip/2020/03/02/python%E8%BF%9B%E9%98%B6/</loc>
     
     <lastmod>2020-03-24T09:01:45.787Z</lastmod>
@@ -19,13 +47,6 @@
     <loc>https://jizx.vip/2019/08/04/anaconda%E4%B8%8Ejupyter%E4%BD%BF%E7%94%A8%E4%B8%8E%E8%AE%BE%E7%BD%AE/</loc>
     
     <lastmod>2020-03-17T01:08:05.610Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jizx.vip/2019/08/06/python%E5%B0%8F%E6%A8%A1%E5%9D%97/</loc>
-    
-    <lastmod>2020-02-28T18:24:00.305Z</lastmod>
     
   </url>
   
@@ -107,13 +128,6 @@
   </url>
   
   <url>
-    <loc>https://jizx.vip/2019/08/13/linux-shell%E7%BC%96%E7%A8%8B/</loc>
-    
-    <lastmod>2020-02-04T09:54:35.285Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jizx.vip/2019/10/28/%E6%8E%A8%E8%8D%90%E7%BD%91%E7%AB%99/</loc>
     
     <lastmod>2020-02-03T08:51:06.562Z</lastmod>
@@ -138,13 +152,6 @@
     <loc>https://jizx.vip/2019/10/11/linux%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
     
     <lastmod>2019-10-28T15:50:52.172Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jizx.vip/2019/08/06/python%E6%A8%A1%E5%9D%97-logging/</loc>
-    
-    <lastmod>2019-10-28T15:49:18.811Z</lastmod>
     
   </url>
   

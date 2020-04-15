@@ -15,7 +15,7 @@
 
 
 
-<meta name="keywords" content="linux,shell">
+<meta name="keywords" content="shell,linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux shell编程">
 <meta property="og:url" content="https://jizx.vip/2019/08/13/linux-shell编程/index.html">
@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://jizx.vip/2019/08/13/linux-shell编程/shell配置文件加载顺序1.png">
 <meta property="og:image" content="https://jizx.vip/2019/08/13/linux-shell编程/shell配置文件加载顺序2.png">
 <meta property="og:image" content="https://jizx.vip/2019/08/13/linux-shell编程/shell展开.png">
-<meta property="og:updated_time" content="2020-02-04T09:54:35.285Z">
+<meta property="og:updated_time" content="2020-03-26T00:52:56.899Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux shell编程">
 <meta name="twitter:image" content="https://jizx.vip/2019/08/13/linux-shell编程/shell配置文件加载顺序1.png">
@@ -483,21 +483,28 @@
 <h5 id="变量-字符串-拼接"><a href="#变量-字符串-拼接" class="headerlink" title="变量(字符串)拼接"></a>变量(字符串)拼接</h5><p>直接将两个变量写在一起就是拼接</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">str1=<span class="variable">$name</span><span class="variable">$url</span>      <span class="comment">#中间不能有空格，遇到空格就认为字符串结束了，空格后边的内容会作为其他变量或者命令解析，</span></span><br><span class="line">str2=<span class="string">"<span class="variable">$name</span> <span class="variable">$url</span>"</span>   <span class="comment">#如果被双引号包围，那么中间可以有空格</span></span><br><span class="line">str3=<span class="variable">$name</span><span class="string">": "</span><span class="variable">$url</span>  <span class="comment">#中间可以出现别的字符串</span></span><br><span class="line">str4=<span class="string">"<span class="variable">$name</span>: <span class="variable">$url</span>"</span>  <span class="comment">#这样写也可以</span></span><br><span class="line">str5=<span class="string">"<span class="variable">$&#123;name&#125;</span>Script: <span class="variable">$&#123;url&#125;</span>index.html"</span>  <span class="comment">#这个时候需要给变量名加上大括号 加&#123; &#125;是为了帮助解释器识别变量的边界</span></span><br></pre></td></tr></table></figure>
 <h5 id="字符串的长度"><a href="#字符串的长度" class="headerlink" title="字符串的长度"></a>字符串的长度</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash">&#123;<span class="comment">#string_name&#125;</span></span></span><br></pre></td></tr></table></figure>
-<h5 id="字符串的截取"><a href="#字符串的截取" class="headerlink" title="字符串的截取"></a>字符串的截取</h5><p>假设有变量 <code>var=http://www.aaa.com/123.htm</code></p>
-<p><strong>1. # 号截取，删除左边字符，保留右边字符。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $&#123;var#*//&#125;</span><br></pre></td></tr></table></figure>
-<p> 其中 var 是变量名，# 号是运算符，*// 表示从左边开始删除第一个 // 号及左边的所有字符<br>即删除<code>http://</code><br>结果是 ：<code>www.aaa.com/123.htm</code></p>
-<p><strong>2. ## 号截取，贪心地删除左边字符，保留右边字符。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $&#123;var##*/&#125;</span><br></pre></td></tr></table></figure>
-<p><code>##*/</code>表示从左边开始删除最后（最右边）一个 / 号及左边的所有字符<br>即删除 <code>http://www.aaa.com/</code></p>
-<p>结果是 <code>123.htm</code></p>
-<p><strong>3. %号截取，删除右边字符，保留左边字符</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $&#123;var%/*&#125;</span><br></pre></td></tr></table></figure>
-<p> <code>%/*</code> 表示从右边开始，删除第一个 / 号及右边的字符</p>
-<p>结果是：<a href="http://www.aaa.com" target="_blank" rel="noopener">http://www.aaa.com</a></p>
-<p><strong>4. %% 号截取，贪心地删除右边字符，保留左边字符</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $&#123;var%%/*&#125;</span><br></pre></td></tr></table></figure>
-<p> <code>%%/*</code> 表示从右边开始，删除最后（最左边）一个 / 号及右边的字符<br>结果是：<code>http:</code></p>
+<h5 id="字符串的截取"><a href="#字符串的截取" class="headerlink" title="字符串的截取"></a>字符串的截取</h5><p><strong>1.<code>#</code>：截取右边字符，删除左边字符</strong></p>
+<p>变量 <code>var=http://www.aaa.com/123.htm</code></p>
+<ul>
+<li><p>单<code>#</code>：<code>echo ${var#*//}</code>，结果：保留 <code>www.aaa.com/123.htm</code></p>
+<p>其中 var 是变量名，<code>#</code>是运算符，<code>*</code>是通配符，<code>*//</code> 表示从左边开始删除第一个 <code>//</code> 号及左其边的所有字符，即删除<code>http://</code>，保留 <code>www.aaa.com/123.htm</code></p>
+</li>
+<li><p>双<code>##</code>（贪心地删除）：<code>echo ${var##*/}</code>，结果：保留 <code>123.htm</code></p>
+<p>  <code>##*/</code>表示从左边开始删除最后一个<code>/</code>号及左边的所有字符，即删除 <code>http://www.aaa.com/</code>，保留 <code>123.htm</code></p>
+</li>
+</ul>
+<p><strong>2. <code>%</code>：截取左边字符，删除右边字符</strong></p>
+<p>变量 <code>var=http://www.aaa.com/123.htm</code></p>
+<ul>
+<li><p>单<code>%</code>：<code>echo ${var%/*}</code>，结果：保留<code>http://www.aaa.com</code></p>
+<p> <code>%/*</code> 表示从右边开始，删除第一个<code>/</code>号及右边的字符，保留<code>http://www.aaa.com</code></p>
+</li>
+</ul>
+<ul>
+<li><p>双<code>%%</code>（贪心地删除）:<code>echo ${var%%/*}</code>，结果：保留<code>http:</code></p>
+<p> <code>%%/*</code> 表示从右边开始，删除最后（最左边）一个<code>/</code>号及右边的字符，保留<code>http:</code></p>
+</li>
+</ul>
 <h4 id="删除变量"><a href="#删除变量" class="headerlink" title="删除变量"></a>删除变量</h4><p>记住不要使用<code>$</code></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unset my_variable</span><br></pre></td></tr></table></figure>
 <p>在处理<strong>全局环境变量</strong>时，如果你是在子进程中删除了一个全局环境变量， 这只对子进程有效。该全局环境变量在<strong>父进程中依然可用</strong>。</p>
@@ -1140,7 +1147,7 @@
         <p><span>本文标题:</span><a href="/2019/08/13/linux-shell编程/">linux shell编程</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
         <p><span>发布时间:</span>2019-08-13, 11:00:08</p>
-        <p><span>最后更新:</span>2020-02-04, 17:54:35</p>
+        <p><span>最后更新:</span>2020-03-26, 08:52:56</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/08/13/linux-shell编程/" title="linux shell编程">https://jizx.vip/2019/08/13/linux-shell编程/</a>
             <span class="copy-path" data-clipboard-text="原文: https://jizx.vip/2019/08/13/linux-shell编程/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -1221,7 +1228,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/02/python进阶的副本/">python进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/02/python进阶/">python进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/attention图解/">attention图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/keras/">keras</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/数据分析库/">python数据分析库</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/sklearn/">sklearn</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/python-多线程/">python 多线程与多进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/python-cookbook/">python cookbook</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/推荐网站/">推荐网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/python技巧/">python技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/开发环境搭建与效率技巧/">开发环境搭建与效率技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/hive/">hive</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/11/linux知识点/">linux知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/10/vim技巧/">vim技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/bash命令提示符个性化/">bash命令提示符个性化</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/02/awk/">awk</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/13/linux-shell编程/">linux shell编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python小模块/">python小模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python模块-logging/">python模块-logging</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/anaconda与jupyter使用与设置/">anaconda与jupyter的使用和设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/linux常用命令/">linux常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/photoshop曲线原理与应用/">photoshop曲线原理与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/正则表达式必知必会/">正则表达式必知必会</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/window添加右键用atom打开/">window添加右键用atom打开</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/notepad常用插件/">notepad常用插件与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/chrome截取整个网页/">chrome截取整个网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Git教程/">Git教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/python编码问题/">python编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/04/java方法传参问题/">java方法传参问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/如何有效批评而不是吵架/">如何有效批评而不是吵架</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/喜欢人的理由为什么说不出来/">喜欢人的理由为什么说不出来</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/全球公认的最健康的一天作息图解/">全球公认的最健康的一天作息图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/如何提高「钝感力」，从此不再「想太多」/">如何提高「钝感力」，从此不再「想太多」</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/03/java嵌套类/">java嵌套类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第3章-完成时态/">英语语法——中级：第3章.完成时态</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第2章-名词、定语、状语从句/">英语语法——中级：第2章.名词、定语、状语从句</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第1章-简单句与复合句/">英语语法——中级：第1章.简单句与复合句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/08/vim/">vim</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/30/pytorch/">pytorch</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/02/python进阶/">python进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/02/python进阶的副本/">python进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/attention图解/">attention图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/keras/">keras</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/数据分析库/">python数据分析库</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/sklearn/">sklearn</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/python-多线程/">python 多线程与多进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/python-cookbook/">python cookbook</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/推荐网站/">推荐网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/python技巧/">python技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/开发环境搭建与效率技巧/">开发环境搭建与效率技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/hive/">hive</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/11/linux知识点/">linux知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/10/vim技巧/">vim技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/bash命令提示符个性化/">bash命令提示符个性化</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/02/awk/">awk</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/13/linux-shell编程/">linux shell编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python小模块/">python小模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python模块-logging/">python模块-logging</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/anaconda与jupyter使用与设置/">anaconda与jupyter的使用和设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/linux常用命令/">linux常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/photoshop曲线原理与应用/">photoshop曲线原理与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/正则表达式必知必会/">正则表达式必知必会</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/window添加右键用atom打开/">window添加右键用atom打开</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/notepad常用插件/">notepad常用插件与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/chrome截取整个网页/">chrome截取整个网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Git教程/">Git教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/python编码问题/">python编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/04/java方法传参问题/">java方法传参问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/如何有效批评而不是吵架/">如何有效批评而不是吵架</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/喜欢人的理由为什么说不出来/">喜欢人的理由为什么说不出来</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/全球公认的最健康的一天作息图解/">全球公认的最健康的一天作息图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/如何提高「钝感力」，从此不再「想太多」/">如何提高「钝感力」，从此不再「想太多」</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/03/java嵌套类/">java嵌套类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第3章-完成时态/">英语语法——中级：第3章.完成时态</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第2章-名词、定语、状语从句/">英语语法——中级：第2章.名词、定语、状语从句</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第1章-简单句与复合句/">英语语法——中级：第1章.简单句与复合句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/08/vim/">vim</a></li></ul>
 
 
 
