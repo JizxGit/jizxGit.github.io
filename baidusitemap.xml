@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jizx.vip/2019/08/06/python%E5%B0%8F%E6%A8%A1%E5%9D%97/</loc>
-    <lastmod>2020-04-15T16:24:29.577Z</lastmod>
+    <loc>https://jizx.vip/2020/05/09/bash%E9%AB%98%E6%95%88%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
+    <lastmod>2020-05-09T14:29:07.525Z</lastmod>
+  </url>  <url>
+    <loc>https://jizx.vip/2019/08/13/linux-shell%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2020-05-09T14:29:07.524Z</lastmod>
   </url>  <url>
     <loc>https://jizx.vip/2019/08/06/python%E6%A8%A1%E5%9D%97-logging/</loc>
-    <lastmod>2020-04-15T16:24:29.577Z</lastmod>
+    <lastmod>2020-05-09T14:29:07.522Z</lastmod>
+  </url>  <url>
+    <loc>https://jizx.vip/2019/08/06/python%E5%B0%8F%E6%A8%A1%E5%9D%97/</loc>
+    <lastmod>2020-05-09T14:29:07.521Z</lastmod>
   </url>  <url>
     <loc>https://jizx.vip/2020/03/30/pytorch/</loc>
     <lastmod>2020-03-30T12:28:51.230Z</lastmod>
-  </url>  <url>
-    <loc>https://jizx.vip/2019/08/13/linux-shell%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2020-03-26T00:52:56.899Z</lastmod>
   </url>  <url>
     <loc>https://jizx.vip/2020/03/02/python%E8%BF%9B%E9%98%B6/</loc>
     <lastmod>2020-03-24T09:01:45.787Z</lastmod>
@@ -111,9 +114,6 @@
   </url>  <url>
     <loc>https://jizx.vip/2018/03/23/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E3%80%8C%E9%92%9D%E6%84%9F%E5%8A%9B%E3%80%8D%EF%BC%8C%E4%BB%8E%E6%AD%A4%E4%B8%8D%E5%86%8D%E3%80%8C%E6%83%B3%E5%A4%AA%E5%A4%9A%E3%80%8D/</loc>
     <lastmod>2018-11-18T09:02:40.876Z</lastmod>
-  </url>  <url>
-    <loc>https://jizx.vip/2018/03/23/%E5%96%9C%E6%AC%A2%E4%BA%BA%E7%9A%84%E7%90%86%E7%94%B1%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4%E4%B8%8D%E5%87%BA%E6%9D%A5/</loc>
-    <lastmod>2018-11-18T09:02:40.874Z</lastmod>
   </url>  <url>
     <loc>https://jizx.vip/2018/03/23/%E5%85%A8%E7%90%83%E5%85%AC%E8%AE%A4%E7%9A%84%E6%9C%80%E5%81%A5%E5%BA%B7%E7%9A%84%E4%B8%80%E5%A4%A9%E4%BD%9C%E6%81%AF%E5%9B%BE%E8%A7%A3/</loc>
     <lastmod>2018-11-18T09:02:40.871Z</lastmod>

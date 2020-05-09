@@ -15,7 +15,7 @@
 
 
 
-<meta name="keywords" content="shell,linux">
+<meta name="keywords" content="linux,shell">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux shell编程">
 <meta property="og:url" content="https://jizx.vip/2019/08/13/linux-shell编程/index.html">
@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://jizx.vip/2019/08/13/linux-shell编程/shell配置文件加载顺序1.png">
 <meta property="og:image" content="https://jizx.vip/2019/08/13/linux-shell编程/shell配置文件加载顺序2.png">
 <meta property="og:image" content="https://jizx.vip/2019/08/13/linux-shell编程/shell展开.png">
-<meta property="og:updated_time" content="2020-03-26T00:52:56.899Z">
+<meta property="og:updated_time" content="2020-05-09T14:29:07.524Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux shell编程">
 <meta name="twitter:image" content="https://jizx.vip/2019/08/13/linux-shell编程/shell配置文件加载顺序1.png">
@@ -614,21 +614,21 @@
 <p>这条命令用到了<strong>重定向绑定</strong>，采用<code>&amp;</code>可以将两个输出绑定在一起，即错误输出将和标准输出共用一个文件描述符。</p>
 <p>可以这样记住这条写法（虽然并不完全正确）首先，<code>2&gt;1</code> 会被解释成将<code>stderr</code> 重定向到一个名为 <code>1</code>的文件中。 因此加入<code>&amp;</code>来表示紧跟着的是文件描述符（file descriptor)而不是文件名，因此最终就是这样的形式： <code>2&gt;&amp;1</code></p>
 <p>理解上面的原理后，就可以明白下面的例子了：</p>
-<p><strong>标准输出和标准错误重定向到不同log文件中</strong></p>
+<p><strong>1、标准输出和标准错误重定向到不同log文件中</strong></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh mr_add_test.sh &gt;log.log 2&gt;log_err.log</span><br></pre></td></tr></table></figure>
-<p><strong>将标准输出和标准错误重定向到同一log文件</strong></p>
+<p><strong>2、将标准输出和标准错误重定向到同一log文件</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foo &gt;file 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
-<p><code>&gt;file</code> 将标准输出重定向到文件中<br><code>2&gt;&amp;1</code>  将错误绑定到标准输出上，此时标准输出已经重定向到file了</p>
-<p><strong>输出标准输出和标准错误，同时保存到文件logfile</strong></p>
+<p>解读：<code>&gt;file</code> 将标准输出重定向到文件中，<code>2&gt;&amp;1</code>  将错误绑定到标准输出上，此时标准输出已经重定向到file了</p>
+<p><strong>3、输出标准输出和标准错误，同时保存到文件logfile</strong></p>
 <p>方法一： <code>&lt;command&gt; 2&gt;&amp;1 | tee &lt;logfile&gt;</code></p>
 <p>管道符号把一个进程的标准输出作为另一个进程的标准输入。<code>2&gt;&amp;1</code>是把标准错误重定向到标准输出的副本一起输出。上面的命令，把标准输出和标准错误都输出作为tee命令的标准输入，tee的作用为把标准输入的内容拷贝到文件，并输出。</p>
 <p>方法二：<code>&lt;command&gt;  2&gt; logfile | cat - logfile</code></p>
 <p>cat可以带多个文件参数，同时显示多个文件的内容。 <code>-</code>代表标准输入，logfile是管道前保存的标准错误文本。</p>
-<p><strong>只输出错误，并保存到文件中</strong></p>
+<p><strong>4、只输标准出错误，并保存错误信息到文件中</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;command&gt; 2&gt;&amp;1 &gt;/dev/null | tee logfile</span><br></pre></td></tr></table></figure>
-<p>这条命令其实分为两命令，一个是<code>&gt;/dev/null</code>，另一个是<code>2&gt;&amp;1</code>。</p>
+<p>这条命令其实分为两命令来看：</p>
 <ol>
-<li><code>2&gt;&amp;1</code>  将标准错误重定向到标准输出，注意，<strong>此时标准输出还没有被重定向</strong></li>
+<li><code>2&gt;&amp;1</code>  将标准错误重定向到标准输出，注意，<strong>此时标准输出还没有被重定向</strong>，其输出仍然是屏幕。</li>
 <li><code>/dev/null</code>文件是一个空设备，类似于windows内的回收站，使用<code>&gt;/dev/null</code>将标准输出重定向到<code>/dev/null</code>，即不显示标准输出的内容。所以这时的标准输出就仅变为重定向过来的标准错误了。</li>
 </ol>
 <p>相反，如果两者颠倒顺序，那标准输出连同它的副本都会被重定向到/dev/null，这是一个逻辑问题。</p>
@@ -637,6 +637,27 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ls a.txt b.txt &gt;out 2&gt;out</span><br><span class="line">cat out</span><br><span class="line"># a.txt</span><br><span class="line"># txt: No such file or directory</span><br></pre></td></tr></table></figure>
 <p><code>out</code>中出现了丢失。采用这种写法，标准输出和错误输出会抢<strong>占往out文件的管道</strong>，所以可能会导致输出内容的时候出现缺失、覆盖等情况。有时候也有可能出现只有error信息或者只有正常信息的情况。不管怎么说，采用这种写法，最后的情况是无法预估的。</p>
 <p>而且，由于out文件被打开了两次，两个文件描述符会抢占性的往文件中输出内容，所以整体IO效率不如<code>&gt;/dev/null 2&gt;&amp;1</code>来得高。</p>
+<p><strong>5、<code>&amp;&gt;</code>与<code>2&gt;&amp;1</code>的区别</strong></p>
+<p><strong>&amp;&gt;file</strong> 意思是把<strong>标准输出</strong> 和 <strong>标准错误输出</strong> 都重定向到文件file中</p>
+<p><strong>2&gt;&amp;1</strong>  意思是把 标准错误输出 重定向到 标准输出，标准输出并不一定输出到文件中哦</p>
+<blockquote>
+<p>Bash’s man page mentions there’s two ways to redirect <a href="https://en.wikipedia.org/wiki/Standard_streams" target="_blank" rel="noopener">stderr and stdout</a>: <code>&amp;&gt; file</code> and <code>&gt;&amp; file</code>. Now, notice that it says both stderr and stdout.</p>
+<p>In case of this <code>&gt;file 2&gt;&amp;1</code> we are doing redirection of stdout (1) to file, but then also telling stderr(2) to be redirected to the same place as stdout ! So the purpose may be the same, but the idea slightly different. In other words “John, go to school; Suzzie go where John goes”.</p>
+<p>在这个<code>&gt; file 2&gt;＆1</code>的情况下，我们正在将stdout（1）重定向到文件，然后还要告诉stderr（2）重定向到与stdout相同的位置！ 因此目的可能是相同的，但想法略有不同。 换句话说，“约翰，去上学；苏奇去约翰去的地方”。</p>
+<p>What about preference ? <code>&amp;&gt;</code> is a <code>bash</code> thing. So if you’re porting a script, that won’t do it. But if you’re 100% certain your script will be only working on system with bash - then there’s no preference.</p>
+<p> “＆&gt;”是专属于“bash”的东西。 因此，如果你有移植脚本的打算，就不会用这种方法。 但是，如果您100％确定您的脚本只在具有bash的系统上运行。那就没有什么问题。</p>
+<p>Here’s an example with <code>dash</code> , the Debian Amquist Shell which is Ubuntu’s default.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt; $ grep &quot;YOLO&quot; * &amp;&gt; /dev/null</span><br><span class="line">&gt; $ grep: Desktop: Is a directory</span><br><span class="line">&gt; grep: Documents: Is a directory</span><br><span class="line">&gt; grep: Downloads: Is a directory</span><br><span class="line">&gt; grep: Music: Is a directory</span><br><span class="line">&gt; grep: Pictures: Is a directory</span><br><span class="line">&gt; grep: Public: Is a directory</span><br><span class="line">&gt; grep: Templates: Is a directory</span><br><span class="line">&gt; grep: Videos: Is a directory</span><br><span class="line">&gt; grep: YOLO: Is a directory</span><br><span class="line">&gt; grep: bin: Is a directory</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>As you can see, stderr is not being redirected。你可以看到标准错误没有被重定向【失败了】</p>
+<p>To address your edits in the question, you can use if statement to check $SHELL variable and change redirects accordingly</p>
+<p>But for most cases <code>&gt; file 2&gt;&amp;1</code> should work。而<code>&gt; file 2&gt;&amp;1</code> 大多数情况都是OK的</p>
+<hr>
+<p>In more technical terms, the form <code>[integer]&gt;&amp;word</code> is called <a href="http://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_07_06" target="_blank" rel="noopener">Duplicating Output File Descriptor</a>, and is a feature specified by POSIX Shell Command Language standard, which is supported by most POSIX-compliant and Brourne-like shells.</p>
+<p>See also <a href="https://askubuntu.com/a/1031663/295286" target="_blank" rel="noopener">What does &amp; mean exactly in output redirection?</a></p>
+</blockquote>
+<p>来自：<a href="https://askubuntu.com/questions/635065/what-is-the-differences-between-and-21" target="_blank" rel="noopener">What is the differences between &amp;&gt; and 2&gt;&amp;1</a></p>
 <h3 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h3><h4 id="expr-不推荐"><a href="#expr-不推荐" class="headerlink" title="expr (不推荐)"></a>expr (不推荐)</h4><p>标准操作符在expr命令中工作得很好，但在脚本或命令行上使用它们时仍有问题出现。 许多expr命令操作符在shell中另有含义（比如星号）。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ expr 5 * 2 </span><br><span class="line">expr: syntax error </span><br><span class="line"></span><br><span class="line"># 需要进行转义</span><br><span class="line">$ expr 5 \* 2</span><br></pre></td></tr></table></figure>
 <h4 id="方括号-只支持整数"><a href="#方括号-只支持整数" class="headerlink" title="方括号(只支持整数)"></a>方括号(只支持整数)</h4><p>用<code>$[ operation ]</code>将数学表达式围起来</p>
@@ -1147,7 +1168,7 @@
         <p><span>本文标题:</span><a href="/2019/08/13/linux-shell编程/">linux shell编程</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
         <p><span>发布时间:</span>2019-08-13, 11:00:08</p>
-        <p><span>最后更新:</span>2020-03-26, 08:52:56</p>
+        <p><span>最后更新:</span>2020-05-09, 22:29:07</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/08/13/linux-shell编程/" title="linux shell编程">https://jizx.vip/2019/08/13/linux-shell编程/</a>
             <span class="copy-path" data-clipboard-text="原文: https://jizx.vip/2019/08/13/linux-shell编程/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -1228,7 +1249,7 @@
         
     </div>
 
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/30/pytorch/">pytorch</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/02/python进阶/">python进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/02/python进阶的副本/">python进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/attention图解/">attention图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/keras/">keras</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/数据分析库/">python数据分析库</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/sklearn/">sklearn</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/python-多线程/">python 多线程与多进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/python-cookbook/">python cookbook</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/推荐网站/">推荐网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/python技巧/">python技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/开发环境搭建与效率技巧/">开发环境搭建与效率技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/hive/">hive</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/11/linux知识点/">linux知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/10/vim技巧/">vim技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/bash命令提示符个性化/">bash命令提示符个性化</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/02/awk/">awk</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/13/linux-shell编程/">linux shell编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python小模块/">python小模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python模块-logging/">python模块-logging</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/anaconda与jupyter使用与设置/">anaconda与jupyter的使用和设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/linux常用命令/">linux常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/photoshop曲线原理与应用/">photoshop曲线原理与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/正则表达式必知必会/">正则表达式必知必会</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/window添加右键用atom打开/">window添加右键用atom打开</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/notepad常用插件/">notepad常用插件与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/chrome截取整个网页/">chrome截取整个网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Git教程/">Git教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/python编码问题/">python编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/04/java方法传参问题/">java方法传参问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/如何有效批评而不是吵架/">如何有效批评而不是吵架</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/喜欢人的理由为什么说不出来/">喜欢人的理由为什么说不出来</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/全球公认的最健康的一天作息图解/">全球公认的最健康的一天作息图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/如何提高「钝感力」，从此不再「想太多」/">如何提高「钝感力」，从此不再「想太多」</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/03/java嵌套类/">java嵌套类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第3章-完成时态/">英语语法——中级：第3章.完成时态</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第2章-名词、定语、状语从句/">英语语法——中级：第2章.名词、定语、状语从句</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第1章-简单句与复合句/">英语语法——中级：第1章.简单句与复合句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/08/vim/">vim</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/bash高效快捷键/">bash高效快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/30/pytorch/">pytorch</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/02/python进阶/">python进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/02/python进阶的副本/">python进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/attention图解/">attention图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/keras/">keras</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/数据分析库/">python数据分析库</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/sklearn/">sklearn</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/python-多线程/">python 多线程与多进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/python-cookbook/">python cookbook</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/推荐网站/">推荐网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/python技巧/">python技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/开发环境搭建与效率技巧/">开发环境搭建与效率技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/hive/">hive</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/11/linux知识点/">linux知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/10/vim技巧/">vim技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/bash命令提示符个性化/">bash命令提示符个性化</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/02/awk/">awk</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/13/linux-shell编程/">linux shell编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python小模块/">python小模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python模块-logging/">python模块-logging</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/anaconda与jupyter使用与设置/">anaconda与jupyter的使用和设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/linux常用命令/">linux常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/photoshop曲线原理与应用/">photoshop曲线原理与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/正则表达式必知必会/">正则表达式必知必会</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/window添加右键用atom打开/">window添加右键用atom打开</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/notepad常用插件/">notepad常用插件与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/chrome截取整个网页/">chrome截取整个网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Git教程/">Git教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/python编码问题/">python编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/04/java方法传参问题/">java方法传参问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/如何有效批评而不是吵架/">如何有效批评而不是吵架</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/全球公认的最健康的一天作息图解/">全球公认的最健康的一天作息图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/如何提高「钝感力」，从此不再「想太多」/">如何提高「钝感力」，从此不再「想太多」</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/03/java嵌套类/">java嵌套类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第3章-完成时态/">英语语法——中级：第3章.完成时态</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第2章-名词、定语、状语从句/">英语语法——中级：第2章.名词、定语、状语从句</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第1章-简单句与复合句/">英语语法——中级：第1章.简单句与复合句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/08/vim/">vim</a></li></ul>
 
 
 

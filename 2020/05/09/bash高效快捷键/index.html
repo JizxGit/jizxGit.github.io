@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="jizx">
+
+
+
+<meta name="description" content="bash 敲命令的快捷键为了提高Linux下工作效率，自然而然的就变成了如何高效使用Bash的问题。虽然上一篇Shell下的一些特殊字符在使用的时候，能够一定程度上提高效率，后一篇关于Bash下的历史扩展也能很大程度提高效率，但Bash上的一些快捷键才是提高效率的最简单也是最直接方式。本文正是奔着这个目标来的！">
+<meta name="keywords" content="python,机器学习,linux,java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bash高效快捷键">
+<meta property="og:url" content="https://jizx.vip/2020/05/09/bash高效快捷键/index.html">
+<meta property="og:site_name" content="玖玖的博客">
+<meta property="og:description" content="bash 敲命令的快捷键为了提高Linux下工作效率，自然而然的就变成了如何高效使用Bash的问题。虽然上一篇Shell下的一些特殊字符在使用的时候，能够一定程度上提高效率，后一篇关于Bash下的历史扩展也能很大程度提高效率，但Bash上的一些快捷键才是提高效率的最简单也是最直接方式。本文正是奔着这个目标来的！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-09T14:29:07.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="bash高效快捷键">
+<meta name="twitter:description" content="bash 敲命令的快捷键为了提高Linux下工作效率，自然而然的就变成了如何高效使用Bash的问题。虽然上一篇Shell下的一些特殊字符在使用的时候，能够一定程度上提高效率，后一篇关于Bash下的历史扩展也能很大程度提高效率，但Bash上的一些快捷键才是提高效率的最简单也是最直接方式。本文正是奔着这个目标来的！">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="玖玖的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="https://avatars1.githubusercontent.com/u/18480104?s=40&v=4">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>bash高效快捷键 | 玖玖的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">jizx</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">分类&amp;标签</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1822980003@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/JizxGit" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/anaconda/">anaconda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hive/">hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ing/">ing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter/">jupyter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logging/">logging</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notepad/">notepad++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photoshop/">photoshop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python进阶/">python进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python高级/">python高级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/window/">window</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/从句/">从句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传参/">传参</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/健康/">健康</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/右键/">右键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/同理心/">同理心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/吵架/">吵架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复合句/">复合句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多进程/">多进程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/心理/">心理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/截图/">截图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/所见所闻/">所见所闻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打印/">打印</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/批评/">批评</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方法调用/">方法调用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时态/">时态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/曲线/">曲线</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流畅的python/">流畅的python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境/">环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类/">类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统优化/">系统优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编码问题/">编码问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编辑器/">编辑器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">博客主题原作者MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">在读研究生二年级</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">jizx</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">jizx</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">分类&amp;标签</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1822980003@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/JizxGit" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-bash高效快捷键" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/05/09/bash高效快捷键/" class="article-date">
+      <time datetime="2020-05-09T14:21:43.000Z" itemprop="datePublished">2020-05-09</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      bash高效快捷键
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <excerpt in="" index="" |="" 首页摘要=""> 
+
+<h2 id="bash-敲命令的快捷键"><a href="#bash-敲命令的快捷键" class="headerlink" title="bash 敲命令的快捷键"></a>bash 敲命令的快捷键</h2><p>为了提高Linux下工作效率，自然而然的就变成了如何高效使用Bash的问题。虽然上一篇<a href="https://linux.cn/article-5657-1.html" target="_blank" rel="noopener">Shell下的一些特殊字符</a>在使用的时候，能够一定程度上提高效率，后一篇关于<a href="https://linux.cn/article-5658-1.html" target="_blank" rel="noopener">Bash下的历史扩展</a>也能很大程度提高效率，但Bash上的一些快捷键才是提高效率的最简单也是最直接方式。本文正是奔着这个目标来的！</p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+
+
+<p><strong>快捷键有个规律，<em>Ctrl开头的快捷键一般是针对字符的，而Alt开头的快捷键一般是针对词的</em>。</strong></p>
+<p>Bash下，如果使用的是shell脚本文件，快捷键不一定是一样的，有的时候会出现同一个快捷键有不同的表现，这种情况一般是由于Bash所处的模式不同而引起的，你可以通过<code>set</code>命令来调整模式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">set -o emacs</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#切到emacs模式</span></span></span><br><span class="line">set -o vi</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#切到vi模式</span></span></span><br><span class="line">set -o</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 查看当前选项的设置状态</span></span></span><br></pre></td></tr></table></figure>
+<p>本文使用的是emacs模式</p>
+<ol>
+<li><code>CTRL</code>=<code>C</code>：这个键是指PC键盘上的Ctrl键</li>
+<li><code>ALT</code>=<code>M</code>：这个键是PC键盘上的ALT键，如果你键盘上没有这个键，可以尝试使用ESC键代替</li>
+<li><code>SHIFT</code>=<code>S</code>：此键是PC上的Shift键</li>
+<li><code>ESC</code>=<code>E</code>：这个键是PC键盘上的ESC键，此键一般在键盘的左上角</li>
+<li><code>BACKSPACE</code>=<code>DEL</code>：此键是是PC键盘上的Backspace键，一般位于主键盘区的右上角</li>
+<li>文中”[]”括住的为快捷键内容，”-“两边的内容是按住左边键，再按右边键获得，”,”逗号两边的内容是先按左边键，松开后再按右边键。如：[<code>CTRL</code>-<code>v</code>]是表示按下Ctrl键之后，不要松开，再按下v键。</li>
+<li>默认的情况下，快捷键的组成格式是：&lt;<code>CTRL</code> | <code>ALT</code> | <code>ESC</code> &gt;-[<code>SHIFT</code>-]<code>&lt;char&gt;</code>。即由Ctrl、Alt、Esc之一开头，中划线，Shift，中划线，和一个字符组成。其中，中括号内的Shift和”-“有时可省略。</li>
+<li>默认情况下，快捷键只有最后一个为字符，其他的键值均为功能键</li>
+<li>出现[<code>CTRL</code>-?]这类快捷键，由于”?”是需要使用Shift按键才能获得的字符，因此此类快捷键默认使用的是[<code>CTRL</code>-<code>SHIFT</code>-?]</li>
+</ol>
+<h3 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>定位相关</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>A</code></td>
+<td>将光标移到行首（在命令行下）</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>E</code></td>
+<td>将光标移动到行尾（在命令行下）</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>F</code></td>
+<td>光标往前跳一个词(移动到光标所在词的末尾)。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>B</code></td>
+<td>光标往回跳一个词，词以非字母为界(跳动到当前光标所在词的开头)。</td>
+</tr>
+<tr>
+<td><strong>编辑相关</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>Y</code></td>
+<td>将之前已经清除的文本粘贴回来（主要针对<code>CTRL</code>-<code>U</code>或<code>CTRL</code>-<code>W</code>或<code>CTRL</code>-<code>K</code>）。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>W</code></td>
+<td>删除从在光标处往回的第一个空白符之间的内容。在某些设置里, <code>CTRL</code>-<code>W</code> 删除光标往后（回）到第一个非文字和数字之间的字符。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>U</code></td>
+<td>删除从光标位置开始到行首的所有字符内容。在某些设置下，<code>CTRL</code>-<code>U</code>会不以光标位置为参考而删除整行的输入。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>K</code></td>
+<td>删除从光标所在处到行尾的所有字符（在命令行下）</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>D</code></td>
+<td>删除光标所在位置到光标所在词的结尾位置的所有内容(如果光标是在词开头，则删除整个词)。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>BASKSPACE</code></td>
+<td>删除光标所在位置到词开头的所有内容。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>R</code></td>
+<td>取消所有变更，并将当前行恢复到在历史记录中的原始状态(前提是当前命令是从历史记录中来的，如果是手动输入，则会清空行)。</td>
+</tr>
+<tr>
+<td><strong>特殊字符相关</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>V</code></td>
+<td>在输入文本的时候，按下C-V之后，可以插入控制字符。比如：<code>echo -e ‘\x0a&#39;;</code>和<code>echo &lt;CTRL-V&gt;&lt;CTRL-J&gt;;</code>这两种效果一样。这点功能在文本编辑器内非常有效。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>M</code></td>
+<td>回车(Carriage return)。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>I</code></td>
+<td>水平制表符。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>K</code></td>
+<td>垂直制表符(Vertical tab)，（输入状态）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>R</code></td>
+<td>回溯搜索(Backwards search)history缓冲区内的文本（在命令行下）。注意：按下之后，提示符会变成<code>(reverse-i-search)&#39;&#39;:</code>输入的搜索内容出现在单引号内，同时冒号后面出现最近最匹配的历史命令。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>L</code></td>
+<td>跳纸，换页(Formfeed)，清屏。清空终端屏幕。在终端上，这个命令的作用和<code>clear</code>命令一样。但当这个命令发送到打印机时，Ctrl-L会直接跳到纸张(Paper sheet)的末尾。</td>
+</tr>
+</tbody>
+</table>
+<p>程序相关</p>
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CTRL</code>-<code>C</code></td>
+<td>中断，终结一个前台作业。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>Z</code></td>
+<td>暂停一个前台的作业；在某些文本处理程序中也作为替换操作；在MSDOS文件系统中作为EOF（End-of-file)字符。 用<code>fg</code>恢复。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>S</code></td>
+<td>Suspend(XOFF)，挂起。这个是冻结终端的stdin。要恢复可以按<code>CTRL</code>-<code>Q</code>。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>Q</code></td>
+<td>Resume (XON)。恢复/解冻，这个命令是恢复终端的stdin用的，可参见<code>CTRL</code>-<code>S</code>。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p><strong>避免重复输入文件名</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">touch /tmp/a-test-file-from-blog.useasp.net</span><br><span class="line"> </span><br><span class="line"><span class="comment">## 如果不使用快捷键，文件名要重新输入</span></span><br><span class="line">chmod u+x /tmp/a-test-file-from-blog.useasp.net</span><br><span class="line"> </span><br><span class="line"><span class="comment">##使用快捷键</span></span><br><span class="line">chmod u+x &lt;ALT-.&gt;</span><br><span class="line"><span class="comment">## 快捷键[M-.]自动会将上面的最后一个参数附加</span></span><br></pre></td></tr></table></figure>
+<h3 id="自定义快捷键"><a href="#自定义快捷键" class="headerlink" title="自定义快捷键"></a>自定义快捷键</h3><p>使用<code>bind</code>命令即可，Bash中的快捷键其实是<code>Readline</code>来提供的，因此，这里快捷键的设置其实就是配置<code>Readline</code>，<code>Readline</code>中分两种快捷键，一种是Readline内部的函数快捷键，另外一种是执行Shell命令，设置的时候稍有不同：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#查看Readline中可以使用的函数名称</span></span></span><br><span class="line">bind -l</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#查看当前绑定的案件配置与其对应的功能</span></span></span><br><span class="line">bind -v</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#已经绑定的快捷键</span></span></span><br><span class="line">bind -p</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#绑定自定义执行命令shell命令的快捷键</span></span></span><br><span class="line">bind -x '"\C-x\C-l":ls -al'</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 绑定后，按[C-x,C-L]就能执行ls -al</span></span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 绑定内置函数功能</span></span></span><br><span class="line">bind "\C-x":backword-delte-char</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#这个是这行Readline库中的函数backword-delte-char</span></span></span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<ol>
+<li><p>在配置文件中，<code>\C</code>代表<code>CTRL</code>，<code>\M</code>代表<code>ALT</code>，<code>\e</code>代表<code>ESC</code>，<code>\\</code>是反斜杠<code>\</code>，<code>\&#39;</code>是单引号，<code>\&quot;</code>是双引号；</p>
+</li>
+<li><p>如果要查看某一个功能键的字符序列可以通过[<code>CTRL</code>-<code>V</code>]来实现，或者输入cat后回车，进入编辑中，直接按快捷键;</p>
+</li>
+<li><p>配置文件中可能会使用八进制或者十六进制来表示字符;</p>
+</li>
+</ol>
+<p>为了能够让设置的快捷键<strong>永久有效</strong>，我们就需要将快捷键的配置写入文件。在Linux系统中，能永久保存快捷键的地方有两个，全局和用户的配置文件，全局的是<code>/etc/inputrc</code>，而用户的是在用户的根目录下<code>~/.inputrc</code>，全局的会影响所有的用户，而用户根目录下的只会对相应的用户产生影响。</p>
+<p>inputrc文件的大概样子像下面这样：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 本例来自CentOS6.4的默认配置文件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="keyword">if</span> mode=emacs</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> linux console and RH/Debian xterm</span></span><br><span class="line">"\e[1~": beginning-of-line</span><br><span class="line">"\e[4~": end-of-line</span><br><span class="line"><span class="meta">#</span><span class="bash"> commented out keymappings <span class="keyword">for</span> pgup/pgdown to reach begin/end of <span class="built_in">history</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="string">"\e[5~"</span>: beginning-of-history</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="string">"\e[6~"</span>: end-of-history</span></span><br><span class="line">"\e[5~": history-search-backward</span><br><span class="line">"\e[6~": history-search-forward</span><br><span class="line">"\e[3~": delete-char</span><br><span class="line">"\e[2~": quoted-insert</span><br><span class="line">"\e[5C": forward-word</span><br><span class="line">"\e[5D": backward-word</span><br><span class="line">"\e[1;5C": forward-word</span><br><span class="line">"\e[1;5D": backward-word</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> rxvt</span></span><br><span class="line">"\e[8~": end-of-line</span><br><span class="line">"\eOc": forward-word</span><br><span class="line">"\eOd": backward-word</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> non RH/Debian xterm, can<span class="string">'t hurt for RH/DEbian xterm</span></span></span><br><span class="line">"\eOH": beginning-of-line</span><br><span class="line">"\eOF": end-of-line</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> freebsd console</span></span><br><span class="line">"\e[H": beginning-of-line</span><br><span class="line">"\e[F": end-of-line</span><br><span class="line"><span class="meta">$</span><span class="bash">endif</span></span><br></pre></td></tr></table></figure>
+<p>TODO ‘<strong>\e[H</strong>‘  到底表示什么</p>
+<p>推荐的自定义</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bind "\C-f":forward-word   # 向前移动一个词 （以英文单词）</span><br><span class="line">bind "\C-b":backward-word  # 向后移动一个词</span><br><span class="line">bind "\C-f":vi-fword  # 向前移动一个词(以空格划分)</span><br><span class="line">bind "\C-b":vi-bword  # 向后移动一个词</span><br></pre></td></tr></table></figure>
+<h3 id="全部快捷键"><a href="#全部快捷键" class="headerlink" title="全部快捷键"></a>全部快捷键</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>快捷键说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CTRL</code>-<code>A</code></td>
+<td>将光标移到行首（在命令行下）</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>B</code></td>
+<td>退格 (非破坏性的)，这个只是将光标位置往回移动一个位置。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>C</code></td>
+<td>中断，终结一个前台作业。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>D</code></td>
+<td>“EOF” (文件结尾：end of file)。它用于表示标准输入（stdin）的结束。在控制台或xterm 窗口输入文本时，<code>CTRL</code>-<code>D</code> 删除在光标下的字符。从一个shell中退出 (类似于exit)。如果没有字符存在，<code>CTRL</code>-<code>D</code> 则会登出该会话。在一个xterm窗口中，则会产生关闭此窗口的效果。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>E</code></td>
+<td>将光标移动到行尾（在命令行下）</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>F</code></td>
+<td>将光标向前移动一个字符（在命令行下）</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>G</code></td>
+<td>BEL。在一些老式打印机终端上，这会引发一个响铃。在xterm终端上可能是哔的一声。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>H</code></td>
+<td>擦除(Rubout)(破坏性的退格)。在光标往回移动的时候，同时擦除光标前的一个字符。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>I</code></td>
+<td>水平制表符。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>J</code></td>
+<td>新行(换行[line feed]并到行首)。在脚本中，也可能表示为八进制形式(‘\012’)或十六进制形式(‘\x0a’)。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>K</code></td>
+<td>垂直制表符(Vertical tab)。在控制台或 xterm 窗口输入文本时，<code>CTRL</code>-<code>K</code>会删除从光标所在处到行尾的所有字符。在脚本中，也可能表示为八进制形式(‘\013’)或十六进制形式(‘\x0b’)。在脚本中，<code>CTRL</code>-<code>K</code>可能会有不一样的行为，下面的例子给出其不一样的行为：`#!/bin/bash## 一个CTRL-K垂直制表符的例子 var=$’\x0aBottom Line\x0bTop line\x0a’## 直接输出echo “$var”## 使用col来过滤控制字符echo “$var”</td>
+<td>col ## 上面的显示将会不一样 exit 0`</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>L</code></td>
+<td>跳纸，换页(Formfeed)，清屏。清空终端屏幕。在终端上，这个命令的作用和<code>clear</code>命令一样。但当这个命令发送到打印机时，Ctrl-L会直接跳到纸张(Paper sheet)的末尾。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>M</code></td>
+<td>回车(Carriage return)。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>N</code></td>
+<td>擦除从history缓冲区召回的一行文本（在命令行下）。如果当前输入是历史记录中选择的时候，这个是从这个历史记录开始，每按一次，是更接近的一条命令。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>O</code></td>
+<td>产生一个新行（在命令行下）。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>P</code></td>
+<td>从history缓冲区召回上一次的命令（在命令行下）。此快捷键召回的顺序是由近及远的召回，即按一次，召回的是前一次的命令，再按一次，是召回上一次之前的命令，这和<code>CTRL</code>-<code>N</code>都是以当前的输入为起点，但是两个命令操作刚好相反，<code>CTRL</code>-<code>N</code>是从起点开始由远及近（如果起点是历史命令的话）。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>Q</code></td>
+<td>Resume (XON)。恢复/解冻，这个命令是恢复终端的stdin用的，可参见<code>CTRL</code>-<code>S</code>。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>R</code></td>
+<td>回溯搜索(Backwards search)history缓冲区内的文本（在命令行下）。注意：按下之后，提示符会变成<code>(reverse-i-search)&#39;&#39;:</code>输入的搜索内容出现在单引号内，同时冒号后面出现最近最匹配的历史命令。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>S</code></td>
+<td>Suspend(XOFF)，挂起。这个是冻结终端的stdin。要恢复可以按<code>CTRL</code>-<code>Q</code>。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>T</code></td>
+<td>交换光标位置与光标的前一个位置的字符内容（在命令行下）。比如：<code>echo $var;</code>，假设光标在a上，那么，按下C-T之后，v和a将会交换位置：<code>echo $avr;</code>。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>U</code></td>
+<td>擦除从光标位置开始到行首的所有字符内容。在某些设置下，<code>CTRL</code>-<code>U</code>会不以光标位置为参考而删除整行的输入。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>V</code></td>
+<td>在输入文本的时候，按下C-V之后，可以插入控制字符。比如：<code>echo -e ‘\x0a&#39;;</code>和<code>echo ;</code>这两种效果一样。这点功能在文本编辑器内非常有效。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>W</code></td>
+<td>当在控制台或一个xterm窗口敲入文本时, <code>CTRL</code>-<code>W</code> 会删除从在光标处往后（回）的第一个空白符之间的内容。在某些设置里, <code>CTRL</code>-<code>W</code> 删除光标往后（回）到第一个非文字和数字之间的字符。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>X</code></td>
+<td>在某些文字处理程序中，这个控制字符将会剪切高亮的文本并且将它复制到剪贴板中。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>Y</code></td>
+<td>将之前已经清除的文本粘贴回来（主要针对<code>CTRL</code>-<code>U</code>或<code>CTRL</code>-<code>W</code>）。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>Z</code></td>
+<td>暂停一个前台的作业；在某些文本处理程序中也作为替换操作；在MSDOS文件系统中作为EOF（End-of-file)字符。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>\</code></td>
+<td>退出。和<code>CTRL</code>-<code>C</code>差不多，也可能dump一个”core”文件到你的工作目录下(这个文件可能对你没用)。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>/</code></td>
+<td>撤消操作，Undo。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>_</code></td>
+<td>撤消操作。</td>
+</tr>
+<tr>
+<td><code>CTRL</code>-<code>xx</code></td>
+<td>在行首和光标两个位置间进行切换，此处是两个”x”字符。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>B</code></td>
+<td>光标往回跳一个词，词以非字母为界(跳动到当前光标所在词的开头)。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>F</code></td>
+<td>光标往前跳一个词(移动到光标所在词的末尾)。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>D</code></td>
+<td>删除光标所在位置到光标所在词的结尾位置的所有内容(如果光标是在词开头，则删除整个词)。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>BASKSPACE</code></td>
+<td>删除光标所在位置到词开头的所有内容。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>C</code></td>
+<td>将光标所在位置的字母转为大写(如果光标在一个词的起始位置或之前，则词首字母大写)。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>U</code></td>
+<td>将光标所在位置到词尾的所有字母转为大写。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>L</code></td>
+<td>将光标位置到词尾的所有字母转为小写。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>R</code></td>
+<td>取消所有变更，并将当前行恢复到在历史记录中的原始状态(前提是当前命令是从历史记录中来的，如果是手动输入，则会清空行)。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>T</code></td>
+<td>当光标两侧都存在词的时候，交换光标两侧词的位置。如：<code>abc bcd</code> -&gt; <code>bcd abc</code></td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>.</code></td>
+<td>使用前一次命令的最后一个词(命令本身也是一个词，参见后一篇的Bang命令中的词指示符概念)。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>_</code></td>
+<td>同<code>ALT</code>-<code>.</code>。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>数值</code></td>
+<td>这个数值可以是正或者是负，这个键单独没有作用，必须后面再接其他内容，如果后面是字符，则表示重复次数。如：[<code>ALT</code>-<code>10</code>,<code>k</code>]则光标位置会插入10个k字符(负值在这种情况下无效)；如果后面接的是命令，则数字会影响后面命令的执行结果，如：[<code>ALT</code>-<code>-`</code>1<code></code>0<code>,</code>CTRL<code>-</code>D<code>]则向</code>CTRL<code>-</code>D`默认方向相反(负数)的方向执行10次操作。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>&lt;</code></td>
+<td>移动到历史记录中的第一行命令。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>&gt;</code></td>
+<td>移动到历史的最后一行，即当前正在输入的行(没有输入的情况下为空)。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>P</code></td>
+<td>从当前行开始向前搜索，有必要则向”上”移动，移动时，使用非增量搜索查找用户提供的字符串。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>N</code></td>
+<td>从当前行开始向后搜索，如果有必要向”下”移动，移动时，使用非增量搜索查找用户提供的字符串。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>CTRL</code>-<code>Y</code></td>
+<td>在标志点上插入前一个命令的第一个参数(一般是前一行的第二个词)。如果有参数n，则插入前一个命令的第n个词(前一行的词编号从0开始，见历史扩展)。负的参数将插入冲前一个命令的结尾开始的第n个词。参数n通过M-No.的方式传递，如：[<code>ALT</code>-<code>0</code>,<code>ALT</code>-<code>CTRL</code>-<code>Y</code>]插入前一个命令的第0个词(命令本身)。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>Y</code></td>
+<td>轮询到删除环，并复制新的顶端文本。只能在yank[<code>CTRL</code>-<code>Y</code>]或者yank-pop[<code>M</code>-<code>Y</code>]之后使用这个命令。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>?</code></td>
+<td>列出能够补全标志点前的条目。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>*</code></td>
+<td>把能够补全[<code>ALT</code>-<code>?</code>]命令能生成的所有文本条目插入到标志点前。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>/</code></td>
+<td>试图对标志点前的文本进行文件名补全。[<code>CTRL</code>-<code>X</code>,<code>/</code>]把标志点前的文本当成文件名并列出可以补全的条目。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>~</code></td>
+<td>把标志点前的文本当成用户名并试图进行补全。[<code>CTRL</code>-<code>X</code>,<code>~</code>]列出可以作为用户名补全标志点前的条目。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>$</code></td>
+<td>把标志点前的文本当成Shell变量并试图进行补全。[<code>CTRL</code>-<code>X</code>,<code>$</code>]列出可以作为变量补全标志点前的条目。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>@</code></td>
+<td>把标志点前的文本当成主机名并试图进行补全。[<code>CTRL</code>-<code>X</code>,<code>@</code>]列出可以作为主机补全标志点前的条目。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>!</code></td>
+<td>把标志点前的文本当成命令名并试图进行补全。进行命令名补全时会依次使用别名、保留字、Shell函数、shell内部命令，最后是可执行文件名。[<code>CTRL</code>-<code>X</code>,<code>!</code>]把标志点前的文本当成命令名并列出可补全的条目。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>TAB</code></td>
+<td>把标志点前的文本与历史记录中的文本进行比较以寻找匹配的并试图进行补全。</td>
+</tr>
+<tr>
+<td><code>ALT</code>-<code>{</code></td>
+<td>进行文件名补全，把可以补全的条目列表放在大括号之间，让shell可以使用。</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://linux.cn/article-5660-1.html" target="_blank" rel="noopener">Bash 快捷键大全</a> </p>
+</the></excerpt>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/05/09/bash高效快捷键/">bash高效快捷键</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
+        <p><span>发布时间:</span>2020-05-09, 22:21:43</p>
+        <p><span>最后更新:</span>2020-05-09, 22:29:07</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/05/09/bash高效快捷键/" title="bash高效快捷键">https://jizx.vip/2020/05/09/bash高效快捷键/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://jizx.vip/2020/05/09/bash高效快捷键/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/03/30/pytorch/">
+                    pytorch
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#bash-敲命令的快捷键"><span class="toc-text">bash 敲命令的快捷键</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用快捷键"><span class="toc-text">常用快捷键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#案例"><span class="toc-text">案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义快捷键"><span class="toc-text">自定义快捷键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全部快捷键"><span class="toc-text">全部快捷键</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-5 i,
+        .toc-level-5 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/03/30/pytorch/" title="下一篇: pytorch">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/bash高效快捷键/">bash高效快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/30/pytorch/">pytorch</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/02/python进阶/">python进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/02/python进阶的副本/">python进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/attention图解/">attention图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/keras/">keras</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/数据分析库/">python数据分析库</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/sklearn/">sklearn</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/python-多线程/">python 多线程与多进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/python-cookbook/">python cookbook</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/推荐网站/">推荐网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/python技巧/">python技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/开发环境搭建与效率技巧/">开发环境搭建与效率技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/hive/">hive</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/11/linux知识点/">linux知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/10/vim技巧/">vim技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/bash命令提示符个性化/">bash命令提示符个性化</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/02/awk/">awk</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/13/linux-shell编程/">linux shell编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python小模块/">python小模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python模块-logging/">python模块-logging</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/anaconda与jupyter使用与设置/">anaconda与jupyter的使用和设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/linux常用命令/">linux常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/photoshop曲线原理与应用/">photoshop曲线原理与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/正则表达式必知必会/">正则表达式必知必会</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/window添加右键用atom打开/">window添加右键用atom打开</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/notepad常用插件/">notepad常用插件与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/chrome截取整个网页/">chrome截取整个网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Git教程/">Git教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/python编码问题/">python编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/04/java方法传参问题/">java方法传参问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/如何有效批评而不是吵架/">如何有效批评而不是吵架</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/全球公认的最健康的一天作息图解/">全球公认的最健康的一天作息图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/23/如何提高「钝感力」，从此不再「想太多」/">如何提高「钝感力」，从此不再「想太多」</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/03/java嵌套类/">java嵌套类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第3章-完成时态/">英语语法——中级：第3章.完成时态</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第2章-名词、定语、状语从句/">英语语法——中级：第2章.名词、定语、状语从句</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第1章-简单句与复合句/">英语语法——中级：第1章.简单句与复合句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/08/vim/">vim</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2020 jizx
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 9;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
