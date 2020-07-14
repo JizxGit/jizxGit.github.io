@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://jizx.vip/2019/10/25/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8E%E6%95%88%E7%8E%87%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2020-07-14T01:31:58.685Z</lastmod>
+  </url>  <url>
     <loc>https://jizx.vip/2020/05/09/bash%E9%AB%98%E6%95%88%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
-    <lastmod>2020-05-09T14:29:07.525Z</lastmod>
+    <lastmod>2020-07-14T01:31:58.685Z</lastmod>
   </url>  <url>
     <loc>https://jizx.vip/2019/08/13/linux-shell%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2020-05-09T14:29:07.524Z</lastmod>
+    <lastmod>2020-07-14T01:31:58.684Z</lastmod>
   </url>  <url>
     <loc>https://jizx.vip/2019/08/06/python%E6%A8%A1%E5%9D%97-logging/</loc>
-    <lastmod>2020-05-09T14:29:07.522Z</lastmod>
+    <lastmod>2020-07-14T01:31:58.683Z</lastmod>
+  </url>  <url>
+    <loc>https://jizx.vip/2019/08/04/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2020-07-14T01:31:58.681Z</lastmod>
+  </url>  <url>
+    <loc>https://jizx.vip/2017/11/08/vim/</loc>
+    <lastmod>2020-07-14T01:31:58.679Z</lastmod>
   </url>  <url>
     <loc>https://jizx.vip/2019/08/06/python%E5%B0%8F%E6%A8%A1%E5%9D%97/</loc>
     <lastmod>2020-05-09T14:29:07.521Z</lastmod>
@@ -40,9 +49,6 @@
     <loc>https://jizx.vip/2020/02/04/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%BA%93/</loc>
     <lastmod>2020-02-06T13:47:42.497Z</lastmod>
   </url>  <url>
-    <loc>https://jizx.vip/2019/10/25/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8E%E6%95%88%E7%8E%87%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2020-02-04T12:59:09.194Z</lastmod>
-  </url>  <url>
     <loc>https://jizx.vip/2020/02/04/attention%E5%9B%BE%E8%A7%A3/</loc>
     <lastmod>2020-02-04T12:16:30.710Z</lastmod>
   </url>  <url>
@@ -54,9 +60,6 @@
   </url>  <url>
     <loc>https://jizx.vip/2019/10/12/hive/</loc>
     <lastmod>2020-02-04T12:09:25.393Z</lastmod>
-  </url>  <url>
-    <loc>https://jizx.vip/2019/08/04/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
-    <lastmod>2020-02-04T09:55:50.357Z</lastmod>
   </url>  <url>
     <loc>https://jizx.vip/2019/10/28/%E6%8E%A8%E8%8D%90%E7%BD%91%E7%AB%99/</loc>
     <lastmod>2020-02-03T08:51:06.562Z</lastmod>
@@ -72,9 +75,6 @@
   </url>  <url>
     <loc>https://jizx.vip/2019/10/10/vim%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2019-10-28T15:15:49.738Z</lastmod>
-  </url>  <url>
-    <loc>https://jizx.vip/2017/11/08/vim/</loc>
-    <lastmod>2019-10-24T09:05:55.758Z</lastmod>
   </url>  <url>
     <loc>https://jizx.vip/2018/11/19/python%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2019-08-04T13:29:52.072Z</lastmod>

@@ -16,7 +16,7 @@
 
 
 <meta name="description" content="python logging 模块的使用以及详细讲解">
-<meta name="keywords" content="python,工具,logging">
+<meta name="keywords" content="python,logging,工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python模块-logging">
 <meta property="og:url" content="https://jizx.vip/2019/08/06/python模块-logging/index.html">
@@ -24,7 +24,7 @@
 <meta property="og:description" content="python logging 模块的使用以及详细讲解">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jizx.vip/2019/08/06/python模块-logging/组件结构图.png">
-<meta property="og:updated_time" content="2020-05-09T14:29:07.522Z">
+<meta property="og:updated_time" content="2020-07-14T01:31:58.683Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python模块-logging">
 <meta name="twitter:description" content="python logging 模块的使用以及详细讲解">
@@ -394,6 +394,8 @@
 <p>其中<code>logging.basicConfig(**kwargs)</code>函数用于指定“要记录的日志级别”、“日志格式”、“日志输出位置”、“日志文件的打开模式”等信息，其他几个都是用于记录各个级别日志的函数。</p>
 <p>具体例子：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(level=logging.DEBUG,<span class="comment"># 控制台打印的日志级别</span></span><br><span class="line">                    <span class="comment"># filename='new.log', # 注释掉当前行即可打印到控制台</span></span><br><span class="line">                    filemode=<span class="string">'w'</span>,<span class="comment"># 写模式：a和w，w就是写模式，a是追加模式，默认是追加模式</span></span><br><span class="line">                    format= <span class="string">'%(asctime)s - %(pathname)s[line:%(lineno)d] - %(name)s - %(levelname)s: %(message)s'</span>, <span class="comment"># 日志格式</span></span><br><span class="line">                    datefmt=<span class="string">'%Y-%m-%d  %H:%M:%S %a '</span>    <span class="comment"># 日期格式</span></span><br><span class="line">                    )</span><br><span class="line"></span><br><span class="line">logging.debug(<span class="string">"info"</span>)</span><br><span class="line">logging.info(<span class="string">"info"</span>)</span><br><span class="line">logging.warning(<span class="string">"warning"</span>)</span><br><span class="line">logging.error(<span class="string">"error"</span>)</span><br><span class="line">logging.critical(<span class="string">"critical"</span>)</span><br></pre></td></tr></table></figure>
+<p>自定义<strong>屏幕输出的logger</strong>。如果想在不同文件中使用不同 logger，就需要创建一个新的 logger。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logger = logging.getLogger(<span class="string">'name'</span>) <span class="comment"># 创建logger</span></span><br><span class="line">logger.setLevel(logging.DEBUG)     <span class="comment"># 设置等级</span></span><br><span class="line">std_err = logging.StreamHandler()  <span class="comment"># 创建handler</span></span><br><span class="line">std_err.setFormatter(logging.Formatter(<span class="string">"%(name)s:%(asctime)s-%(levelname)s: %(message)s"</span>))       <span class="comment"># handler定义输出格式</span></span><br><span class="line">logger.addHandler(std_err)         <span class="comment"># 将handler添加到logger</span></span><br></pre></td></tr></table></figure>
 <h4 id="关于-basicConfig-说明"><a href="#关于-basicConfig-说明" class="headerlink" title="关于 basicConfig 说明"></a>关于 basicConfig 说明</h4><p>主要的配置是通过<code>basicConfig</code>来定制的：</p>
 <table>
 <thead>
@@ -701,7 +703,7 @@
         <p><span>本文标题:</span><a href="/2019/08/06/python模块-logging/">python模块-logging</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
         <p><span>发布时间:</span>2019-08-06, 14:32:08</p>
-        <p><span>最后更新:</span>2020-05-09, 22:29:07</p>
+        <p><span>最后更新:</span>2020-07-14, 09:31:58</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/08/06/python模块-logging/" title="python模块-logging">https://jizx.vip/2019/08/06/python模块-logging/</a>
             <span class="copy-path" data-clipboard-text="原文: https://jizx.vip/2019/08/06/python模块-logging/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
