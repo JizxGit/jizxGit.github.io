@@ -1,7 +1,5 @@
 https://jizx.vip/2020/05/09/bash高效快捷键/
-https://jizx.vip/2020/03/30/pytorch/
 https://jizx.vip/2020/03/02/python进阶/
-https://jizx.vip/2020/03/02/python进阶的副本/
 https://jizx.vip/2020/02/04/attention图解/
 https://jizx.vip/2020/02/04/keras/
 https://jizx.vip/2020/02/04/数据分析库/
