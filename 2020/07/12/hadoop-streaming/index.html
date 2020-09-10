@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="author" content="jizx">
+
+
+
+<meta name="description" content="hadoop streaming">
+<meta name="keywords" content="hadoop streaming">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hadoop streaming">
+<meta property="og:url" content="https://jizx.vip/2020/07/12/hadoop-streaming/index.html">
+<meta property="og:site_name" content="玖玖的博客">
+<meta property="og:description" content="hadoop streaming">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://jizx.vip/2020/07/12/hadoop-streaming/非utf-8字符问题.png">
+<meta property="og:image" content="https://jizx.vip/2020/07/12/hadoop-streaming/hadoop目录结构.png">
+<meta property="og:updated_time" content="2020-09-10T14:51:41.701Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hadoop streaming">
+<meta name="twitter:description" content="hadoop streaming">
+<meta name="twitter:image" content="https://jizx.vip/2020/07/12/hadoop-streaming/非utf-8字符问题.png">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="玖玖的博客" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="https://avatars1.githubusercontent.com/u/18480104?s=40&v=4">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>hadoop streaming | 玖玖的博客</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">jizx</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">分类&amp;标签</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:1822980003@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/JizxGit" title="GitHub"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/anaconda/">anaconda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-streaming/">hadoop streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hive/">hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ing/">ing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter/">jupyter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logging/">logging</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notepad/">notepad++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photoshop/">photoshop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python进阶/">python进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python高级/">python高级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/window/">window</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/从句/">从句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传参/">传参</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/右键/">右键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复合句/">复合句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多进程/">多进程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/截图/">截图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打印/">打印</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方法调用/">方法调用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时态/">时态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/曲线/">曲线</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流畅的python/">流畅的python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境/">环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类/">类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统优化/">系统优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编码问题/">编码问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编辑器/">编辑器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">博客主题原作者MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">在读研究生二年级</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">jizx</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">jizx</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">分类&amp;标签</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:1822980003@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/JizxGit" title="GitHub"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-hadoop-streaming" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/07/12/hadoop-streaming/" class="article-date">
+      <time datetime="2020-07-12T02:30:50.000Z" itemprop="datePublished">2020-07-12</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      hadoop streaming
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/hadoop/">hadoop</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hadoop-streaming/">hadoop streaming</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <excerpt in="" index="" |="" 首页摘要=""> 
+
+<p>hadoop streaming</p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+
+
+<h2 id="mapper、reducer-模板"><a href="#mapper、reducer-模板" class="headerlink" title="mapper、reducer 模板"></a>mapper、reducer 模板</h2><p>Python3版本的 mapper、reducer 模板，一行一行的读取并处理</p>
+<p><strong>注意：hadoop上的默认编码有可能不是 utf-8，因此不论python2、3都建议使用codecs模块，使用 codecs.open(file, ‘r’, encoding=’utf-8’) 是个好习惯</strong></p>
+<p>如果你使用的是 <strong>for line in sys.stdin:</strong> 出现下面的错误怎么办呢——&gt;<strong><a href="https://stackoverflow.com/questions/53026131/how-to-prevent-unicodedecodeerror-when-reading-piped-input-from-sys-stdin/53028829" target="_blank" rel="noopener">How to prevent “UnicodeDecodeError” when reading piped input from sys.stdin?</a></strong></p>
+<p><img src="/2020/07/12/hadoop-streaming/非utf-8字符问题.png" alt="非utf-8字符问题"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding=utf8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@Author :</span></span><br><span class="line"><span class="string">@Created Time : 2020-05-21 15:00:32</span></span><br><span class="line"><span class="string">@Description : TODO</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> codecs <span class="keyword">as</span> cs</span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> stdin, stdout</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 用于判断hadoop默认编码环境</span></span><br><span class="line">logging.warning(stdin.encoding)</span><br><span class="line">logging.warning(stdout.encoding)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># TODO</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    main</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># python3 建议这样处理编码，从标准输入读取，下面两种方式等价</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> cs.open(stdin.fileno(), <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>, errors=<span class="string">'replace'</span>):</span><br><span class="line">    <span class="comment">#for line in cs.open(0, 'r', encoding='utf-8', errors='replace'):                                                                       </span></span><br><span class="line">        <span class="comment"># 1.输入</span></span><br><span class="line">        line = line.strip(<span class="string">'\r\n'</span>)</span><br><span class="line">        cols = line.split(<span class="string">'\t'</span>)</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># 2.列数校验</span></span><br><span class="line">        <span class="keyword">if</span> len(cols) != <span class="number">2</span>:</span><br><span class="line">            logging.warning(line)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"> </span><br><span class="line">        <span class="comment"># 3.TODO 具体处理逻辑</span></span><br><span class="line">        results = process()</span><br><span class="line">         </span><br><span class="line">        <span class="comment"># 4.输出</span></span><br><span class="line">        <span class="keyword">for</span> result <span class="keyword">in</span> results:</span><br><span class="line">            stdout.write(result)</span><br><span class="line">            stdout.write(<span class="string">'\n'</span>)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p>shell版的mapper、reducer，下面是一个统计词频的功能</p>
+<p><strong>注意：头部不可以加 source ~/.bashrc ,因为hadoop环境没有该文件</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mapper.sh</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$LANG</span> &gt;&amp;2</span><br><span class="line">awk -F<span class="string">"\t"</span> <span class="string">'&#123;print $1"\t"1&#125;'</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment"># reducer.sh</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$LANG</span> &gt;&amp;2</span><br><span class="line">awk -F<span class="string">"\t"</span> <span class="string">'&#123;dict[$1]+=1&#125;  END&#123;for(w in dict)print w"\t"dict[w]&#125;'</span></span><br></pre></td></tr></table></figure>
+<h2 id="本地测试"><a href="#本地测试" class="headerlink" title="本地测试"></a>本地测试</h2><p>通过模拟MapReduce进行测试，排查问题。只有本地测试通过，才能确保在hadoop上运行成功。</p>
+<p><strong>python测试</strong></p>
+<p>构造一份测试数据到 test_data.txt 中，然后下载hadoop上的python包（自己编译的），进行测试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -get /xxx/python3.6.tar.gz .</span><br><span class="line">tar -zxvf python3.6.tar.gz</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 注意使用解压后的python，非本地开发机的python</span></span><br><span class="line">cat test_data.txt  | python3.6/bin/python mapper.py | python3.6/bin/python reducer.py</span><br></pre></td></tr></table></figure>
+<p>如需安装其他模块请使用 ./python3.6/bin/python -m pip install xxx ，<strong>并重新打包压缩，上传到你的hadoop目录</strong></p>
+<p><strong>其他测试</strong></p>
+<p>mapper 与 reducer可以是 python、shell脚本，并且可以混合使用，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat test_data.txt  | python3.6/bin/python mapper.py | sh reducer.sh     <span class="comment"># python 与 shell脚本</span></span><br><span class="line">cat test_data.txt  | python3.6/bin/python mapper.py | sort -k1,1        <span class="comment"># python 与 命令</span></span><br></pre></td></tr></table></figure>
+<h2 id="hadoop-stream-模板"><a href="#hadoop-stream-模板" class="headerlink" title="hadoop stream 模板"></a>hadoop stream 模板</h2><ol>
+<li>如果只有2、3个代码文件，使用 -file xxx.py 指定；</li>
+<li>如果有较多文件，如下图，建议将整个src目录压缩成 <strong>src.tar.gz</strong>，上传到指定的hadoop目录，如果还用到别的目录，比如config、data也一起打包上传，并使用 -<em>cacheArchive hadoop路径</em>  指定；（hadoop支持zip, jar, tar.gz格式的压缩包，由于Java解压zip压缩包时会丢失文件权限信息而且遇到中文文件名会出错，所以<strong>建议采用tar.gz压缩包</strong>。）<br><img src="/2020/07/12/hadoop-streaming/./hadoop目录结构.png" alt="hadoop目录结构"></li>
+<li>hadoop上的目录结构，可以理解与本地的工程目录是相同的，只要你打包与解压的方式是对的，因此相对路径啥的，只要本地测试通过，hadoop上也不会有问题；</li>
+<li>具体使用请看下面的模板；</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/sh</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line"> </span><br><span class="line">DATE=`date -d <span class="string">"<span class="variable">$1</span>"</span> +<span class="string">"%Y%m%d"</span>`</span><br><span class="line">HADOOP_DIR=<span class="string">""</span>  <span class="comment"># TODO hadoop路径</span></span><br><span class="line">HADOOP_INPUT=<span class="string">"<span class="variable">$&#123;HADOOP_DIR&#125;</span>/input/"</span></span><br><span class="line">HADOOP_OUTPUT=<span class="string">"<span class="variable">$&#123;HADOOP_DIR&#125;</span>/output/"</span></span><br><span class="line">SRC=<span class="string">"<span class="variable">$&#123;HADOOP_DIR&#125;</span>/src.tar.gz"</span></span><br><span class="line">DATA_CONFIG=<span class="string">"<span class="variable">$&#123;HADOOP_DIR&#125;</span>/data.tar.gz"</span></span><br><span class="line">PYTHON=<span class="string">"<span class="variable">$&#123;HADOOP_DIR&#125;</span>/python3.6.tar.gz"</span></span><br><span class="line">TASK_NAME=<span class="string">"task_name"</span></span><br><span class="line"> </span><br><span class="line">hadoop fs -<span class="built_in">test</span> -e <span class="variable">$HADOOP_DIR</span></span><br><span class="line"><span class="keyword">if</span> [ $? -ne 0 ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"Hadoop路径有误：<span class="variable">$HADOOP_DIR</span>，请检查"</span>   </span><br><span class="line">  <span class="built_in">exit</span> 8</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="comment"># 上传本地工程代码到 hadoop</span></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">upload</span></span>() &#123;</span><br><span class="line">  LOCAL_FILE=<span class="variable">$1</span>    <span class="comment"># 本地文件</span></span><br><span class="line">  HADOOP_FILE=<span class="variable">$2</span>   <span class="comment"># hadoop目录</span></span><br><span class="line">  <span class="built_in">echo</span> -e <span class="string">"<span class="variable">$1</span>\n上传到↑=====↓ \n <span class="variable">$2</span>"</span></span><br><span class="line">  hadoop fs -<span class="built_in">test</span> -e <span class="variable">$HADOOP_FILE</span></span><br><span class="line">  <span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">    hadoop fs -rmr <span class="variable">$HADOOP_FILE</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">  hadoop fs -put <span class="variable">$LOCAL_FILE</span> <span class="variable">$HADOOP_FILE</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">info</span></span>() &#123;</span><br><span class="line">  <span class="built_in">echo</span> -e <span class="string">"############### <span class="variable">$1</span> ##############\n"</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">archives_dir=<span class="string">"./archives"</span> <span class="comment"># 本地缓存压缩包的目录</span></span><br><span class="line">[ ! -e <span class="variable">$&#123;archives_dir&#125;</span> ] &amp;&amp; mkdir <span class="variable">$&#123;archives_dir&#125;</span></span><br><span class="line"> </span><br><span class="line">info <span class="string">'[开始]更新本地代码到hadoop'</span></span><br><span class="line">tar -czvf <span class="variable">$&#123;archives_dir&#125;</span>/src.tar.gz  src/  &amp;&amp; upload <span class="variable">$&#123;archives_dir&#125;</span>/src.tar.gz <span class="variable">$SRC</span></span><br><span class="line">tar -czvf <span class="variable">$&#123;archives_dir&#125;</span>/data.tar.gz data/ &amp;&amp; upload <span class="variable">$&#123;archives_dir&#125;</span>/data.tar.gz <span class="variable">$DATA_CONFIG</span></span><br><span class="line"><span class="comment"># 针对不经常修改的、含有大文件的目录，避免每次都压缩，可以如下加个判断</span></span><br><span class="line"><span class="comment">#if [ ! -f $&#123;archives_dir&#125;/config.tar.gz ]; then # config是大文件，避免每次压缩</span></span><br><span class="line"><span class="comment">#    tar -czvf $&#123;archives_dir&#125;/config.tar.gz config/  &amp;&amp; upload $&#123;archives_dir&#125;/config.tar.gz $NLPC_CONFIG</span></span><br><span class="line"><span class="comment">#fi</span></span><br><span class="line">info <span class="string">'[完成]更新本地代码到hadoop'</span></span><br><span class="line"> </span><br><span class="line">hadoop fs -<span class="built_in">test</span> -e <span class="variable">$HADOOP_OUTPUT</span></span><br><span class="line"><span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">  hadoop fs -rmr <span class="variable">$HADOOP_OUTPUT</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 务必使用如下的-cmdenv指定环境的编码为UTF8</span></span><br><span class="line">hadoop streaming \</span><br><span class="line">    -input <span class="variable">$HADOOP_INPUT</span> \</span><br><span class="line">    -output <span class="variable">$HADOOP_OUTPUT</span> \</span><br><span class="line">    -mapper <span class="string">"sh src/script/mapper.sh"</span> \</span><br><span class="line">    -reducer <span class="string">"sort -u"</span> \</span><br><span class="line">    -file xxx.py \</span><br><span class="line">    -file yyy.sh \</span><br><span class="line">    -cacheArchive <span class="variable">$&#123;DATA_CONFIG&#125;</span>\</span><br><span class="line">    -cacheArchive <span class="variable">$&#123;SRC&#125;</span>\</span><br><span class="line">    -cacheArchive <span class="variable">$&#123;PYTHON&#125;</span>\</span><br><span class="line">    -cmdenv LANG=zh_CN.utf8 \</span><br><span class="line">    -cmdenv PYTHONIOENCODING=utf_8 \</span><br><span class="line">    -jobconf mapred.job.name=<span class="variable">$TASK_NAME</span> \</span><br><span class="line">    -jobconf mapred.job.map.capacity=400 \</span><br><span class="line">    -jobconf mapred.map.tasks=100 \</span><br><span class="line">    -jobconf mapred.reduce.tasks=100 \</span><br><span class="line">    -jobconf stream.memory.limit=5120 \</span><br><span class="line">    -jobconf abaci.split.optimize.enable=<span class="literal">false</span> \</span><br><span class="line">    -jobconf mapred.map.over.capacity.allowed=<span class="literal">false</span> \</span><br><span class="line">    -jobconf mapred.job.priority=NORMAL \</span><br><span class="line">    -jobconf abaci.job.base.environment=centos6u3_hadoop</span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> [ $? -ne 0 ]</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"hadoop error"</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><p><strong>输入输出文件</strong></p>
+<p><code>-input &lt;path&gt;</code>：指定作业输入，path可以是文件或者目录，可以使用*通配符，-input选项可以使用多次指定多个文件或目录作为输入。</p>
+<p><code>-output &lt;path&gt;</code>：指定作业输出目录，path必须不存在，而且执行作业的用户必须有创建该目录的权限，-output只能使用一次。</p>
+<p><strong>上传 单个mapper、reducer文件</strong></p>
+<p>-file xxx.py </p>
+<p>-file yyy.sh</p>
+<p><strong>上传较多代码文件</strong></p>
+<p>建议本地打包后上传到hadoop上，并使用 <code>-cacheArchive</code> 指定，该命令会自动解压；<strong>注意第3个有#号的例子，这不是注释，而是指定了解压的目录，相当于 <code>tar -xzvf python.tar.gz -C ./target_dir</code></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-cacheArchive $&#123;DATA_CONFIG&#125;\</span><br><span class="line">-cacheArchive $&#123;SRC&#125;\</span><br><span class="line">-cacheArchive $&#123;PYTHON&#125;#target_dir\</span><br></pre></td></tr></table></figure>
+<p><strong>解决reduce积压到一个reducer的问题</strong></p>
+<p> -jobconf stream.map.output.field.separator=.      # 指定“.”作为map输出内容的分隔符，默认是\t，<strong>这个参数不建议添加和修改</strong><br> -jobconf stream.num.map.output.key.fields=2     # 从在第2个“\t”之前的部分作为key，之后的部分作为value</p>
+<p><strong>自己指定mapper的数量，否则abaci会自动优化</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-jobconf abaci.split.optimize.enable=false </span><br><span class="line">-jobconf mapred.map.tasks=200</span><br></pre></td></tr></table></figure>
+<p>但并不是你指定多少就是多少mapper</p>
+<p><strong>指定reducer数量</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-jobconf mapred.reduce.tasks=100</span><br></pre></td></tr></table></figure>
+<p><strong>同时运行的mapper、reducer数量限制</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-jobconf mapred.job.map.capacity=200 最多同时运行map任务数</span><br><span class="line">-jobconf mapred.job.reduce.capacity=200 最多同时运行reduce任务数</span><br></pre></td></tr></table></figure>
+<p><strong>设置环境变量</strong></p>
+<p><code>-cmdenv NAME=VALUE</code>：给mapper和reducer程序传递额外的环境变量，NAME是变量名，VALUE是变量值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-cmdenv LANG=zh_CN.utf8 \</span><br><span class="line">-cmdenv PYTHONIOENCODING=utf_8 \    # 如果上面的环境变量不生效，再试试加上这个</span><br></pre></td></tr></table></figure>
+<p>可以设置的编码请用: <strong>locale -a |grep zh</strong> 查看，原因请看：<a href="https://blog.csdn.net/j___t/article/details/97705231" target="_blank" rel="noopener">Python3.6 sys.stdout.encoding的输出为ANSI_X3.4-1968(python3.6的坑)</a></p>
+<h2 id="官方教程"><a href="#官方教程" class="headerlink" title="官方教程"></a>官方教程</h2><p>官方教程：<a href="http://hadoop.apache.org/docs/r1.0.4/cn/streaming.html" target="_blank" rel="noopener">Hadoop Streaming</a></p>
+</the></excerpt>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/07/12/hadoop-streaming/">hadoop streaming</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
+        <p><span>发布时间:</span>2020-07-12, 10:30:50</p>
+        <p><span>最后更新:</span>2020-09-10, 22:51:41</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/07/12/hadoop-streaming/" title="hadoop streaming">https://jizx.vip/2020/07/12/hadoop-streaming/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://jizx.vip/2020/07/12/hadoop-streaming/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2020/08/09/pytorch与tensorflow环境搭建/">
+                    pytorch与tensorflow环境搭建
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2020/06/23/pandas/">
+                    pandas
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#mapper、reducer-模板"><span class="toc-text">mapper、reducer 模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地测试"><span class="toc-text">本地测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hadoop-stream-模板"><span class="toc-text">hadoop stream 模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参数说明"><span class="toc-text">参数说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#官方教程"><span class="toc-text">官方教程</span></a></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-5 i,
+        .toc-level-5 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/08/09/pytorch与tensorflow环境搭建/" title="上一篇: pytorch与tensorflow环境搭建">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2020/06/23/pandas/" title="下一篇: pandas">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/09/09/scp免密传输文件/">scp免密传输文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/09/pytorch与tensorflow环境搭建/">pytorch与tensorflow环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/12/hadoop-streaming/">hadoop streaming</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/23/pandas/">pandas</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/bash高效快捷键/">bash高效快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/02/python进阶/">python进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/attention图解/">attention图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/keras/">keras</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/数据分析库/">python数据分析库</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/sklearn/">sklearn</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/python-多线程/">python 多线程与多进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/python-cookbook/">python cookbook</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/推荐网站/">推荐网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/python技巧/">python技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/开发环境搭建与效率技巧/">开发环境搭建与效率技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/hive/">hive</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/11/linux知识点/">linux知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/10/vim技巧/">vim技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/bash命令提示符个性化/">bash命令提示符个性化</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/02/awk/">awk</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/13/linux-shell编程/">linux shell编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python小模块/">python小模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python模块-logging/">python模块-logging</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/anaconda与jupyter使用与设置/">anaconda与jupyter的使用和设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/linux常用命令/">linux常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/photoshop曲线原理与应用/">photoshop曲线原理与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/正则表达式必知必会/">正则表达式必知必会</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/window添加右键用atom打开/">window添加右键用atom打开</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/notepad常用插件/">notepad常用插件与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/chrome截取整个网页/">chrome截取整个网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Git教程/">Git教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/python编码问题/">python编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/04/java方法传参问题/">java方法传参问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/03/java嵌套类/">java嵌套类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第3章-完成时态/">英语语法——中级：第3章.完成时态</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第2章-名词、定语、状语从句/">英语语法——中级：第2章.名词、定语、状语从句</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第1章-简单句与复合句/">英语语法——中级：第1章.简单句与复合句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/08/vim/">vim</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017-2020 jizx
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 9;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
