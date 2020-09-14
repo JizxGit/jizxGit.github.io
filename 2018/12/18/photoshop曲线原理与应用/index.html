@@ -1,349 +1,513 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.9.0">
+<html>
+<head hexo-theme="https://github.com/volantis-x/hexo-theme-volantis/tree/4.0.0-rc.4"><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="x-dns-prefetch-control" content="on">
 
-    <!--[if lt IE 9]>
-        <style>body {display: none; background: none !important} </style>
-        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
-    <![endif]-->
+  <!-- 页面元数据 -->
+  
+  <title>photoshop曲线原理与应用 - 玖玖的博客</title>
+  
+    <meta name="keywords" content="photoshop,曲线">
+  
 
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="format-detection" content="telephone=no">
-<meta name="author" content="jizx">
+  
+    <meta name="description" content=" 
 
+转载poco：photoshop曲线原理与应用，https://www.jb51.net/photoshop/532386.html">
+  
 
+  <!-- feed -->
+  
 
-<meta name="description" content="转载poco：photoshop曲线原理与应用，https://www.jb51.net/photoshop/532386.html">
-<meta name="keywords" content="photoshop,曲线">
-<meta property="og:type" content="article">
-<meta property="og:title" content="photoshop曲线原理与应用">
-<meta property="og:url" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/index.html">
-<meta property="og:site_name" content="玖玖的博客">
-<meta property="og:description" content="转载poco：photoshop曲线原理与应用，https://www.jb51.net/photoshop/532386.html">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754284.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754285.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754286.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754287.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754288.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754289.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754290.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754291.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754292.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754293.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754294.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754295.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754296.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754297.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754298.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754299.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754300.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754301.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754302.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754303.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754304.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754305.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754306.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754307.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754308.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754309.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754310.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754311.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754312.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754313.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754314.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754315.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754316.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754317.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754318.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754319.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754320.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754321.jpg">
-<meta property="og:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754322.jpg">
-<meta property="og:updated_time" content="2018-12-18T08:12:03.336Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="photoshop曲线原理与应用">
-<meta name="twitter:description" content="转载poco：photoshop曲线原理与应用，https://www.jb51.net/photoshop/532386.html">
-<meta name="twitter:image" content="https://jizx.vip/2018/12/18/photoshop曲线原理与应用/20170209152754284.jpg">
+  <!-- import meta -->
+  
 
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <!-- link -->
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css">
+  
+  
 
+  
 
-    <link rel="alternate" href="/atom.xml" title="玖玖的博客" type="application/atom+xml">
+  
 
+  
 
+  
 
-    <link rel="shortcut icon" href="https://avatars1.githubusercontent.com/u/18480104?s=40&v=4">
+  <!-- import link -->
+  
 
+  
+  
+    <link rel="stylesheet" href="/css/style.css">
+  
+  
+  
+  <!-- 脚本懒加载函数 -->
+  <script>
+  function loadScript(src, cb) {
+    var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
+    var script = document.createElement('script');
+    script.setAttribute('type','text/javascript');
+    if (cb) script.onload = cb;
+    script.setAttribute('src', src);
+    HEAD.appendChild(script);
+  }
+  //https://github.com/filamentgroup/loadCSS
+  !function(c){"use strict";var e=function(e,t,n,r){var o,i=c.document,a=i.createElement("link");if(t)o=t;else{var d=(i.body||i.getElementsByTagName("head")[0]).childNodes;o=d[d.length-1]}var f=i.styleSheets;if(r)for(var l in r)r.hasOwnProperty(l)&&a.setAttribute(l,r[l]);a.rel="stylesheet",a.href=e,a.media="only x",function e(t){if(i.body)return t();setTimeout(function(){e(t)})}(function(){o.parentNode.insertBefore(a,t?o:o.nextSibling)});var s=function(e){for(var t=a.href,n=f.length;n--;)if(f[n].href===t)return e();setTimeout(function(){s(e)})};function u(){a.addEventListener&&a.removeEventListener("load",u),a.media=n||"all"}return a.addEventListener&&a.addEventListener("load",u),(a.onloadcssdefined=s)(u),a};"undefined"!=typeof exports?exports.loadCSS=e:c.loadCSS=e}("undefined"!=typeof global?global:this);
+  </script>
+  <script id="loadcss"></script>
+</head>
 
-
-    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
-
-
-
-    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
-
-
-
-    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
-
-
-<link rel="stylesheet" href="/css/style.css">
-
-
-
-<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-
-
-<title>photoshop曲线原理与应用 | 玖玖的博客</title>
-
-<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-
-<script>
-    var yiliaConfig = {
-        fancybox: true,
-        animate: true,
-        isHome: false,
-        isPost: true,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
-        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: true
-    }
-</script>
-
-
-    <script> yiliaConfig.jquery_ui = [false]; </script>
-
-
-
-    <script> yiliaConfig.rootUrl = "\/";</script>
-
-
-
-
-
-
-</head></html>
 <body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            <img src="/img/avatar.png" class="animated zoomIn">
-        </a>
-        <hgroup>
-          <h1 class="header-author"><a href="/">jizx</a></h1>
-        </hgroup>
-
+  <header class="l_header auto shadow blur " style='opacity: 0' >
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
         
-        <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
         
-
-        
-            <form id="search-form">
-            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
-            <i class="fa fa-times" onclick="resetSearch()"></i>
-            </form>
-            <div id="local-search-result"></div>
-            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
-        
-
-
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
-                        
-                        <li>友情链接</li>
-                        
-                        
-                        <li>关于我</li>
-                        
-                    </ul>
-                </div>
-            </div>
-        
-
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                            <li><a href="/">主页</a></li>
-                        
-                            <li><a href="/archives/">所有文章</a></li>
-                        
-                            <li><a href="/tags/">分类&amp;标签</a></li>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa Email" href="mailto:1822980003@qq.com" title="Email"></a>
-                            
-                                <a class="fa GitHub" href="https://github.com/JizxGit" title="GitHub"></a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/anaconda/">anaconda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hadoop-streaming/">hadoop streaming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hive/">hive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ing/">ing</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jupyter/">jupyter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logging/">logging</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notepad/">notepad++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/numpy/">numpy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pandas/">pandas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photoshop/">photoshop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python进阶/">python进阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python高级/">python高级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scp/">scp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tensorflow/">tensorflow</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/window/">window</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/从句/">从句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/传参/">传参</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/协议/">协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/右键/">右键</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复合句/">复合句</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多进程/">多进程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/截图/">截图</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/打印/">打印</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/效率/">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方法调用/">方法调用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时态/">时态</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/曲线/">曲线</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模块/">模块</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/流畅的python/">流畅的python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/深度学习/">深度学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境/">环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类/">类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统优化/">系统优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编码问题/">编码问题</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编辑器/">编辑器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a></li></ul>
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">博客主题原作者MOxFIVE</a>
-                    
-                    </div>
-                </section>
-                
-
-                
-                
-                <section class="switch-part switch-part4">
-                
-                    <div id="js-aboutme">在读研究生二年级</div>
-                </section>
-                
-            </div>
-        </div>
-    </header>                
-</div>
+      </ul>
     </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">jizx</a></h1>
-      </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                <img src="/img/avatar.png" class="animated zoomIn">
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">jizx</a></h1>
-            </hgroup>
-            
-            <p class="header-subtitle">个人学习笔记，各种杂杂碎碎O(∩_∩)O</p>
-            
-            <nav class="header-menu">
-                <ul>
-                
-                    <li><a href="/">主页</a></li>
-                
-                    <li><a href="/archives/">所有文章</a></li>
-                
-                    <li><a href="/tags/">分类&amp;标签</a></li>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa Email" target="_blank" href="mailto:1822980003@qq.com" title="Email"></a>
-                            
-                                <a class="fa GitHub" target="_blank" href="https://github.com/JizxGit" title="GitHub"></a>
-                            
-                        </ul>
-            </nav>
-        </header>                
-    </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
-</nav>
-      <div class="body-wrap"><article id="post-photoshop曲线原理与应用" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/12/18/photoshop曲线原理与应用/" class="article-date">
-      <time datetime="2018-12-18T08:04:13.000Z" itemprop="datePublished">2018-12-18</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      photoshop曲线原理与应用
-    </h1>
-  
-
-      </header>
+		<div class="nav-main">
       
-      <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/photoshop/">photoshop</a>
-    </div>
-
-
-        
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/photoshop/">photoshop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/曲线/">曲线</a></li></ul>
-    </div>
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <a class="title flat-box" target="_self" href='/'>
           
-        <excerpt in="" index="" |="" 首页摘要=""> 
+            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png'/>
+          
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+  <div class="l_body">
+    <div class="l_cover">
+  
+    
+    
+        <div class='cover-wrapper post dock' style="display: none;">
+          
+            <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg"></div>
+          
+          <div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">Volantis</p>
+    
+    
+  </div>
+  <div class='bottom'>
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+          
+            <a href="/v4/getting-started/"
+              
+              
+              id="v4getting-started">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f5c3.svg'><p>文档</p>
+            </a>
+          
+            <a href="/faqs/"
+              
+              
+              id="faqs">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f516.svg'><p>帮助</p>
+            </a>
+          
+            <a href="/examples/"
+              
+              
+              id="examples">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f396.svg'><p>示例</p>
+            </a>
+          
+            <a href="/contributors/"
+              
+              
+              id="contributors">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f389.svg'><p>社区</p>
+            </a>
+          
+            <a href="/archives/"
+              
+              
+              id="archives">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f4f0.svg'><p>博客</p>
+            </a>
+          
+            <a href="https://github.com/volantis-x/hexo-theme-volantis/"
+              
+              
+              id="https:githubcomvolantis-xhexo-theme-volantis">
+              <img src='https://cdn.jsdelivr.net/gh/twitter/twemoji@13.0/assets/svg/1f9ec.svg'><p>源码</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+          <div class="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+        </div>
+    
+  
+  </div>
+  
+    <div class='safearea'>
+      <div class='body-wrapper' id="pjax-container">
+        
+          <!--此文件用来存放一些不方便取值的变量--> 
+<!--思路大概是将值藏到重加载的区域内--> 
+ 
+ 
+ 
+<div id="pjax-data" style="display: none"> 
+  <div id="pjax-ispage">true</div> 
+  <div id="pjax-pageTitle">photoshop曲线原理与应用</div> 
+  <div id="pjax-enable-cover">true</div> 
+  <div id="pjax-comment-path"></div> 
+  <div id="pjax-comment-placeholder"></div> 
+</div> 
+ 
+ 
+<script> 
+  // 处理封面 此时 jquery 还没加载 
+  if ("none" == "none") { // 移除封面 
+    document.getElementsByClassName('cover-wrapper')[0].style.display = "none"; 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show"); 
+  } else { 
+    if ("none" == "half") { // 半屏 
+      document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'half'); 
+      document.getElementsByClassName('scroll-down')[0].style.display = "none"; 
+    } else if ("none" == "full") { // 全屏 
+      document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'full'); 
+      document.getElementsByClassName('scroll-down')[0].style.display = ""; 
+    } 
+    document.getElementsByClassName('cover-wrapper')[0].style.display = ""; 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.remove("show"); 
+  } 
+</script> 
+ 
+
+        
+        
+
+<div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
+  
+
+
+  
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title">
+        photoshop曲线原理与应用
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="">
+    <p>请设置文章作者</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/photoshop/">photoshop</a>
+    </a>
+  </div>
+
+
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Dec 18, 2018</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="photoshop曲线原理与应用" data-path="/2018/12/18/photoshop曲线原理与应用/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+      </div>
+    
+  </div>
+
+
+  
+  <excerpt in="" index="" |="" 首页摘要=""> 
 
 <p>转载poco：photoshop曲线原理与应用，<a href="https://www.jb51.net/photoshop/532386.html" target="_blank" rel="noopener">https://www.jb51.net/photoshop/532386.html</a></p>
 <a id="more"></a>
@@ -354,306 +518,913 @@
 </blockquote>
 <h3 id="零、曲线工具原理"><a href="#零、曲线工具原理" class="headerlink" title="零、曲线工具原理"></a>零、曲线工具原理</h3><p>如果说直方图是摄影师的“X光片”，那么曲线工具一定是摄影师的“手术刀”了。</p>
 <p>曲线作为重要的影调和色调调整工具，不仅存在于Photoshop中，在ACR，Lightroom甚至其他很多手机P图软件中都占据着显眼的位置。本篇文章，就将详细谈谈什么是RGB曲线，如何使用提亮压暗、黑白场、对比度，以及局部调整曲线等基本形态，调整一张照片的影调。同时，还会讲解如何把各种基本曲线形态组合起来，达到胶片、漂白、日系等等更复杂的影调效果。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754284.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754284.jpg" class="lazyload" data-srcset="./20170209152754284.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p><strong>曲线工具在哪?</strong></p>
 <p>曲线面板在Lightroom和Adobe Camera Raw工具中，都是紧接着基本面板的第二个面板，足以感受到它的重要性。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754285.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754285.jpg" class="lazyload" data-srcset="./20170209152754285.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>在Photoshop中，我们一般会使用曲线调整图层来改变曲线。在PS中图层面板的右下角，第四个图标就是“新建调整图层”选项，点击后选择“曲线”，我们就可以新建一个“曲线调整图层”。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754286.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754286.jpg" class="lazyload" data-srcset="./20170209152754286.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>新建调整图层，而不是在原图层上直接改变曲线。优点就是可以让我们方便的撤销/恢复所做的任意调整。曲线是什么?</p>
 <p>本文将重点讲解RGB通道曲线，它是由红(R)绿(G)蓝(B)三个通道的曲线叠加而成的，可以“近似的”理解成图片的亮度曲线。</p>
 <p><strong>RGB曲线调整的核心其实就是对原图亮度的变换。</strong></p>
 <p>曲线的横轴是原图的亮度分布，从左到右依次是0值纯黑，1-254的中间灰色值，以及最右边255的纯白最亮值。横轴上叠加着一个直方图，显示出原图各个亮度上，分别存在着多少像素。</p>
 <p>曲线的纵轴是目标图(调整后)的亮度，从下到上任然是0-255的亮度值。当中的那根线就是我们的“曲线”。当我们在曲线上任意取一个点，它的“输入值”就是它横轴对应的值，即原图中的亮度，它的“输出值”就是它纵轴中的数值，也就是调整后它的亮度值。</p>
 <p>未调整的情况下，图像的曲线会是一条对角线，也就是横轴(原图)和纵轴(目标图)的亮度值相等。比如我在曲线上取了一个点，它的输入和输出值都是193。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754287.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754287.jpg" class="lazyload" data-srcset="./20170209152754287.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>如果我把这个点往上移动，可以看到这个点的输出值变成了232.这意味着原图直方图上那些193亮度的点，都被提亮到了更亮的232。同时我们可以发现曲线的一个特点，当我们变动一个点的时候，旁边的点也会跟着一起变化，离调整点越远的点变化越小。这样使得曲线调整的图片，大多数情况都比较的平滑自然。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754288.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754288.jpg" class="lazyload" data-srcset="./20170209152754288.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>通过在曲线上添加控制点(锚点)，我们就可以把曲线变成各种各样的形态，从而达到我们想要的影调效果。接下来我就会通过一些基本的曲线形态，来进一步的解释曲线。</p>
 <h3 id="一、提亮压暗曲线"><a href="#一、提亮压暗曲线" class="headerlink" title="一、提亮压暗曲线"></a>一、提亮压暗曲线</h3><p>提亮和压暗一张图片，并不是我们想象中的对图片中所有点都加大减小同样的亮度值。比如下面这个曲线，就是把图像上所有的点亮度都提高了64。这样造成了2个不好的结果：</p>
 <p>(1)图片的高光区域直接过曝溢出了</p>
 <p>(2)图片的阴影和黑色区域亮度大大提高，使得图片黑场不足，严重发灰。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754289.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754289.jpg" class="lazyload" data-srcset="./20170209152754289.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>所以我们一般提亮图片都是用如下的曲线，把锚点放在中间调附近往上提。这样照片主要是中间调的亮度大幅提高。高光区域亮度提高较少，防止了过曝。阴影黑色区域提升也不多，较好的维持了图像的对比反差程度。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754290.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754290.jpg" class="lazyload" data-srcset="./20170209152754290.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>同样的，我们要压暗一张图片，也是用描点下拉图片的中间调。保护阴影区域不欠曝，让高光白色区域维持住对比度。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754291.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754291.jpg" class="lazyload" data-srcset="./20170209152754291.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <h3 id="二、黑白场曲线"><a href="#二、黑白场曲线" class="headerlink" title="二、黑白场曲线"></a>二、黑白场曲线</h3><p>我们把照片上最暗的点叫做黑场，最亮的点叫做白场，黑白场的差值决定了一张照片的反差程度。通过横移和竖移曲线的左右两端，就可以加大和减小照片的黑白场差值。</p>
 <p>比如下面这张图片就是一张灰蒙蒙的低反差图片，照片最暗的地方也只是亮度高达50多的深灰色，照片最亮的地方也只是200多的浅灰色。照片的黑色和白色区域完全没有像素。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754292.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754292.jpg" class="lazyload" data-srcset="./20170209152754292.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>所以我把曲线最右侧横向左移，此时原来亮度值(输入值)219的像素，全部被提亮到了255(输出值)的纯白色。照片中终于有了亮白的部分。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754293.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754293.jpg" class="lazyload" data-srcset="./20170209152754293.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>同样我在曲线最左侧建立一个锚点，横向右拉，此时原来亮度值55的深灰色区域，就全部输出成了亮度为0的纯黑区域。照片中又有了深黑色。通过这两步，我们加大了照片黑白场的差距，照片的反差就大大提高了。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754294.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754294.jpg" class="lazyload" data-srcset="./20170209152754294.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>黑白场差值大的图片一般层次丰富，鲜艳锐利。但是照片的黑白场差值并不是越高越好。一个很大的误区就是照片的黑场一定要是0，白场必须为255。实则不然，比如这张照片，照片的黑场是0，照片中有许多深黑区域，显得反差比较大，可能并不是我们想要的效果。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754295.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754295.jpg" class="lazyload" data-srcset="./20170209152754295.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>我在曲线最左侧建立一个锚点，纵向上拉。这样输入值为0的纯黑部分，亮度被提高到了38。照片中不再有纯黑，最暗的部分(也就是黑场)也是亮度38的深灰色，这样的照片看起来更加的朦胧淡雅，符合我们想要的气氛。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754296.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754296.jpg" class="lazyload" data-srcset="./20170209152754296.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <h3 id="三、对比度曲线"><a href="#三、对比度曲线" class="headerlink" title="三、对比度曲线"></a>三、对比度曲线</h3><p>对比度曲线，其实就是摄影里几乎人人皆知的S型曲线和反S型曲线了。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754297.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754297.jpg" class="lazyload" data-srcset="./20170209152754297.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>增强对比度曲线(S型曲线)，其实就是在高光处建立锚点并提高，在阴影处建立锚点并降低，拉出一个像英语字母S一样的曲线。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754298.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754298.jpg" class="lazyload" data-srcset="./20170209152754298.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>仔细观察S曲线，或许我们就能理解到其背后的原理。前面的教程我们提到过，一张照片按亮度从低到高分为黑色，阴影，中间调(曝光度)，高光和白色5个部分。其中中间调区域的过渡与细节最为细腻。可以看到S型曲线中间部分，输入和输出值变化很小。所以S曲线在中间调区域的影响并不大，很好的保护了照片细节最丰富的部分。白色和黑色区域在最两端，S型曲线对这些亮度区域的改变也不大，有效防止了过曝和欠曝溢出。S曲线主要是提高了原来照片中高光部分的亮度，降低了阴影部分的亮度，让照片的影调更加偏向硬调。因此S曲线在保护黑白色与中间调细节的前提下，有效的提高了照片的对比度，几乎成为了大部分照片必用的一步。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754299.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754299.jpg" class="lazyload" data-srcset="./20170209152754299.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>类似的，如果我们降低高光锚点，提高阴影锚点，形成一个反S的形状。就是降低对比度曲线了。</p>
 <h3 id="四、曲线的局部调整"><a href="#四、曲线的局部调整" class="headerlink" title="四、曲线的局部调整"></a>四、曲线的局部调整</h3><p>前面三个曲线形态都是作用在照片的全局。但数码后期的一个核心思路，就是局部调整照片不同的区域，让每个区域在展现出最好效果的同时不要影响到其他区域。比如这张图片，雪山和湖之间的草地一片漆黑，需要提亮。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754300.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754300.jpg" class="lazyload" data-srcset="./20170209152754300.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>如果我直接应用提亮曲线，草地倒是变亮了，但雪山(高光部分)和天空(中间调部分)一下子就过曝了。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754301.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754301.jpg" class="lazyload" data-srcset="./20170209152754301.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>所以我需要建立两个锚点，把提亮的高光和中间调部分重新拉回来。这样这条曲线就只提高了照片阴影部分的亮度。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754302.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754302.jpg" class="lazyload" data-srcset="./20170209152754302.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>在局部调整曲线时，有一个非常有用的工具。就是圆圈中那个手一样的图标，点击它之后再把鼠标移动到图像里面，鼠标就会变成一个吸管，同时在右边曲线面板里，会实时显示吸管所在点对应在曲线里的位置。单击吸管，吸管所在的点，就会对应成一个锚点记录在直方图上，方便我们调整。比如这张图，我想降低深色的山体的亮度，同时又保持住白色雾气的亮度。所以我选择“手”图标后，先在红圈1的山体处点一下，曲线中对应建立了1锚点。再在雾气的红圈2处点一下，曲线中就建立了对应的2锚点。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754303.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754303.jpg" class="lazyload" data-srcset="./20170209152754303.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>这样我下压1锚点，同时保持住2锚点，就只降低了阴影的山体区域，而高光的雾气则没有被影响。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754304.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754304.jpg" class="lazyload" data-srcset="./20170209152754304.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>在上面讲了RGB曲线是什么。通过提亮压暗曲线，黑白场曲线，对比度曲线三种基本形态，以及对他们的局部应用，就可以快速的调整一张照片的影调了。接下来谈谈如何把这几种基本曲线组合起来，调出复杂的影调效果。</p>
 <p>同样的，三种基本曲线虽然看起来都很简单，但当我们把这些基本形态结合起来的时候，却可以创作出丰富多样的复杂效果。</p>
 <h3 id="五、暗调效果曲线"><a href="#五、暗调效果曲线" class="headerlink" title="五、暗调效果曲线"></a>五、暗调效果曲线</h3><p>下图是一张英国七姐妹白崖的照片，如果我们想让它更加的阴沉，仿佛世界尽头一样。应该怎么调整呢?</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754305.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754305.jpg" class="lazyload" data-srcset="./20170209152754305.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>直接运用我们学过的压暗曲线，可以发现照片的中间调已经达到了我们想要的低沉影调。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754306.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754306.jpg" class="lazyload" data-srcset="./20170209152754306.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>但是这样的话暗部几乎一片漆黑，失去了细节。所以我在暗部再增加一个锚点上拉，相当于在暗部又局部的应用了提亮曲线。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754307.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754307.jpg" class="lazyload" data-srcset="./20170209152754307.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>这样虽然暗部细节回来了，但是阴影部分发灰严重，乌云已经完全失去了立体感。所以再在暗部建立2个锚点，叠加上一条S型曲线，提高暗部的对比度。可以发现天上的乌云内部的层次对比又展现了出来。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754308.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754308.jpg" class="lazyload" data-srcset="./20170209152754308.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>最后在高光区也建立一个锚点上拉，相当于在高光部分叠加了一个局部提亮曲线，重新恢复了高光的亮度。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754309.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754309.jpg" class="lazyload" data-srcset="./20170209152754309.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>这张暗调照片的最后曲线=全局压暗曲线+暗部提亮曲线+暗部增加对比度曲线+亮部提亮曲线。看起来很复杂，其实只要理解了原理非常简单，三种基本曲线的一步步的叠加应用而已。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754310.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754310.jpg" class="lazyload" data-srcset="./20170209152754310.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <h3 id="六、胶片效果曲线"><a href="#六、胶片效果曲线" class="headerlink" title="六、胶片效果曲线"></a>六、胶片效果曲线</h3><p>下图是一张泰国美功铁路市场的照片，如果我们想让它更有胶片味儿。应该怎么调整呢?</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754311.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754311.jpg" class="lazyload" data-srcset="./20170209152754311.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>最简单的办法就是直接套用PS里的颜色查找表(3D-Lut)工具或者使用各种第三方胶片滤镜了。各种预设好的胶片LUT，可以快速的让图片带上不同类型胶片的影调和色调。不过其实这些效果也是可以通过曲线来完成的。仔细观察下面这张套用 柯达5218胶片 LUT 的成片效果，可以发现它的直方图在保持对比度的同时有一个明显的右移，黑色区域完全没有像素。发灰的暗部给了我们一种照片暗部细节非常丰富的错觉，看起来就像是用高宽容度的胶片拍摄的。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754312.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754312.jpg" class="lazyload" data-srcset="./20170209152754312.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>要消除直方图中的黑色像素很简单，使用我们学过的黑白场曲线，(竖直向上)提高照片的黑场锚点即可。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754313.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754313.jpg" class="lazyload" data-srcset="./20170209152754313.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>不过这样不仅照片的暗部发灰，中间调和高光也变灰了。所以为了恢复对比度，我再在上面曲线的基础上拉一个S型曲线(增加对比度曲线)。这样这张照片就获得了很多胶片类似的影调，暗部发灰但对比度又很足。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754314.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754314.jpg" class="lazyload" data-srcset="./20170209152754314.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>之后我们可以继续应用可选颜色、渐变映射、色相饱和度等等调色工具，给照片加上胶片的色调，这些色彩调整工具会在以后的教程中继续展开。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754315.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754315.jpg" class="lazyload" data-srcset="./20170209152754315.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>这里的胶片曲线=提高黑场曲线+增强对比度曲线。我们并不需要记忆这个公式，因为有的胶片效果反而是需要减少对比度的。只要理解了三种基本的曲线形态，各种各样的效果我们都是可以组合出来的。</p>
 <p><strong>七、压黑漂白效果曲线</strong></p>
 <p>压黑漂白效果很适合运动类，主体硬朗，以及感情强烈的片子。其特点如下图所示，有大量的纯黑或者纯白区域，反差强烈。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754316.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754316.jpg" class="lazyload" data-srcset="./20170209152754316.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>下面是这张道路上飞驰的装甲车的原片，反差不够强烈，无法体现出装甲战士带给我们的冲击力。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754317.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754317.jpg" class="lazyload" data-srcset="./20170209152754317.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>使用黑白场曲线右移黑场锚点，照片中很暗的部分全部都变成了纯黑。黑色倒是足够了，但黑白场曲线的副作用就是把整个图片都压黑了。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754318.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754318.jpg" class="lazyload" data-srcset="./20170209152754318.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>所以在亮部建立锚点，用提亮曲线提高高光和中间调，营造硬朗的反差效果。这种扩大纯黑并提亮亮部的效果就称为压黑(Crushed Black)效果。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754319.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754319.jpg" class="lazyload" data-srcset="./20170209152754319.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>与压黑类似的还有漂白效果。顾名思义，漂白效果就是照片整体提亮，白色溢出，同时暗处也变亮并压缩成深灰色，仿佛照片印在纸上再放进漂白水里漂白出来一样。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754320.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754320.jpg" class="lazyload" data-srcset="./20170209152754320.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <p>漂白曲线的前两部跟压黑曲线一样，先是把暗部变成纯黑，同时提亮照片。 漂白效果会进一步让高光也溢出成白色，虽然丢掉细节，但是照片会更有明快动感的气氛。在曲线中可以通过左移白场锚点实现这个效果。 最后我们把黑场的点再上移一段距离，可以理解成刚刚压缩成纯黑的暗部，提亮成了同一种深灰色。</p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754321.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
-<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754322.jpg" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754321.jpg" class="lazyload" data-srcset="./20170209152754321.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
+<p><img src="/2018/12/18/photoshop曲线原理与应用/./20170209152754322.jpg" class="lazyload" data-srcset="./20170209152754322.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="Photoshop曲线工具的使用原理详细解析"></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>可以看到，不管是胶片曲线，暗调曲线，还是压黑漂白曲线，无论多么复杂的效果。其本质任然是提亮压暗，黑白场和对比度这3种基本曲线，在整体和各个局部组合而成的，所以我们并不需要死记硬背这些复杂效果的曲线长什么样。只要理解了三种基本曲线形态的作用，就可以根据需要，组合出自己想要的各种影调效果了。</p>
 <p>PS曲线不仅可以调整照片的影调，各个色彩通道的曲线还可以影响照片的色调，这些就只能在未来的教程中继续展开了。</p>
 </the></excerpt>
-      
-    </div>
-    
-  </div>
+  
   
     
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/2018/12/18/photoshop曲线原理与应用/">photoshop曲线原理与应用</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">jizx</a></p>
-        <p><span>发布时间:</span>2018-12-18, 16:04:13</p>
-        <p><span>最后更新:</span>2018-12-18, 16:12:03</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/2018/12/18/photoshop曲线原理与应用/" title="photoshop曲线原理与应用">https://jizx.vip/2018/12/18/photoshop曲线原理与应用/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://jizx.vip/2018/12/18/photoshop曲线原理与应用/　　作者: jizx" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
-        </p>
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=https://jizx.vip/2018/12/18/photoshop曲线原理与应用/>https://jizx.vip/2018/12/18/photoshop曲线原理与应用/</a></p>
+              
+            
+          </blockquote>
+        </div>
+      
+      
     </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2018-12-18T16:12:03+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Dec 18, 2018</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/photoshop/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>photoshop</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/曲线/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>曲线</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://jizx.vip/2018/12/18/photoshop曲线原理与应用/&title=photoshop曲线原理与应用 - 玖玖的博客&summary= 
+
+转载poco：photoshop曲线原理与应用，https://www.jb51.net/photoshop/532386.html"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://jizx.vip/2018/12/18/photoshop曲线原理与应用/&title=photoshop曲线原理与应用 - 玖玖的博客&summary= 
+
+转载poco：photoshop曲线原理与应用，https://www.jb51.net/photoshop/532386.html"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://jizx.vip/2018/12/18/photoshop曲线原理与应用/&title=photoshop曲线原理与应用 - 玖玖的博客&summary= 
+
+转载poco：photoshop曲线原理与应用，https://www.jb51.net/photoshop/532386.html"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
 
 
 
-    <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2019/08/04/linux常用命令/">
-                    linux常用命令
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/2018/12/18/正则表达式必知必会/">
-                    正则表达式必知必会
-                </a>
-            </div>
-        
-    </nav>
+      
+    </div>
+  </div>
 
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2019/08/04/linux常用命令/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>linux常用命令</p>
+          <p class='content'> 
+
+处理数据常用的命令，包括 sort、awk、cut 等常用命令（持续 ing）
+
+
+
+
+
+进程ps -f命令也能够表现子shell的嵌套关系
+时间date12345678910111213...</p>
+        </a>
+      
+      
+        <a class='next' href='/2018/12/18/正则表达式必知必会/'>
+          <p class='title'>正则表达式必知必会<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'> 
+
+正则表达式必知必会的笔记
+
+
+
+元字符表下面介绍的是在正则表达式中有特殊意义的字符，称为元字符
+
+
+转义符号如果要查找这些字符本身，需要用\进行转义，比如想匹配点号. 就需要这样写\.  ...</p>
+        </a>
+      
+    </div>
   
 </article>
 
-    <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
-        
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#零、曲线工具原理"><span class="toc-text">零、曲线工具原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、提亮压暗曲线"><span class="toc-text">一、提亮压暗曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、黑白场曲线"><span class="toc-text">二、黑白场曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、对比度曲线"><span class="toc-text">三、对比度曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、曲线的局部调整"><span class="toc-text">四、曲线的局部调整</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、暗调效果曲线"><span class="toc-text">五、暗调效果曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、胶片效果曲线"><span class="toc-text">六、胶片效果曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-5 i,
-        .toc-level-5 ol {
-            display: none !important;
-        }
-    </style>
 
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+  
 
-    <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
-    </script>
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
 
 
 
 
 
+
+</div>
+<aside class='l_side'>
+  
+  
+    
     
 
 
 
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
 
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/2019/08/04/linux常用命令/" title="上一篇: linux常用命令">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
 
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/2018/12/18/正则表达式必知必会/" title="下一篇: 正则表达式必知必会">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#零、曲线工具原理"><span class="toc-text">零、曲线工具原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、提亮压暗曲线"><span class="toc-text">一、提亮压暗曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、黑白场曲线"><span class="toc-text">二、黑白场曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、对比度曲线"><span class="toc-text">三、对比度曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、曲线的局部调整"><span class="toc-text">四、曲线的局部调整</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、暗调效果曲线"><span class="toc-text">五、暗调效果曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、胶片效果曲线"><span class="toc-text">六、胶片效果曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
     </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/09/09/scp免密传输文件/">scp免密传输文件</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/08/09/pytorch与tensorflow环境搭建/">pytorch与tensorflow环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/07/12/hadoop-streaming/">hadoop streaming</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/06/23/pandas/">pandas</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/bash高效快捷键/">bash高效快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/02/python进阶/">python进阶</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/attention图解/">attention图解</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/keras/">keras</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/数据分析库/">python数据分析库</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/04/sklearn/">sklearn</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/07/python-多线程/">python 多线程与多进程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/01/python-cookbook/">python cookbook</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/28/推荐网站/">推荐网站</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/python技巧/">python技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/25/开发环境搭建与效率技巧/">开发环境搭建与效率技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/12/hive/">hive</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/11/linux知识点/">linux知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/10/10/vim技巧/">vim技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/04/bash命令提示符个性化/">bash命令提示符个性化</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/09/02/awk/">awk</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/13/linux-shell编程/">linux shell编程</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python小模块/">python小模块</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/06/python模块-logging/">python模块-logging</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/anaconda与jupyter使用与设置/">anaconda与jupyter的使用和设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/08/04/linux常用命令/">linux常用命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/photoshop曲线原理与应用/">photoshop曲线原理与应用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/18/正则表达式必知必会/">正则表达式必知必会</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/15/window添加右键用atom打开/">window添加右键用atom打开</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/12/notepad常用插件/">notepad常用插件与设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/12/04/chrome截取整个网页/">chrome截取整个网页</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/22/Git教程/">Git教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/11/19/python编码问题/">python编码问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/04/java方法传参问题/">java方法传参问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/17/剑指offer/">剑指offer</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/03/java嵌套类/">java嵌套类</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第3章-完成时态/">英语语法——中级：第3章.完成时态</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第2章-名词、定语、状语从句/">英语语法——中级：第2章.名词、定语、状语从句</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/02/11/英语语法——中级：第1章-简单句与复合句/">英语语法——中级：第1章.简单句与复合句</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/08/vim/">vim</a></li></ul>
-
+  </section>
 
 
+  
 
-    <script>
-        
-    </script>
-</div>
-      <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                <i class="fa fa-copyright"></i> 
-                2017-2020 jizx
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
-            </div>
+
+</aside>
+
+
+
+      </div>
+      
+  
+  <footer class="footer clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+
         </div>
-        
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>| </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
-            </div>
-        
-    </div>
-</footer>
-    </div>
+      
     
-<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            var iPad = window.navigator.userAgent.indexOf('iPad');
-            if (iPad > -1 || $(".left-col").css("display") === "none") {
-                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
-                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
-                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
-            }
-            else {
-                var backgroundnum = 9;
-                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
-                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
-            }
-        })
-    </script>
-
-
-
-
-
-    <script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
-
-<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-<div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+          
+            
+          
+            
+          
+        </div>
+      
+    
+      
+        <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
+      
+    
+      
+        
+          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
+</div>
+        
+      
+    
+      
+        Use
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.0.0-rc.4" target="_blank" class="codename">Volantis</a>
+        as theme
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2017-2020 XXX</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+      <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+    </div>
+  </div>
+  <div>
+    <!-- required -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
 <script>
-    // Open in New Window
-    
-        var oOpenInNew = {
-            
-            
-            
-            
-            
-            
-             archives: ".archive-article-title", 
-             miniArchives: "a.post-list-link", 
-            
-             friends: "#js-friends a", 
-             socail: ".social a" 
-        }
-        for (var x in oOpenInNew) {
-            $(oOpenInNew[x]).attr("target", "_blank");
-        }
-    
+  function pjax_fancybox() {
+    $(".md .gallery").find("img").each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".md .gallery").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  function SCload_fancybox() {
+    if ($(".md .gallery").find("img").length == 0) return;
+    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
+    setTimeout(function() {
+      loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
+    }, 1);
+  };
+  $(function () {
+    SCload_fancybox();
+  });
 </script>
 
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+
+<!-- internal -->
+
+
+
+
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
 </script>
+
+
+
+
+  
+  
+    <script>
+      window.FPConfig = {
+        delay: 0,
+        ignoreKeywords: [],
+        maxRPS: 5,
+        hoverDelay: 25
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/js/valine.js"></script>
+
+<script>
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link'.split(',').filter(function (item) {
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick', 'mail', 'link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function (item) {
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+
+  function pjax_valine() {
+    if(!document.querySelectorAll("#valine_container")[0])return;
+
+    let pagePlaceholder = $.trim($('#pjax-comment-placeholder').text()) || "快来评论吧~";
+
+    let path = $.trim($('#pjax-comment-path').text());
+    if (path.length == 0) {
+      let defaultPath = '';
+      path = defaultPath || decodeURI(window.location.pathname);
+    }
+
+    var valine = new Valine();
+    valine.init({
+      el: '#valine_container',
+      meta: meta,
+      placeholder: pagePlaceholder,
+      path: path,
+      appId: "",
+      appKey: "",
+      pageSize: '10',
+      avatar: 'robohash',
+      lang: 'zh-cn',
+      visitor: 'true',
+      highlight: 'true',
+      mathJax: 'false',
+      enableQQ: 'true',
+      requiredFields: requiredFields,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps
+    })
+  }
+
+  $(function () {
+    pjax_valine();
+  });
+</script>
+
+
+
+
+
+
+
+  <script src="/js/app.js"></script>
+
+
+
+  
+    <script src="/js/search.js"></script>
+  
+
+
+<!-- optional -->
+
+  <script>
+const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
+const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
+(function ($) {
+  
+    customSearch = new HexoSearch({
+      imagePath: SearchServiceimagePath
+    });
+  
+})(jQuery);
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  <script defer>
+
+  const LCCounter = {
+    app_id: 'u9j57bwJod4EDmXWdxrwuqQT-MdYXbMMI',
+    app_key: 'jfHtEKVE24j0IVCGHbvuFClp',
+    custom_api_server: '',
+
+    // 查询存储的记录
+    getRecord(Counter, url, title) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({url})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {url, title: title, times: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    },
+
+    // 发起自增请求
+    increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    },
+
+    // 构建自增请求体
+    buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "times": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    },
+
+    // 校验是否为有效的 UV
+    validUV() {
+      var key = 'LeanCloudUVTimestamp';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    },
+
+    addCount(Counter) {
+      var enableIncr = '' === 'true' && window.location.hostname !== 'localhost';
+      enableIncr = true;
+      var getterArr = [];
+      var incrArr = [];
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#lc-sv');
+      if (pvCtn || enableIncr) {
+        var pvGetter = this.getRecord(Counter, 'https://jizx.vip' + '/#lc-sv', 'Visits').then((record) => {
+          incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-sv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + 1;
+              if (pvCtn) {
+                pvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#lc-uv');
+      if (uvCtn || enableIncr) {
+        var uvGetter = this.getRecord(Counter, 'https://jizx.vip' + '/#lc-uv', 'Visitors').then((record) => {
+          var vuv = this.validUV();
+          vuv && incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-uv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + (vuv ? 1 : 0);
+              if (uvCtn) {
+                uvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 请求文章的浏览数，如果是当前页面就自增
+      var allPV = document.querySelectorAll('#lc-pv');
+      if (allPV.length > 0 || enableIncr) {
+        for (i = 0; i < allPV.length; i++) {
+          let pv = allPV[i];
+          let title = pv.getAttribute('data-title');
+          var url = 'https://jizx.vip' + pv.getAttribute('data-path');
+          if (url) {
+            var viewGetter = this.getRecord(Counter, url, title).then((record) => {
+              // 是当前页面就自增
+              let curPath = window.location.pathname;
+              if (curPath.includes('index.html')) {
+                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
+              }
+              if (pv.getAttribute('data-path') == curPath) {
+                incrArr.push(this.buildIncrement(record.objectId));
+              }
+              if (pv) {
+                var ele = pv.querySelector('#lc-pv #number');
+                if (ele) {
+                  if (pv.getAttribute('data-path') == curPath) {
+                    ele.innerText = (record.times || 0) + 1;
+                  } else {
+                    ele.innerText = record.times || 0;
+                  }
+                  pv.style.display = 'inline';
+                }
+              }
+            });
+            getterArr.push(viewGetter);
+          }
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && this.increment(Counter, incrArr);
+        })
+      }
+
+    },
+
+
+    fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': this.app_id,
+            'X-LC-Key': this.app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      this.addCount(Counter);
+    },
+
+    refreshCounter() {
+      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+      if (api_server) {
+        this.fetchData(api_server);
+      } else {
+        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
+          .then(resp => resp.json())
+          .then(({api_server}) => {
+            this.fetchData('https://' + api_server);
+          });
+      }
+    }
+
+  };
+
+  LCCounter.refreshCounter();
+
+  document.addEventListener('pjax:complete', function () {
+    LCCounter.refreshCounter();
+  });
+</script>
+
+
+
+<!-- more -->
+
+
+    
+      
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+<!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <div id="loading-bar-wrapper"><script>NProgress.configure({parent:"#loading-bar-wrapper",trickleSpeed: 100})</script></div>
+    <script>
+      window.ShowLoading = function() {
+        NProgress.start();
+      };
+      window.HideLoading = function() {
+        NProgress.done();
+      }
+    </script>
+  
+</div>
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+      if (typeof $.fancybox != "undefined") {
+        $.fancybox.close();    // 关闭弹窗
+      }
+      $('.l_header .switcher .s-search').removeClass('active'); // 关闭移动端激活的搜索框
+      $('.l_header').removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      $('.wrapper').removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      $('.s-top').unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+      window.ShowLoading();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 关于百度统计对 SPA 页面的处理：
+      // 方案一：百度统计>管理>单页应用设置中，打开开启按钮即可对SPA进行统计。 https://tongji.baidu.com/web/help/article?id=324
+      // 方案二：取消注释下列代码。 https://tongji.baidu.com/web/help/article?id=235
+      // 
+
+      // 关于谷歌统计对 SPA 页面的处理：
+      // 当应用以动态方式加载内容并更新地址栏中的网址时，也应该更新通过 gtag.js 存储的网页网址。
+      // https://developers.google.cn/analytics/devguides/collection/gtagjs/single-page-applications?hl=zh-cn
+      
+
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+      try{
+          if (typeof $.fancybox == "undefined") {
+            SCload_fancybox();
+          } else {
+            pjax_fancybox();
+          }
+        
+        
+        
+        
+        
+        
+          pjax_valine();
+        
+        
+        
+        
+        
+      } catch (e) {
+        console.log(e);
+      }
+      window.HideLoading();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.HideLoading();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+
+    
   </div>
 </body>
 </html>
