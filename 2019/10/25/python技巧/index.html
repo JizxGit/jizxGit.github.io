@@ -518,13 +518,13 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>1.8k words</p>
+      <p>2k words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
     <a class='notlink'>
       <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>8 min</p>
+      <p>10 min</p>
     </a>
   </div>
 
@@ -546,15 +546,49 @@
 
 
 
-<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><h4 id="字典排序"><a href="#字典排序" class="headerlink" title="字典排序"></a>字典排序</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res = sorted(a.iteritems(), key = <span class="keyword">lambda</span> kv:(kv[<span class="number">1</span>], kv[<span class="number">0</span>]),reverse=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><h4 id="字典排序"><a href="#字典排序" class="headerlink" title="字典排序"></a>字典排序</h4><pre><code class="python">res = sorted(a.iteritems(), key = lambda kv:(kv[1], kv[0]),reverse=True) 
+</code></pre>
 <h4 id="多字段排序"><a href="#多字段排序" class="headerlink" title="多字段排序"></a>多字段排序</h4><p>其实就是将要排序的字段组成一个元组</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">L = [(<span class="number">12</span>, <span class="number">12</span>), (<span class="number">34</span>, <span class="number">13</span>), (<span class="number">32</span>, <span class="number">15</span>), (<span class="number">12</span>, <span class="number">24</span>), (<span class="number">32</span>, <span class="number">64</span>), (<span class="number">32</span>, <span class="number">11</span>)]</span><br><span class="line">L.sort(key=<span class="keyword">lambda</span> x: (x[<span class="number">0</span>], -x[<span class="number">1</span>]))</span><br></pre></td></tr></table></figure>
+<pre><code class="python">L = [(12, 12), (34, 13), (32, 15), (12, 24), (32, 64), (32, 11)]
+L.sort(key=lambda x: (x[0], -x[1])) 
+</code></pre>
 <p><code>Operator</code> 模块功能允许多级排序。 例如，按 <em>grade</em> 排序，然后按 <em>age</em> 排序：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> itemgetter, attrgetter</span><br><span class="line"></span><br><span class="line"><span class="comment"># 元组、字典类型，使用itemgetter</span></span><br><span class="line">student_tuples = [ (<span class="string">'dave'</span>, <span class="string">'B'</span>, <span class="number">10</span>), (<span class="string">'john'</span>, <span class="string">'A'</span>, <span class="number">15</span>), (<span class="string">'jane'</span>, <span class="string">'B'</span>, <span class="number">12</span>)]  <span class="comment"># 元组类型</span></span><br><span class="line">student_dicts = [&#123;<span class="string">'name'</span>:<span class="string">'dave'</span>,<span class="string">'grade'</span>:<span class="string">'B'</span>,<span class="string">'age'</span>:<span class="number">10</span>&#125;,&#123;<span class="string">'name'</span>:<span class="string">'john'</span>,<span class="string">'grade'</span>:<span class="string">'A'</span>,<span class="string">'age'</span>:<span class="number">15</span>&#125;,&#123;<span class="string">'name'</span>:<span class="string">'jane'</span>,<span class="string">'grade'</span>:<span class="string">'B'</span>,<span class="string">'age'</span>:<span class="number">12</span>&#125;] <span class="comment"># 字典类型</span></span><br><span class="line"></span><br><span class="line">sorted(student_tuples, key=itemgetter(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">sorted(student_tuples, key=itemgetter(<span class="string">'grade'</span>, <span class="string">'age'</span>))</span><br><span class="line"><span class="comment"># [('john', 'A', 15), ('dave', 'B', 10), ('jane', 'B', 12)]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 考虑 Student 对象，使用attrgetter</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, grade, age)</span>:</span></span><br><span class="line">            self.name = name</span><br><span class="line">            self.grade = grade</span><br><span class="line">            self.age = age</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">            <span class="keyword">return</span> repr((self.name, self.grade, self.age))</span><br><span class="line"></span><br><span class="line">student_objects = [</span><br><span class="line">    Student(<span class="string">'jane'</span>, <span class="string">'B'</span>, <span class="number">12</span>),</span><br><span class="line">    Student(<span class="string">'john'</span>, <span class="string">'A'</span>, <span class="number">12</span>),</span><br><span class="line">    Student(<span class="string">'dave'</span>, <span class="string">'B'</span>, <span class="number">10</span>),</span><br><span class="line">]</span><br><span class="line">sorted(student_objects, key=attrgetter(<span class="string">'grade'</span>, <span class="string">'age'</span>))</span><br><span class="line"><span class="comment"># [('john', 'A', 15), ('dave', 'B', 10), ('jane', 'B', 12)]</span></span><br></pre></td></tr></table></figure>
-<h4 id="显示字符串原始内容，不进行转义"><a href="#显示字符串原始内容，不进行转义" class="headerlink" title="显示字符串原始内容，不进行转义"></a>显示字符串原始内容，不进行转义</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s=[<span class="string">"s\nsdf\r"</span>,<span class="string">"s\n"</span>,<span class="string">"d\r\n"</span>,<span class="string">"sdf\n\r"</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">    <span class="keyword">print</span> repr(i)</span><br></pre></td></tr></table></figure>
-<h4 id="默认字典-带数据的初始化"><a href="#默认字典-带数据的初始化" class="headerlink" title="默认字典 带数据的初始化"></a>默认字典 带数据的初始化</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d = defaultdict(<span class="keyword">lambda</span>: <span class="number">0</span>, &#123;<span class="string">"1"</span>:<span class="number">1</span> , <span class="string">"0"</span>:<span class="number">0</span> &#125;)</span><br></pre></td></tr></table></figure>
-<h4 id="python从后向前遍历"><a href="#python从后向前遍历" class="headerlink" title="python从后向前遍历"></a>python从后向前遍历</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for i in range(len(arr)-1, -1, -1):</span><br><span class="line">    print(arr[i])</span><br></pre></td></tr></table></figure>
-<p>最后个<code>-1</code>表示逆向，从<code>len(arr)-1</code>也就是数组最后一位开始，到<code>0</code>，因为 range 是开始区间，因此为了取到 0，用<code>-1</code>表示结束位置。</p>
+<pre><code class="python">from operator import itemgetter, attrgetter
+
+# 元组、字典类型，使用itemgetter
+student_tuples = [ (&#39;dave&#39;, &#39;B&#39;, 10), (&#39;john&#39;, &#39;A&#39;, 15), (&#39;jane&#39;, &#39;B&#39;, 12)]  # 元组类型
+student_dicts = [{&#39;name&#39;:&#39;dave&#39;,&#39;grade&#39;:&#39;B&#39;,&#39;age&#39;:10},{&#39;name&#39;:&#39;john&#39;,&#39;grade&#39;:&#39;A&#39;,&#39;age&#39;:15},{&#39;name&#39;:&#39;jane&#39;,&#39;grade&#39;:&#39;B&#39;,&#39;age&#39;:12}] # 字典类型
+
+sorted(student_tuples, key=itemgetter(1,2))
+sorted(student_tuples, key=itemgetter(&#39;grade&#39;, &#39;age&#39;))
+# [(&#39;john&#39;, &#39;A&#39;, 15), (&#39;dave&#39;, &#39;B&#39;, 10), (&#39;jane&#39;, &#39;B&#39;, 12)]
+
+# 考虑 Student 对象，使用attrgetter
+class Student:
+    def __init__(self, name, grade, age):
+            self.name = name
+            self.grade = grade
+            self.age = age
+    def __repr__(self):
+            return repr((self.name, self.grade, self.age))
+
+student_objects = [
+    Student(&#39;jane&#39;, &#39;B&#39;, 12),
+    Student(&#39;john&#39;, &#39;A&#39;, 12),
+    Student(&#39;dave&#39;, &#39;B&#39;, 10),
+]
+sorted(student_objects, key=attrgetter(&#39;grade&#39;, &#39;age&#39;))
+# [(&#39;john&#39;, &#39;A&#39;, 15), (&#39;dave&#39;, &#39;B&#39;, 10), (&#39;jane&#39;, &#39;B&#39;, 12)]
+</code></pre>
+<h4 id="显示字符串原始内容，不进行转义"><a href="#显示字符串原始内容，不进行转义" class="headerlink" title="显示字符串原始内容，不进行转义"></a>显示字符串原始内容，不进行转义</h4><pre><code class="python">s=[&quot;s\nsdf\r&quot;,&quot;s\n&quot;,&quot;d\r\n&quot;,&quot;sdf\n\r&quot;]
+for i in s:
+    print repr(i)
+</code></pre>
+<h4 id="默认字典-带数据的初始化"><a href="#默认字典-带数据的初始化" class="headerlink" title="默认字典 带数据的初始化"></a>默认字典 带数据的初始化</h4><pre><code class="python"> d = defaultdict(lambda: 0, {&quot;1&quot;:1 , &quot;0&quot;:0 })
+</code></pre>
+<h4 id="python从后向前遍历"><a href="#python从后向前遍历" class="headerlink" title="python从后向前遍历"></a>python从后向前遍历</h4><pre><code>for i in range(len(arr)-1, -1, -1):
+    print(arr[i])
+</code></pre><p>最后个<code>-1</code>表示逆向，从<code>len(arr)-1</code>也就是数组最后一位开始，到<code>0</code>，因为 range 是开始区间，因此为了取到 0，用<code>-1</code>表示结束位置。</p>
 <h3 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h3><h4 id="删除特定的字符"><a href="#删除特定的字符" class="headerlink" title="删除特定的字符"></a>删除特定的字符</h4><p><strong>问题：</strong></p>
 <ol>
 <li><p>过滤用户输入中前后多余的空白字符：<code>++++abc123---</code></p>
@@ -566,56 +600,212 @@
 <p><strong>解决方案</strong>：</p>
 <ol>
 <li><p>去掉两端字符串： <code>strip(), rstrip(), lstrip()</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'  -----abc123++++       '</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 删除两边空字符</span></span><br><span class="line">print(s.strip())</span><br><span class="line"><span class="comment"># 删除左边空字符</span></span><br><span class="line">print(s.rstrip())</span><br><span class="line"><span class="comment"># 删除右边空字符</span></span><br><span class="line">print(s.lstrip())</span><br><span class="line"><span class="comment"># 删除两边 - + 和空字符</span></span><br><span class="line">print(s.strip().strip(<span class="string">'-+'</span>))</span><br><span class="line"> </span><br><span class="line">print(<span class="string">"北门吹雪:http://www.cnblogs.com/2bjiujiu/"</span>)</span><br></pre></td></tr></table></figure>
+<pre><code class="python">s = &#39;  -----abc123++++       &#39;
+
+# 删除两边空字符
+print(s.strip())
+# 删除左边空字符
+print(s.rstrip())
+# 删除右边空字符
+print(s.lstrip())
+# 删除两边 - + 和空字符
+print(s.strip().strip(&#39;-+&#39;))
+
+print(&quot;北门吹雪:http://www.cnblogs.com/2bjiujiu/&quot;)
+</code></pre>
 </li>
 <li><p>删除单个固定位置字符： 切片 + 拼接</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'abc:123'</span></span><br><span class="line"><span class="comment"># 字符串拼接方式去除冒号</span></span><br><span class="line">new_s = s[:<span class="number">3</span>] + s[<span class="number">4</span>:]</span><br><span class="line">print(new_s)</span><br></pre></td></tr></table></figure>
+<pre><code class="python">s = &#39;abc:123&#39;
+# 字符串拼接方式去除冒号
+new_s = s[:3] + s[4:]
+print(new_s)
+</code></pre>
 </li>
 <li><p>删除任意位置字符同时删除多种不同字符：<code>replace(), re.sub()</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 去除字符串中相同的字符</span></span><br><span class="line">s = <span class="string">'\tabc\t123\tisk'</span></span><br><span class="line">print(s.replace(<span class="string">'\t'</span>, <span class="string">''</span>))</span><br><span class="line"> </span><br><span class="line">print(<span class="string">"北门吹雪: http://www.cnblogs.com/2bjiujiu/"</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="comment"># 去除\r\n\t字符</span></span><br><span class="line">s = <span class="string">'\r\nabc\t123\nxyz'</span></span><br><span class="line">print(re.sub(<span class="string">'[\r\n\t]'</span>, <span class="string">''</span>, s))</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># 去除字符串中相同的字符
+s = &#39;\tabc\t123\tisk&#39;
+print(s.replace(&#39;\t&#39;, &#39;&#39;))
+
+print(&quot;北门吹雪: http://www.cnblogs.com/2bjiujiu/&quot;)
+
+import re
+# 去除\r\n\t字符
+s = &#39;\r\nabc\t123\nxyz&#39;
+print(re.sub(&#39;[\r\n\t]&#39;, &#39;&#39;, s))
+</code></pre>
 </li>
 <li><p>多种不同字符映射转换：<code>translate()</code> </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'abc123xyz'</span></span><br><span class="line"><span class="comment"># a _&gt; x, b_&gt; y, c_&gt; z，字符映射加密</span></span><br><span class="line">print(str.maketrans(<span class="string">'abcxyz'</span>, <span class="string">'xyzabc'</span>))</span><br><span class="line"><span class="comment"># translate把其转换成字符串</span></span><br><span class="line">print(s.translate(str.maketrans(<span class="string">'abcxyz'</span>, <span class="string">'xyzabc'</span>)))</span><br></pre></td></tr></table></figure>
+<pre><code class="python">s = &#39;abc123xyz&#39;
+# a _&gt; x, b_&gt; y, c_&gt; z，字符映射加密
+print(str.maketrans(&#39;abcxyz&#39;, &#39;xyzabc&#39;))
+# translate把其转换成字符串
+print(s.translate(str.maketrans(&#39;abcxyz&#39;, &#39;xyzabc&#39;)))
+</code></pre>
 </li>
 <li><p>去掉unicode字符中音调</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python3</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> unicodedata</span><br><span class="line">s = <span class="string">"Zhào Qián Sūn Lǐ Zhōu Wú Zhèng Wáng"</span></span><br><span class="line">remap = &#123;</span><br><span class="line">    <span class="comment"># ord返回ascii值</span></span><br><span class="line">    ord(<span class="string">'\t'</span>): <span class="string">''</span>,</span><br><span class="line">    ord(<span class="string">'\f'</span>): <span class="string">''</span>,</span><br><span class="line">    ord(<span class="string">'\r'</span>): <span class="keyword">None</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment"># 去除\t, \f, \r</span></span><br><span class="line">a = s.translate(remap)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">　　通过使用dict.fromkeys() 方法构造一个字典，每个Unicode 和音符作为键，对于的值全部为None</span></span><br><span class="line"><span class="string">　　然后使用unicodedata.normalize() 将原始输入标准化为分解形式字符</span></span><br><span class="line"><span class="string">　　sys.maxunicode : 给出最大Unicode代码点的值的整数，即1114111（十六进制的0x10FFFF）。</span></span><br><span class="line"><span class="string">　　unicodedata.combining:将分配给字符chr的规范组合类作为整数返回。 如果未定义组合类，则返回0。</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">cmb_chrs = dict.fromkeys(c <span class="keyword">for</span> c <span class="keyword">in</span> range(sys.maxunicode) <span class="keyword">if</span> unicodedata.combining(chr(c))) <span class="comment">#此部分建议拆分开来理解</span></span><br><span class="line">b = unicodedata.normalize(<span class="string">'NFD'</span>, a)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">　　　调用translate 函数删除所有重音符</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">print(b.translate(cmb_chrs))</span><br></pre></td></tr></table></figure>
+<pre><code class="python">#!/usr/bin/python3
+
+import sys
+import unicodedata
+s = &quot;Zhào Qián Sūn Lǐ Zhōu Wú Zhèng Wáng&quot;
+remap = {
+    # ord返回ascii值
+    ord(&#39;\t&#39;): &#39;&#39;,
+    ord(&#39;\f&#39;): &#39;&#39;,
+    ord(&#39;\r&#39;): None
+    }
+# 去除\t, \f, \r
+a = s.translate(remap)
+&#39;&#39;&#39;
+　　通过使用dict.fromkeys() 方法构造一个字典，每个Unicode 和音符作为键，对于的值全部为None
+　　然后使用unicodedata.normalize() 将原始输入标准化为分解形式字符
+　　sys.maxunicode : 给出最大Unicode代码点的值的整数，即1114111（十六进制的0x10FFFF）。
+　　unicodedata.combining:将分配给字符chr的规范组合类作为整数返回。 如果未定义组合类，则返回0。
+&#39;&#39;&#39;
+cmb_chrs = dict.fromkeys(c for c in range(sys.maxunicode) if unicodedata.combining(chr(c))) #此部分建议拆分开来理解
+b = unicodedata.normalize(&#39;NFD&#39;, a)
+&#39;&#39;&#39;
+　　　调用translate 函数删除所有重音符
+&#39;&#39;&#39;
+print(b.translate(cmb_chrs))
+</code></pre>
 <p><a href="https://www.cnblogs.com/2bjiujiu/p/7257744.html" target="_blank" rel="noopener">https://www.cnblogs.com/2bjiujiu/p/7257744.html</a></p>
 </li>
 </ol>
-<h3 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h3><h4 id="读取多个文件"><a href="#读取多个文件" class="headerlink" title="读取多个文件"></a>读取多个文件</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'file1'</span>) <span class="keyword">as</span> f1, open(<span class="string">'file2'</span>) <span class="keyword">as</span> f2, open(<span class="string">'file3'</span>) <span class="keyword">as</span> f3:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> f1:</span><br><span class="line">        j = f2.readline()</span><br><span class="line">        k = f3.readline()</span><br><span class="line">        print(i,j,k)</span><br></pre></td></tr></table></figure>
+<h3 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h3><h4 id="读取多个文件"><a href="#读取多个文件" class="headerlink" title="读取多个文件"></a>读取多个文件</h4><pre><code class="python">with open(&#39;file1&#39;) as f1, open(&#39;file2&#39;) as f2, open(&#39;file3&#39;) as f3:
+    for i in f1:
+        j = f2.readline()
+        k = f3.readline()
+        print(i,j,k)
+</code></pre>
 <p>还有一种优雅一点的写法（已过时）：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> contextlib <span class="keyword">import</span> nested</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> nested(open(<span class="string">'file1'</span>), open(<span class="string">'file2'</span>), open(<span class="string">'file3'</span>)) <span class="keyword">as</span> (f1,f2,f3):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> f1:</span><br><span class="line">        j = f2.readline()</span><br><span class="line">        k = f3.readline()</span><br><span class="line">        print(i,j,k)</span><br></pre></td></tr></table></figure>
+<pre><code class="python">from contextlib import nested
+
+with nested(open(&#39;file1&#39;), open(&#39;file2&#39;), open(&#39;file3&#39;)) as (f1,f2,f3):
+    for i in f1:
+        j = f2.readline()
+        k = f3.readline()
+        print(i,j,k)
+</code></pre>
 <h4 id="readline报错-Unicode-error"><a href="#readline报错-Unicode-error" class="headerlink" title="readline报错 Unicode error"></a>readline报错 Unicode error</h4><p>The default for errors is ‘strict’, meaning that encoding errors raise a UnicodeError. Other possible values are ‘ignore’, ‘replace’, ‘xmlcharrefreplace’, ‘backslashreplace’ and any other name registered via codecs.register_error(), see section Error Handlers. For a list of possible encodings, see section Standard Encodings.</p>
 <p>In Python 3, pass an appropriate <code>errors=</code> value (such as <code>errors=ignore</code> or <code>errors=replace</code>) on creating your file object (presuming it to be a subclass of <code>io.TextIOWrapper</code> – and if it isn’t, consider wrapping it in one!); also, consider passing a more likely encoding than <code>charmap</code> (when you aren’t sure, <code>utf-8</code> is always a good place to start).</p>
 <p>For instance:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = open(<span class="string">'misc-notes.txt'</span>, encoding=<span class="string">'utf-8'</span>, errors=<span class="string">'ignore'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code class="py">f = open(&#39;misc-notes.txt&#39;, encoding=&#39;utf-8&#39;, errors=&#39;ignore&#39;)
+</code></pre>
 <hr>
 <p>In Python 2, the <code>read()</code> operation simply returns bytes; the trick, then, is decoding them to get them into a string (if you do, in fact, want characters as opposed to bytes). If you don’t have a better guess for their real encoding:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">your_string.decode(<span class="string">'utf-8'</span>, <span class="string">'replace'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code class="py">your_string.decode(&#39;utf-8&#39;, &#39;replace&#39;)
+</code></pre>
 <p>…to replace unhandled characters, or</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">your_string.decode(<span class="string">'utf-8'</span>, <span class="string">'ignore'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code class="py">your_string.decode(&#39;utf-8&#39;, &#39;ignore&#39;)
+</code></pre>
 <p>to simply ignore them.</p>
-<h4 id="遍历文件夹"><a href="#遍历文件夹" class="headerlink" title="遍历文件夹"></a>遍历文件夹</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">source</span><br><span class="line">  -- dir</span><br><span class="line">     -- 文件3.txt</span><br><span class="line">  -- 文件1.txt</span><br><span class="line">  -- 文件2.txt</span><br></pre></td></tr></table></figure>
-<p><code>listdir</code>：罗列出指定目录下的<strong>一级文件以及目录</strong>，<strong>不递归</strong>进入子文件夹</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">filesystemencoding = sys.getfilesystemencoding() <span class="comment"># 获取文件系统的编码</span></span><br><span class="line">files = os.listdir(<span class="string">"source/"</span>)</span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> files:</span><br><span class="line">    file = file.decode(filesystemencoding).encode(<span class="string">"utf-8"</span>)</span><br><span class="line">    <span class="keyword">print</span> file</span><br></pre></td></tr></table></figure>
+<h4 id="遍历文件夹"><a href="#遍历文件夹" class="headerlink" title="遍历文件夹"></a>遍历文件夹</h4><pre><code>source
+  -- dir
+     -- 文件3.txt
+  -- 文件1.txt
+  -- 文件2.txt
+</code></pre><p><code>listdir</code>：罗列出指定目录下的<strong>一级文件以及目录</strong>，<strong>不递归</strong>进入子文件夹</p>
+<pre><code class="python">import os
+import sys
+
+filesystemencoding = sys.getfilesystemencoding() # 获取文件系统的编码
+files = os.listdir(&quot;source/&quot;)
+for file in files:
+    file = file.decode(filesystemencoding).encode(&quot;utf-8&quot;)
+    print file
+</code></pre>
 <p><code>walk</code>：罗列出指定目录下<strong>全部的文件、文件夹</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">filesystemencoding = sys.getfilesystemencoding()</span><br><span class="line"><span class="keyword">for</span> pwd, dirs, files <span class="keyword">in</span> os.walk(<span class="string">"source/"</span>):</span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> files:</span><br><span class="line">        f = f.decode(filesystemencoding).encode(<span class="string">"utf-8"</span>)</span><br><span class="line">        <span class="keyword">print</span> f</span><br></pre></td></tr></table></figure>
-<h4 id="写入文件头部"><a href="#写入文件头部" class="headerlink" title="写入文件头部"></a>写入文件头部</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">new_data = <span class="string">"ssss"</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"1.txt"</span>, <span class="string">'r+'</span>) <span class="keyword">as</span> fw:</span><br><span class="line">    old_data = fw.read()    <span class="comment"># 读取全部文本内容，此时指针会到文件尾部</span></span><br><span class="line">    fw.seek(<span class="number">0</span>)        			<span class="comment"># 通过seek回到文件头部</span></span><br><span class="line">    fw.write(new_data)</span><br><span class="line">    fw.write(old_data)</span><br></pre></td></tr></table></figure>
+<pre><code class="python">import os
+import sys
+
+filesystemencoding = sys.getfilesystemencoding()
+for pwd, dirs, files in os.walk(&quot;source/&quot;):
+    for f in files:
+        f = f.decode(filesystemencoding).encode(&quot;utf-8&quot;)
+        print f
+</code></pre>
+<h4 id="写入文件头部"><a href="#写入文件头部" class="headerlink" title="写入文件头部"></a>写入文件头部</h4><pre><code class="python">new_data = &quot;ssss&quot;
+with open(&quot;1.txt&quot;, &#39;r+&#39;) as fw:
+    old_data = fw.read()    # 读取全部文本内容，此时指针会到文件尾部
+    fw.seek(0)                    # 通过seek回到文件头部
+    fw.write(new_data)
+    fw.write(old_data)
+</code></pre>
 <p><a href="https://blog.csdn.net/junbujianwpl/article/details/73194846" target="_blank" rel="noopener">https://blog.csdn.net/junbujianwpl/article/details/73194846</a></p>
 <h3 id="打印显示"><a href="#打印显示" class="headerlink" title="打印显示"></a>打印显示</h3><h4 id="在一行内显示进度"><a href="#在一行内显示进度" class="headerlink" title="在一行内显示进度"></a>在一行内显示进度</h4><p>Python3版本</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">100</span>):</span><br><span class="line">    time.sleep(<span class="number">0.1</span>)</span><br><span class="line">    print(<span class="string">"\r"</span> + <span class="string">"#"</span> * i, end=<span class="string">""</span>)</span><br><span class="line">    sys.stdout.flush()</span><br></pre></td></tr></table></figure>
+<pre><code class="python">import sys
+import time
+
+for i in range(0, 100):
+    time.sleep(0.1)
+    print(&quot;\r&quot; + &quot;#&quot; * i, end=&quot;&quot;)
+    sys.stdout.flush()
+</code></pre>
 <p>python2版本，逗号是重点</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">    time.sleep(<span class="number">0.1</span>)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"\r"</span>+<span class="string">"#"</span>*i,   <span class="comment"># 重点是这个逗号</span></span><br><span class="line">    sys.stdout.flush()</span><br></pre></td></tr></table></figure>
-<h4 id="format-函数的格式化语言"><a href="#format-函数的格式化语言" class="headerlink" title="format 函数的格式化语言"></a>format 函数的格式化语言</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">format_spec     ::=  [[fill]align][sign][#][0][width][grouping_option][.precision][type]</span><br><span class="line">fill            ::=  &lt;any character&gt;</span><br><span class="line">align           ::=  &quot;&lt;&quot; | &quot;&gt;&quot; | &quot;=&quot; | &quot;^&quot;</span><br><span class="line">sign            ::=  &quot;+&quot; | &quot;-&quot; | &quot; &quot;</span><br><span class="line">width           ::=  digit+</span><br><span class="line">grouping_option ::=  &quot;_&quot; | &quot;,&quot;</span><br><span class="line">precision       ::=  digit+</span><br><span class="line">type            ::=  &quot;b&quot; | &quot;c&quot; | &quot;d&quot; | &quot;e&quot; | &quot;E&quot; | &quot;f&quot; | &quot;F&quot; | &quot;g&quot; | &quot;G&quot; | &quot;n&quot; | &quot;o&quot; | &quot;s&quot; | &quot;x&quot; | &quot;X&quot; | &quot;%&quot;</span><br></pre></td></tr></table></figure>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="python-查看所有模块"><a href="#python-查看所有模块" class="headerlink" title="python 查看所有模块"></a>python 查看所有模块</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>help()</span><br><span class="line">Welcome to Python <span class="number">3.7</span><span class="string">'s help utility!...........</span></span><br><span class="line"><span class="string">help&gt; modules</span></span><br></pre></td></tr></table></figure>
-<h4 id="使用其他目录的模块"><a href="#使用其他目录的模块" class="headerlink" title="使用其他目录的模块"></a>使用其他目录的模块</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PROJECT_PATH = path.dirname(path.dirname(path.abspath(__file__))) <span class="comment"># 当前文件所在目录的前两级目录</span></span><br><span class="line">sys.path.append(PROJECT_PATH)  <span class="comment"># 添加在环境变量中</span></span><br><span class="line"><span class="keyword">from</span> conf <span class="keyword">import</span> config        <span class="comment"># 就可以使用conf目录中的config.py文件了</span></span><br></pre></td></tr></table></figure>
+<pre><code class="python">import sys
+import time
+
+for i in range(100):
+    time.sleep(0.1)
+    print &quot;\r&quot;+&quot;#&quot;*i,   # 重点是这个逗号
+    sys.stdout.flush()
+</code></pre>
+<h4 id="format-函数的格式化语言"><a href="#format-函数的格式化语言" class="headerlink" title="format 函数的格式化语言"></a>format 函数的格式化语言</h4><pre><code>format_spec     ::=  [[fill]align][sign][#][0][width][grouping_option][.precision][type]
+fill            ::=  &lt;any character&gt;
+align           ::=  &quot;&lt;&quot; | &quot;&gt;&quot; | &quot;=&quot; | &quot;^&quot;
+sign            ::=  &quot;+&quot; | &quot;-&quot; | &quot; &quot;
+width           ::=  digit+
+grouping_option ::=  &quot;_&quot; | &quot;,&quot;
+precision       ::=  digit+
+type            ::=  &quot;b&quot; | &quot;c&quot; | &quot;d&quot; | &quot;e&quot; | &quot;E&quot; | &quot;f&quot; | &quot;F&quot; | &quot;g&quot; | &quot;G&quot; | &quot;n&quot; | &quot;o&quot; | &quot;s&quot; | &quot;x&quot; | &quot;X&quot; | &quot;%&quot;
+</code></pre><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="python-查看所有模块"><a href="#python-查看所有模块" class="headerlink" title="python 查看所有模块"></a>python 查看所有模块</h4><pre><code class="python">python
+
+&gt;&gt;&gt; help()
+Welcome to Python 3.7&#39;s help utility!...........
+help&gt; modules
+</code></pre>
+<h4 id="使用其他目录的模块"><a href="#使用其他目录的模块" class="headerlink" title="使用其他目录的模块"></a>使用其他目录的模块</h4><pre><code class="python">PROJECT_PATH = path.dirname(path.dirname(path.abspath(__file__))) # 当前文件所在目录的前两级目录
+sys.path.append(PROJECT_PATH)  # 添加在环境变量中
+from conf import config        # 就可以使用conf目录中的config.py文件了
+</code></pre>
 <h4 id="sys-exit-与-exit、quit-的区别"><a href="#sys-exit-与-exit、quit-的区别" class="headerlink" title="sys.exit 与 exit、quit 的区别"></a>sys.exit 与 exit、quit 的区别</h4><p><strong>exit和quit函数</strong></p>
 <p>这两个函数的作用，就是直接退出程序，可以带一个参数作为程序的返回码，如果不带参数，默认就是返回0.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">xinlin@ubuntu:~/test$ python3 -q</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>exit(<span class="number">111</span>)</span><br><span class="line">xinlin@ubuntu:~/test$ echo $?</span><br><span class="line"><span class="number">111</span></span><br><span class="line">xinlin@ubuntu:~/test$ python3 -q</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>quit(<span class="number">222</span>)</span><br><span class="line">xinlin@ubuntu:~/test$ echo $?</span><br><span class="line"><span class="number">222</span></span><br><span class="line">xinlin@ubuntu:~/test$ python3 -q</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>exit()</span><br><span class="line">xinlin@ubuntu:~/test$ echo $?</span><br><span class="line"><span class="number">0</span></span><br><span class="line">xinlin@ubuntu:~/test$ python3 -q</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>quit()</span><br><span class="line">xinlin@ubuntu:~/test$ echo $?</span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+<pre><code class="python">xinlin@ubuntu:~/test$ python3 -q
+&gt;&gt;&gt; exit(111)
+xinlin@ubuntu:~/test$ echo $?
+111
+xinlin@ubuntu:~/test$ python3 -q
+&gt;&gt;&gt; quit(222)
+xinlin@ubuntu:~/test$ echo $?
+222
+xinlin@ubuntu:~/test$ python3 -q
+&gt;&gt;&gt; exit()
+xinlin@ubuntu:~/test$ echo $?
+0
+xinlin@ubuntu:~/test$ python3 -q
+&gt;&gt;&gt; quit()
+xinlin@ubuntu:~/test$ echo $?
+0
+</code></pre>
 <p><strong>sys.exit()函数</strong></p>
 <p><strong><code>sys.exit()</code>函数会抛出一个SystemExit异常，Python代码可以捕获这个异常来进行一些程序退出前的清理工作</strong>。<code>sys.exit</code>函数同样可以带一个参数来作为程序的退出码，默认是0.</p>
 <p>实践中，完整的使用<code>sys.exit</code>函数的逻辑应该是如下这样的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># do something</span></span><br><span class="line">    sys.exit(<span class="number">123</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        main()</span><br><span class="line">    <span class="keyword">except</span> SystemExit <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">if</span> str(e) == <span class="string">'123'</span>:</span><br><span class="line">            print(<span class="string">'---123---'</span>)</span><br><span class="line">            exit(<span class="number">123</span>)</span><br></pre></td></tr></table></figure>
+<pre><code class="python">import sys
+
+def main():
+    # do something
+    sys.exit(123)
+    return
+
+if __name__ == &#39;__main__&#39;:
+    try:
+        main()
+    except SystemExit as e:
+        if str(e) == &#39;123&#39;:
+            print(&#39;---123---&#39;)
+            exit(123)
+</code></pre>
 <p>使用sys.exit函数退出程序，可以有个异常捕获机制来做清理扫尾的工作，程序会更加灵活健壮。</p>
 </the></excerpt>
   
@@ -936,7 +1126,7 @@ Mac、linux、window这 3 大系统的开发环境搭建推荐、遇到的相关
     <script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
     <script type="text/javascript">
       $(function(){
-        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/054.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
+        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/044.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
         if ('true' == 'true') {
           function shuffle(arr){
             /*From countercurrent-time*/

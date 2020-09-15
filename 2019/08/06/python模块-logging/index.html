@@ -522,13 +522,13 @@ python logging 模块的使用以及详细讲解">
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>4.9k words</p>
+      <p>5k words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
     <a class='notlink'>
       <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>18 min</p>
+      <p>19 min</p>
     </a>
   </div>
 
@@ -629,9 +629,30 @@ python logging 模块的使用以及详细讲解">
 </table>
 <p>其中<code>logging.basicConfig(**kwargs)</code>函数用于指定“要记录的日志级别”、“日志格式”、“日志输出位置”、“日志文件的打开模式”等信息，其他几个都是用于记录各个级别日志的函数。</p>
 <p>具体例子：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logging.basicConfig(level=logging.DEBUG,<span class="comment"># 控制台打印的日志级别</span></span><br><span class="line">                    <span class="comment"># filename='new.log', # 注释掉当前行即可打印到控制台</span></span><br><span class="line">                    filemode=<span class="string">'w'</span>,<span class="comment"># 写模式：a和w，w就是写模式，a是追加模式，默认是追加模式</span></span><br><span class="line">                    format= <span class="string">'%(asctime)s - %(pathname)s[line:%(lineno)d] - %(name)s - %(levelname)s: %(message)s'</span>, <span class="comment"># 日志格式</span></span><br><span class="line">                    datefmt=<span class="string">'%Y-%m-%d  %H:%M:%S %a '</span>    <span class="comment"># 日期格式</span></span><br><span class="line">                    )</span><br><span class="line"></span><br><span class="line">logging.debug(<span class="string">"info"</span>)</span><br><span class="line">logging.info(<span class="string">"info"</span>)</span><br><span class="line">logging.warning(<span class="string">"warning"</span>)</span><br><span class="line">logging.error(<span class="string">"error"</span>)</span><br><span class="line">logging.critical(<span class="string">"critical"</span>)</span><br></pre></td></tr></table></figure>
+<pre><code class="python">import logging
+
+logging.basicConfig(level=logging.DEBUG,# 控制台打印的日志级别
+                    # filename=&#39;new.log&#39;, # 注释掉当前行即可打印到控制台
+                    filemode=&#39;w&#39;,# 写模式：a和w，w就是写模式，a是追加模式，默认是追加模式
+                    format= &#39;%(asctime)s - %(pathname)s[line:%(lineno)d] - %(name)s - %(levelname)s: %(message)s&#39;, # 日志格式
+                    datefmt=&#39;%Y-%m-%d  %H:%M:%S %a &#39;    # 日期格式
+                    )
+
+logging.debug(&quot;info&quot;)
+logging.info(&quot;info&quot;)
+logging.warning(&quot;warning&quot;)
+logging.error(&quot;error&quot;)
+logging.critical(&quot;critical&quot;)
+</code></pre>
 <p>自定义<strong>屏幕输出的logger</strong>。如果想在不同文件中使用不同 logger，就需要创建一个新的 logger。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line">logger = logging.getLogger(<span class="string">'name'</span>) <span class="comment"># 创建logger</span></span><br><span class="line">logger.setLevel(logging.DEBUG)     <span class="comment"># 设置等级</span></span><br><span class="line">std_err = logging.StreamHandler()  <span class="comment"># 创建handler</span></span><br><span class="line">std_err.setFormatter(logging.Formatter(<span class="string">"%(name)s:%(asctime)s-%(levelname)s: %(message)s"</span>))       <span class="comment"># handler定义输出格式</span></span><br><span class="line">logger.addHandler(std_err)         <span class="comment"># 将handler添加到logger</span></span><br></pre></td></tr></table></figure>
+<pre><code class="python">import logging
+
+logger = logging.getLogger(&#39;name&#39;) # 创建logger
+logger.setLevel(logging.DEBUG)     # 设置等级
+std_err = logging.StreamHandler()  # 创建handler
+std_err.setFormatter(logging.Formatter(&quot;%(name)s:%(asctime)s-%(levelname)s: %(message)s&quot;))       # handler定义输出格式
+logger.addHandler(std_err)         # 将handler添加到logger
+</code></pre>
 <h4 id="关于-basicConfig-说明"><a href="#关于-basicConfig-说明" class="headerlink" title="关于 basicConfig 说明"></a>关于 basicConfig 说明</h4><p>主要的配置是通过<code>basicConfig</code>来定制的：</p>
 <table>
 <thead>
@@ -679,7 +700,9 @@ python logging 模块的使用以及详细讲解">
 <ul>
 <li><code>logging.basicConfig()</code>函数是一个一次性的简单配置工具使，也就是说<strong>只有在第一次调用该函数时会起作用</strong>，后续再次调用该函数时完全不会产生任何操作的，多次调用的设置并不是累加操作。</li>
 <li>日志器（Logger）是有层级关系的，上面调用的logging模块级别的函数所使用的日志器是<code>RootLogger</code>类的实例，其名称为’root’，它是处于日志器层级关系最顶层的日志器，且<strong>该实例是以单例模式存在的</strong>。</li>
-<li>如果要记录的日志中包含变量数据，可使用一个格式字符串作为这个事件的描述消息（<code>logging.debug</code>、<code>logging.info</code>等函数的第一个参数），然后将变量数据作为第二个参数<code>*args</code>的值进行传递，如下:<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">logging.warning(<span class="string">'%s is %d years old.'</span>, <span class="string">'Tom'</span>, <span class="number">10</span>)</span><br><span class="line"><span class="comment"># WARNING:root:Tom is 10 years old.</span></span><br></pre></td></tr></table></figure>
+<li>如果要记录的日志中包含变量数据，可使用一个格式字符串作为这个事件的描述消息（<code>logging.debug</code>、<code>logging.info</code>等函数的第一个参数），然后将变量数据作为第二个参数<code>*args</code>的值进行传递，如下:<pre><code class="python">logging.warning(&#39;%s is %d years old.&#39;, &#39;Tom&#39;, 10)
+# WARNING:root:Tom is 10 years old.
+</code></pre>
 </li>
 </ul>
 <p>其实，logging所提供的模块级别的日志记录函数也是对logging日志系统相关类的封装而已。这里其实创建了一个 名为<code>root</code>的日志器组件，是一个默认的、单例的 logger 组件。接下来我们看一下第二种。</p>
@@ -767,7 +790,11 @@ python logging 模块的使用以及详细讲解">
 <li>2）把所有严重级别大于等于error的日志发送到stdout（标准输出）；</li>
 <li>3）把所有严重级别为critical的日志发送到一个email邮件地址。这种场景就需要3个不同的handlers，每个handler复杂发送一个特定严重级别的日志到一个特定的位置。</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fh = logging.FileHandler(<span class="string">"jizx_log.txt"</span>,encoding=<span class="string">"utf-8"</span>) <span class="comment"># 创建一个文件 handler 用于注册到 logger 中</span></span><br><span class="line">Handler.setLevel(lel):指定被处理的信息级别，低于lel级别的信息将被忽略</span><br><span class="line">Handler.setFormatter()：给这个handler选择一个格式</span><br><span class="line">Handler.addFilter(filt)、Handler.removeFilter(filt)：新增或删除一个filter对象</span><br></pre></td></tr></table></figure>
+<pre><code class="python">fh = logging.FileHandler(&quot;jizx_log.txt&quot;,encoding=&quot;utf-8&quot;) # 创建一个文件 handler 用于注册到 logger 中
+Handler.setLevel(lel):指定被处理的信息级别，低于lel级别的信息将被忽略
+Handler.setFormatter()：给这个handler选择一个格式
+Handler.addFilter(filt)、Handler.removeFilter(filt)：新增或删除一个filter对象
+</code></pre>
 <p>应用程序代码不应该直接实例化和使用Handler实例。因为Handler是一个基类，它只定义了素有handlers都应该有的接口，同时提供了一些子类可以直接使用或覆盖的默认行为。下面是一些常用的Handler：</p>
 <table>
 <thead>
@@ -809,7 +836,8 @@ python logging 模块的使用以及详细讲解">
 </table>
 <h4 id="formater"><a href="#formater" class="headerlink" title="formater"></a>formater</h4><p>Formater对象用于配置日志信息的最终顺序、结构和内容。与logging.Handler基类不同的是，应用代码可以直接实例化Formatter类。另外，如果你的应用程序需要一些特殊的处理行为，也可以实现一个Formatter的子类来完成。</p>
 <p>Formatter类的构造方法定义如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logging.Formatter.__init__(fmt=<span class="keyword">None</span>, datefmt=<span class="keyword">None</span>, style=<span class="string">'%'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code class="python">  logging.Formatter.__init__(fmt=None, datefmt=None, style=&#39;%&#39;)
+</code></pre>
 <p>该构造方法接收3个可选参数：</p>
 <ul>
 <li>fmt：指定消息格式化字符串，如果不指定该参数则默认使用message的原始值</li>
@@ -914,18 +942,89 @@ python logging 模块的使用以及详细讲解">
 </tbody>
 </table>
 <h4 id="Filter类（暂时了解）"><a href="#Filter类（暂时了解）" class="headerlink" title="Filter类（暂时了解）"></a>Filter类（暂时了解）</h4><p>Filter可以被Handler和Logger用来做比level更细粒度的、更复杂的过滤功能。Filter是一个过滤器基类，它只允许某个logger层级下的日志事件通过过滤。该类定义如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">logging</span>.<span class="title">Filter</span><span class="params">(name=<span class="string">''</span>)</span></span></span><br><span class="line"><span class="class">    <span class="title">filter</span><span class="params">(record)</span></span></span><br></pre></td></tr></table></figure>
+<pre><code class="python">  class logging.Filter(name=&#39;&#39;)
+      filter(record)
+</code></pre>
 <p>比如，一个filter实例化时传递的name参数值为’A.B’，那么该filter实例将只允许名称为类似如下规则的loggers产生的日志记录通过过滤：’A.B’，’A.B,C’，’A.B.C.D’，’A.B.D’，而名称为’A.BB’, ‘B.A.B’的loggers产生的日志则会被过滤掉。如果name的值为空字符串，则允许所有的日志事件通过过滤。</p>
 <p>filter方法用于具体控制传递的record记录是否能通过过滤，如果该方法返回值为0表示不能通过过滤，返回值为非0表示可以通过过滤。</p>
 <h3 id="最佳实践"><a href="#最佳实践" class="headerlink" title="最佳实践"></a>最佳实践</h3><p><strong>标准屏幕日志</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_stream_logger</span><span class="params">(name=<span class="string">'LOGGER'</span>, level=<span class="string">'debug'</span>, output_format=None)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    获取标准屏幕日志器</span></span><br><span class="line"><span class="string">    :param name: 日志器名称</span></span><br><span class="line"><span class="string">    :param level: 日志级别</span></span><br><span class="line"><span class="string">    :param output_format: 输出格式</span></span><br><span class="line"><span class="string">    :return: </span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">if</span> output_format <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        output_format = <span class="string">"%(name)s:%(asctime)s %(filename)s[line:%(lineno)d]:%(levelname)s:%(message)s"</span></span><br><span class="line"></span><br><span class="line">    level_relations = &#123;</span><br><span class="line">        <span class="string">'debug'</span>: logging.DEBUG,</span><br><span class="line">        <span class="string">'info'</span>: logging.INFO,</span><br><span class="line">        <span class="string">'warning'</span>: logging.WARNING,</span><br><span class="line">        <span class="string">'error'</span>: logging.ERROR,</span><br><span class="line">        <span class="string">'critical'</span>: logging.CRITICAL</span><br><span class="line">    &#125;  <span class="comment"># 日志级别关系映射</span></span><br><span class="line"></span><br><span class="line">    logger = logging.getLogger(name)</span><br><span class="line">    logger.setLevel(level_relations[level])</span><br><span class="line">    stream = logging.StreamHandler()</span><br><span class="line">    stream.setFormatter(logging.Formatter(output_format))</span><br><span class="line">    logger.addHandler(stream)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> logger</span><br></pre></td></tr></table></figure>
+<pre><code class="python">import logging
+
+def get_stream_logger(name=&#39;LOGGER&#39;, level=&#39;debug&#39;, output_format=None):
+    &quot;&quot;&quot;
+    获取标准屏幕日志器
+    :param name: 日志器名称
+    :param level: 日志级别
+    :param output_format: 输出格式
+    :return: 
+    &quot;&quot;&quot;
+    &quot;&quot;&quot;
+    &quot;&quot;&quot;
+    if output_format is None:
+        output_format = &quot;%(name)s:%(asctime)s %(filename)s[line:%(lineno)d]:%(levelname)s:%(message)s&quot;
+
+    level_relations = {
+        &#39;debug&#39;: logging.DEBUG,
+        &#39;info&#39;: logging.INFO,
+        &#39;warning&#39;: logging.WARNING,
+        &#39;error&#39;: logging.ERROR,
+        &#39;critical&#39;: logging.CRITICAL
+    }  # 日志级别关系映射
+
+    logger = logging.getLogger(name)
+    logger.setLevel(level_relations[level])
+    stream = logging.StreamHandler()
+    stream.setFormatter(logging.Formatter(output_format))
+    logger.addHandler(stream)
+
+    return logger
+</code></pre>
 <p><strong>屏幕文件双日志</strong></p>
 <p>输出log到控制台，并将日志写入log文件，保存2种类型的log：</p>
 <ul>
 <li>all.log 保存debug, info, warning, critical 信息</li>
 <li>error.log则只保存error信息，同时按照时间自动分割日志文件</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_file_screen_logger</span><span class="params">(name=<span class="string">'LOGGER'</span>, filename=None, level=<span class="string">'info'</span>, when=<span class="string">'D'</span>, backCount=<span class="number">3</span>, fmt=None)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    获取标准屏幕、文件输出日志器</span></span><br><span class="line"><span class="string">    :param name:日志器的名称</span></span><br><span class="line"><span class="string">    :param filename: 保存的文件名</span></span><br><span class="line"><span class="string">    :param level:日志级别</span></span><br><span class="line"><span class="string">    :param when: 日志生成间隔的时间单位，单位有以下几种：</span></span><br><span class="line"><span class="string">        # S 秒、M 分、H 小时、、D 天、、W 每星期（interval==0时代表星期一）、midnight 每天凌晨</span></span><br><span class="line"><span class="string">    :param backCount: 备份数量</span></span><br><span class="line"><span class="string">    :param fmt:日志输出格式</span></span><br><span class="line"><span class="string">    :return:</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    level_relations = &#123;</span><br><span class="line">        <span class="string">'debug'</span>: logging.DEBUG,</span><br><span class="line">        <span class="string">'info'</span>: logging.INFO,</span><br><span class="line">        <span class="string">'warning'</span>: logging.WARNING,</span><br><span class="line">        <span class="string">'error'</span>: logging.ERROR,</span><br><span class="line">        <span class="string">'critical'</span>: logging.CRITICAL</span><br><span class="line">    &#125;  <span class="comment"># 日志级别关系映射</span></span><br><span class="line">    logger = logging.getLogger(name)</span><br><span class="line">    logger.setLevel(level_relations.get(level))  <span class="comment"># 设置日志级别</span></span><br><span class="line">    <span class="keyword">if</span> fmt <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        fmt = <span class="string">'%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s'</span></span><br><span class="line">    format_str = logging.Formatter(fmt)  <span class="comment"># 设置日志格式</span></span><br><span class="line"></span><br><span class="line">    out_screen = logging.StreamHandler()  <span class="comment"># 往屏幕上输出</span></span><br><span class="line">    out_screen.setFormatter(format_str)  <span class="comment"># 设置屏幕上显示的格式</span></span><br><span class="line">    logger.addHandler(out_screen)  <span class="comment"># 把对象加到logger里</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> filename <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">'未指定日志文件名 '</span>)</span><br><span class="line">    <span class="comment"># 往文件里写入，指定间隔时间自动生成文件的处理器</span></span><br><span class="line">    <span class="comment"># interval是时间间隔，backupCount是备份文件的个数，如果超过这个个数，就会自动删除，when是间隔的时间单位，单位有以下几种：</span></span><br><span class="line">    <span class="comment"># S 秒、M 分、H 小时、、D 天、、W 每星期（interval==0时代表星期一）、midnight 每天凌晨</span></span><br><span class="line">    out_file = handlers.TimedRotatingFileHandler(filename=filename, when=when, backupCount=backCount, encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">    out_file.setFormatter(format_str)  <span class="comment"># 设置文件里写入的格式</span></span><br><span class="line">    logger.addHandler(out_file)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> logger</span><br></pre></td></tr></table></figure>
+<pre><code class="python">def get_file_screen_logger(name=&#39;LOGGER&#39;, filename=None, level=&#39;info&#39;, when=&#39;D&#39;, backCount=3, fmt=None):
+    &quot;&quot;&quot;
+    获取标准屏幕、文件输出日志器
+    :param name:日志器的名称
+    :param filename: 保存的文件名
+    :param level:日志级别
+    :param when: 日志生成间隔的时间单位，单位有以下几种：
+        # S 秒、M 分、H 小时、、D 天、、W 每星期（interval==0时代表星期一）、midnight 每天凌晨
+    :param backCount: 备份数量
+    :param fmt:日志输出格式
+    :return:
+    &quot;&quot;&quot;
+    level_relations = {
+        &#39;debug&#39;: logging.DEBUG,
+        &#39;info&#39;: logging.INFO,
+        &#39;warning&#39;: logging.WARNING,
+        &#39;error&#39;: logging.ERROR,
+        &#39;critical&#39;: logging.CRITICAL
+    }  # 日志级别关系映射
+    logger = logging.getLogger(name)
+    logger.setLevel(level_relations.get(level))  # 设置日志级别
+    if fmt is None:
+        fmt = &#39;%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s&#39;
+    format_str = logging.Formatter(fmt)  # 设置日志格式
+
+    out_screen = logging.StreamHandler()  # 往屏幕上输出
+    out_screen.setFormatter(format_str)  # 设置屏幕上显示的格式
+    logger.addHandler(out_screen)  # 把对象加到logger里
+
+    if filename is None:
+        raise Exception(&#39;未指定日志文件名 &#39;)
+    # 往文件里写入，指定间隔时间自动生成文件的处理器
+    # interval是时间间隔，backupCount是备份文件的个数，如果超过这个个数，就会自动删除，when是间隔的时间单位，单位有以下几种：
+    # S 秒、M 分、H 小时、、D 天、、W 每星期（interval==0时代表星期一）、midnight 每天凌晨
+    out_file = handlers.TimedRotatingFileHandler(filename=filename, when=when, backupCount=backCount, encoding=&#39;utf-8&#39;)
+    out_file.setFormatter(format_str)  # 设置文件里写入的格式
+    logger.addHandler(out_file)
+
+    return logger
+</code></pre>
 <p>参考:<a href="https://www.cnblogs.com/Nicholas0707/p/9021672.html" target="_blank" rel="noopener">https://www.cnblogs.com/Nicholas0707/p/9021672.html</a></p>
 <p><a href="https://www.cnblogs.com/nancyzhu/p/8551506.html" target="_blank" rel="noopener">https://www.cnblogs.com/nancyzhu/p/8551506.html</a> 综合案例</p>
 </the></excerpt>
@@ -1250,7 +1349,7 @@ anaconda安装
     <script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
     <script type="text/javascript">
       $(function(){
-        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/054.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
+        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/044.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
         if ('true' == 'true') {
           function shuffle(arr){
             /*From countercurrent-time*/

@@ -513,7 +513,7 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>4.3k words</p>
+      <p>4.4k words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
@@ -540,7 +540,13 @@
 
 <h2 id="bash-敲命令的快捷键"><a href="#bash-敲命令的快捷键" class="headerlink" title="bash 敲命令的快捷键"></a>bash 敲命令的快捷键</h2><p><strong>快捷键有个规律，<em>Ctrl开头的快捷键一般是针对字符的，而Alt开头的快捷键一般是针对词的</em>。</strong></p>
 <p>Bash下，如果使用的是shell脚本文件，快捷键不一定是一样的，有的时候会出现同一个快捷键有不同的表现，这种情况一般是由于Bash所处的模式不同而引起的，你可以通过<code>set</code>命令来调整模式：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">set -o emacs</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#切到emacs模式</span></span></span><br><span class="line">set -o vi</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#切到vi模式</span></span></span><br><span class="line">set -o</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 查看当前选项的设置状态</span></span></span><br></pre></td></tr></table></figure>
+<pre><code class="shell">set -o emacs
+##切到emacs模式
+set -o vi
+##切到vi模式
+set -o
+## 查看当前选项的设置状态
+</code></pre>
 <p>本文使用的是emacs模式</p>
 <ol>
 <li><code>CTRL</code>=<code>C</code>：这个键是指PC键盘上的Ctrl键</li>
@@ -675,9 +681,31 @@
 </tbody>
 </table>
 <h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p><strong>避免重复输入文件名</strong></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">touch /tmp/a-test-file-from-blog.useasp.net</span><br><span class="line"> </span><br><span class="line"><span class="comment">## 如果不使用快捷键，文件名要重新输入</span></span><br><span class="line">chmod u+x /tmp/a-test-file-from-blog.useasp.net</span><br><span class="line"> </span><br><span class="line"><span class="comment">##使用快捷键</span></span><br><span class="line">chmod u+x &lt;ALT-.&gt;</span><br><span class="line"><span class="comment">## 快捷键[M-.]自动会将上面的最后一个参数附加</span></span><br></pre></td></tr></table></figure>
+<pre><code class="sh">touch /tmp/a-test-file-from-blog.useasp.net
+
+## 如果不使用快捷键，文件名要重新输入
+chmod u+x /tmp/a-test-file-from-blog.useasp.net
+
+##使用快捷键
+chmod u+x &lt;ALT-.&gt;
+## 快捷键[M-.]自动会将上面的最后一个参数附加
+</code></pre>
 <h3 id="自定义快捷键"><a href="#自定义快捷键" class="headerlink" title="自定义快捷键"></a>自定义快捷键</h3><p>使用<code>bind</code>命令即可，Bash中的快捷键其实是<code>Readline</code>来提供的，因此，这里快捷键的设置其实就是配置<code>Readline</code>，<code>Readline</code>中分两种快捷键，一种是Readline内部的函数快捷键，另外一种是执行Shell命令，设置的时候稍有不同：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#查看Readline中可以使用的函数名称</span></span></span><br><span class="line">bind -l</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#查看当前绑定的案件配置与其对应的功能</span></span></span><br><span class="line">bind -v</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#已经绑定的快捷键</span></span></span><br><span class="line">bind -p</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#绑定自定义执行命令shell命令的快捷键</span></span></span><br><span class="line">bind -x '"\C-x\C-l":ls -al'</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 绑定后，按[C-x,C-L]就能执行ls -al</span></span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 绑定内置函数功能</span></span></span><br><span class="line">bind "\C-x":backword-delte-char</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#这个是这行Readline库中的函数backword-delte-char</span></span></span><br></pre></td></tr></table></figure>
+<pre><code class="shell">##查看Readline中可以使用的函数名称
+bind -l
+##查看当前绑定的案件配置与其对应的功能
+bind -v
+##已经绑定的快捷键
+bind -p
+
+##绑定自定义执行命令shell命令的快捷键
+bind -x &#39;&quot;\C-x\C-l&quot;:ls -al&#39;
+## 绑定后，按[C-x,C-L]就能执行ls -al
+
+## 绑定内置函数功能
+bind &quot;\C-x&quot;:backword-delte-char
+##这个是这行Readline库中的函数backword-delte-char
+</code></pre>
 <p>说明：</p>
 <ol>
 <li><p>在配置文件中，<code>\C</code>代表<code>CTRL</code>，<code>\M</code>代表<code>ALT</code>，<code>\e</code>代表<code>ESC</code>，<code>\\</code>是反斜杠<code>\</code>，<code>\&#39;</code>是单引号，<code>\&quot;</code>是双引号；</p>
@@ -689,10 +717,45 @@
 </ol>
 <p>为了能够让设置的快捷键<strong>永久有效</strong>，我们就需要将快捷键的配置写入文件。在Linux系统中，能永久保存快捷键的地方有两个，全局和用户的配置文件，全局的是<code>/etc/inputrc</code>，而用户的是在用户的根目录下<code>~/.inputrc</code>，全局的会影响所有的用户，而用户根目录下的只会对相应的用户产生影响。</p>
 <p>inputrc文件的大概样子像下面这样：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 本例来自CentOS6.4的默认配置文件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"><span class="keyword">if</span> mode=emacs</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> linux console and RH/Debian xterm</span></span><br><span class="line">"\e[1~": beginning-of-line</span><br><span class="line">"\e[4~": end-of-line</span><br><span class="line"><span class="meta">#</span><span class="bash"> commented out keymappings <span class="keyword">for</span> pgup/pgdown to reach begin/end of <span class="built_in">history</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="string">"\e[5~"</span>: beginning-of-history</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="string">"\e[6~"</span>: end-of-history</span></span><br><span class="line">"\e[5~": history-search-backward</span><br><span class="line">"\e[6~": history-search-forward</span><br><span class="line">"\e[3~": delete-char</span><br><span class="line">"\e[2~": quoted-insert</span><br><span class="line">"\e[5C": forward-word</span><br><span class="line">"\e[5D": backward-word</span><br><span class="line">"\e[1;5C": forward-word</span><br><span class="line">"\e[1;5D": backward-word</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> rxvt</span></span><br><span class="line">"\e[8~": end-of-line</span><br><span class="line">"\eOc": forward-word</span><br><span class="line">"\eOd": backward-word</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> non RH/Debian xterm, can<span class="string">'t hurt for RH/DEbian xterm</span></span></span><br><span class="line">"\eOH": beginning-of-line</span><br><span class="line">"\eOF": end-of-line</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> freebsd console</span></span><br><span class="line">"\e[H": beginning-of-line</span><br><span class="line">"\e[F": end-of-line</span><br><span class="line"><span class="meta">$</span><span class="bash">endif</span></span><br></pre></td></tr></table></figure>
+<pre><code class="shell">## 本例来自CentOS6.4的默认配置文件
+$if mode=emacs
+
+# for linux console and RH/Debian xterm
+&quot;\e[1~&quot;: beginning-of-line
+&quot;\e[4~&quot;: end-of-line
+# commented out keymappings for pgup/pgdown to reach begin/end of history
+#&quot;\e[5~&quot;: beginning-of-history
+#&quot;\e[6~&quot;: end-of-history
+&quot;\e[5~&quot;: history-search-backward
+&quot;\e[6~&quot;: history-search-forward
+&quot;\e[3~&quot;: delete-char
+&quot;\e[2~&quot;: quoted-insert
+&quot;\e[5C&quot;: forward-word
+&quot;\e[5D&quot;: backward-word
+&quot;\e[1;5C&quot;: forward-word
+&quot;\e[1;5D&quot;: backward-word
+
+# for rxvt
+&quot;\e[8~&quot;: end-of-line
+&quot;\eOc&quot;: forward-word
+&quot;\eOd&quot;: backward-word
+
+# for non RH/Debian xterm, can&#39;t hurt for RH/DEbian xterm
+&quot;\eOH&quot;: beginning-of-line
+&quot;\eOF&quot;: end-of-line
+
+# for freebsd console
+&quot;\e[H&quot;: beginning-of-line
+&quot;\e[F&quot;: end-of-line
+$endif
+</code></pre>
 <p>TODO ‘<strong>\e[H</strong>‘  到底表示什么</p>
 <p>推荐的自定义</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bind "\C-f":forward-word   # 向前移动一个词 （以英文单词）</span><br><span class="line">bind "\C-b":backward-word  # 向后移动一个词</span><br><span class="line">bind "\C-f":vi-fword  # 向前移动一个词(以空格划分)</span><br><span class="line">bind "\C-b":vi-bword  # 向后移动一个词</span><br></pre></td></tr></table></figure>
+<pre><code class="shell">bind &quot;\C-f&quot;:forward-word   # 向前移动一个词 （以英文单词）
+bind &quot;\C-b&quot;:backward-word  # 向后移动一个词
+bind &quot;\C-f&quot;:vi-fword  # 向前移动一个词(以空格划分)
+bind &quot;\C-b&quot;:vi-bword  # 向后移动一个词
+</code></pre>
 <h3 id="全部快捷键"><a href="#全部快捷键" class="headerlink" title="全部快捷键"></a>全部快捷键</h3><table>
 <thead>
 <tr>
@@ -1248,7 +1311,7 @@ KISS 原则：“Keep It Simple, Stupid”的首字母缩写。这个原则要�
     <script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
     <script type="text/javascript">
       $(function(){
-        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/054.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
+        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/044.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
         if ('true' == 'true') {
           function shuffle(arr){
             /*From countercurrent-time*/

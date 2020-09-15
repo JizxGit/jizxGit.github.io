@@ -555,23 +555,65 @@ jupyter 使用介绍、与 anaconda 的虚拟环境结合 、右键打开配置"
 <p> <img src="/2019/08/04/anaconda与jupyter使用与设置/./anaconda版本记录.png" class="lazyload" data-srcset="./anaconda版本记录.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="anaconda版本记录"></p>
 </li>
 <li><p>对于 <strong>windows 安装</strong>时，把Anaconda加入环境变量，这涉及到能否直接在cmd中使用conda、jupyter、ipython等命令，推荐打勾。如果没有打钩，可在后续加入下面这些路径（如果目录不同，请修改为对应的安装目录）：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\ProgramData\Anaconda3;</span><br><span class="line">C:\ProgramData\Anaconda3\Library\mingw-w64\bin;</span><br><span class="line">C:\ProgramData\Anaconda3\Library\usr\bin;</span><br><span class="line">C:\ProgramData\Anaconda3\Library\bin;</span><br><span class="line">C:\ProgramData\Anaconda3\Scripts;</span><br></pre></td></tr></table></figure>
-</li>
+<pre><code> C:\ProgramData\Anaconda3;
+ C:\ProgramData\Anaconda3\Library\mingw-w64\bin;
+ C:\ProgramData\Anaconda3\Library\usr\bin;
+ C:\ProgramData\Anaconda3\Library\bin;
+ C:\ProgramData\Anaconda3\Scripts;
+</code></pre></li>
 <li><p>配置镜像地址，否则从官方网站下载、升级文件太慢</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">conda config --show channels   				<span class="comment"># 列出现有的镜像频道</span></span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/ <span class="comment"># 为pytorch而加</span></span><br><span class="line">conda config --<span class="built_in">set</span> show_channel_urls yes   <span class="comment"># 下载时显示文件来源</span></span><br><span class="line">conda config --remove channels 镜像链接     <span class="comment"># 删除指定的镜像</span></span><br><span class="line">conda clean- i 									  <span class="comment"># 清除索引缓存</span></span><br></pre></td></tr></table></figure>
+<pre><code class="bash"> conda config --show channels                   # 列出现有的镜像频道
+ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/ # 为pytorch而加
+ conda config --set show_channel_urls yes   # 下载时显示文件来源
+ conda config --remove channels 镜像链接     # 删除指定的镜像
+ conda clean- i                                       # 清除索引缓存
+</code></pre>
 </li>
 <li><p>推荐在默认环境下更新所有的包。打开 Anaconda Prompt （或者 Mac 下的终端），键入<code>conda upgrade —all</code></p>
 </li>
 </ol>
 <h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>默认有一个base环境，推荐在此基础上，再创建2个环境，分别是：Python3和Python2</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -n py3 python=3.6      # 如果是 python=3 默认安装最新版</span><br><span class="line">conda create -n py2 python=2.7</span><br></pre></td></tr></table></figure>
-<h3 id="包管理"><a href="#包管理" class="headerlink" title="包管理"></a>包管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">conda install numpy scipy pandas            <span class="comment"># 安装多个包</span></span><br><span class="line">conda install numpy=1.10                    <span class="comment"># 指定所需的包版本</span></span><br><span class="line">conda remove package_name                   <span class="comment"># 卸载包</span></span><br><span class="line">conda update package_name                   <span class="comment"># 更新包</span></span><br><span class="line">conda update --all                          <span class="comment"># 更新环境中的所有包（这样做常常很有用）</span></span><br><span class="line">conda list                                  <span class="comment"># 列出已安装的包</span></span><br><span class="line">conda search search_term                    <span class="comment"># 如果不知道要找的包的确切名称，可以尝试进行搜索</span></span><br></pre></td></tr></table></figure>
-<h3 id="环境管理"><a href="#环境管理" class="headerlink" title="环境管理"></a>环境管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建、删除环境，记得替换 env_name 为自定义的环境名称</span></span><br><span class="line">conda create -n env_name python=3.4 pandas  <span class="comment"># 创建环境 ，-n 是指名称，后面可以跟一些想要安装的库</span></span><br><span class="line">conda env remove -n env_name                <span class="comment"># 删除指定的环境</span></span><br><span class="line">conda create -n new_env --<span class="built_in">clone</span> old_name    <span class="comment"># 克隆环境，实现重命名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 激活/退出环境</span></span><br><span class="line">activate my_env                             <span class="comment"># 激活环境 window</span></span><br><span class="line">deactivate                                  <span class="comment"># 退出环境 window</span></span><br><span class="line">conda activate my_env                       <span class="comment"># 激活环境 OSX/Linux</span></span><br><span class="line">conda deactivate                            <span class="comment"># 退出环境 OSX/Linux</span></span><br><span class="line"><span class="built_in">source</span> activate my_env                      <span class="comment"># 激活环境 OSX/Linux(弃用)</span></span><br><span class="line"><span class="built_in">source</span> deactivate                           <span class="comment"># 退出环境 OSX/Linux(弃用)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看环境</span></span><br><span class="line">conda env list                              <span class="comment"># 列出你创建的所有环境</span></span><br><span class="line">conda info -e                               <span class="comment"># 列出你创建的所有环境</span></span><br><span class="line">conda info                                  <span class="comment"># 显示当前环境的全部相关信息</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出环境信息文件，利用文件信息克隆环境</span></span><br><span class="line">conda env <span class="built_in">export</span> &gt; environment.yaml         <span class="comment"># 将包保存为YAML，共享此文件，而且其他人能够用于创建和你项目相同的环境</span></span><br><span class="line">conda env create -f environment.yaml        <span class="comment"># 利用环境文件创建相同环境</span></span><br></pre></td></tr></table></figure>
+<pre><code>conda create -n py3 python=3.6      # 如果是 python=3 默认安装最新版
+conda create -n py2 python=2.7
+</code></pre><h3 id="包管理"><a href="#包管理" class="headerlink" title="包管理"></a>包管理</h3><pre><code class="bash">conda install numpy scipy pandas            # 安装多个包
+conda install numpy=1.10                    # 指定所需的包版本
+conda remove package_name                   # 卸载包
+conda update package_name                   # 更新包
+conda update --all                          # 更新环境中的所有包（这样做常常很有用）
+conda list                                  # 列出已安装的包
+conda search search_term                    # 如果不知道要找的包的确切名称，可以尝试进行搜索 
+</code></pre>
+<h3 id="环境管理"><a href="#环境管理" class="headerlink" title="环境管理"></a>环境管理</h3><pre><code class="bash"># 创建、删除环境，记得替换 env_name 为自定义的环境名称
+conda create -n env_name python=3.4 pandas  # 创建环境 ，-n 是指名称，后面可以跟一些想要安装的库
+conda env remove -n env_name                # 删除指定的环境
+conda create -n new_env --clone old_name    # 克隆环境，实现重命名
+
+# 激活/退出环境
+activate my_env                             # 激活环境 window
+deactivate                                  # 退出环境 window
+conda activate my_env                       # 激活环境 OSX/Linux
+conda deactivate                            # 退出环境 OSX/Linux
+source activate my_env                      # 激活环境 OSX/Linux(弃用)
+source deactivate                           # 退出环境 OSX/Linux(弃用)
+
+# 查看环境
+conda env list                              # 列出你创建的所有环境
+conda info -e                               # 列出你创建的所有环境
+conda info                                  # 显示当前环境的全部相关信息
+
+# 导出环境信息文件，利用文件信息克隆环境
+conda env export &gt; environment.yaml         # 将包保存为YAML，共享此文件，而且其他人能够用于创建和你项目相同的环境
+conda env create -f environment.yaml        # 利用环境文件创建相同环境
+</code></pre>
 <blockquote>
 <p>  对于不使用 conda 的用户，可以使用命令<code>pip freeze&gt; pip_requirements.txt</code>（<a href="https://pip.pypa.io/en/stable/reference/pip_freeze/" target="_blank" rel="noopener">详情</a>）将一个 pip_requirements.txt 文件导出并包括在其中。</p>
 </blockquote>
 <p>推荐 Mac/linux，在 <code>~/.bash_profile</code> 中添加别名，方便激活环境</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> activate=<span class="string">"source activate"</span></span><br><span class="line"><span class="built_in">alias</span> deactivate=<span class="string">"source deactivate"</span></span><br></pre></td></tr></table></figure>
+<pre><code class="bash">alias activate=&quot;source activate&quot;
+alias deactivate=&quot;source deactivate&quot;
+</code></pre>
 <p>参考：<a href="https://www.cnblogs.com/python2webdata/p/10034528.html" target="_blank" rel="noopener">https://www.cnblogs.com/python2webdata/p/10034528.html</a></p>
 <h1 id="jupyter-jupyter-lab"><a href="#jupyter-jupyter-lab" class="headerlink" title="jupyter/jupyter-lab"></a>jupyter/jupyter-lab</h1><p>推荐安装jupyter的升级版<strong>jupyter lab</strong>： <code>conda install -c conda-forge jupyterlab</code></p>
 <p>激活环境后，输入<code>jupyter-lab</code>或者<code>jupyter notebook</code>就打开了当前环境的 notebook（<strong>如果当前环境没有安装jupyter，那么会调用base的</strong>）。</p>
@@ -748,7 +790,7 @@ python logging 模块的使用以及详细讲解
 
 
 进程ps -f命令也能够表现子shell的嵌套关系
-时间date12345678910111213...</p>
+时间date-d&lt;字符串&gt;：显示字...</p>
         </a>
       
     </div>
@@ -924,7 +966,7 @@ python logging 模块的使用以及详细讲解
     <script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
     <script type="text/javascript">
       $(function(){
-        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/054.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
+        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/044.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
         if ('true' == 'true') {
           function shuffle(arr){
             /*From countercurrent-time*/

@@ -701,8 +701,8 @@
 </blockquote>
 <h3 id="shell配置文件加载顺序"><a href="#shell配置文件加载顺序" class="headerlink" title="shell配置文件加载顺序"></a>shell配置文件加载顺序</h3><p><a href="http://ddrv.cn/a/173848/" target="_blank" rel="noopener">http://ddrv.cn/a/173848/</a></p>
 <h3 id="通配符（Wildcard）"><a href="#通配符（Wildcard）" class="headerlink" title="通配符（Wildcard）"></a>通配符（Wildcard）</h3><p>在 Shell 中命令中，通常会使用通配符表达式来匹配一些文件，如以下命令可以查找当前目录下所有后缀为 .xml 的文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name &quot;*.xml&quot;</span><br></pre></td></tr></table></figure>
-<p>Shell 中可以使用的通配符如下：</p>
+<pre><code>find . -name &quot;*.xml&quot; 
+</code></pre><p>Shell 中可以使用的通配符如下：</p>
 <table>
 <thead>
 <tr>
@@ -749,12 +749,17 @@
 <p>而且<strong>正则表达式一般是部分匹配的</strong>，用来匹配内容中的一部分，如用正则表达式 <code>a</code> 去匹配 <code>bac</code> 这段字符串时，匹配是成功的，匹配到的内容是 <code>a</code>。但是<strong>通配符表达式的话是全部匹配的</strong>，表达式要匹配整个字符串才算匹配成功，如用通配符表达式 <code>a</code> 取匹配 <code>bac</code> 这段字符串时，匹配是失败的。</p>
 <p>在 Shell 命令中，通常<strong>用通配符表达式来匹配文件名</strong>，而<strong>用正则表达式来匹配一段文本内容</strong>。以 <code>grep</code> 命令为例，<code>grep</code> 命令可以在指定的文件中，挑选出和表达式匹配的那些行，其中指定文件是用的通配符表达式，而文本内容的匹配用的是正则表达式。</p>
 <p>今天使用 <code>grep</code> 时，就因为没分清楚他们，忙活了半天。情况是这样的，我想看一个 jar 包里是不是有 pom 相关的文件，所以就输入了下面命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jar tf maven-model-builder-3.5.3.jar | grep &apos;pom*&apos;  # 这里是正则表达式，匹配有po、pom、pom+子串的字符串</span><br></pre></td></tr></table></figure>
-<p>结果输入了一堆文件，而且很多文件都没有 pom 这串字符串的。输出内容是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">org/apache/maven/model/composition/</span><br><span class="line">org/apache/maven/model/interpolation/</span><br><span class="line">org/apache/maven/model/superpom/</span><br><span class="line">org/apache/maven/model/composition/DependencyManagementImporter.class</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>这就是因为我把通配符表达式和正则表达式搞混了，后来知道原因后，用下面的命令才得到想要的内容。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jar tf maven-model-builder-3.5.3.jar | grep &apos;pom.*&apos;</span><br></pre></td></tr></table></figure>
-<p>使用 Shell 命令时，要分清楚哪里用的是通配符表达式，哪里用的是正则表达式。</p>
+<pre><code>jar tf maven-model-builder-3.5.3.jar | grep &#39;pom*&#39;  # 这里是正则表达式，匹配有po、pom、pom+子串的字符串
+</code></pre><p>结果输入了一堆文件，而且很多文件都没有 pom 这串字符串的。输出内容是这样的：</p>
+<pre><code>...
+org/apache/maven/model/composition/
+org/apache/maven/model/interpolation/
+org/apache/maven/model/superpom/
+org/apache/maven/model/composition/DependencyManagementImporter.class
+...
+</code></pre><p>这就是因为我把通配符表达式和正则表达式搞混了，后来知道原因后，用下面的命令才得到想要的内容。</p>
+<pre><code>jar tf maven-model-builder-3.5.3.jar | grep &#39;pom.*&#39;
+</code></pre><p>使用 Shell 命令时，要分清楚哪里用的是通配符表达式，哪里用的是正则表达式。</p>
 <p>链接：<a href="https://www.jianshu.com/p/25f3d0cd5fdc" target="_blank" rel="noopener">https://www.jianshu.com/p/25f3d0cd5fdc</a></p>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>文本命令行界面（command line interface，CLI）</p>
 </the></excerpt>
@@ -902,7 +907,10 @@ TODO
 
 
 
-行尾添加字符串123&lt;C-v&gt;G$   &quot; 全选A;        &quot; 进入插入模式，添加;&lt;Esc&gt;     &quot; 完成插入...</p>
+行尾添加字符串&lt;C-v&gt;G$   &quot; 全选
+A;        &quot; 进入插入模式，添加;
+&lt;Esc&gt;     &quot; 完成插入
+...</p>
         </a>
       
     </div>
@@ -1078,7 +1086,7 @@ TODO
     <script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
     <script type="text/javascript">
       $(function(){
-        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/054.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
+        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/044.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
         if ('true' == 'true') {
           function shuffle(arr){
             /*From countercurrent-time*/

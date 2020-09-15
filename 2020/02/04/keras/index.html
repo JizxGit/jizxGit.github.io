@@ -518,7 +518,7 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>130 words</p>
+      <p>131 words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
@@ -547,13 +547,21 @@
 
 
 <h5 id="下载mnist数据集，网络失败的问题"><a href="#下载mnist数据集，网络失败的问题" class="headerlink" title="下载mnist数据集，网络失败的问题"></a>下载mnist数据集，网络失败的问题</h5><p>Keras file is located into a new path in Google Cloud Storage (Before it was in AWS S3)：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz</span><br></pre></td></tr></table></figure>
+<pre><code class="py">https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
+</code></pre>
 <p>When using:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tf.keras.datasets.mnist.load_data()</span><br></pre></td></tr></table></figure>
-<p>You can pass a <code>path</code> parameter.</p>
+<pre><code>tf.keras.datasets.mnist.load_data()
+</code></pre><p>You can pass a <code>path</code> parameter.</p>
 <p><code>load_data()</code> will call <code>get_file()</code> which takes as parameter <code>fname</code>, if path is a full path and file exists, it will not be downloaded.</p>
 <p>Example:</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gsutil cp gs://tensorflow/tf-keras-datasets/mnist.npz /tmp/data/mnist.npz</span></span><br><span class="line"><span class="comment"># python3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>path = <span class="string">'/tmp/data/mnist.npz'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(train_images, train_labels), (test_images, test_labels) = tf.keras.datasets.mnist.load_data(path)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>len(train_images)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">60000</span></span><br></pre></td></tr></table></figure>
+<pre><code class="py"># gsutil cp gs://tensorflow/tf-keras-datasets/mnist.npz /tmp/data/mnist.npz
+# python3
+&gt;&gt;&gt; import tensorflow as tf
+&gt;&gt;&gt; path = &#39;/tmp/data/mnist.npz&#39;
+&gt;&gt;&gt; (train_images, train_labels), (test_images, test_labels) = tf.keras.datasets.mnist.load_data(path)
+&gt;&gt;&gt; len(train_images)
+&gt;&gt;&gt; 60000
+</code></pre>
 </the></excerpt>
   
   
@@ -677,8 +685,9 @@
 
 
 回顾自注意力机制语言离不开语境，比如这个第二定律：
-12机器人第二定律机器人必须服从人给予它的命令，当命令与第一定律冲突时例外。
-笔者已强调了句子中有三处单词与其他单词有联系。如...</p>
+机器人第二定律
+机器人必须服从人给予它的命令，当命令与第一定律冲突时例外。
+笔者已强调了句子中有三处单词与其他单词有联系。如果...</p>
         </a>
       
       
@@ -868,7 +877,7 @@ numpy函数argpartitionnumpy.argpartition：是将第k大的数字，放在第k�
     <script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
     <script type="text/javascript">
       $(function(){
-        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/054.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
+        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/044.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
         if ('true' == 'true') {
           function shuffle(arr){
             /*From countercurrent-time*/

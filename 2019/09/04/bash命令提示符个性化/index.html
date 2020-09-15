@@ -522,7 +522,7 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>770 words</p>
+      <p>797 words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
@@ -602,10 +602,43 @@
 </tbody>
 </table>
 <p>颜色格式后面跟着的就是<code>\u</code>、<code>\w</code>这样的显示参数，颜色格式后面的字符串都将使用该颜色，为了实现不同字段不同颜色，建议使用<code>指定的颜色 显示参数 None颜色</code> 这样进行划分。见下例</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">COLOR_GRAY=<span class="string">'\[\e[1;30m\]'</span>    还有一种写法是将\e写成\033</span><br><span class="line">COLOR_RED=<span class="string">'\[\e[1;31m\]'</span></span><br><span class="line">COLOR_GREEN=<span class="string">'\[\e[1;32m\]'</span></span><br><span class="line">COLOR_YELLOW=<span class="string">'\[\e[1;33m\]'</span></span><br><span class="line">COLOR_BLUE=<span class="string">'\[\e[1;34m\]'</span></span><br><span class="line">COLOR_MAGENTA=<span class="string">'\[\e[1;35m\]'</span></span><br><span class="line">COLOR_CYAN=<span class="string">'\[\e[1;36m\]'</span></span><br><span class="line">COLOR_WHITE=<span class="string">'\[\e[1;37m\]'</span></span><br><span class="line">COLOR_NONE=<span class="string">'\[\e[m\]'</span></span><br><span class="line"></span><br><span class="line">PS1_USER=<span class="string">"<span class="variable">$&#123;COLOR_MAGENTA&#125;</span>\u<span class="variable">$&#123;COLOR_NONE&#125;</span>"</span></span><br><span class="line">PS1_HOST=<span class="string">"<span class="variable">$&#123;COLOR_CYAN&#125;</span>\h<span class="variable">$&#123;COLOR_NONE&#125;</span>"</span></span><br><span class="line">PS1_PWD=<span class="string">"<span class="variable">$&#123;COLOR_YELLOW&#125;</span>\w<span class="variable">$&#123;COLOR_NONE&#125;</span>"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PS1=<span class="string">"<span class="variable">$&#123;PS1_USER&#125;</span>@<span class="variable">$&#123;PS1_HOST&#125;</span>:<span class="variable">$&#123;PS1_PWD&#125;</span>\\\$ "</span></span><br></pre></td></tr></table></figure>
+<pre><code class="bash">COLOR_GRAY=&#39;\[\e[1;30m\]&#39;    还有一种写法是将\e写成\033
+COLOR_RED=&#39;\[\e[1;31m\]&#39;
+COLOR_GREEN=&#39;\[\e[1;32m\]&#39;
+COLOR_YELLOW=&#39;\[\e[1;33m\]&#39;
+COLOR_BLUE=&#39;\[\e[1;34m\]&#39;
+COLOR_MAGENTA=&#39;\[\e[1;35m\]&#39;
+COLOR_CYAN=&#39;\[\e[1;36m\]&#39;
+COLOR_WHITE=&#39;\[\e[1;37m\]&#39;
+COLOR_NONE=&#39;\[\e[m\]&#39;
+
+PS1_USER=&quot;${COLOR_MAGENTA}\u${COLOR_NONE}&quot;
+PS1_HOST=&quot;${COLOR_CYAN}\h${COLOR_NONE}&quot;
+PS1_PWD=&quot;${COLOR_YELLOW}\w${COLOR_NONE}&quot;
+
+export PS1=&quot;${PS1_USER}@${PS1_HOST}:${PS1_PWD}\\\$ &quot;
+</code></pre>
 <p>在颜色定制文本(例如： <code>COLOR_GRAY=&#39;\[\033[1;30m\]&#39;</code>)中，开始的<code>\[</code>和结尾的<code>\]</code>是必须的，否则当输入的命令很长的时候，就会回车但不换行,于是覆盖了行首的有颜色的字符串</p>
 <p>通过Bash编程在Terminal上输出彩色的字符串，是不能添加<code>\[</code>和<code>\]</code>的。 例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="built_in">print</span> &#123; <span class="built_in">printf</span> -- <span class="string">"$*\n"</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> _isatty</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">typeset</span> -l isatty=<span class="variable">$&#123;ISATTY:-"auto"&#125;</span></span><br><span class="line">    [[ <span class="variable">$isatty</span> == <span class="string">"yes"</span> ]] &amp;&amp; <span class="built_in">return</span> 0         <span class="comment"># yes</span></span><br><span class="line">    [[ <span class="variable">$isatty</span> == <span class="string">"no"</span> ]] &amp;&amp; <span class="built_in">return</span> 1          <span class="comment"># no</span></span><br><span class="line">    [[ -t 1 &amp;&amp; -t 2 ]] &amp;&amp; <span class="built_in">return</span> 0 || <span class="built_in">return</span> 1 <span class="comment"># auto</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> str2gray    &#123; _isatty &amp;&amp; <span class="built_in">print</span> <span class="string">"\e[1;30m<span class="variable">$@</span>\033[m"</span> || <span class="built_in">print</span> <span class="string">"<span class="variable">$@</span>"</span>; &#125;</span><br><span class="line"><span class="keyword">function</span> str2red     &#123; _isatty &amp;&amp; <span class="built_in">print</span> <span class="string">"\e[1;31m<span class="variable">$@</span>\033[m"</span> || <span class="built_in">print</span> <span class="string">"<span class="variable">$@</span>"</span>; &#125;</span><br><span class="line"><span class="keyword">function</span> str2green   &#123; _isatty &amp;&amp; <span class="built_in">print</span> <span class="string">"\e[1;32m<span class="variable">$@</span>\033[m"</span> || <span class="built_in">print</span> <span class="string">"<span class="variable">$@</span>"</span>; &#125;</span><br><span class="line"><span class="keyword">function</span> str2yellow  &#123; _isatty &amp;&amp; <span class="built_in">print</span> <span class="string">"\e[1;33m<span class="variable">$@</span>\033[m"</span> || <span class="built_in">print</span> <span class="string">"<span class="variable">$@</span>"</span>; &#125;</span><br><span class="line"><span class="keyword">function</span> str2blue    &#123; _isatty &amp;&amp; <span class="built_in">print</span> <span class="string">"\e[1;34m<span class="variable">$@</span>\033[m"</span> || <span class="built_in">print</span> <span class="string">"<span class="variable">$@</span>"</span>; &#125;</span><br><span class="line"><span class="keyword">function</span> str2magenta &#123; _isatty &amp;&amp; <span class="built_in">print</span> <span class="string">"\e[1;35m<span class="variable">$@</span>\033[m"</span> || <span class="built_in">print</span> <span class="string">"<span class="variable">$@</span>"</span>; &#125;</span><br><span class="line"><span class="keyword">function</span> str2cyan    &#123; _isatty &amp;&amp; <span class="built_in">print</span> <span class="string">"\e[1;36m<span class="variable">$@</span>\033[m"</span> || <span class="built_in">print</span> <span class="string">"<span class="variable">$@</span>"</span>; &#125;</span><br><span class="line"><span class="keyword">function</span> str2white   &#123; _isatty &amp;&amp; <span class="built_in">print</span> <span class="string">"\e[1;37m<span class="variable">$@</span>\033[m"</span> || <span class="built_in">print</span> <span class="string">"<span class="variable">$@</span>"</span>; &#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">function print { printf -- &quot;$*\n&quot;; }
+
+function _isatty
+{
+    typeset -l isatty=${ISATTY:-&quot;auto&quot;}
+    [[ $isatty == &quot;yes&quot; ]] &amp;&amp; return 0         # yes
+    [[ $isatty == &quot;no&quot; ]] &amp;&amp; return 1          # no
+    [[ -t 1 &amp;&amp; -t 2 ]] &amp;&amp; return 0 || return 1 # auto
+}
+
+function str2gray    { _isatty &amp;&amp; print &quot;\e[1;30m$@\033[m&quot; || print &quot;$@&quot;; }
+function str2red     { _isatty &amp;&amp; print &quot;\e[1;31m$@\033[m&quot; || print &quot;$@&quot;; }
+function str2green   { _isatty &amp;&amp; print &quot;\e[1;32m$@\033[m&quot; || print &quot;$@&quot;; }
+function str2yellow  { _isatty &amp;&amp; print &quot;\e[1;33m$@\033[m&quot; || print &quot;$@&quot;; }
+function str2blue    { _isatty &amp;&amp; print &quot;\e[1;34m$@\033[m&quot; || print &quot;$@&quot;; }
+function str2magenta { _isatty &amp;&amp; print &quot;\e[1;35m$@\033[m&quot; || print &quot;$@&quot;; }
+function str2cyan    { _isatty &amp;&amp; print &quot;\e[1;36m$@\033[m&quot; || print &quot;$@&quot;; }
+function str2white   { _isatty &amp;&amp; print &quot;\e[1;37m$@\033[m&quot; || print &quot;$@&quot;; }
+</code></pre>
 <h3 id="在线网站"><a href="#在线网站" class="headerlink" title="在线网站"></a>在线网站</h3><p>更多颜色参数，请参考：<a href="https://misc.flogisoft.com/bash/tip_colors_and_formatting" target="_blank" rel="noopener">https://misc.flogisoft.com/bash/tip_colors_and_formatting</a></p>
 <p>如果上面的方法觉得麻烦，可以使用推荐的在线制作网站：<a href="http://ezprompt.net/" target="_blank" rel="noopener">http://ezprompt.net/</a></p>
 <p>参考：</p>
@@ -739,7 +772,10 @@
 
 
 
-行尾添加字符串123&lt;C-v&gt;G$   &quot; 全选A;        &quot; 进入插入模式，添加;&lt;Esc&gt;     &quot; 完成插入...</p>
+行尾添加字符串&lt;C-v&gt;G$   &quot; 全选
+A;        &quot; 进入插入模式，添加;
+&lt;Esc&gt;     &quot; 完成插入
+...</p>
         </a>
       
       
@@ -929,7 +965,7 @@ awk英文文档https://www.gnu.org/software/gawk/manual/gawk.html
     <script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
     <script type="text/javascript">
       $(function(){
-        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/054.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
+        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/044.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
         if ('true' == 'true') {
           function shuffle(arr){
             /*From countercurrent-time*/

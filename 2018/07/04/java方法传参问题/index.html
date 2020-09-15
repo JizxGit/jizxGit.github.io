@@ -518,7 +518,7 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>715 words</p>
+      <p>708 words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
@@ -544,13 +544,25 @@
 
 
 
-<h3 id="一、基本类型-和-引用类型的不同之处"><a href="#一、基本类型-和-引用类型的不同之处" class="headerlink" title="一、基本类型 和 引用类型的不同之处"></a>一、基本类型 和 引用类型的不同之处</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num = <span class="number">10</span>;</span><br><span class="line">String str = <span class="string">"hello"</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="一、基本类型-和-引用类型的不同之处"><a href="#一、基本类型-和-引用类型的不同之处" class="headerlink" title="一、基本类型 和 引用类型的不同之处"></a>一、基本类型 和 引用类型的不同之处</h3><pre><code class="java">int num = 10;
+String str = &quot;hello&quot;;
+</code></pre>
 <p>首先变量其实是堆栈中的地址索引。然后 基本类型的数据直接保存在堆栈中，而对象是保存在堆中，堆栈中保存的是该对象在堆中的地址，这个地址就是所谓的<strong>引用</strong></p>
 <p><img src="/2018/07/04/java方法传参问题/java传参1.png" class="lazyload" data-srcset="java传参1.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt=""></p>
-<h3 id="二、赋值运算符（-）的作用"><a href="#二、赋值运算符（-）的作用" class="headerlink" title="二、赋值运算符（=）的作用"></a>二、赋值运算符（=）的作用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">num = <span class="number">20</span>;</span><br><span class="line">str = <span class="string">"java"</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="二、赋值运算符（-）的作用"><a href="#二、赋值运算符（-）的作用" class="headerlink" title="二、赋值运算符（=）的作用"></a>二、赋值运算符（=）的作用</h3><pre><code class="java">num = 20;
+str = &quot;java&quot;;
+</code></pre>
 <p><img src="/2018/07/04/java方法传参问题/java传参2.png" class="lazyload" data-srcset="java传参2.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt=""></p>
 <p>对于基本类型 num ，赋值运算符会直接改变变量的值，原来的值被覆盖掉。<br>对于引用类型 str，赋值运算符会改变引用中所保存的地址，原来的地址被覆盖掉。<strong>但是原来的对象不会被改变（重要）。</strong><br>如上图所示，”hello” 字符串对象没有被改变。（没有被任何引用所指向的对象是垃圾，会被垃圾回收器回收）</p>
-<h3 id="三、调用方法时发生了什么？参数传递基本上就是赋值操作。"><a href="#三、调用方法时发生了什么？参数传递基本上就是赋值操作。" class="headerlink" title="三、调用方法时发生了什么？参数传递基本上就是赋值操作。"></a>三、调用方法时发生了什么？<strong>参数传递基本上就是赋值操作</strong>。</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">num = <span class="number">20</span>;</span><br><span class="line">str = <span class="string">"java"</span>;</span><br><span class="line">func(num,str);</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> n,String s)</span></span>&#123;</span><br><span class="line">    n=<span class="number">30</span>;</span><br><span class="line">    s+=<span class="string">"haha"</span>;</span><br><span class="line">    <span class="comment">// do something with s</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三、调用方法时发生了什么？参数传递基本上就是赋值操作。"><a href="#三、调用方法时发生了什么？参数传递基本上就是赋值操作。" class="headerlink" title="三、调用方法时发生了什么？参数传递基本上就是赋值操作。"></a>三、调用方法时发生了什么？<strong>参数传递基本上就是赋值操作</strong>。</h3><pre><code class="java">num = 20;
+str = &quot;java&quot;;
+func(num,str);
+public void func(int n,String s){
+    n=30;
+    s+=&quot;haha&quot;;
+    // do something with s
+}
+</code></pre>
 <p><img src="/2018/07/04/java方法传参问题/java传参3.png" class="lazyload" data-srcset="java传参3.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt=""></p>
 <p>n变为30，num不受影响；s虽然是对象类型，但是由于String是不可变类型，因此并不会影响到原来的str变量。所以结果如下：</p>
 <p><img src="/2018/07/04/java方法传参问题/java传参4.png" class="lazyload" data-srcset="java传参4.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt=""></p>
@@ -568,10 +580,49 @@
 <li>修改一个对象参数(数组、集合、map、类)的引用时，永远不会影响到原始的引用；</li>
 <li>修改一个对象参数的属性时，会影响原始对象</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        DuplicatenNum app = <span class="keyword">new</span> DuplicatenNum();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> a1=<span class="number">5</span>;</span><br><span class="line">        app.fun1(a1);</span><br><span class="line">        System.out.println(a1);</span><br><span class="line"></span><br><span class="line">        TreeNode a2=<span class="keyword">new</span> TreeNode(<span class="number">5</span>);</span><br><span class="line">        app.fun2(a2);</span><br><span class="line">        System.out.println(a2);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span>[] a2_2=&#123;<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">        app.fun2_2(a2_2);</span><br><span class="line">        System.out.println(a2_2[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">        List&lt;Integer&gt; list=<span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        list.add(<span class="number">1</span>);</span><br><span class="line">        app.fun3(list);</span><br><span class="line">        System.out.println(list);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">fun1</span><span class="params">(<span class="keyword">int</span> a)</span> </span>&#123;</span><br><span class="line">        a=<span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun2</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        root=<span class="keyword">new</span> TreeNode(<span class="number">10</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun2_2</span><span class="params">(<span class="keyword">int</span> []  arr)</span> </span>&#123;</span><br><span class="line">        arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fun3</span><span class="params">(List&lt;Integer&gt; list)</span></span>&#123;</span><br><span class="line">        list.add(<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">public static void main(String[] args) {
+        DuplicatenNum app = new DuplicatenNum();
+
+        int a1=5;
+        app.fun1(a1);
+        System.out.println(a1);
+
+        TreeNode a2=new TreeNode(5);
+        app.fun2(a2);
+        System.out.println(a2);
+
+        int[] a2_2={1,2};
+        app.fun2_2(a2_2);
+        System.out.println(a2_2[0]);
+
+        List&lt;Integer&gt; list=new ArrayList&lt;&gt;();
+        list.add(1);
+        app.fun3(list);
+        System.out.println(list);
+    }
+
+    public  void fun1(int a) {
+        a=10;
+    }
+
+    public void fun2(TreeNode root) {
+        root=new TreeNode(10);
+    }
+
+    public void fun2_2(int []  arr) {
+        arr = new int[4];
+    }
+
+    public void fun3(List&lt;Integer&gt; list){
+        list.add(2);
+    }
+</code></pre>
 <p>输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">TreeNode&#123;val=5, left=null, right=null&#125;</span><br><span class="line">1</span><br><span class="line">[1, 2]</span><br></pre></td></tr></table></figure>
-<p>参考： <a href="https://www.zhihu.com/question/31203609" target="_blank" rel="noopener">Java 到底是值传递还是引用传递？</a> </p>
+<pre><code>5
+TreeNode{val=5, left=null, right=null}
+1
+[1, 2]
+</code></pre><p>参考： <a href="https://www.zhihu.com/question/31203609" target="_blank" rel="noopener">Java 到底是值传递还是引用传递？</a> </p>
 </the></excerpt>
   
   
@@ -705,7 +756,12 @@
 
 
 
-单例模式单线程1234567891011121314151617181920/** * 线程不安全 */class Singleton1 &#123;...</p>
+单例模式单线程/**
+ * 线程不安全
+ */
+class Singleton1 {
+
+    private static Singleton1 i...</p>
         </a>
       
     </div>
@@ -881,7 +937,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
     <script type="text/javascript">
       $(function(){
-        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/054.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
+        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/044.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
         if ('true' == 'true') {
           function shuffle(arr){
             /*From countercurrent-time*/

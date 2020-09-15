@@ -528,7 +528,7 @@ hive 的读书笔记，ing">
   <div class="new-meta-item readtime">
     <a class='notlink'>
       <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>20 min</p>
+      <p>21 min</p>
     </a>
   </div>
 
@@ -772,8 +772,13 @@ hive 的读书笔记，ing">
 <p>  Hive 中没有定义专门的数据格式，数据格式可以由用户指定，用户定义数据格式需要指定三个属性：列分隔符（通常为空格、”\t”、”\x001″）、行分隔符（”\n”）以及读取文件数据的方法。由于在加载数据的过程中，不需要从用户数据格式到 Hive 定义的数据格式的转换，因此，Hive 在加载的过程中不会对数据本身进行任何修改，而只是将数据内容复制或者移动到相应的 HDFS 目录中。</p>
 </blockquote>
 <p>在创建 table 的时候，table 加载文件的时候就会按照下面格式匹配</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">row format delimited </span><br><span class="line">fields terminated by &apos;\001&apos; </span><br><span class="line">collection items terminated by &apos;\002&apos; </span><br><span class="line">map keys terminated by &apos;\003&apos;</span><br><span class="line">lines terminated by &apos;\n&apos; </span><br><span class="line">stored as textfile;</span><br></pre></td></tr></table></figure>
-<p><code>row format delimited</code>必须写在其他子句（不包括<code>lines terminated by</code>与<code>stored as textfile</code>）之前。</p>
+<pre><code>row format delimited 
+fields terminated by &#39;\001&#39; 
+collection items terminated by &#39;\002&#39; 
+map keys terminated by &#39;\003&#39;
+lines terminated by &#39;\n&#39; 
+stored as textfile;
+</code></pre><p><code>row format delimited</code>必须写在其他子句（不包括<code>lines terminated by</code>与<code>stored as textfile</code>）之前。</p>
 <p>其实，<code>line terminated by</code>目前只支持<code>\n</code>，<code>stored as textfile</code>也很少用到。</p>
 <h3 id="数据校验"><a href="#数据校验" class="headerlink" title="数据校验"></a>数据校验</h3><p>传统数据库是<strong>写时模式</strong>，即 数据在写入数据库的时候对模式（数据格式）进行检查</p>
 <p>hive 不会在 数据加载时进行验证，而是在查询时进行，也就是<strong>读时模式</strong></p>
@@ -785,54 +790,89 @@ hive 的读书笔记，ing">
 <h2 id="HiveQL基本语句"><a href="#HiveQL基本语句" class="headerlink" title="HiveQL基本语句"></a>HiveQL基本语句</h2><p>hive 不支持行级插入、更新、删除操作，也不支持事务。</p>
 <p>hive   数据库的概念本质上只是表的一个目录或者命名空间。这样可以避免表名冲突。</p>
 <p>如果没有显指定数据库，默认使用 default 数据库</p>
-<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br><span class="line">show databases like &apos;h.*&apos;;   # 支持正则</span><br><span class="line">create database name LOCATION ‘/my/dir/’;   # 指定数据库目录</span><br></pre></td></tr></table></figure>
-<p>数据库可以的内容很少，只有<code>DBPROPERTIES</code>可以设置键值对属性，来描述这个数据库的属性信息，其他都是不可改的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert database name SET DBPROPERTIES (&apos;edited-by&apos;=&apos;jizx&apos;);</span><br></pre></td></tr></table></figure>
-<h3 id="数据定义"><a href="#数据定义" class="headerlink" title="数据定义"></a>数据定义</h3><h3 id="分区表"><a href="#分区表" class="headerlink" title="分区表"></a>分区表</h3><p>通过载入数据的方式创建分区。将<code>$HOME/california-employees</code>   目录下的文件拷贝到分区目录下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">load data local inpath &apos;$&#123;env:HOME&#125;/california-employees&apos;</span><br><span class="line">into table emplyees</span><br><span class="line">partition (country = &apos;US&apos;, state = &apos;CA&apos;)</span><br></pre></td></tr></table></figure>
-<p>也可以t通过 insert 的方法，也可以通过 <code>alert table...add partition</code>的方法</p>
-<h4 id="查看分区"><a href="#查看分区" class="headerlink" title="查看分区"></a>查看分区</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show partitions table_name;</span><br><span class="line">describe extended table_name;   # 更详细的表信息</span><br><span class="line">describe extended table_name PARTITION  (year=2019,month=1,day=2);   # 更详细的分区信息，可以看到 location 信息</span><br></pre></td></tr></table></figure>
-<h3 id="外部分区表（最常见）"><a href="#外部分区表（最常见）" class="headerlink" title="外部分区表（最常见）"></a>外部分区表（最常见）</h3><p>使用的目录组织习惯完全由我们自己定义。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alert table name ADD PARTITION(year=2019,month=9,day=2)</span><br><span class="line">LOCATITION &apos;hdfs://master_server/data/log_messages/2012/01/02&apos;;</span><br></pre></td></tr></table></figure>
-<p>这种灵活性的优点是：我们可以用像 amazon s3 这样的廉价存储设备存储<strong>旧的数据</strong>，在 HDFS 中存储较新的数据。</p>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><pre><code>show databases;
+show databases like &#39;h.*&#39;;   # 支持正则
+create database name LOCATION ‘/my/dir/’;   # 指定数据库目录
+
+</code></pre><p>数据库可以的内容很少，只有<code>DBPROPERTIES</code>可以设置键值对属性，来描述这个数据库的属性信息，其他都是不可改的。</p>
+<pre><code>alert database name SET DBPROPERTIES (&#39;edited-by&#39;=&#39;jizx&#39;);
+</code></pre><h3 id="数据定义"><a href="#数据定义" class="headerlink" title="数据定义"></a>数据定义</h3><h3 id="分区表"><a href="#分区表" class="headerlink" title="分区表"></a>分区表</h3><p>通过载入数据的方式创建分区。将<code>$HOME/california-employees</code>   目录下的文件拷贝到分区目录下。</p>
+<pre><code>load data local inpath &#39;${env:HOME}/california-employees&#39;
+into table emplyees
+partition (country = &#39;US&#39;, state = &#39;CA&#39;)
+</code></pre><p>也可以t通过 insert 的方法，也可以通过 <code>alert table...add partition</code>的方法</p>
+<h4 id="查看分区"><a href="#查看分区" class="headerlink" title="查看分区"></a>查看分区</h4><pre><code>show partitions table_name;
+describe extended table_name;   # 更详细的表信息
+describe extended table_name PARTITION  (year=2019,month=1,day=2);   # 更详细的分区信息，可以看到 location 信息
+</code></pre><h3 id="外部分区表（最常见）"><a href="#外部分区表（最常见）" class="headerlink" title="外部分区表（最常见）"></a>外部分区表（最常见）</h3><p>使用的目录组织习惯完全由我们自己定义。</p>
+<pre><code>alert table name ADD PARTITION(year=2019,month=9,day=2)
+LOCATITION &#39;hdfs://master_server/data/log_messages/2012/01/02&#39;;
+</code></pre><p>这种灵活性的优点是：我们可以用像 amazon s3 这样的廉价存储设备存储<strong>旧的数据</strong>，在 HDFS 中存储较新的数据。</p>
 <p><img src="/2019/10/12/hive/./image1.png" class="lazyload" data-srcset="./image1.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20191012145614833"></p>
-<h3 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop table if exists table_name;</span><br></pre></td></tr></table></figure>
-<p>对于管理表，表的元数据和表内的数据都会被删除。</p>
+<h3 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h3><pre><code>drop table if exists table_name;
+</code></pre><p>对于管理表，表的元数据和表内的数据都会被删除。</p>
 <p>回收站功能</p>
 <p>/user/$USER/.Trash目录下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.trash.interval=</span><br></pre></td></tr></table></figure>
-<p>检查点的时间间隔，单位是分钟。</p>
+<pre><code>fs.trash.interval=
+</code></pre><p>检查点的时间间隔，单位是分钟。</p>
 <p>如果不小心删除了管理表的话，先重建表，然后重建所需要的分区，再从<code>.Trash</code>目录中将误删的文件移动到正确的文件目录下。</p>
 <h3 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h3><p>会修改元数据，但不会修改数据本身</p>
-<h4 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert table log_messages RENAME TO logmsgs;</span><br></pre></td></tr></table></figure>
-<h4 id="分区操作"><a href="#分区操作" class="headerlink" title="分区操作"></a>分区操作</h4><p>添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert table log_messages ADD IF NOT EXISTS</span><br><span class="line">PARTITION (year=2019,month=1,day=1) LOCATITION &apos;/logs/2019/09/01&apos;</span><br><span class="line">PARTITION (year=2019,month=1,day=2) LOCATITION &apos;/logs/2019/09/02&apos;</span><br><span class="line">PARTITION (year=2019,month=1,day=3) LOCATITION &apos;/logs/2019/09/03&apos;</span><br></pre></td></tr></table></figure>
-<blockquote>
+<h4 id="重命名"><a href="#重命名" class="headerlink" title="重命名"></a>重命名</h4><pre><code>alert table log_messages RENAME TO logmsgs;
+</code></pre><h4 id="分区操作"><a href="#分区操作" class="headerlink" title="分区操作"></a>分区操作</h4><p>添加</p>
+<pre><code>alert table log_messages ADD IF NOT EXISTS
+PARTITION (year=2019,month=1,day=1) LOCATITION &#39;/logs/2019/09/01&#39;
+PARTITION (year=2019,month=1,day=2) LOCATITION &#39;/logs/2019/09/02&#39;
+PARTITION (year=2019,month=1,day=3) LOCATITION &#39;/logs/2019/09/03&#39;
+</code></pre><blockquote>
 <p>  0.8.0以上的 hive 可以在一个查询内同时增加多个分区</p>
 </blockquote>
 <p>修改</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alert table log_messages PARTITION (year=2019,month=1,day=3)</span><br><span class="line">SET LOCATION &apos;s3n://ourbucket/logs/2011/01/02&apos;</span><br></pre></td></tr></table></figure>
-<p>删除</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert table log_messages DROP IF EXISTs PARTITION (year=2019,month=1,day=3);</span><br></pre></td></tr></table></figure>
-<h4 id="列操作"><a href="#列操作" class="headerlink" title="列操作"></a>列操作</h4><p><strong>修改列</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert table log</span><br><span class="line">CHANGE COLUMN hms new_hms INT</span><br><span class="line">COMMENT &apos;注释&apos;</span><br><span class="line">AFTER other_column;</span><br></pre></td></tr></table></figure>
-<p>想放在第一列的话，使用<code>FIRTST</code>代替<code>AFTER other_column</code>即可</p>
+<pre><code>alert table log_messages PARTITION (year=2019,month=1,day=3)
+SET LOCATION &#39;s3n://ourbucket/logs/2011/01/02&#39;
+</code></pre><p>删除</p>
+<pre><code>alert table log_messages DROP IF EXISTs PARTITION (year=2019,month=1,day=3);
+</code></pre><h4 id="列操作"><a href="#列操作" class="headerlink" title="列操作"></a>列操作</h4><p><strong>修改列</strong></p>
+<pre><code>alert table log
+CHANGE COLUMN hms new_hms INT
+COMMENT &#39;注释&#39;
+AFTER other_column;
+</code></pre><p>想放在第一列的话，使用<code>FIRTST</code>代替<code>AFTER other_column</code>即可</p>
 <p><strong>添加</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert table log ADD COLUMN (</span><br><span class="line">	app_name STRING COMMENT &apos;注释&apos;,</span><br><span class="line">	session STRING COMMENT &apos;注释&apos;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p><strong>删除或替换列</strong></p>
+<pre><code>alert table log ADD COLUMN (
+    app_name STRING COMMENT &#39;注释&#39;,
+    session STRING COMMENT &#39;注释&#39;
+);
+</code></pre><p><strong>删除或替换列</strong></p>
 <p>其实就是将原本的全部的列信息删除掉，然后重新定义列信息。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert table log REPLACE COLUMN (</span><br><span class="line">	app_name STRING COMMENT &apos;注释&apos;,</span><br><span class="line">	session STRING COMMENT &apos;注释&apos;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p><strong>修改表属性</strong></p>
+<pre><code>alert table log REPLACE COLUMN (
+    app_name STRING COMMENT &#39;注释&#39;,
+    session STRING COMMENT &#39;注释&#39;
+);
+</code></pre><p><strong>修改表属性</strong></p>
 <p>可以修改或添加，但是无法删除</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">alert table log SET TBLPROPERTIES(</span><br><span class="line">	&apos;note&apos; = &apos;笔记内容&apos;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<h3 id="查看表详细信息"><a href="#查看表详细信息" class="headerlink" title="查看表详细信息"></a>查看表详细信息</h3><p> <code>desc formatted test_table;</code></p>
+<pre><code>alert table log SET TBLPROPERTIES(
+    &#39;note&#39; = &#39;笔记内容&#39;
+);
+</code></pre><h3 id="查看表详细信息"><a href="#查看表详细信息" class="headerlink" title="查看表详细信息"></a>查看表详细信息</h3><p> <code>desc formatted test_table;</code></p>
 <h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>limit在CLI 中非常经常用到，为了避免执行整个查询语句，有一个配置属性可开启，对原数据进行抽样。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hive.limit.optimize.enable=true</span><br><span class="line">hive.limit.row.max.size=1000000    # how much size we need to gurantee each row to have at least</span><br><span class="line">hive.limit.optimize.limit.file=10  # 最多采样的文件数</span><br></pre></td></tr></table></figure>
-<p>缺点：有可能输入中有用的数据永远不会被处理到。</p>
-<h3 id="创建分区表"><a href="#创建分区表" class="headerlink" title="创建分区表"></a>创建分区表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 建表</span><br><span class="line">&gt; create table supply(id int, part string, quantity int) </span><br><span class="line">&gt; partitioned by (int day);</span><br><span class="line"></span><br><span class="line"># 添加分区</span><br><span class="line">&gt; alert table supply add partiton (day=20190909);</span><br><span class="line"></span><br><span class="line"># 通过 where 选择分区</span><br><span class="line">&gt; select part,quantity from supply</span><br><span class="line">&gt; where day&gt;=20190909 and quantity &lt; 4;</span><br></pre></td></tr></table></figure>
-<p>多分区</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ...</span><br><span class="line">&gt; partition by (day int, state string, city string);</span><br></pre></td></tr></table></figure>
-<p>理想的分区方案不应该导致产生太多的分区和文件夹目录。</p>
+<pre><code>hive.limit.optimize.enable=true
+hive.limit.row.max.size=1000000    # how much size we need to gurantee each row to have at least
+hive.limit.optimize.limit.file=10  # 最多采样的文件数
+</code></pre><p>缺点：有可能输入中有用的数据永远不会被处理到。</p>
+<h3 id="创建分区表"><a href="#创建分区表" class="headerlink" title="创建分区表"></a>创建分区表</h3><pre><code># 建表
+&gt; create table supply(id int, part string, quantity int) 
+&gt; partitioned by (int day);
+
+# 添加分区
+&gt; alert table supply add partiton (day=20190909);
+
+# 通过 where 选择分区
+&gt; select part,quantity from supply
+&gt; where day&gt;=20190909 and quantity &lt; 4;
+</code></pre><p>多分区</p>
+<pre><code>&gt; ...
+&gt; partition by (day int, state string, city string);
+</code></pre><p>理想的分区方案不应该导致产生太多的分区和文件夹目录。</p>
 <p>一个分区对应着包含多个文件的文件夹。因此如果存在数百个分区，每天就会创建好几万个文件。默认情况下，MapReduce 会将每个 job转为多个 task，每个 task 都是一个新的 JVM 实例，每个文件都会对应一个 task，因此 JVM 的开启和销毁可能会比实际处理数据的时间还要久。</p>
 <p>好的分区方案应该保证分区数量的增长是<strong>均匀的</strong>。</p>
 <h3 id="分桶表TODO"><a href="#分桶表TODO" class="headerlink" title="分桶表TODO"></a>分桶表TODO</h3><h3 id="为表增加列"><a href="#为表增加列" class="headerlink" title="为表增加列"></a>为表增加列</h3><p>SerDe 非常宽松，通过指定的分隔符从左向右将行分解成列</p>
@@ -840,14 +880,32 @@ hive 的读书笔记，ing">
 <li>如果字段数比预期少，那么缺失的字段将返回 null</li>
 <li>如果字段数比预期多，那么多出的字段将会被忽略</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert table student add columns (score string);</span><br></pre></td></tr></table></figure>
-<p>通过这种方法，无法在已有字段的开始或者中间增加字段</p>
+<pre><code>alert table student add columns (score string);
+</code></pre><p>通过这种方法，无法在已有字段的开始或者中间增加字段</p>
 <h3 id="使用列存储表-TODO"><a href="#使用列存储表-TODO" class="headerlink" title="使用列存储表 TODO"></a>使用列存储表 TODO</h3><p>以下两种情况适合列存储表</p>
 <h4 id="重复数据，如-age，省市"><a href="#重复数据，如-age，省市" class="headerlink" title="重复数据，如 age，省市"></a>重复数据，如 age，省市</h4><h4 id="多列"><a href="#多列" class="headerlink" title="多列"></a>多列</h4><h3 id="Map-join"><a href="#Map-join" class="headerlink" title="Map join"></a>Map join</h3><p>以下几种情况无法使用map join</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Union Followed by a MapJoin</span><br><span class="line">Lateral View Followed by a MapJoin</span><br><span class="line">Reduce Sink (Group By/Join/Sort By/Cluster By/Distribute By) Followed by MapJoin</span><br><span class="line">MapJoin Followed by Union</span><br><span class="line">MapJoin Followed by Join</span><br><span class="line">MapJoin Followed by MapJoin</span><br></pre></td></tr></table></figure>
-<p>相关配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">--是否自动转换为mapjoin</span><br><span class="line">set hive.auto.convert.join = true;</span><br><span class="line">--小表的最大文件大小，默认为25000000，即25M</span><br><span class="line">set hive.mapjoin.smalltable.filesize = 25000000;</span><br><span class="line">--是否将多个mapjoin合并为一个</span><br><span class="line">set hive.auto.convert.join.noconditionaltask = true;</span><br><span class="line">--多个mapjoin转换为1个时，所有小表的文件大小总和的最大值。</span><br><span class="line">set hive.auto.convert.join.noconditionaltask.size = 10000000;</span><br></pre></td></tr></table></figure>
-<h4 id="确保多张小表使用-mapjoin"><a href="#确保多张小表使用-mapjoin" class="headerlink" title="确保多张小表使用 mapjoin"></a>确保多张小表使用 mapjoin</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="comment">/*+MAPJOIN(smallTableTwo)*/</span> idOne, idTwo, <span class="keyword">value</span> <span class="keyword">FROM</span></span><br><span class="line">  ( <span class="keyword">select</span> <span class="comment">/*+MAPJOIN(smallTableOne)*/</span> idOne, idTwo, <span class="keyword">value</span> <span class="keyword">FROM</span></span><br><span class="line">    bigTable <span class="keyword">JOIN</span> smallTableOne <span class="keyword">on</span> (bigTable.idOne = smallTableOne.idOne)                             </span><br><span class="line">  ) firstjoin                                                            </span><br><span class="line">  <span class="keyword">JOIN</span>                                                                 </span><br><span class="line">  smallTableTwo <span class="keyword">ON</span> (firstjoin.idTwo = smallTableTwo.idTwo)</span><br></pre></td></tr></table></figure>
+<pre><code>Union Followed by a MapJoin
+Lateral View Followed by a MapJoin
+Reduce Sink (Group By/Join/Sort By/Cluster By/Distribute By) Followed by MapJoin
+MapJoin Followed by Union
+MapJoin Followed by Join
+MapJoin Followed by MapJoin
+</code></pre><p>相关配置</p>
+<pre><code>--是否自动转换为mapjoin
+set hive.auto.convert.join = true;
+--小表的最大文件大小，默认为25000000，即25M
+set hive.mapjoin.smalltable.filesize = 25000000;
+--是否将多个mapjoin合并为一个
+set hive.auto.convert.join.noconditionaltask = true;
+--多个mapjoin转换为1个时，所有小表的文件大小总和的最大值。
+set hive.auto.convert.join.noconditionaltask.size = 10000000;
+</code></pre><h4 id="确保多张小表使用-mapjoin"><a href="#确保多张小表使用-mapjoin" class="headerlink" title="确保多张小表使用 mapjoin"></a>确保多张小表使用 mapjoin</h4><pre><code class="sql">select /*+MAPJOIN(smallTableTwo)*/ idOne, idTwo, value FROM
+  ( select /*+MAPJOIN(smallTableOne)*/ idOne, idTwo, value FROM
+    bigTable JOIN smallTableOne on (bigTable.idOne = smallTableOne.idOne)                             
+  ) firstjoin                                                            
+  JOIN                                                                 
+  smallTableTwo ON (firstjoin.idTwo = smallTableTwo.idTwo) 
+</code></pre>
 <p>除了添加 mapjoin提示，还需要设置两个参数</p>
 <ul>
 <li><p>hive.auto.convert.join.noconditionaltask=true</p>
@@ -863,36 +921,59 @@ hive 的读书笔记，ing">
 </ul>
 <p><a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Joins" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Joins</a></p>
 <h2 id="导入导出数据"><a href="#导入导出数据" class="headerlink" title="导入导出数据"></a>导入导出数据</h2><h3 id="动态分区插入"><a href="#动态分区插入" class="headerlink" title="动态分区插入"></a>动态分区插入</h3><p>可以基于查询参数推断出需要创建的分区名称。SELECT 语句中的最后 2 列会对应到 PARTITION 中的分区名。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INSERT OVERWRITE TSBLE employees</span><br><span class="line">PARTITION(country, state)</span><br><span class="line">SELECT ..., se.cnty,se.st</span><br><span class="line">FROM staged_employees se;</span><br></pre></td></tr></table></figure>
-<p>动静结合</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INSERT OVERWRITE TSBLE employees</span><br><span class="line">PARTITION(country = &apos;US&apos;, state)   # 静态分区键必须出现在动态分区键之前</span><br><span class="line">SELECT ..., se.cnty,se.st</span><br><span class="line">FROM staged_employees se</span><br><span class="line">WHERE se.cnty = &apos;US&apos;;</span><br></pre></td></tr></table></figure>
-<h3 id="单个查询语句中创建表并加装数据"><a href="#单个查询语句中创建表并加装数据" class="headerlink" title="单个查询语句中创建表并加装数据"></a>单个查询语句中创建表并加装数据</h3><p>这个功能不能用于外部表。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE ca_employees</span><br><span class="line">AS SELECT name, salary, address</span><br><span class="line">FROM employees</span><br><span class="line">WHERE se.state = &apos;CA&apos;;</span><br></pre></td></tr></table></figure>
-<h3 id="导出数据"><a href="#导出数据" class="headerlink" title="导出数据"></a>导出数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INSERT OVERWRITE LOCAL DIRECTORY &apos;/tmp/employees&apos;</span><br><span class="line">select name</span><br><span class="line">from employee</span><br><span class="line">where se.state = &apos;CA&apos;</span><br></pre></td></tr></table></figure>
-<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p><code>select sub[0] from table_name;</code> 查询<strong>数组</strong>类型的字段的第一个元素</p>
+<pre><code>INSERT OVERWRITE TSBLE employees
+PARTITION(country, state)
+SELECT ..., se.cnty,se.st
+FROM staged_employees se;
+</code></pre><p>动静结合</p>
+<pre><code>INSERT OVERWRITE TSBLE employees
+PARTITION(country = &#39;US&#39;, state)   # 静态分区键必须出现在动态分区键之前
+SELECT ..., se.cnty,se.st
+FROM staged_employees se
+WHERE se.cnty = &#39;US&#39;;
+</code></pre><h3 id="单个查询语句中创建表并加装数据"><a href="#单个查询语句中创建表并加装数据" class="headerlink" title="单个查询语句中创建表并加装数据"></a>单个查询语句中创建表并加装数据</h3><p>这个功能不能用于外部表。</p>
+<pre><code>CREATE TABLE ca_employees
+AS SELECT name, salary, address
+FROM employees
+WHERE se.state = &#39;CA&#39;;
+</code></pre><h3 id="导出数据"><a href="#导出数据" class="headerlink" title="导出数据"></a>导出数据</h3><pre><code>INSERT OVERWRITE LOCAL DIRECTORY &#39;/tmp/employees&#39;
+select name
+from employee
+where se.state = &#39;CA&#39;
+</code></pre><h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p><code>select sub[0] from table_name;</code> 查询<strong>数组</strong>类型的字段的第一个元素</p>
 <p><code>select ded[“state taxes”] from table_name;</code> 查询<strong>map</strong>类型的字段</p>
 <p><code>select address.city from table_name;</code> 查询<strong>struct</strong>类型的字段</p>
 <p>使用正则表达式来指定列，所有以 price 开头的列</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select `price.*` from stocks;</span><br></pre></td></tr></table></figure>
-<p>不允许使用多个 DISTINCT 函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(DISTINCT ymd),count (DISTINCT volume) from stocks;</span><br></pre></td></tr></table></figure>
-<p>存在的 bug <code>count(DISTINCT col)</code>同时 col 是分区列时，会出现 bug</p>
+<pre><code>select `price.*` from stocks;
+</code></pre><p>不允许使用多个 DISTINCT 函数</p>
+<pre><code>select count(DISTINCT ymd),count (DISTINCT volume) from stocks;
+</code></pre><p>存在的 bug <code>count(DISTINCT col)</code>同时 col 是分区列时，会出现 bug</p>
 <p>表生成函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT name, sub </span><br><span class="line">FROM udtf_test</span><br><span class="line">LATERAL VIEW explode(subordinates) subView AS sub;</span><br></pre></td></tr></table></figure>
-<p>在这里LATERAL VIEW 是将 explode结果转换成一个视图subView,在视图中的单列列名定义为sub，然后在查询的时候引用这个列名就能够查到。</p>
+<pre><code>SELECT name, sub 
+FROM udtf_test
+LATERAL VIEW explode(subordinates) subView AS sub;
+</code></pre><p>在这里LATERAL VIEW 是将 explode结果转换成一个视图subView,在视图中的单列列名定义为sub，然后在查询的时候引用这个列名就能够查到。</p>
 <p>与时间相关的函数 ，输入可以是整数或者字符串类型。对于 0.8.0，可以接受 TIMESTAMP 类型的参数。</p>
 <p>列别名 <code>SELECT  col as new_col FROM table_name</code></p>
 <p>对列的进一步处理，进行条件判断</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Select  </span><br><span class="line">    CASE </span><br><span class="line">     WHEN salary &gt; 7 AND salary &lt;10 THEN &apos;high&apos;</span><br><span class="line">     ELSE &apos;very high&apos;</span><br><span class="line">    END AS bracket </span><br><span class="line">FROM employees</span><br></pre></td></tr></table></figure>
-<p>最好将下面的设置添加到 hiverc 中，避免不必要的 <code>MapReduce</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set  hive.exec.mode.local.auto=true</span><br></pre></td></tr></table></figure>
-<h3 id="where"><a href="#where" class="headerlink" title="where"></a>where</h3><p>where 语句使用<strong>谓词表达式</strong>，谓词表达式结果为 true 时，相应的行将被保留和输出。</p>
+<pre><code>Select  
+    CASE 
+     WHEN salary &gt; 7 AND salary &lt;10 THEN &#39;high&#39;
+     ELSE &#39;very high&#39;
+    END AS bracket 
+FROM employees
+</code></pre><p>最好将下面的设置添加到 hiverc 中，避免不必要的 <code>MapReduce</code></p>
+<pre><code>set  hive.exec.mode.local.auto=true
+</code></pre><h3 id="where"><a href="#where" class="headerlink" title="where"></a>where</h3><p>where 语句使用<strong>谓词表达式</strong>，谓词表达式结果为 true 时，相应的行将被保留和输出。</p>
 <p>where 语句中并不能使用 select 语句中的别名，解决办法是使用嵌套 select 语句</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT e.* FROM</span><br><span class="line">  ( select salary*(1- ded[&quot;Taxes&quot;]) as new_salary</span><br><span class="line">    FROM employees) e</span><br><span class="line">WHERE round(e.new_salary) &gt; 7000</span><br></pre></td></tr></table></figure>
-<h4 id="关于浮点数比较的陷阱"><a href="#关于浮点数比较的陷阱" class="headerlink" title="关于浮点数比较的陷阱"></a>关于浮点数比较的陷阱</h4><p>hive无法精确的表示 0.2，如果转为 float，实际数值是：0.2000001。如果转为 double，实际数值是：0.200000000001。</p>
+<pre><code>SELECT e.* FROM
+  ( select salary*(1- ded[&quot;Taxes&quot;]) as new_salary
+    FROM employees) e
+WHERE round(e.new_salary) &gt; 7000
+</code></pre><h4 id="关于浮点数比较的陷阱"><a href="#关于浮点数比较的陷阱" class="headerlink" title="关于浮点数比较的陷阱"></a>关于浮点数比较的陷阱</h4><p>hive无法精确的表示 0.2，如果转为 float，实际数值是：0.2000001。如果转为 double，实际数值是：0.200000000001。</p>
 <p>sql 语句中的浮点数，默认是 Double 类型的，比如下面的0.2</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from name wheren high&gt; 0.2</span><br></pre></td></tr></table></figure>
-<p>如果表的字段定义时是 Float 类型，就会出现比较上的问题。输出中会有=0.2 的。</p>
+<pre><code>select * from name wheren high&gt; 0.2
+</code></pre><p>如果表的字段定义时是 Float 类型，就会出现比较上的问题。输出中会有=0.2 的。</p>
 <p>Float字段会隐式转为 Double 类型，变成：0.20000001000000，因此会比 0.2 的double 类型0.200000000001大。 </p>
 <p>因此会出现 <code>&gt;0.2</code>的效果与<code>&gt;=0.2</code>相同。</p>
 <p>解决办法：</p>
@@ -902,16 +983,20 @@ hive 的读书笔记，ing">
 <li>与钱相关的都避免使用浮点数</li>
 </ol>
 <h3 id="GROUP-BY-语句"><a href="#GROUP-BY-语句" class="headerlink" title="GROUP BY 语句"></a>GROUP BY 语句</h3><p>having 语句用于聚合后再进行的条件过滤，避免了子查询</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select avg(salary) From stocks</span><br><span class="line">where ...</span><br><span class="line">GROUP BY year(ymd)</span><br><span class="line">HAVING avg(salary) &gt; 50.0   # 对上面的聚合后的内容进行过滤</span><br></pre></td></tr></table></figure>
-<h3 id="join-语句"><a href="#join-语句" class="headerlink" title="join 语句"></a>join 语句</h3><ul>
+<pre><code>select avg(salary) From stocks
+where ...
+GROUP BY year(ymd)
+HAVING avg(salary) &gt; 50.0   # 对上面的聚合后的内容进行过滤
+</code></pre><h3 id="join-语句"><a href="#join-语句" class="headerlink" title="join 语句"></a>join 语句</h3><ul>
 <li><p>join on 只支持等值连接，也就是<code>a.col=b.col</code> ，不支持<code>a.col&lt; b.col</code></p>
 </li>
 <li><p>不支持在 on 子句中的谓词使用 OR</p>
 </li>
 <li><p>hive 假定从左到右边表依次变大，也可以在 SELECT 中添加<code>/*+STREAMTABLE(s)*/</code></p>
 </li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT /*+STREAMTABLE(s)*/   s.ymd,s.symbol</span><br><span class="line">FROM stocks s JOIN dividends d ON ...</span><br></pre></td></tr></table></figure>
-</li>
+<li><pre><code>SELECT /*+STREAMTABLE(s)*/   s.ymd,s.symbol
+FROM stocks s JOIN dividends d ON ...
+</code></pre></li>
 <li><p>ON语句中的分区过滤条件在 OUTER JOIN 中是无效的，在 INNER JOIN 中是有效的 TODO（不太明白）</p>
 </li>
 <li><p>full outer join 将会返回所有表中符合 WHERE 语句条件的所有记录。如果任一张表的指定字段没有符合条件的值的话，那么就是用 NULL 值代替。</p>
@@ -920,18 +1005,20 @@ hive 的读书笔记，ing">
 <h4 id="LEFT-SEMI-JOIN"><a href="#LEFT-SEMI-JOIN" class="headerlink" title="LEFT SEMI-JOIN"></a>LEFT SEMI-JOIN</h4><p>左半开连接会返回左边表的记录，前提是其记录对于满足 ON 语句中的判定条件。</p>
 <p><img src="/2019/10/12/hive/2019-10-12-hive/image2.png" class="lazyload" data-srcset="2019-10-12-hive/image2.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="image-20191015111109600"></p>
 <h4 id="map-join"><a href="#map-join" class="headerlink" title="map  join"></a>map  join</h4><p>0.7之前的需要在 SELECT 中添加标记来进行触发，如下面的内连接</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT /*+MAPJOIN(d)*/ s.ymd, s.symbol, d.dividend </span><br><span class="line">FROM stocks s JOIN dividends d ON s.ymd=d.ymd</span><br><span class="line">WHERE s.symbol = &apos;AAPL&apos;</span><br></pre></td></tr></table></figure>
-<p>0.7之后的版本，废弃这种标记，不过添加后同样是有效的。如果没有该标记，需要用户设置属性<code>hive.auto.convert.JOIN=true</code>，也可以配置小表的大小<code>hive.mapjoin.smalltable.filesize=25000000</code> 单位是字节</p>
+<pre><code>SELECT /*+MAPJOIN(d)*/ s.ymd, s.symbol, d.dividend 
+FROM stocks s JOIN dividends d ON s.ymd=d.ymd
+WHERE s.symbol = &#39;AAPL&#39;
+</code></pre><p>0.7之后的版本，废弃这种标记，不过添加后同样是有效的。如果没有该标记，需要用户设置属性<code>hive.auto.convert.JOIN=true</code>，也可以配置小表的大小<code>hive.mapjoin.smalltable.filesize=25000000</code> 单位是字节</p>
 <h3 id="ORDER-BY-和-SORT-BY"><a href="#ORDER-BY-和-SORT-BY" class="headerlink" title="ORDER BY 和 SORT BY"></a>ORDER BY 和 SORT BY</h3><p>sort by 是局部的，order by 是全局的，比较费时。</p>
 <h3 id="DISTRIBUTE-BY与-CLUSTER-BY"><a href="#DISTRIBUTE-BY与-CLUSTER-BY" class="headerlink" title="DISTRIBUTE BY与 CLUSTER BY"></a>DISTRIBUTE BY与 CLUSTER BY</h3><p>Distribute by 用来保证相同指定列的记录会分发到同一个 reducer 中。</p>
 <p>如果DISTRIBUTE 与 SORT 语句中都涉及到相同的列，而且采用的是升序排序方式，那么这时 CLUSTER BY 等价于前面的两个语句。</p>
 <p>CLUSTER BY 剥夺了 SORT BY 的并行性，但是这样可以实现输出的数据是全局排序的。</p>
 <h3 id="抽样查询"><a href="#抽样查询" class="headerlink" title="抽样查询"></a>抽样查询</h3><p>方式1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from numbers TABLESAMPLE(BUCKET 1 OUT OF 2 ON col1) s;</span><br></pre></td></tr></table></figure>
-<p>2表示将数据分散成几桶，1 表示选择第几桶</p>
+<pre><code>select * from numbers TABLESAMPLE(BUCKET 1 OUT OF 2 ON col1) s;
+</code></pre><p>2表示将数据分散成几桶，1 表示选择第几桶</p>
 <p>方式 2</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from numbersflat TABLESAMPLE(0.1 PERCENT) s;</span><br></pre></td></tr></table></figure>
-<p>基于行数的，按照输入路径下的数据块百分比进行抽样。</p>
+<pre><code>select * from numbersflat TABLESAMPLE(0.1 PERCENT) s;
+</code></pre><p>基于行数的，按照输入路径下的数据块百分比进行抽样。</p>
 <ul>
 <li>不一定适合所有文件格式</li>
 <li>抽样最小单元是一个 HDFS 数据块，如果标的数据大小 &lt; 普通的块大小 128MB 的话，将返回所有行</li>
@@ -946,34 +1033,58 @@ hive 的读书笔记，ing">
 <p>describe 和describe extended 可以显示视图的元数据信息</p>
 <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="数据的导入与导出"><a href="#数据的导入与导出" class="headerlink" title="数据的导入与导出"></a>数据的导入与导出</h3><p>1）加载到普通表</p>
 <p>加载本地文本文件内容（要与hive表字段分隔符顺序都要一致）</p>
-<pre><code>load data local inpath &apos;/home/hadoop/orders.csv&apos; overwrite into table orders;
+<pre><code>load data local inpath &#39;/home/hadoop/orders.csv&#39; overwrite into table orders;
 </code></pre><p>如果数据源在HDFS上，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load data inpath &apos;hdfs://master:9000/user/orders&apos; overwrite into table orders;  数据源在HDFS上</span><br></pre></td></tr></table></figure>
-<p>2) 加载到分区表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load data local inpath &apos;/home/hadoop/test.txt&apos; overwrite into table test partition (dt=&apos;2017-09-09&apos;);</span><br></pre></td></tr></table></figure>
-<p>partition 是指定这批数据放入分区2017-09-09中；</p>
+<pre><code>load data inpath &#39;hdfs://master:9000/user/orders&#39; overwrite into table orders;  数据源在HDFS上
+</code></pre><p>2) 加载到分区表</p>
+<pre><code> load data local inpath &#39;/home/hadoop/test.txt&#39; overwrite into table test partition (dt=&#39;2017-09-09&#39;);
+</code></pre><p>partition 是指定这批数据放入分区2017-09-09中；</p>
 <p>3）加载分桶表<br>先创建普通临时表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> orders_tmp</span><br><span class="line">(</span><br><span class="line">user_id <span class="built_in">int</span>,</span><br><span class="line">user_name <span class="keyword">string</span>,</span><br><span class="line">create_time <span class="keyword">string</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">row</span> <span class="keyword">format</span> <span class="keyword">delimited</span> <span class="keyword">fields</span> <span class="keyword">terminated</span> <span class="keyword">by</span> <span class="string">','</span> <span class="keyword">stored</span> <span class="keyword">as</span> textfile;</span><br></pre></td></tr></table></figure>
+<pre><code class="sql">create table orders_tmp
+(
+user_id int,
+user_name string,
+create_time string
+)
+row format delimited fields terminated by &#39;,&#39; stored as textfile;
+</code></pre>
 <p>数据载入临时表</p>
-<pre><code>load data local inpath &apos;/home/hadoop/lead.txt&apos; overwrite into table orders_tmp; 
+<pre><code>load data local inpath &#39;/home/hadoop/lead.txt&#39; overwrite into table orders_tmp; 
 </code></pre><p>导入分桶表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set hive.enforce.bucketing = true;</span><br><span class="line">insert overwrite table orders select * from orders_tmp;</span><br></pre></td></tr></table></figure>
-<p>4) 导出数据</p>
+<pre><code>set hive.enforce.bucketing = true;
+insert overwrite table orders select * from orders_tmp; 
+</code></pre><p>4) 导出数据</p>
 <p>将hive表中的数据导出到本地文件中；</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert overwrite local directory &apos;/home/hadoop/orders.bak2017-12-28&apos; select * from orders;</span><br></pre></td></tr></table></figure>
-<p>【去掉local关键字，也可以导出到HDFS上】</p>
+<pre><code>insert overwrite local directory &#39;/home/hadoop/orders.bak2017-12-28&#39; select * from orders;
+</code></pre><p>【去掉local关键字，也可以导出到HDFS上】</p>
 <h3 id="JOIN-ON中的-and-与-where-子句"><a href="#JOIN-ON中的-and-与-where-子句" class="headerlink" title="JOIN ON中的 and 与 where 子句"></a>JOIN ON中的 and 与 where 子句</h3><p>HiveQL与标准SQL的区别：</p>
 <p>陷阱1：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> first_table t1</span><br><span class="line"><span class="keyword">JOIN</span> second_table t2</span><br><span class="line"><span class="keyword">ON</span> t1.id = t2.id</span><br><span class="line">	<span class="keyword">where</span> t1.date = <span class="string">"2016-06-01"</span></span><br></pre></td></tr></table></figure>
+<pre><code class="sql">SELECT *
+FROM first_table t1
+JOIN second_table t2
+ON t1.id = t2.id
+    where t1.date = &quot;2016-06-01&quot;
+</code></pre>
 <p>在hive里面，没有SQL优化器，则这样些的后果是，直接将t1表与t2表全量连接，产生大量的MapReduce操作再进行过滤</p>
 <p>正确写法：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span></span><br><span class="line">( <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> first_table <span class="keyword">WHERE</span> <span class="built_in">date</span> = <span class="string">"2016-06-01"</span>) t1</span><br><span class="line"><span class="keyword">JOIN</span> second_table t2</span><br><span class="line"><span class="keyword">ON</span> t1.id = t2.id;</span><br></pre></td></tr></table></figure>
+<pre><code class="sql">SELECT *
+FROM
+( SELECT * FROM first_table WHERE date = &quot;2016-06-01&quot;) t1
+JOIN second_table t2
+ON t1.id = t2.id;
+</code></pre>
 <p>其实上面的语句还不是最好的,因为hive通常处理的都是大数据表,上亿至少小case。<strong>hive sql里不推荐用嵌套子查询语句</strong>，就是为了减小查询负担。</p>
 <p>更优的写法是join…on 后面，用and代替where。为什么？用and的话，查询是先过滤条件，得到一个较小的表，然后再跟其他表联合。这样，无形中，就能节省下不小的运算量，自然就更快了！</p>
 <p>更优的写法：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> first_table t1</span><br><span class="line"><span class="keyword">JOIN</span> second_table t2</span><br><span class="line"><span class="keyword">ON</span> t1.id = t2.id</span><br><span class="line"><span class="keyword">and</span> t1.date = <span class="string">"2016-06-01"</span>;</span><br></pre></td></tr></table></figure>
+<pre><code class="sql">SELECT *
+FROM first_table t1
+JOIN second_table t2
+ON t1.id = t2.id
+and t1.date = &quot;2016-06-01&quot;;
+</code></pre>
 <p><a href="https://www.jianshu.com/p/ad64b953dc67" target="_blank" rel="noopener">https://www.jianshu.com/p/ad64b953dc67</a></p>
-<h3 id="合并小文件"><a href="#合并小文件" class="headerlink" title="合并小文件"></a>合并小文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -cat hdfs://cdh5/tmp/lxw1234/*.txt | hadoop fs -appendToFile - hdfs://cdh5/tmp/hdfs_largefile.txt</span><br></pre></td></tr></table></figure>
+<h3 id="合并小文件"><a href="#合并小文件" class="headerlink" title="合并小文件"></a>合并小文件</h3><pre><code class="shell">hadoop fs -cat hdfs://cdh5/tmp/lxw1234/*.txt | hadoop fs -appendToFile - hdfs://cdh5/tmp/hdfs_largefile.txt
+</code></pre>
 <p>这种处理方法在<strong>数据量非常大的情况下不适合</strong>，最好使用MapReduce来合并。</p>
 </the></excerpt>
   
@@ -1295,7 +1406,7 @@ Mac、linux、window这 3 大系统的开发环境搭建推荐、遇到的相关
     <script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
     <script type="text/javascript">
       $(function(){
-        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/054.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
+        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/044.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
         if ('true' == 'true') {
           function shuffle(arr){
             /*From countercurrent-time*/
