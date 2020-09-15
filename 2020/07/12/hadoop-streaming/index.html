@@ -40,6 +40,8 @@ hadoop streaming">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css">
   
   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css">
+  
 
   
 
@@ -52,6 +54,10 @@ hadoop streaming">
   <!-- import link -->
   
 
+  
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.18.1/styles/solarized-light.css">
+    
   
   
     <link rel="stylesheet" href="/css/style.css">
@@ -329,13 +335,13 @@ hadoop streaming">
     
         <div class='cover-wrapper post search' style="display: none;">
           
-            <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg"></div>
+            <div class='cover-backstretch'></div>
           
           <div class='cover-body'>
   <div class='top'>
     
     
-      <p class="title">玖玖的博客</p>
+      <p class="title">玖玖</p>
     
     
       <p class="subtitle">^_^</p>
@@ -345,7 +351,7 @@ hadoop streaming">
     
       <div class="m_search">
         <form name="searchform" class="form u-search-form">
-          <input type="text" class="input u-search-input" placeholder="A Wonderful Theme for Hexo" />
+          <input type="text" class="input u-search-input" placeholder="Search..." />
           <i class="icon fas fa-search fa-fw"></i>
         </form>
       </div>
@@ -427,14 +433,14 @@ hadoop streaming">
  
 <script> 
   // 处理封面 此时 jquery 还没加载 
-  if ("none" == "none") { // 移除封面 
+  if ("half" == "none") { // 移除封面 
     document.getElementsByClassName('cover-wrapper')[0].style.display = "none"; 
     document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show"); 
   } else { 
-    if ("none" == "half") { // 半屏 
+    if ("half" == "half") { // 半屏 
       document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'half'); 
       document.getElementsByClassName('scroll-down')[0].style.display = "none"; 
-    } else if ("none" == "full") { // 全屏 
+    } else if ("half" == "full") { // 全屏 
       document.getElementsByClassName('cover-wrapper')[0].setAttribute('id', 'full'); 
       document.getElementsByClassName('scroll-down')[0].style.display = ""; 
     } 
@@ -455,6 +461,10 @@ hadoop streaming">
   
   <div class="article-meta" id="top">
     
+      
+
+
+    
     
     
       <h1 class="title">
@@ -467,7 +477,7 @@ hadoop streaming">
 <div class='new-meta-item author'>
   <a class='author' href="/" rel="nofollow">
     <img no-lazy src="">
-    <p>请设置文章作者</p>
+    <p>玖玖</p>
   </a>
 </div>
 
@@ -511,6 +521,24 @@ hadoop streaming">
 
           
         
+          
+            
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>1.7k words</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>7 min</p>
+    </a>
+  </div>
+
+
+          
+        
       </div>
     
   </div>
@@ -529,25 +557,166 @@ hadoop streaming">
 <p><strong>注意：hadoop上的默认编码有可能不是 utf-8，因此不论python2、3都建议使用codecs模块，使用 codecs.open(file, ‘r’, encoding=’utf-8’) 是个好习惯</strong></p>
 <p>如果你使用的是 <strong>for line in sys.stdin:</strong> 出现下面的错误怎么办呢——&gt;<strong><a href="https://stackoverflow.com/questions/53026131/how-to-prevent-unicodedecodeerror-when-reading-piped-input-from-sys-stdin/53028829" target="_blank" rel="noopener">How to prevent “UnicodeDecodeError” when reading piped input from sys.stdin?</a></strong></p>
 <p><img src="/2020/07/12/hadoop-streaming/非utf-8字符问题.png" class="lazyload" data-srcset="非utf-8字符问题.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="非utf-8字符问题"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding=utf8 -*-</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">@Author :</span></span><br><span class="line"><span class="string">@Created Time : 2020-05-21 15:00:32</span></span><br><span class="line"><span class="string">@Description : TODO</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> codecs <span class="keyword">as</span> cs</span><br><span class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> stdin, stdout</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 用于判断hadoop默认编码环境</span></span><br><span class="line">logging.warning(stdin.encoding)</span><br><span class="line">logging.warning(stdout.encoding)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># TODO</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    main</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># python3 建议这样处理编码，从标准输入读取，下面两种方式等价</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> cs.open(stdin.fileno(), <span class="string">'r'</span>, encoding=<span class="string">'utf-8'</span>, errors=<span class="string">'replace'</span>):</span><br><span class="line">    <span class="comment">#for line in cs.open(0, 'r', encoding='utf-8', errors='replace'):                                                                       </span></span><br><span class="line">        <span class="comment"># 1.输入</span></span><br><span class="line">        line = line.strip(<span class="string">'\r\n'</span>)</span><br><span class="line">        cols = line.split(<span class="string">'\t'</span>)</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># 2.列数校验</span></span><br><span class="line">        <span class="keyword">if</span> len(cols) != <span class="number">2</span>:</span><br><span class="line">            logging.warning(line)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"> </span><br><span class="line">        <span class="comment"># 3.TODO 具体处理逻辑</span></span><br><span class="line">        results = process()</span><br><span class="line">         </span><br><span class="line">        <span class="comment"># 4.输出</span></span><br><span class="line">        <span class="keyword">for</span> result <span class="keyword">in</span> results:</span><br><span class="line">            stdout.write(result)</span><br><span class="line">            stdout.write(<span class="string">'\n'</span>)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<pre><code class="python">#!/usr/bin/python
+# -*- coding=utf8 -*-
+&quot;&quot;&quot;
+@Author :
+@Created Time : 2020-05-21 15:00:32
+@Description : TODO
+&quot;&quot;&quot;
+
+import sys
+import logging
+import codecs as cs
+from sys import stdin, stdout
+
+# 用于判断hadoop默认编码环境
+logging.warning(stdin.encoding)
+logging.warning(stdout.encoding)
+
+def process():
+    # TODO
+    pass
+
+def main():
+    &quot;&quot;&quot;
+    main
+    &quot;&quot;&quot;
+    # python3 建议这样处理编码，从标准输入读取，下面两种方式等价
+    for line in cs.open(stdin.fileno(), &#39;r&#39;, encoding=&#39;utf-8&#39;, errors=&#39;replace&#39;):
+    #for line in cs.open(0, &#39;r&#39;, encoding=&#39;utf-8&#39;, errors=&#39;replace&#39;):                                                                       
+        # 1.输入
+        line = line.strip(&#39;\r\n&#39;)
+        cols = line.split(&#39;\t&#39;)
+
+        # 2.列数校验
+        if len(cols) != 2:
+            logging.warning(line)
+            continue
+
+        # 3.TODO 具体处理逻辑
+        results = process()
+
+        # 4.输出
+        for result in results:
+            stdout.write(result)
+            stdout.write(&#39;\n&#39;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
 <p>shell版的mapper、reducer，下面是一个统计词频的功能</p>
 <p><strong>注意：头部不可以加 source ~/.bashrc ,因为hadoop环境没有该文件</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mapper.sh</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$LANG</span> &gt;&amp;2</span><br><span class="line">awk -F<span class="string">"\t"</span> <span class="string">'&#123;print $1"\t"1&#125;'</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment"># reducer.sh</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$LANG</span> &gt;&amp;2</span><br><span class="line">awk -F<span class="string">"\t"</span> <span class="string">'&#123;dict[$1]+=1&#125;  END&#123;for(w in dict)print w"\t"dict[w]&#125;'</span></span><br></pre></td></tr></table></figure>
+<pre><code class="bash"># mapper.sh
+echo $LANG &gt;&amp;2
+awk -F&quot;\t&quot; &#39;{print $1&quot;\t&quot;1}&#39;
+
+
+# reducer.sh
+echo $LANG &gt;&amp;2
+awk -F&quot;\t&quot; &#39;{dict[$1]+=1}  END{for(w in dict)print w&quot;\t&quot;dict[w]}&#39;
+</code></pre>
 <h2 id="本地测试"><a href="#本地测试" class="headerlink" title="本地测试"></a>本地测试</h2><p>通过模拟MapReduce进行测试，排查问题。只有本地测试通过，才能确保在hadoop上运行成功。</p>
 <p><strong>python测试</strong></p>
 <p>构造一份测试数据到 test_data.txt 中，然后下载hadoop上的python包（自己编译的），进行测试</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -get /xxx/python3.6.tar.gz .</span><br><span class="line">tar -zxvf python3.6.tar.gz</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 注意使用解压后的python，非本地开发机的python</span></span><br><span class="line">cat test_data.txt  | python3.6/bin/python mapper.py | python3.6/bin/python reducer.py</span><br></pre></td></tr></table></figure>
+<pre><code class="bash">hadoop fs -get /xxx/python3.6.tar.gz .
+tar -zxvf python3.6.tar.gz
+
+# 注意使用解压后的python，非本地开发机的python
+cat test_data.txt  | python3.6/bin/python mapper.py | python3.6/bin/python reducer.py
+</code></pre>
 <p>如需安装其他模块请使用 ./python3.6/bin/python -m pip install xxx ，<strong>并重新打包压缩，上传到你的hadoop目录</strong></p>
 <p><strong>其他测试</strong></p>
 <p>mapper 与 reducer可以是 python、shell脚本，并且可以混合使用，如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat test_data.txt  | python3.6/bin/python mapper.py | sh reducer.sh     <span class="comment"># python 与 shell脚本</span></span><br><span class="line">cat test_data.txt  | python3.6/bin/python mapper.py | sort -k1,1        <span class="comment"># python 与 命令</span></span><br></pre></td></tr></table></figure>
+<pre><code class="bash">cat test_data.txt  | python3.6/bin/python mapper.py | sh reducer.sh     # python 与 shell脚本
+cat test_data.txt  | python3.6/bin/python mapper.py | sort -k1,1        # python 与 命令
+</code></pre>
 <h2 id="hadoop-stream-模板"><a href="#hadoop-stream-模板" class="headerlink" title="hadoop stream 模板"></a>hadoop stream 模板</h2><ol>
 <li>如果只有2、3个代码文件，使用 -file xxx.py 指定；</li>
 <li>如果有较多文件，如下图，建议将整个src目录压缩成 <strong>src.tar.gz</strong>，上传到指定的hadoop目录，如果还用到别的目录，比如config、data也一起打包上传，并使用 -<em>cacheArchive hadoop路径</em>  指定；（hadoop支持zip, jar, tar.gz格式的压缩包，由于Java解压zip压缩包时会丢失文件权限信息而且遇到中文文件名会出错，所以<strong>建议采用tar.gz压缩包</strong>。）<br><img src="/2020/07/12/hadoop-streaming/./hadoop目录结构.png" class="lazyload" data-srcset="./hadoop目录结构.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="hadoop目录结构"></li>
 <li>hadoop上的目录结构，可以理解与本地的工程目录是相同的，只要你打包与解压的方式是对的，因此相对路径啥的，只要本地测试通过，hadoop上也不会有问题；</li>
 <li>具体使用请看下面的模板；</li>
 </ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/sh</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line"> </span><br><span class="line">DATE=`date -d <span class="string">"<span class="variable">$1</span>"</span> +<span class="string">"%Y%m%d"</span>`</span><br><span class="line">HADOOP_DIR=<span class="string">""</span>  <span class="comment"># TODO hadoop路径</span></span><br><span class="line">HADOOP_INPUT=<span class="string">"<span class="variable">$&#123;HADOOP_DIR&#125;</span>/input/"</span></span><br><span class="line">HADOOP_OUTPUT=<span class="string">"<span class="variable">$&#123;HADOOP_DIR&#125;</span>/output/"</span></span><br><span class="line">SRC=<span class="string">"<span class="variable">$&#123;HADOOP_DIR&#125;</span>/src.tar.gz"</span></span><br><span class="line">DATA_CONFIG=<span class="string">"<span class="variable">$&#123;HADOOP_DIR&#125;</span>/data.tar.gz"</span></span><br><span class="line">PYTHON=<span class="string">"<span class="variable">$&#123;HADOOP_DIR&#125;</span>/python3.6.tar.gz"</span></span><br><span class="line">TASK_NAME=<span class="string">"task_name"</span></span><br><span class="line"> </span><br><span class="line">hadoop fs -<span class="built_in">test</span> -e <span class="variable">$HADOOP_DIR</span></span><br><span class="line"><span class="keyword">if</span> [ $? -ne 0 ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"Hadoop路径有误：<span class="variable">$HADOOP_DIR</span>，请检查"</span>   </span><br><span class="line">  <span class="built_in">exit</span> 8</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="comment"># 上传本地工程代码到 hadoop</span></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">upload</span></span>() &#123;</span><br><span class="line">  LOCAL_FILE=<span class="variable">$1</span>    <span class="comment"># 本地文件</span></span><br><span class="line">  HADOOP_FILE=<span class="variable">$2</span>   <span class="comment"># hadoop目录</span></span><br><span class="line">  <span class="built_in">echo</span> -e <span class="string">"<span class="variable">$1</span>\n上传到↑=====↓ \n <span class="variable">$2</span>"</span></span><br><span class="line">  hadoop fs -<span class="built_in">test</span> -e <span class="variable">$HADOOP_FILE</span></span><br><span class="line">  <span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">    hadoop fs -rmr <span class="variable">$HADOOP_FILE</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">  hadoop fs -put <span class="variable">$LOCAL_FILE</span> <span class="variable">$HADOOP_FILE</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">info</span></span>() &#123;</span><br><span class="line">  <span class="built_in">echo</span> -e <span class="string">"############### <span class="variable">$1</span> ##############\n"</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">archives_dir=<span class="string">"./archives"</span> <span class="comment"># 本地缓存压缩包的目录</span></span><br><span class="line">[ ! -e <span class="variable">$&#123;archives_dir&#125;</span> ] &amp;&amp; mkdir <span class="variable">$&#123;archives_dir&#125;</span></span><br><span class="line"> </span><br><span class="line">info <span class="string">'[开始]更新本地代码到hadoop'</span></span><br><span class="line">tar -czvf <span class="variable">$&#123;archives_dir&#125;</span>/src.tar.gz  src/  &amp;&amp; upload <span class="variable">$&#123;archives_dir&#125;</span>/src.tar.gz <span class="variable">$SRC</span></span><br><span class="line">tar -czvf <span class="variable">$&#123;archives_dir&#125;</span>/data.tar.gz data/ &amp;&amp; upload <span class="variable">$&#123;archives_dir&#125;</span>/data.tar.gz <span class="variable">$DATA_CONFIG</span></span><br><span class="line"><span class="comment"># 针对不经常修改的、含有大文件的目录，避免每次都压缩，可以如下加个判断</span></span><br><span class="line"><span class="comment">#if [ ! -f $&#123;archives_dir&#125;/config.tar.gz ]; then # config是大文件，避免每次压缩</span></span><br><span class="line"><span class="comment">#    tar -czvf $&#123;archives_dir&#125;/config.tar.gz config/  &amp;&amp; upload $&#123;archives_dir&#125;/config.tar.gz $NLPC_CONFIG</span></span><br><span class="line"><span class="comment">#fi</span></span><br><span class="line">info <span class="string">'[完成]更新本地代码到hadoop'</span></span><br><span class="line"> </span><br><span class="line">hadoop fs -<span class="built_in">test</span> -e <span class="variable">$HADOOP_OUTPUT</span></span><br><span class="line"><span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">  hadoop fs -rmr <span class="variable">$HADOOP_OUTPUT</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 务必使用如下的-cmdenv指定环境的编码为UTF8</span></span><br><span class="line">hadoop streaming \</span><br><span class="line">    -input <span class="variable">$HADOOP_INPUT</span> \</span><br><span class="line">    -output <span class="variable">$HADOOP_OUTPUT</span> \</span><br><span class="line">    -mapper <span class="string">"sh src/script/mapper.sh"</span> \</span><br><span class="line">    -reducer <span class="string">"sort -u"</span> \</span><br><span class="line">    -file xxx.py \</span><br><span class="line">    -file yyy.sh \</span><br><span class="line">    -cacheArchive <span class="variable">$&#123;DATA_CONFIG&#125;</span>\</span><br><span class="line">    -cacheArchive <span class="variable">$&#123;SRC&#125;</span>\</span><br><span class="line">    -cacheArchive <span class="variable">$&#123;PYTHON&#125;</span>\</span><br><span class="line">    -cmdenv LANG=zh_CN.utf8 \</span><br><span class="line">    -cmdenv PYTHONIOENCODING=utf_8 \</span><br><span class="line">    -jobconf mapred.job.name=<span class="variable">$TASK_NAME</span> \</span><br><span class="line">    -jobconf mapred.job.map.capacity=400 \</span><br><span class="line">    -jobconf mapred.map.tasks=100 \</span><br><span class="line">    -jobconf mapred.reduce.tasks=100 \</span><br><span class="line">    -jobconf stream.memory.limit=5120 \</span><br><span class="line">    -jobconf abaci.split.optimize.enable=<span class="literal">false</span> \</span><br><span class="line">    -jobconf mapred.map.over.capacity.allowed=<span class="literal">false</span> \</span><br><span class="line">    -jobconf mapred.job.priority=NORMAL \</span><br><span class="line">    -jobconf abaci.job.base.environment=centos6u3_hadoop</span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> [ $? -ne 0 ]</span><br><span class="line">    <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"hadoop error"</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<pre><code class="bash">#!/usr/bin/sh
+source ~/.bashrc
+
+DATE=`date -d &quot;$1&quot; +&quot;%Y%m%d&quot;`
+HADOOP_DIR=&quot;&quot;  # TODO hadoop路径
+HADOOP_INPUT=&quot;${HADOOP_DIR}/input/&quot;
+HADOOP_OUTPUT=&quot;${HADOOP_DIR}/output/&quot;
+SRC=&quot;${HADOOP_DIR}/src.tar.gz&quot;
+DATA_CONFIG=&quot;${HADOOP_DIR}/data.tar.gz&quot;
+PYTHON=&quot;${HADOOP_DIR}/python3.6.tar.gz&quot;
+TASK_NAME=&quot;task_name&quot;
+
+hadoop fs -test -e $HADOOP_DIR
+if [ $? -ne 0 ]; then
+  echo &quot;Hadoop路径有误：$HADOOP_DIR，请检查&quot;   
+  exit 8
+fi
+# 上传本地工程代码到 hadoop
+function upload() {
+  LOCAL_FILE=$1    # 本地文件
+  HADOOP_FILE=$2   # hadoop目录
+  echo -e &quot;$1\n上传到↑=====↓ \n $2&quot;
+  hadoop fs -test -e $HADOOP_FILE
+  if [ $? -eq 0 ]; then
+    hadoop fs -rmr $HADOOP_FILE
+  fi
+  hadoop fs -put $LOCAL_FILE $HADOOP_FILE
+}
+
+function info() {
+  echo -e &quot;############### $1 ##############\n&quot;
+}
+
+archives_dir=&quot;./archives&quot; # 本地缓存压缩包的目录
+[ ! -e ${archives_dir} ] &amp;&amp; mkdir ${archives_dir}
+
+info &#39;[开始]更新本地代码到hadoop&#39;
+tar -czvf ${archives_dir}/src.tar.gz  src/  &amp;&amp; upload ${archives_dir}/src.tar.gz $SRC
+tar -czvf ${archives_dir}/data.tar.gz data/ &amp;&amp; upload ${archives_dir}/data.tar.gz $DATA_CONFIG
+# 针对不经常修改的、含有大文件的目录，避免每次都压缩，可以如下加个判断
+#if [ ! -f ${archives_dir}/config.tar.gz ]; then # config是大文件，避免每次压缩
+#    tar -czvf ${archives_dir}/config.tar.gz config/  &amp;&amp; upload ${archives_dir}/config.tar.gz $NLPC_CONFIG
+#fi
+info &#39;[完成]更新本地代码到hadoop&#39;
+
+hadoop fs -test -e $HADOOP_OUTPUT
+if [ $? -eq 0 ]; then
+  hadoop fs -rmr $HADOOP_OUTPUT
+fi
+
+# 务必使用如下的-cmdenv指定环境的编码为UTF8
+hadoop streaming \
+    -input $HADOOP_INPUT \
+    -output $HADOOP_OUTPUT \
+    -mapper &quot;sh src/script/mapper.sh&quot; \
+    -reducer &quot;sort -u&quot; \
+    -file xxx.py \
+    -file yyy.sh \
+    -cacheArchive ${DATA_CONFIG}\
+    -cacheArchive ${SRC}\
+    -cacheArchive ${PYTHON}\
+    -cmdenv LANG=zh_CN.utf8 \
+    -cmdenv PYTHONIOENCODING=utf_8 \
+    -jobconf mapred.job.name=$TASK_NAME \
+    -jobconf mapred.job.map.capacity=400 \
+    -jobconf mapred.map.tasks=100 \
+    -jobconf mapred.reduce.tasks=100 \
+    -jobconf stream.memory.limit=5120 \
+    -jobconf abaci.split.optimize.enable=false \
+    -jobconf mapred.map.over.capacity.allowed=false \
+    -jobconf mapred.job.priority=NORMAL \
+    -jobconf abaci.job.base.environment=centos6u3_hadoop
+
+if [ $? -ne 0 ]
+    then
+    echo &quot;hadoop error&quot;
+    exit 1
+fi
+</code></pre>
 <h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><p><strong>输入输出文件</strong></p>
 <p><code>-input &lt;path&gt;</code>：指定作业输入，path可以是文件或者目录，可以使用*通配符，-input选项可以使用多次指定多个文件或目录作为输入。</p>
 <p><code>-output &lt;path&gt;</code>：指定作业输出目录，path必须不存在，而且执行作业的用户必须有创建该目录的权限，-output只能使用一次。</p>
@@ -556,20 +725,25 @@ hadoop streaming">
 <p>-file yyy.sh</p>
 <p><strong>上传较多代码文件</strong></p>
 <p>建议本地打包后上传到hadoop上，并使用 <code>-cacheArchive</code> 指定，该命令会自动解压；<strong>注意第3个有#号的例子，这不是注释，而是指定了解压的目录，相当于 <code>tar -xzvf python.tar.gz -C ./target_dir</code></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-cacheArchive $&#123;DATA_CONFIG&#125;\</span><br><span class="line">-cacheArchive $&#123;SRC&#125;\</span><br><span class="line">-cacheArchive $&#123;PYTHON&#125;#target_dir\</span><br></pre></td></tr></table></figure>
-<p><strong>解决reduce积压到一个reducer的问题</strong></p>
+<pre><code>-cacheArchive ${DATA_CONFIG}\
+-cacheArchive ${SRC}\
+-cacheArchive ${PYTHON}#target_dir\
+</code></pre><p><strong>解决reduce积压到一个reducer的问题</strong></p>
 <p> -jobconf stream.map.output.field.separator=.      # 指定“.”作为map输出内容的分隔符，默认是\t，<strong>这个参数不建议添加和修改</strong><br> -jobconf stream.num.map.output.key.fields=2     # 从在第2个“\t”之前的部分作为key，之后的部分作为value</p>
 <p><strong>自己指定mapper的数量，否则abaci会自动优化</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-jobconf abaci.split.optimize.enable=false </span><br><span class="line">-jobconf mapred.map.tasks=200</span><br></pre></td></tr></table></figure>
-<p>但并不是你指定多少就是多少mapper</p>
+<pre><code>-jobconf abaci.split.optimize.enable=false 
+-jobconf mapred.map.tasks=200
+</code></pre><p>但并不是你指定多少就是多少mapper</p>
 <p><strong>指定reducer数量</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-jobconf mapred.reduce.tasks=100</span><br></pre></td></tr></table></figure>
-<p><strong>同时运行的mapper、reducer数量限制</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-jobconf mapred.job.map.capacity=200 最多同时运行map任务数</span><br><span class="line">-jobconf mapred.job.reduce.capacity=200 最多同时运行reduce任务数</span><br></pre></td></tr></table></figure>
-<p><strong>设置环境变量</strong></p>
+<pre><code>-jobconf mapred.reduce.tasks=100
+</code></pre><p><strong>同时运行的mapper、reducer数量限制</strong></p>
+<pre><code>-jobconf mapred.job.map.capacity=200 最多同时运行map任务数
+-jobconf mapred.job.reduce.capacity=200 最多同时运行reduce任务数
+</code></pre><p><strong>设置环境变量</strong></p>
 <p><code>-cmdenv NAME=VALUE</code>：给mapper和reducer程序传递额外的环境变量，NAME是变量名，VALUE是变量值。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-cmdenv LANG=zh_CN.utf8 \</span><br><span class="line">-cmdenv PYTHONIOENCODING=utf_8 \    # 如果上面的环境变量不生效，再试试加上这个</span><br></pre></td></tr></table></figure>
-<p>可以设置的编码请用: <strong>locale -a |grep zh</strong> 查看，原因请看：<a href="https://blog.csdn.net/j___t/article/details/97705231" target="_blank" rel="noopener">Python3.6 sys.stdout.encoding的输出为ANSI_X3.4-1968(python3.6的坑)</a></p>
+<pre><code>-cmdenv LANG=zh_CN.utf8 \
+-cmdenv PYTHONIOENCODING=utf_8 \    # 如果上面的环境变量不生效，再试试加上这个
+</code></pre><p>可以设置的编码请用: <strong>locale -a |grep zh</strong> 查看，原因请看：<a href="https://blog.csdn.net/j___t/article/details/97705231" target="_blank" rel="noopener">Python3.6 sys.stdout.encoding的输出为ANSI_X3.4-1968(python3.6的坑)</a></p>
 <h2 id="官方教程"><a href="#官方教程" class="headerlink" title="官方教程"></a>官方教程</h2><p>官方教程：<a href="http://hadoop.apache.org/docs/r1.0.4/cn/streaming.html" target="_blank" rel="noopener">Hadoop Streaming</a></p>
 </the></excerpt>
   
@@ -605,10 +779,10 @@ hadoop streaming">
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-10T22:51:41+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-16T00:55:28+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Sep 10, 2020</p>
+    <p>更新于：Sep 16, 2020</p>
   </a>
 </div>
 
@@ -817,7 +991,7 @@ panda入门笔记
     
       
         <div class='copyright'>
-        <p><a href="/">Copyright © 2017-2020 XXX</a></p>
+        <p><a href="/">Copyright © 2017-2020 </a></p>
 
         </div>
       
@@ -885,6 +1059,45 @@ panda入门笔记
 
 <!-- internal -->
 
+  
+  
+  
+    <script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/002.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/003.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/004.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/005.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/006.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/012.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/016.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/019.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/025.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/033.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/034.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/035.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/038.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/039.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/042.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/046.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/051.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/054.jpg", "https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/056.jpg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "100000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "100000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
 
 
 
@@ -934,6 +1147,61 @@ panda入门笔记
   
 
 
+
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+    var clipboard = new ClipboardJS('.btn-copy', {
+        target: function (trigger) {
+            return trigger.nextElementSibling
+        }
+    });
+    function wait(callback, seconds) {
+        var timelag = null;
+        timelag = window.setTimeout(callback, seconds)
+    }
+    function pjax_initCopyCode() {
+		if($(".highlight .code pre").length+$(".article pre code").length==0)return;
+        var copyHtml = '';
+        copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+        copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+        copyHtml += '</button>';
+        $(".highlight .code pre").before(copyHtml);
+        $(".article pre code").before(copyHtml);
+        clipboard.off('success').on('success', function (e) {
+            let $btn = $(e.trigger);
+            $btn.addClass('copied');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-check-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPIED';
+            wait(function () {
+                $icon.removeClass('fa-check-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        });
+        clipboard.off('error').on('error', function (e) {
+            e.clearSelection();
+            let $btn = $(e.trigger);
+            $btn.addClass('copy-failed');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-times-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPY FAILED';
+            wait(function () {
+                $icon.removeClass('fa-times-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        })
+    }
+    $(function () {
+        pjax_initCopyCode()
+    });
+</script>
 
 
 
@@ -1050,6 +1318,11 @@ const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
 
 
 
+
+  
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  
 
 
 
@@ -1360,9 +1633,32 @@ const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
             pjax_fancybox();
           }
         
+          
+          if ('') {
+            $('').backstretch("resize");
+            if($('.cover-wrapper').is(':hidden')){
+              $('.cover-backstretch').backstretch("pause");
+            }else{
+              $('.cover-backstretch').backstretch("next");
+            }
+          } else {
+            $.backstretch("resize");
+            if($('.cover-wrapper').is(':hidden')){
+              $.backstretch("pause");
+            }else{
+              $.backstretch("next");
+            }
+          }
+        
+        
+        document.querySelectorAll('pre code').forEach((block) => {
+          hljs.highlightBlock(block);
+        });
         
         
         
+        
+          pjax_initCopyCode();
         
         
           pjax_valine();
