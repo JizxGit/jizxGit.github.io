@@ -1,3 +1,4 @@
+https://jizx.vip/2020/10/13/centos使用逻辑卷/
 https://jizx.vip/2020/09/09/scp免密传输文件/
 https://jizx.vip/2020/08/09/pytorch与tensorflow环境搭建/
 https://jizx.vip/2020/07/12/hadoop-streaming/

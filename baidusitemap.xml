@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://jizx.vip/2020/10/13/centos%E4%BD%BF%E7%94%A8%E9%80%BB%E8%BE%91%E5%8D%B7/</loc>
+    <lastmod>2020-10-13T14:32:50.676Z</lastmod>
+  </url>  <url>
+    <loc>https://jizx.vip/2020/09/09/scp%E5%85%8D%E5%AF%86%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6/</loc>
+    <lastmod>2020-10-13T14:32:50.675Z</lastmod>
+  </url>  <url>
+    <loc>https://jizx.vip/2019/08/04/anaconda%E4%B8%8Ejupyter%E4%BD%BF%E7%94%A8%E4%B8%8E%E8%AE%BE%E7%BD%AE/</loc>
+    <lastmod>2020-10-13T14:32:50.674Z</lastmod>
+  </url>  <url>
     <loc>https://jizx.vip/2020/07/12/hadoop-streaming/</loc>
     <lastmod>2020-09-15T16:55:28.012Z</lastmod>
   </url>  <url>
     <loc>https://jizx.vip/2019/09/02/awk/</loc>
     <lastmod>2020-09-14T16:29:28.344Z</lastmod>
   </url>  <url>
-    <loc>https://jizx.vip/2019/08/04/anaconda%E4%B8%8Ejupyter%E4%BD%BF%E7%94%A8%E4%B8%8E%E8%AE%BE%E7%BD%AE/</loc>
-    <lastmod>2020-09-10T14:51:41.711Z</lastmod>
-  </url>  <url>
     <loc>https://jizx.vip/2019/10/25/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E4%B8%8E%E6%95%88%E7%8E%87%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2020-09-10T14:51:41.709Z</lastmod>
-  </url>  <url>
-    <loc>https://jizx.vip/2020/09/09/scp%E5%85%8D%E5%AF%86%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6/</loc>
-    <lastmod>2020-09-10T14:51:41.704Z</lastmod>
   </url>  <url>
     <loc>https://jizx.vip/2020/06/23/pandas/</loc>
     <lastmod>2020-09-10T14:51:41.700Z</lastmod>

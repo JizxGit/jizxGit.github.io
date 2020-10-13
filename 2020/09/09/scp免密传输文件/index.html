@@ -522,7 +522,7 @@
   <div class="new-meta-item wordcount">
     <a class='notlink'>
       <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>171 words</p>
+      <p>397 words</p>
     </a>
   </div>
   <div class="new-meta-item readtime">
@@ -547,25 +547,41 @@
 <a id="more"></a>
 <the rest="" of="" contents="" |="" 余下全文="">
 
-
-
-<p>使用scp在两台Linux机器之间相互传输文件，常用参数如下：</p>
+<h3 id="scp命令"><a href="#scp命令" class="headerlink" title="scp命令"></a>scp命令</h3><p>使用scp在两台Linux机器之间相互传输文件，常用参数如下：</p>
 <pre><code class="bash">scp file.txt   work@linux2:/home/work/somedir
 scp -p file.txt   work@linux2:/home/work/somedir  # 保留创建时间、属性
 scp -r xxx_dir   work@linux2:/home/work/somedir   # 复制目录
 </code></pre>
-<p>为了避免每次传输都需要对方机器的密码，配置步骤如下：</p>
+<h3 id="配置免密"><a href="#配置免密" class="headerlink" title="配置免密"></a>配置免密</h3><p>为了避免每次传输都需要对方机器的密码，配置步骤如下：</p>
 <p>第一步：配置机器1的的公钥</p>
 <pre><code class="bash"># 在机器1上
 ssh-keygen -t rsa
-
 cat ~/.ssh/id_rsa.pub
 </code></pre>
 <p>第二步：复制公钥到机器2上</p>
 <pre><code class="bash"># 在机器2上，打开 authorized_keys，追加在后面（文件不存在则新建）
+ssh-keygen -t rsa
 vim ~/.ssh/authorized_keys
 </code></pre>
 <p>然后反过来操作一遍。</p>
+<h3 id="不生效问题排查"><a href="#不生效问题排查" class="headerlink" title="不生效问题排查"></a>不生效问题排查</h3><p><strong>可能问题1</strong>：最后确认一下ssh启用了authorized_keys 功能，如果是像下面被注释掉了，解开即可</p>
+<pre><code class="bash">sudo cat /etc/ssh/sshd_config |grep AuthorizedKeysFile
+#AuthorizedKeysFile     .ssh/authorized_keys
+sudo vim /etc/ssh/sshd_config
+</code></pre>
+<p><strong>可能问题2</strong>：查看系统安全日志，定位问题</p>
+<p>执行 <code>sudo vim /var/log/secure</code> 查看系统的安全日志，查找<strong>refused</strong>关键字，然后在安全日志中看到SSH登录过程中提示了如下错误：后面的目录代表权限不匹配</p>
+<pre><code>Authentication refused: bad ownership or modes for file /home/jizx/.ssh/authorized_keys
+</code></pre><p>解决，执行如下：</p>
+<pre><code class="bash"># chmod g-w /home/raini
+chmod 700 ~/.ssh 
+chmod 600 ~/.ssh/authorized_keys
+</code></pre>
+<p>PS：SSH进行认证的过程中除了对用户目录有权限要求外，对 .ssh 文件夹和 authorized_keys 文件同样也要限制。</p>
+<p>(<strong>可选</strong>)重启SSH服务 <code>service sshd restart</code></p>
+<blockquote>
+<p>参考 ：<a href="https://blog.csdn.net/lovebyz/article/details/87916317" target="_blank" rel="noopener">https://blog.csdn.net/lovebyz/article/details/87916317</a></p>
+</blockquote>
 </the></excerpt>
   
   
@@ -600,10 +616,10 @@ vim ~/.ssh/authorized_keys
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-10T22:51:41+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-13T22:32:50+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Sep 10, 2020</p>
+    <p>更新于：Oct 13, 2020</p>
   </a>
 </div>
 
@@ -685,6 +701,35 @@ vim ~/.ssh/authorized_keys
   
     <div class="prev-next">
       
+        <a class='prev' href='/2020/10/13/centos使用逻辑卷/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>centos使用逻辑卷</p>
+          <p class='content'> 
+
+Centos 中使用卷组、逻辑卷等硬盘管理
+
+
+
+
+
+概念
+
+
+名词
+解释
+设备名
+
+
+
+
+PV
+物理卷，在LVM系统中处于最底层，可以是整个硬盘、硬盘的分区
+/dev/sda
+
+
+PE
+...</p>
+        </a>
+      
       
         <a class='next' href='/2020/08/09/pytorch与tensorflow环境搭建/'>
           <p class='title'>pytorch与tensorflow环境搭建<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
@@ -729,6 +774,20 @@ conda config --add channels https:/...</p>
     
 
 
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#scp命令"><span class="toc-text">scp命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置免密"><span class="toc-text">配置免密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不生效问题排查"><span class="toc-text">不生效问题排查</span></a></li></ol>
+    </div>
+  </section>
 
 
   

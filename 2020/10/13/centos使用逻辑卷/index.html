@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -19,9 +17,15 @@
 
   <!-- 页面元数据 -->
   
-  <title>Tag: 模块 - 玖玖的博客</title>
+  <title>centos使用逻辑卷 - 玖玖的博客</title>
+  
+    <meta name="keywords" content="linux,centos">
   
 
+  
+    <meta name="description" content=" 
+
+Centos 中使用卷组、逻辑卷等硬盘管理">
   
 
   <!-- feed -->
@@ -329,7 +333,7 @@
   
     
     
-        <div class='cover-wrapper  search' style="display: none;">
+        <div class='cover-wrapper post search' style="display: none;">
           
             <div class='cover-backstretch'></div>
           
@@ -419,8 +423,8 @@
  
  
 <div id="pjax-data" style="display: none"> 
-  <div id="pjax-ispage">false</div> 
-  <div id="pjax-pageTitle"></div> 
+  <div id="pjax-ispage">true</div> 
+  <div id="pjax-pageTitle">centos使用逻辑卷</div> 
   <div id="pjax-enable-cover">true</div> 
   <div id="pjax-comment-path"></div> 
   <div id="pjax-comment-placeholder"></div> 
@@ -449,76 +453,323 @@
         
         
 
-
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
+  
+  <div class="article-meta" id="top">
     
-      
-  <section class="post-list">
     
-      
+    
+      <h1 class="title">
+        centos使用逻辑卷
+      </h1>
+      <div class='new-meta-box'>
         
           
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2019/08/06/python小模块/">
-        python小模块
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      <excerpt in="" index="" |="" 首页摘要=""> 
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="">
+    <p>玖玖</p>
+  </a>
+</div>
 
-<p>记录Python常用的一些标准库，以及第三方库</p></excerpt>
-    
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/linux/">linux</a>
+    </a>
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
+
+
+          
         
-        <time>2019-08-06</time>
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Oct 13, 2020</p>
+  </a>
+</div>
+
+          
         
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/python/">python</a>
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="centos使用逻辑卷" data-path="/2020/10/13/centos使用逻辑卷/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+          
+            
+  <div class="new-meta-item wordcount">
+    <a class='notlink'>
+      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
+      <p>745 words</p>
+    </a>
+  </div>
+  <div class="new-meta-item readtime">
+    <a class='notlink'>
+      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
+      <p>2 min</p>
+    </a>
+  </div>
+
+
+          
         
       </div>
+    
+  </div>
+
+
+  
+  <excerpt in="" index="" |="" 首页摘要=""> 
+
+<p>Centos 中使用卷组、逻辑卷等硬盘管理</p>
+<a id="more"></a>
+<the rest="" of="" contents="" |="" 余下全文="">
+
+
+
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">名词</th>
+<th style="text-align:left">解释</th>
+<th style="text-align:left">设备名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">PV</td>
+<td style="text-align:left">物理卷，在LVM系统中处于最底层，可以是整个硬盘、硬盘的分区</td>
+<td style="text-align:left">/dev/sda</td>
+</tr>
+<tr>
+<td style="text-align:left">PE</td>
+<td style="text-align:left">物理区域，物理卷的基本单元，大小是可以配置的，默认为4MB</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">VG</td>
+<td style="text-align:left">卷组，由一个或多个物理卷组成</td>
+<td style="text-align:left">/dev/<vgname></vgname></td>
+</tr>
+<tr>
+<td style="text-align:left">LV</td>
+<td style="text-align:left">逻辑卷，建立在卷组之上，它是从卷组中“切出”的一块空间</td>
+<td style="text-align:left">/dev/<vgname>/<lv name=""></lv></vgname></td>
+</tr>
+</tbody>
+</table>
+<p><img src="/2020/10/13/centos使用逻辑卷/Users/jizhongxian/个人/blog/source/_posts/2020-10-13-centos使用逻辑卷/逻辑、物理卷示意图.png" class="lazyload" data-srcset="/Users/jizhongxian/个人/blog/source/_posts/2020-10-13-centos使用逻辑卷/逻辑、物理卷示意图.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="img"></p>
+<h3 id="物理盘"><a href="#物理盘" class="headerlink" title="物理盘"></a>物理盘</h3><p><code>fdisk -l</code> 来查看当前服务器都多少块磁盘。</p>
+<h3 id="物理卷"><a href="#物理卷" class="headerlink" title="物理卷"></a>物理卷</h3><p>将磁盘或分区设定为物理卷</p>
+<ol>
+<li><p>使用<code>pvscan</code>指令查询服务器有无物理卷，如果显示“No matching physical volumes found”表示找不到任何的 PV 存在。</p>
+</li>
+<li><p>使用<code>pvcreate</code>指令创建物理卷，输入<code>pvcreate /dev/sdb</code>回车，表示将该磁盘或分区设定为物理卷，设定成功返回“Physical volume “/dev/sdb” successfully created”。</p>
+</li>
+<li><p>使用<code>pvremove</code>指令删除物理卷，输入<code>pvremove /dev/sdb</code>回车，表示删除该磁盘或分区的物理卷。</p>
+</li>
+<li><p>使用<code>pvresize</code>调整物理卷大小，输入<code>pvresize --setphysicalvolumesize 500G /dev/vdd</code>，表示将该物理卷跳转到500G大小</p>
+</li>
+<li><p>使用<code>pvdisplay</code>指令查询服务器上每个物理卷的详细信息。</p>
+</li>
+</ol>
+<h3 id="卷组"><a href="#卷组" class="headerlink" title="卷组"></a>卷组</h3><p>利用物理卷来组建卷组</p>
+<ol>
+<li>使用<code>vgdisplay</code>指令查询服务器上每个卷组的详细信息。</li>
+<li>使用<code>vgcreate</code>指令创建卷组，输入<code>vgcreate vghome 物理卷1 物理卷2……物理卷n</code>回车，将物理卷1、物理卷2……物理卷n添加到卷组vghome里。</li>
+<li>使用<code>vgextend</code>指令扩展卷组，输入<code>vgextend vghome 物理卷1 物理卷2……物理卷n</code>回车，将物理卷1、物理卷2……物理卷n添加到卷组vghome里。</li>
+<li>使用<code>vgextend</code>指令移除物理卷，输入<code>vgreduce vghome 物理卷1 物理卷2……物理卷n</code>回车，将物理卷1、物理卷2……物理卷n从卷组vghome中移除。</li>
+<li>一个卷组最多可以包括255个物理卷，同时最多也只能划分出255个逻辑卷。</li>
+</ol>
+<h3 id="逻辑卷"><a href="#逻辑卷" class="headerlink" title="逻辑卷"></a>逻辑卷</h3><p>接着在卷组中创建逻辑卷</p>
+<ol>
+<li>使用<code>lvcreate</code>指令创建逻辑卷，输入<code>lvcreate -L100G -nlvhome vghome</code>回车，表示从卷组<strong>vghome</strong>划分100G空间给新创建的逻辑卷<strong>lvhome</strong> (L为字节数，l为PE数)</li>
+<li>使用<code>mke2fs</code>指令格式化新创建的逻辑卷，输入<code>mke2fs -t ext4 /dev/vghome/lvhome</code>回车，表示将逻辑卷<strong>lvhome</strong>格式化为ext4类型的文件系统。</li>
+<li>使用<code>lvexend</code>指令扩容逻辑卷，输入<code>lvextend -L +400G /dev/vghome/lvhome</code>回车，表示在原来的容量基础上再扩容50G (L为字节数，l为PE数)</li>
+<li>使用<code>resize2</code>fs指令执行增大或收缩的逻辑卷，输入<code>resize2fs /dev/vghome/lvhome</code>回车。</li>
+</ol>
+<h3 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h3><p>最后可以直接使用逻辑卷进行挂载</p>
+<pre><code class="bash">mount /dev/vghome/lvhome /home
+</code></pre>
+<blockquote>
+<p> 参考：<a href="https://blog.csdn.net/sd4493091/article/details/66976078" target="_blank" rel="noopener">https://blog.csdn.net/sd4493091/article/details/66976078</a></p>
+<p> <a href="https://www.bluestep.cc/linux-lvremove命令-删除指定lvm逻辑卷/" target="_blank" rel="noopener">https://www.bluestep.cc/linux-lvremove%e5%91%bd%e4%bb%a4-%e5%88%a0%e9%99%a4%e6%8c%87%e5%ae%9alvm%e9%80%bb%e8%be%91%e5%8d%b7/</a></p>
+</blockquote>
+</the></excerpt>
+  
+  
+    
+    <div class='footer'>
       
-        <div>
-          <a class='readmore' href='/2019/08/06/python小模块/'>
-            Read More
-          </a>
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=https://jizx.vip/2020/10/13/centos使用逻辑卷/>https://jizx.vip/2020/10/13/centos使用逻辑卷/</a></p>
+              
+            
+          </blockquote>
         </div>
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-13T22:32:50+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Oct 13, 2020</p>
+  </a>
 </div>
 
-          </div>
         
       
-    
-  </section>
+        
+          
   
-    
-  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>linux</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/centos/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>centos</p></a></div>
 
 
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://jizx.vip/2020/10/13/centos使用逻辑卷/&title=centos使用逻辑卷 - 玖玖的博客&summary= 
+
+Centos 中使用卷组、逻辑卷等硬盘管理"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://jizx.vip/2020/10/13/centos使用逻辑卷/&title=centos使用逻辑卷 - 玖玖的博客&summary= 
+
+Centos 中使用卷组、逻辑卷等硬盘管理"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://jizx.vip/2020/10/13/centos使用逻辑卷/&title=centos使用逻辑卷 - 玖玖的博客&summary= 
+
+Centos 中使用卷组、逻辑卷等硬盘管理"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
   
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2020/09/09/scp免密传输文件/'>
+          <p class='title'>scp免密传输文件<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'> 
+
+如何免密在两台Linux机器之间相互传输文件
+
+
+
+scp命令使用scp在两台Linux机器之间相互传输文件，常用参数如下：
+scp file.txt   work@linux2:/hom...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -526,221 +777,28 @@
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">玖玖的博客</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:me@xxx.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/volantis-x/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
 
-  
 
-  
-    
-    
-  
-
-  <section class="widget category shadow desktop">
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Chrome/" href="/categories/Chrome/"
-            id="categoriesChrome"
-            ><div class='name'>Chrome</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/git/" href="/categories/git/"
-            id="categoriesgit"
-            ><div class='name'>git</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/hadoop/" href="/categories/hadoop/"
-            id="categorieshadoop"
-            ><div class='name'>hadoop</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/hive/" href="/categories/hive/"
-            id="categorieshive"
-            ><div class='name'>hive</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/java/" href="/categories/java/"
-            id="categoriesjava"
-            ><div class='name'>java</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/java/基础/" href="/categories/java/基础/"
-            id="categoriesjava基础"
-            ><div class='name'>基础</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/linux/" href="/categories/linux/"
-            id="categorieslinux"
-            ><div class='name'>linux</div><div class='badge'>(9)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/linux/awk/" href="/categories/linux/awk/"
-            id="categorieslinuxawk"
-            ><div class='name'>awk</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/linux/vim/" href="/categories/linux/vim/"
-            id="categorieslinuxvim"
-            ><div class='name'>vim</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/photoshop/" href="/categories/photoshop/"
-            id="categoriesphotoshop"
-            ><div class='name'>photoshop</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/python/" href="/categories/python/"
-            id="categoriespython"
-            ><div class='name'>python</div><div class='badge'>(10)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/vim/" href="/categories/vim/"
-            id="categoriesvim"
-            ><div class='name'>vim</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/windows/" href="/categories/windows/"
-            id="categorieswindows"
-            ><div class='name'>windows</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/正则表达式/" href="/categories/正则表达式/"
-            id="categories正则表达式"
-            ><div class='name'>正则表达式</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/深度学习/" href="/categories/深度学习/"
-            id="categories深度学习"
-            ><div class='name'>深度学习</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/算法/" href="/categories/算法/"
-            id="categories算法"
-            ><div class='name'>算法</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/算法/java/" href="/categories/算法/java/"
-            id="categories算法java"
-            ><div class='name'>java</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/编辑器/" href="/categories/编辑器/"
-            id="categories编辑器"
-            ><div class='name'>编辑器</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/英语/" href="/categories/英语/"
-            id="categories英语"
-            ><div class='name'>英语</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/英语/语法/" href="/categories/英语/语法/"
-            id="categories英语语法"
-            ><div class='name'>语法</div><div class='badge'>(3)</div></a></li>
-        
-      </ul>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#物理盘"><span class="toc-text">物理盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#物理卷"><span class="toc-text">物理卷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#卷组"><span class="toc-text">卷组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑卷"><span class="toc-text">逻辑卷</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#挂载"><span class="toc-text">挂载</span></a></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/anaconda/" style="font-size: 14px; color: #999">anaconda</a> <a href="/tags/atom/" style="font-size: 14px; color: #999">atom</a> <a href="/tags/awk/" style="font-size: 16.5px; color: #888">awk</a> <a href="/tags/centos/" style="font-size: 14px; color: #999">centos</a> <a href="/tags/git/" style="font-size: 14px; color: #999">git</a> <a href="/tags/hadoop-streaming/" style="font-size: 14px; color: #999">hadoop streaming</a> <a href="/tags/hive/" style="font-size: 14px; color: #999">hive</a> <a href="/tags/ing/" style="font-size: 19px; color: #777">ing</a> <a href="/tags/java/" style="font-size: 16.5px; color: #888">java</a> <a href="/tags/jupyter/" style="font-size: 14px; color: #999">jupyter</a> <a href="/tags/linux/" style="font-size: 21.5px; color: #666">linux</a> <a href="/tags/logging/" style="font-size: 14px; color: #999">logging</a> <a href="/tags/notepad/" style="font-size: 14px; color: #999">notepad++</a> <a href="/tags/numpy/" style="font-size: 14px; color: #999">numpy</a> <a href="/tags/pandas/" style="font-size: 16.5px; color: #888">pandas</a> <a href="/tags/photoshop/" style="font-size: 14px; color: #999">photoshop</a> <a href="/tags/python/" style="font-size: 24px; color: #555">python</a> <a href="/tags/python进阶/" style="font-size: 14px; color: #999">python进阶</a> <a href="/tags/python高级/" style="font-size: 14px; color: #999">python高级</a> <a href="/tags/scp/" style="font-size: 14px; color: #999">scp</a> <a href="/tags/shell/" style="font-size: 16.5px; color: #888">shell</a> <a href="/tags/tensorflow/" style="font-size: 14px; color: #999">tensorflow</a> <a href="/tags/time/" style="font-size: 14px; color: #999">time</a> <a href="/tags/vim/" style="font-size: 16.5px; color: #888">vim</a> <a href="/tags/vscode/" style="font-size: 14px; color: #999">vscode</a> <a href="/tags/window/" style="font-size: 14px; color: #999">window</a> <a href="/tags/乱码/" style="font-size: 14px; color: #999">乱码</a> <a href="/tags/从句/" style="font-size: 14px; color: #999">从句</a> <a href="/tags/传参/" style="font-size: 14px; color: #999">传参</a> <a href="/tags/协议/" style="font-size: 14px; color: #999">协议</a> <a href="/tags/右键/" style="font-size: 14px; color: #999">右键</a> <a href="/tags/命令/" style="font-size: 14px; color: #999">命令</a> <a href="/tags/复合句/" style="font-size: 14px; color: #999">复合句</a> <a href="/tags/多线程/" style="font-size: 14px; color: #999">多线程</a> <a href="/tags/多进程/" style="font-size: 14px; color: #999">多进程</a> <a href="/tags/工具/" style="font-size: 19px; color: #777">工具</a> <a href="/tags/截图/" style="font-size: 14px; color: #999">截图</a> <a href="/tags/打印/" style="font-size: 14px; color: #999">打印</a> <a href="/tags/效率/" style="font-size: 19px; color: #777">效率</a> <a href="/tags/方法调用/" style="font-size: 14px; color: #999">方法调用</a> <a href="/tags/时态/" style="font-size: 14px; color: #999">时态</a> <a href="/tags/曲线/" style="font-size: 14px; color: #999">曲线</a> <a href="/tags/机器学习/" style="font-size: 14px; color: #999">机器学习</a> <a href="/tags/模块/" style="font-size: 14px; color: #999">模块</a> <a href="/tags/正则表达式/" style="font-size: 14px; color: #999">正则表达式</a> <a href="/tags/流畅的python/" style="font-size: 14px; color: #999">流畅的python</a> <a href="/tags/深度学习/" style="font-size: 16.5px; color: #888">深度学习</a> <a href="/tags/环境/" style="font-size: 14px; color: #999">环境</a> <a href="/tags/算法/" style="font-size: 14px; color: #999">算法</a> <a href="/tags/类/" style="font-size: 14px; color: #999">类</a> <a href="/tags/系统优化/" style="font-size: 14px; color: #999">系统优化</a> <a href="/tags/编码问题/" style="font-size: 14px; color: #999">编码问题</a> <a href="/tags/编辑器/" style="font-size: 14px; color: #999">编辑器</a> <a href="/tags/面试/" style="font-size: 14px; color: #999">面试</a>
-    </div>
-  </section>
-
-
-  
 
   
 
 
 </aside>
+
 
 
       </div>
